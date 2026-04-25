@@ -5,12 +5,6 @@ description = "Climate-Action Packages for Dutch Foodbanks"
 readme = "README.md"
 requires-python = ">=3.13"
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[tool.hatch.build.targets.wheel]
-packages = ["src/backend"]
 dependencies = [
     "sqlmodel>=0.0.21",
     "sqlalchemy>=2.0",
@@ -35,3 +29,10 @@ dev = [
     "pytest-cov>=5.0",
     "httpx>=0.27",
 ]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
