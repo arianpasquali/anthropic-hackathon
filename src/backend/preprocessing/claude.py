@@ -55,6 +55,9 @@ def _call_claude(
     logger.debug(f"[{tool_name}] raw output: {raw}")
 
     if detect_drift(raw, schema_cls):
+        if model == FALLBACK_MODEL:
+            logger.warning(f"[{tool_name}] drift persists on fallback model — returning as-is")
+            return raw
         logger.warning(f"[{tool_name}] drift detected with {model}, retrying with {FALLBACK_MODEL}")
         return _call_claude(client, text, tool_name, FALLBACK_MODEL)
 

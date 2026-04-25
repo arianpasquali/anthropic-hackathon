@@ -139,7 +139,8 @@ def ingest(
             model=model,
             force=force,
         )
-    logger.info(f"Done — report id={report.id}")
+        report_id = report.id
+    logger.info(f"Done — report id={report_id}")
 
 
 @app.command(name="ingest-dir")
