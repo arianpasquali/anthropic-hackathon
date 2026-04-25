@@ -1,0 +1,120 @@
+export type ImpactProfile = "co2_focus" | "social_focus" | "balanced"
+export type SubscriptionStatus = "pending" | "paid" | "failed" | "refunded"
+export type Source =
+  | "extracted"
+  | "inferred_national_avg"
+  | "inferred_category_split"
+  | "inferred_calculation"
+  | "manual"
+export type UserRole = "corporate" | "foodbank" | "admin"
+
+export interface CategoryMix {
+  produce: number
+  dry_goods: number
+  dairy: number
+  bakery: number
+  meat: number
+  prepared: number
+  eggs: number
+}
+
+export interface ProvenanceRecord {
+  field: string
+  source: Source
+  method: string
+}
+
+export interface Bank {
+  id: string
+  slug: string
+  name: string
+  region: string
+  city: string
+  lat: number | null
+  lng: number | null
+  is_regional_dc: boolean
+  rdc_satellite_count: number | null
+  annual_kg_rescued: number | null
+  annual_tco2e: number | null
+  weighted_emission_factor: number | null
+  households_weekly: number | null
+  people_served: number | null
+  category_mix: CategoryMix | null
+  source_url: string | null
+  provenance: ProvenanceRecord[]
+}
+
+export interface Package {
+  id: string
+  name: string
+  description: string | null
+  region: string
+  price_eur: number
+  co2e_claim_kg: number
+  impact_profile: ImpactProfile
+  top_n: number
+  is_active: boolean
+}
+
+export interface ProjectedAllocation {
+  foodbank: Bank
+  weight_pct: number
+  attributed_kg: number
+  attributed_tco2e: number
+  attributed_eur: number
+}
+
+export interface PackageDetail extends Package {
+  projected_allocations: ProjectedAllocation[]
+}
+
+export interface User {
+  id: string
+  email: string
+  role: UserRole
+  org_name: string | null
+}
+
+export interface Subscription {
+  id: string
+  user_id: string
+  package_id: string
+  amount_eur: number
+  status: SubscriptionStatus
+  purchased_at: string
+  csr_report_id: string | null
+}
+
+// Backend dashboard shape (src/backend/routers/dashboard.py)
+export interface DashboardSubscriptionSummary {
+  id: string
+  package_id: string
+  package_name: string
+  amount_eur: number
+  status: SubscriptionStatus
+  total_co2e_kg: number
+}
+
+export interface DashboardAllocationDetail {
+  foodbank_id: string
+  foodbank_name: string
+  foodbank_city: string
+  weight_pct: number
+  amount_eur: number
+  co2e_attributed_kg: number
+}
+
+export interface DashboardSubscriptionDetail {
+  id: string
+  package_id: string
+  package_name: string
+  amount_eur: number
+  status: SubscriptionStatus
+  total_co2e_kg: number
+  allocations: DashboardAllocationDetail[]
+  report_id: string | null
+}
+
+// Compatibility aliases used by some pages
+export type SubscriptionDetail = DashboardSubscriptionDetail
+export interface SubscriptionAllocation extends DashboardAllocationDetail {}

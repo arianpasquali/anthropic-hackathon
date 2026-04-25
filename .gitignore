@@ -6,3 +6,10 @@ __pycache__/
 *.pyc
 *.db
 logs/
+
+# frontend
+src/frontend/node_modules/
+src/frontend/.next/
+src/frontend/.turbo/
+src/frontend/out/
+

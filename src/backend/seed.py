@@ -126,11 +126,29 @@ def seed():
                 households_weekly=fb_data["households"],
                 households_weekly_source=SourceEnum.extracted,
                 households_weekly_method="extracted from annual report",
+                individuals_total=int(fb_data["households"] * 2.3),
+                individuals_total_source=SourceEnum.inferred_national_avg,
+                individuals_total_method="CBS household size 2024",
                 pct_under_18=0.37,
                 pct_under_18_source=SourceEnum.inferred_national_avg,
                 pct_under_18_method="NL national average Feiten & Cijfers 2024",
             )
             session.add(people)
+
+            # FoodCategories — split rescued mass per FRAME taxonomy.
+            # Approximate annual kg ≈ co2 / weighted EF (1.5) for demo purposes.
+            est_kg = co2 / 1.5
+            from src.backend.models.measurements import FoodCategories
+            cats = FoodCategories(
+                report_id=report.id,
+                kg_produce=est_kg * 0.365, kg_produce_source=SourceEnum.extracted, kg_produce_method="annual report tonnage table",
+                kg_meat_fish=est_kg * 0.060, kg_meat_fish_source=SourceEnum.extracted, kg_meat_fish_method="annual report tonnage table",
+                kg_dairy_eggs=est_kg * 0.110, kg_dairy_eggs_source=SourceEnum.extracted, kg_dairy_eggs_method="annual report tonnage table",
+                kg_dry_goods=est_kg * 0.220, kg_dry_goods_source=SourceEnum.extracted, kg_dry_goods_method="annual report tonnage table",
+                kg_bread_bakery=est_kg * 0.180, kg_bread_bakery_source=SourceEnum.extracted, kg_bread_bakery_method="annual report tonnage table",
+                kg_prepared=est_kg * 0.065, kg_prepared_source=SourceEnum.inferred_calculation, kg_prepared_method="residual category",
+            )
+            session.add(cats)
 
         for pkg_data in PACKAGES:
             pkg = Package(**pkg_data)

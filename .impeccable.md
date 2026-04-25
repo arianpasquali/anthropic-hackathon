@@ -1,0 +1,42 @@
+# Klimaatkracht — Design Context
+
+## Users
+
+- **Corporate buyers**: Dutch sustainability leads, CSR officers, and CFOs at midcap-to-large NL companies (Heineken, Unilever, Philips type) who need CSRD/ESRS E1+S3-compliant impact reporting and want a credible, auditable proof of avoided emissions for their annual report.
+- **Foodbank operators**: Voedselbanken Nederland (VBN) regional operators uploading annual reports, monitoring sponsorship, and showing impact to local stakeholders.
+- **Context of use**: Daytime, desktop, boardroom or office screen. Used during quarterly CSR planning, budget allocation, and audit prep. Trust + receipts matter more than entertainment.
+
+## Brand Personality
+
+Three words: **Civic. Audit-grade. Calm.**
+
+Voice: Plana-style narrative trust — story-led at the entry point (a clear, confident headline about *why* food rescue matters as climate action), audit-grade detail one click in (sources cited, methodology disclosed, FRAME formula visible). No marketing fluff, no exclamation points, no "join the revolution." Dutch-direct, slightly understated, technically literate.
+
+Emotional goals: confidence, credibility, calm. Buyers should feel they are doing serious work, not buying a feel-good badge.
+
+## Aesthetic Direction
+
+**Refined climate-tech minimal.** References:
+- **watershed.com** — audit-grade carbon accounting dashboards, restrained color, dense data tables, methodology-forward
+- **plana.earth** — warm emerald-tinted neutrals, modern climate platform feel, narrative + receipts
+- **Dutch design tradition** — Werkplaats Typografie / Rijksoverheid / NS — grid rigor, civic clarity, generous whitespace, strong typographic hierarchy
+
+**Theme**: Light only. Off-white emerald-tinted surfaces. Boardroom-friendly, screenshot-friendly, parity with reference set.
+
+**Type**: Dutch-cut display face for headlines + clean sans for body. Explicit ban on the `reflex_fonts_to_reject` list (Inter, Plex, Jakarta, DM, Instrument, Fraunces, Newsreader, Crimson, Cormorant, Playfair, Outfit, Space Grotesk, Syne). Candidate pairing: PP Editorial New (display moments) + ABC Diatype or Söhne (body), with PP Neue Montreal as a free-tier fallback.
+
+**Color**: OKLCH only. Neutrals tinted toward emerald (hue 155, chroma 0.005–0.015). Single emerald accent at oklch(45% 0.10 155). Off-white surface oklch(98.5% 0.005 155). Warm-dark text oklch(22% 0.012 155). No neon, no purple→cyan gradients, no glow.
+
+**Layout**: 12-col Dutch grid. Marketing pages = editorial whitespace, asymmetric compositions, occasional serif moments. Dashboards = Watershed-dense, 13–14px tabular-nums tables, tight rows.
+
+**Motion**: Restrained. Scroll-triggered fade+slide on big sections, stagger on dashboard reveal. No bounce, no elastic, no parallax.
+
+**Anti-references**: AI dashboard slop (purple/cyan gradients, glassmorphism, generic metric cards with rounded icons, side-stripe alert borders, gradient text headlines, identical card grids). Crypto/web3 aesthetics. Anything that looks like a Stripe/Linear copy.
+
+## Design Principles
+
+1. **Receipts before story** — every claim is one click from its source. Provenance badges, methodology link, FRAME formula are first-class UI.
+2. **Civic over corporate** — Dutch institutional clarity beats slick startup polish. Short sentences, concrete numbers, no buzzwords.
+3. **Restrained color, confident type** — emerald is rare and earned. Type carries the brand.
+4. **Density where it earns trust** — dashboards and tables are tight; marketing pages breathe.
+5. **No AI-slop tells** — explicit bans: gradient text, side-stripe borders >1px, banned-list fonts, purple→cyan, neon-on-dark, generic card grids, sparkline-as-decoration.

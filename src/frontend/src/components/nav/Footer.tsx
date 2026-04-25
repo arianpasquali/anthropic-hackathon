@@ -1,0 +1,77 @@
+import Link from "next/link"
+
+export function Footer() {
+  return (
+    <footer className="mt-32 border-t border-line bg-surface-2">
+      <div className="mx-auto max-w-[1280px] px-6 py-16 grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-12">
+        <div>
+          <div className="flex items-baseline gap-2 mb-4">
+            <span aria-hidden className="block w-2.5 h-2.5 bg-emerald rounded-[1px] translate-y-[1px]" />
+            <span className="font-display text-[17px] font-medium tracking-[-0.02em]">
+              Klimaatkracht
+            </span>
+          </div>
+          <p className="text-[13px] text-text-muted leading-relaxed max-w-[36ch]">
+            Verified avoided emissions from Dutch food rescue. Built on FRAME with
+            CSRD-aligned ESRS E1+S3 reporting.
+          </p>
+        </div>
+
+        <FooterCol
+          title="Product"
+          links={[
+            { href: "/marketplace", label: "Marketplace" },
+            { href: "/methodology", label: "Methodology" },
+            { href: "/dashboard/corporate", label: "Corporate dashboard" },
+          ]}
+        />
+        <FooterCol
+          title="For food banks"
+          links={[
+            { href: "/dashboard/foodbank", label: "Operator dashboard" },
+            { href: "/register", label: "Onboard your bank" },
+          ]}
+        />
+        <FooterCol
+          title="Sources"
+          links={[
+            { href: "/methodology#frame", label: "FRAME methodology" },
+            { href: "/methodology#counterfactual", label: "NL counterfactual" },
+            { href: "/methodology#provenance", label: "Provenance ledger" },
+          ]}
+        />
+      </div>
+      <div className="border-t border-line/60">
+        <div className="mx-auto max-w-[1280px] px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-2 text-[12px] text-text-faint tabular">
+          <span>Built on FRAME · Aligned with Global FoodBanking Network</span>
+          <span>
+            © {new Date().getFullYear()} Klimaatkracht · Sources: FAO · WRAP · RIVM · CBS
+          </span>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+function FooterCol({
+  title,
+  links,
+}: {
+  title: string
+  links: { href: string; label: string }[]
+}) {
+  return (
+    <div>
+      <p className="eyebrow mb-3">{title}</p>
+      <ul className="flex flex-col gap-2">
+        {links.map((l) => (
+          <li key={l.href}>
+            <Link href={l.href} className="text-[13px] text-text hover:text-emerald transition-colors">
+              {l.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}

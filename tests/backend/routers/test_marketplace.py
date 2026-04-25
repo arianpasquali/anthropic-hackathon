@@ -56,3 +56,47 @@ def test_get_package_returns_200(client: TestClient):
 def test_get_package_404_on_missing(client: TestClient):
     resp = client.get(f"/packages/{uuid.uuid4()}")
     assert resp.status_code == 404
+
+
+def test_get_package_includes_projected_allocations(client: TestClient):
+    """PackageDetail must expose projected_allocations for the Fund detail page."""
+    from datetime import date
+    from src.backend.models.enums import SourceEnum
+    from src.backend.models.foodbank import AnnualReport, Foodbank
+    from src.backend.models.frame import FrameResult
+    from src.backend.models.measurements import PeopleServed
+
+    pkg_id = _seed_package(client, ImpactProfileEnum.co2_focus)
+    session = next(client.app.dependency_overrides[get_session]())
+    for i, (city, co2) in enumerate([("Rotterdam", 5e6), ("Amsterdam", 3e6), ("Utrecht", 1e6)]):
+        fb = Foodbank(name=f"VB {city}", city=city, region=RegionEnum.west)
+        session.add(fb); session.commit()
+        report = AnnualReport(
+            foodbank_id=fb.id, year=2024,
+            period_start=date(2024, 1, 1), period_end=date(2024, 12, 31),
+            raw_file_path="x.pdf", ingestion_model="test",
+        )
+        session.add(report); session.commit()
+        session.add(FrameResult(
+            report_id=report.id, co2e_total_kg=co2,
+            co2e_produce_kg=co2 * 0.4, co2e_meat_fish_kg=co2 * 0.2,
+            co2e_dairy_eggs_kg=co2 * 0.15, co2e_dry_goods_kg=co2 * 0.15,
+            co2e_bread_kg=co2 * 0.1,
+            emission_factor_source="t", methodology_version="v1",
+        ))
+        session.add(PeopleServed(
+            report_id=report.id, households_weekly=1000,
+            households_weekly_source=SourceEnum.extracted,
+            households_weekly_method="seed",
+        ))
+        session.commit()
+
+    resp = client.get(f"/packages/{pkg_id}")
+    body = resp.json()
+    assert "projected_allocations" in body
+    allocations = body["projected_allocations"]
+    assert len(allocations) == 3
+    assert allocations[0]["foodbank"]["city"] == "Rotterdam"  # highest CO2 first
+    assert allocations[0]["weight_pct"] > allocations[-1]["weight_pct"]
+    assert abs(sum(a["weight_pct"] for a in allocations) - 1.0) < 1e-6
+    assert allocations[0]["attributed_eur"] > 0

@@ -2,26 +2,31 @@ import os
 import uuid
 from typing import Optional
 
+import bcrypt
 from fastapi import Cookie, Depends, HTTPException, status
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
-from passlib.context import CryptContext
 from sqlmodel import Session, select
 
 from src.backend.database import get_session
 from src.backend.models.user import User
 
-_pwd = CryptContext(schemes=["bcrypt"], deprecated="auto")
 _SECRET = os.getenv("SESSION_SECRET", "dev-secret-change-in-prod")
 _signer = URLSafeTimedSerializer(_SECRET)
 COOKIE_NAME = "session"
 
 
 def hash_password(plain: str) -> str:
-    return _pwd.hash(plain)
+    # bcrypt's max input is 72 bytes; truncate explicitly so long passwords don't blow up.
+    payload = plain.encode("utf-8")[:72]
+    return bcrypt.hashpw(payload, bcrypt.gensalt()).decode("utf-8")
 
 
 def verify_password(plain: str, hashed: str) -> bool:
-    return _pwd.verify(plain, hashed)
+    payload = plain.encode("utf-8")[:72]
+    try:
+        return bcrypt.checkpw(payload, hashed.encode("utf-8"))
+    except ValueError:
+        return False
 
 
 def make_session_cookie(user_id: str) -> str:

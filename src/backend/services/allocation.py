@@ -1,4 +1,5 @@
 import uuid
+from dataclasses import dataclass
 from sqlmodel import Session, select
 
 from src.backend.models.allocation import Allocation
@@ -7,6 +8,15 @@ from src.backend.models.foodbank import AnnualReport, Foodbank
 from src.backend.models.frame import FrameResult
 from src.backend.models.marketplace import FundSubscription, Package
 from src.backend.models.measurements import PeopleServed
+
+
+@dataclass
+class ScoredFoodbank:
+    foodbank: Foodbank
+    score: float
+    weight_pct: float
+    co2e_total_kg: float
+    households_weekly: int
 
 
 def _score(
@@ -25,14 +35,12 @@ def _score(
     return 0.5 * norm_co2 + 0.5 * norm_social
 
 
-def compute_allocations(
-    session: Session,
-    subscription_id: uuid.UUID,
-    commit: bool = False,
-) -> list[Allocation]:
-    sub = session.get(FundSubscription, subscription_id)
-    package = session.get(Package, sub.package_id)
+def score_foodbanks(session: Session, package: Package) -> list[ScoredFoodbank]:
+    """Pure scoring: return top-N foodbanks ranked for a package, with weights normalised.
 
+    No DB writes. Used by both compute_allocations (post-purchase persistence) and
+    the marketplace router (pre-purchase projected allocation preview).
+    """
     rows = session.exec(
         select(Foodbank, FrameResult, PeopleServed)
         .join(AnnualReport, AnnualReport.foodbank_id == Foodbank.id)
@@ -49,21 +57,48 @@ def compute_allocations(
     max_social = max(social_values) if social_values else 1.0
 
     scored = [
-        (fb, _score(frame.co2e_total_kg, people.households_weekly or 0,
-                    package.impact_profile, max_co2, max_social))
+        (
+            fb,
+            _score(frame.co2e_total_kg, people.households_weekly or 0,
+                   package.impact_profile, max_co2, max_social),
+            frame.co2e_total_kg,
+            people.households_weekly or 0,
+        )
         for fb, frame, people in rows
     ]
     scored.sort(key=lambda x: x[1], reverse=True)
     top = scored[:package.top_n]
 
-    total = sum(score for _, score in top)
+    total = sum(score for _, score, _, _ in top)
+    fallback = 1.0 / len(top) if top else 0.0
+    return [
+        ScoredFoodbank(
+            foodbank=fb,
+            score=score,
+            weight_pct=(score / total) if total > 0 else fallback,
+            co2e_total_kg=co2e,
+            households_weekly=hh,
+        )
+        for fb, score, co2e, hh in top
+    ]
+
+
+def compute_allocations(
+    session: Session,
+    subscription_id: uuid.UUID,
+    commit: bool = False,
+) -> list[Allocation]:
+    sub = session.get(FundSubscription, subscription_id)
+    package = session.get(Package, sub.package_id)
+
+    scored = score_foodbanks(session, package)
     allocations = [
         Allocation(
             subscription_id=subscription_id,
-            foodbank_id=fb.id,
-            weight_pct=score / total if total > 0 else 1.0 / len(top),
+            foodbank_id=row.foodbank.id,
+            weight_pct=row.weight_pct,
         )
-        for fb, score in top
+        for row in scored
     ]
 
     if commit:
