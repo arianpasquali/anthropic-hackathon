@@ -2,27 +2,33 @@ import uuid
 from sqlmodel import Session, select
 
 from src.backend.models.allocation import Allocation
-from src.backend.models.enums import ImpactProfileEnum
 from src.backend.models.foodbank import AnnualReport, Foodbank
 from src.backend.models.frame import FrameResult
 from src.backend.models.marketplace import FundSubscription, Package
 from src.backend.models.measurements import PeopleServed
+from src.backend.models.profile import ImpactProfile
 
 
 def _score(
     co2e_kg: float,
     households: int,
-    profile: ImpactProfileEnum,
+    co2_weight: float,
+    social_weight: float,
     max_co2: float,
     max_households: float,
 ) -> float:
-    if profile == ImpactProfileEnum.co2_focus:
-        return co2e_kg
-    if profile == ImpactProfileEnum.social_focus:
-        return float(households)
     norm_co2 = co2e_kg / max_co2 if max_co2 > 0 else 0.0
     norm_social = households / max_households if max_households > 0 else 0.0
-    return 0.5 * norm_co2 + 0.5 * norm_social
+    return co2_weight * norm_co2 + social_weight * norm_social
+
+
+def _get_profile_weights(session: Session, profile_key: str) -> tuple[float, float]:
+    profile = session.exec(
+        select(ImpactProfile).where(ImpactProfile.key == profile_key)
+    ).first()
+    if profile:
+        return profile.co2_weight, profile.social_weight
+    return 0.5, 0.5
 
 
 def compute_allocations(
@@ -32,6 +38,8 @@ def compute_allocations(
 ) -> list[Allocation]:
     sub = session.get(FundSubscription, subscription_id)
     package = session.get(Package, sub.package_id)
+
+    co2_weight, social_weight = _get_profile_weights(session, package.impact_profile.value)
 
     rows = session.exec(
         select(Foodbank, FrameResult, PeopleServed)
@@ -50,7 +58,7 @@ def compute_allocations(
 
     scored = [
         (fb, _score(frame.co2e_total_kg, people.households_weekly or 0,
-                    package.impact_profile, max_co2, max_social))
+                    co2_weight, social_weight, max_co2, max_social))
         for fb, frame, people in rows
     ]
     scored.sort(key=lambda x: x[1], reverse=True)

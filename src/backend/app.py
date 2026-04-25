@@ -10,6 +10,7 @@ from src.backend.routers import admin as admin_router
 from src.backend.routers import report as report_router
 from src.backend.routers import insights as insights_router
 from src.backend.routers import discovery as discovery_router
+from src.backend.routers import profiles as profiles_router
 
 OPENAPI_TAGS = [
     {"name": "discovery", "description": "Agent/LLM discovery: health, llms.txt, robots.txt, manifests"},
@@ -20,6 +21,7 @@ OPENAPI_TAGS = [
     {"name": "report", "description": "Generate, stream, and download CSRD/ESRS E5 reports"},
     {"name": "insights", "description": "Public platform stats and per-foodbank FRAME data"},
     {"name": "admin", "description": "Admin-only: foodbank management"},
+    {"name": "profiles", "description": "Impact allocation profiles (public read, admin write)"},
 ]
 
 app = FastAPI(
@@ -67,3 +69,4 @@ app.include_router(dashboard_router.router)
 app.include_router(admin_router.router)
 app.include_router(report_router.router)
 app.include_router(insights_router.router)
+app.include_router(profiles_router.router)

@@ -5,6 +5,7 @@ test_extraction.py
 __pycache__/
 *.pyc
 *.db
+!foodbank.db
 logs/
 logs/extraction.log
 logs/extraction.log
