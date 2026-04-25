@@ -103,6 +103,11 @@ Work directly on `main`. No feature branches.
 `ANTHROPIC_API_KEY` — required for report generation  
 `SESSION_SECRET` — defaults to `"dev-secret-change-in-prod"`
 
+## Ingestion pipeline rules
+
+- **Never run `ingest-dir --force` without explicit user confirmation.** It overwrites all existing DB extractions (including higher-quality model runs) with whatever model is passed.
+- Ask before any force-refresh or batch re-ingest operation.
+
 ## What's not built yet
 
 - `src/frontend/` — all Jinja2 templates (see `PROGRESS.md` Task 14)

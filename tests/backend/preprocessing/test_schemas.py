@@ -14,6 +14,8 @@ def test_food_volume_schema_fields():
     props = schema["properties"]
     assert "kg_received_total" in props
     assert "kg_received_total_method" in props
+    assert "kg_received_total_evidence" in props
+    assert "kg_received_total_confidence" in props
     assert "waste_pct" in props
     assert "waste_pct_method" in props
     assert "parcels_distributed" in props
@@ -25,6 +27,8 @@ def test_food_categories_schema_fields():
     for field in ["kg_produce", "kg_meat_fish", "kg_dairy_eggs", "kg_dry_goods", "kg_bread_bakery", "kg_prepared"]:
         assert field in props
         assert f"{field}_method" in props
+        assert f"{field}_evidence" in props
+        assert f"{field}_confidence" in props
 
 
 def test_people_served_schema_fields():

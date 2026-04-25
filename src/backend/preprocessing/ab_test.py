@@ -9,6 +9,7 @@ from src.backend.preprocessing.openai_compat import (
     DEFAULT_MODEL as OPENAI_COMPAT_MODEL,
 )
 from src.backend.preprocessing.openai_compat import extract_all_openai_compat
+from src.backend.preprocessing.regex_extract import extract_all_regex
 
 
 @dataclass(frozen=True)
@@ -69,7 +70,7 @@ def _flatten(result: object) -> dict[str, float | int | None]:
     ):
         section = getattr(result, section_name)
         for field in type(section).model_fields:
-            if field.endswith("_method"):
+            if field.endswith(("_method", "_evidence", "_confidence")):
                 continue
             flat[f"{section_name}.{field}"] = getattr(section, field)
     return flat
@@ -83,16 +84,30 @@ def _matches(actual: float | int | None, expected: float | int) -> bool:
     return int(actual) == expected
 
 
-async def _run_case(case: BenchmarkCase) -> tuple[dict[str, float | int | None], dict[str, float | int | None]]:
+async def _run_case(
+    case: BenchmarkCase,
+) -> tuple[
+    dict[str, float | int | None],
+    dict[str, float | int | None],
+    dict[str, float | int | None],
+]:
     text = extract_text(Path(case.path))
     results = await asyncio.gather(
-        asyncio.wait_for(extract_all(text, model=CLAUDE_MODEL), timeout=45),
         asyncio.wait_for(
-            extract_all_openai_compat(text, model=OPENAI_COMPAT_MODEL), timeout=45
+            extract_all(text, model=CLAUDE_MODEL, source_label=case.path), timeout=45
         ),
+        asyncio.wait_for(
+            extract_all_openai_compat(
+                text,
+                model=OPENAI_COMPAT_MODEL,
+                source_label=case.path,
+            ),
+            timeout=45,
+        ),
+        asyncio.wait_for(asyncio.to_thread(extract_all_regex, text), timeout=5),
         return_exceptions=True,
     )
-    claude_result, openai_result = results
+    claude_result, openai_result, regex_result = results
     if isinstance(claude_result, Exception):
         print(f"  Claude failed: {claude_result}")
         claude_flat: dict[str, float | int | None] = {}
@@ -103,12 +118,18 @@ async def _run_case(case: BenchmarkCase) -> tuple[dict[str, float | int | None],
         openai_flat: dict[str, float | int | None] = {}
     else:
         openai_flat = _flatten(openai_result)
-    return claude_flat, openai_flat
+    if isinstance(regex_result, Exception):
+        print(f"  Regex failed: {regex_result}")
+        regex_flat: dict[str, float | int | None] = {}
+    else:
+        regex_flat = _flatten(regex_result)
+    return claude_flat, openai_flat, regex_flat
 
 
 async def main() -> None:
     claude_hits = 0
     openai_hits = 0
+    regex_hits = 0
     total = 0
 
     print(f"Benchmark cases: {len(CASES)}")
@@ -117,26 +138,31 @@ async def main() -> None:
     print()
 
     for case in CASES:
-        claude_flat, openai_flat = await _run_case(case)
+        claude_flat, openai_flat, regex_flat = await _run_case(case)
         print(case.path)
         for field, expected in case.expected.items():
             total += 1
             claude_value = claude_flat.get(field)
             openai_value = openai_flat.get(field)
+            regex_value = regex_flat.get(field)
             claude_ok = _matches(claude_value, expected)
             openai_ok = _matches(openai_value, expected)
+            regex_ok = _matches(regex_value, expected)
             claude_hits += int(claude_ok)
             openai_hits += int(openai_ok)
+            regex_hits += int(regex_ok)
             print(
                 f"  {field}: expected={expected} | "
                 f"claude={claude_value} {'OK' if claude_ok else 'MISS'} | "
-                f"openai={openai_value} {'OK' if openai_ok else 'MISS'}"
+                f"openai={openai_value} {'OK' if openai_ok else 'MISS'} | "
+                f"regex={regex_value} {'OK' if regex_ok else 'MISS'}"
             )
         print()
 
     print("Summary")
     print(f"  Claude: {claude_hits}/{total}")
     print(f"  OpenAI-compatible: {openai_hits}/{total}")
+    print(f"  Regex: {regex_hits}/{total}")
 
 
 if __name__ == "__main__":

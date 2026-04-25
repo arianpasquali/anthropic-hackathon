@@ -10,13 +10,28 @@ from sqlmodel import Session, select
 
 from src.backend.database import create_db_and_tables, engine
 from src.backend.models import IngestionRecord
-from src.backend.models.enums import IngestionStatus, RegionEnum
+from src.backend.models.enums import IngestionStatus, RegionEnum, SourceEnum
 from src.backend.preprocessing.claude import DEFAULT_MODEL, extract_all
-from src.backend.preprocessing.extractor import ExtractionError, extract_text
+from src.backend.preprocessing.extractor import MIN_TEXT_CHARS, ExtractionError, extract_text
+from src.backend.preprocessing.openai_compat import (
+    DEFAULT_MODEL as ORQ_DEFAULT_MODEL,
+)
+from src.backend.preprocessing.openai_compat import extract_all_openai_compat
 from src.backend.models.foodbank import AnnualReport, Foodbank
 from datetime import datetime, timezone
 from src.backend.models.frame import FrameResult
+from src.backend.models.measurements import (
+    Donations,
+    FoodCategories,
+    FoodVolume,
+    Operations,
+    PeopleServed,
+)
 from src.backend.preprocessing.db_inspect import app as db_app
+from src.backend.preprocessing.regex_extract import (
+    extract_all_regex,
+    merge_extraction_results,
+)
 from src.backend.preprocessing.writer import write_report
 from src.backend.services.frame import compute_frame
 
@@ -56,6 +71,7 @@ BANK_MAP: dict[str, tuple[str, str, RegionEnum]] = {
     "enschede":       ("Voedselbank Enschede",         "Enschede",       RegionEnum.oost),
     "gouda":          ("Voedselbank Gouda",            "Gouda",          RegionEnum.west),
     "groningen":      ("Voedselbank Groningen",        "Groningen",      RegionEnum.noord),
+    "den-haag":       ("Voedselbank Haaglanden",        "Den Haag",       RegionEnum.west),
     "haaglanden":     ("Voedselbank Haaglanden",       "Den Haag",       RegionEnum.west),
     "haarlem":        ("Voedselbank Haarlem",          "Haarlem",        RegionEnum.randstad),
     "hengelo":        ("Voedselbank Midden Twente",    "Hengelo",        RegionEnum.oost),
@@ -80,6 +96,24 @@ _NATIONAL_PREFIXES = {"jaarverslag", "feiten"}
 
 # Stem parts that indicate financial-only docs (skip; prefer the jaarverslag)
 _SKIP_PARTS = {"fin", "jr"}
+
+
+def _extract_with_provider(
+    text: str,
+    provider: str,
+    model: str,
+    source_label: str | None = None,
+    pdf_path: Path | None = None,
+):
+    if provider == "anthropic":
+        return extract_all(text, model=model, source_label=source_label, pdf_path=pdf_path)
+    if provider == "orq":
+        if pdf_path is not None:
+            logger.warning("orq provider does not support PDF document fallback — proceeding with sparse text")
+        return extract_all_openai_compat(
+            text, model=model, source_label=source_label
+        )
+    raise ValueError(f"Unknown provider '{provider}'")
 
 
 def _should_skip(stem: str) -> str | None:
@@ -110,6 +144,38 @@ def _bank_from_stem(stem: str) -> tuple[str, str, RegionEnum] | None:
     return None
 
 
+def _resolve_report_file(report: AnnualReport, foodbank: Foodbank | None) -> Path:
+    path = Path(report.raw_file_path)
+    if path.exists():
+        return path
+
+    candidates: list[Path] = []
+    if foodbank is not None:
+        for key, (bank_name, _, _) in BANK_MAP.items():
+            if bank_name != foodbank.name:
+                continue
+            candidates.extend(sorted(Path("data").glob(f"{key}-{report.year}*.txt")))
+            candidates.extend(sorted(Path("data").glob(f"{key}-{report.year}*.pdf")))
+            break
+
+    stem = path.stem.lower()
+    for candidate in candidates:
+        if stem and stem in candidate.stem.lower():
+            return candidate
+
+    if foodbank is not None:
+        city_slug = foodbank.city.lower().replace(" ", "-")
+        city_matches = sorted(Path("data").glob(f"*{city_slug}*{report.year}*.txt"))
+        city_matches.extend(sorted(Path("data").glob(f"*{city_slug}*{report.year}*.pdf")))
+        if city_matches:
+            return city_matches[0]
+
+    if candidates:
+        return candidates[0]
+
+    raise ExtractionError(f"File not found: {report.raw_file_path}")
+
+
 @app.command()
 def ingest(
     file: Path = typer.Argument(..., help="Path to PDF or .txt report"),
@@ -117,8 +183,10 @@ def ingest(
     city: str = typer.Option(..., "--city", help="City name"),
     region: str = typer.Option(..., "--region", help="Region: noord|oost|zuidoost|zuid|west|randstad"),
     year: int = typer.Option(..., "--year", help="Report year, e.g. 2024"),
-    model: str = typer.Option(DEFAULT_MODEL, "--model", help="Claude model ID"),
+    provider: str = typer.Option("orq", "--provider", help="Extraction provider: orq|anthropic"),
+    model: str = typer.Option(DEFAULT_MODEL, "--model", help="Model ID"),
     force: bool = typer.Option(False, "--force", help="Overwrite existing report"),
+    save_text: bool = typer.Option(True, "--save-text/--no-save-text", help="Write extracted text as .txt sidecar alongside the PDF"),
 ) -> None:
     """Ingest a single foodbank annual report."""
     if not file.exists():
@@ -136,9 +204,30 @@ def ingest(
     except ExtractionError as e:
         logger.error(f"Text extraction failed: {e}")
         raise typer.Exit(code=1)
+    if save_text and file.suffix.lower() == ".pdf":
+        sidecar = file.with_suffix(".txt")
+        if force or not sidecar.exists():
+            sidecar.write_text(text, encoding="utf-8")
+            logger.debug(f"Saved text sidecar: {sidecar}")
 
     logger.info(f"Extracted {len(text)} chars from {file.name}")
-    result = asyncio.run(extract_all(text, model=model))
+    if provider == "orq" and model == DEFAULT_MODEL:
+        model = ORQ_DEFAULT_MODEL
+
+    sparse = len(text.strip()) < MIN_TEXT_CHARS
+    pdf_path = file if (sparse and file.suffix.lower() == ".pdf") else None
+    if sparse and pdf_path is None and file.suffix.lower() != ".pdf":
+        # txt file given directly but sparse — look for sibling PDF
+        sibling = file.with_suffix(".pdf")
+        if sibling.exists():
+            pdf_path = sibling
+
+    result = asyncio.run(
+        _extract_with_provider(
+            text, provider=provider, model=model, source_label=str(file), pdf_path=pdf_path
+        )
+    )
+    result = merge_extraction_results(result, extract_all_regex(text))
 
     create_db_and_tables()
     with Session(engine) as session:
@@ -160,15 +249,19 @@ def ingest(
 @app.command(name="ingest-dir")
 def ingest_dir(
     directory: Path = typer.Argument(..., help="Directory containing PDF/txt files"),
-    model: str = typer.Option(DEFAULT_MODEL, "--model", help="Claude model ID"),
+    provider: str = typer.Option("orq", "--provider", help="Extraction provider: orq|anthropic"),
+    model: str = typer.Option(DEFAULT_MODEL, "--model", help="Model ID"),
     force: bool = typer.Option(False, "--force", help="Overwrite existing reports"),
     dry_run: bool = typer.Option(False, "--dry-run", help="Print plan without ingesting"),
     max_concurrent: int = typer.Option(10, "--max-concurrent", help="Max parallel file ingestions"),
+    save_text: bool = typer.Option(True, "--save-text/--no-save-text", help="Write extracted text as .txt sidecar alongside each PDF"),
 ) -> None:
     """Batch ingest all jaarverslag reports in a directory (skips financial-only and national docs)."""
     if not directory.is_dir():
         logger.error(f"Not a directory: {directory}")
         raise typer.Exit(code=1)
+    if provider == "orq" and model == DEFAULT_MODEL:
+        model = ORQ_DEFAULT_MODEL
 
     skipped: list[tuple[str, str]] = []
     queued: list[tuple[Path, tuple[str, str, RegionEnum], int]] = []
@@ -211,7 +304,7 @@ def ingest_dir(
         for section_name in ("food_volume", "food_categories", "people_served", "operations", "donations"):
             section = getattr(result, section_name)
             for field in type(section).model_fields:
-                if field.endswith(("_source", "_method")):
+                if field.endswith(("_source", "_method", "_evidence", "_confidence")):
                     continue
                 key = f"{section_name}.{field}"
                 counts[key] = 0 if getattr(section, field) is None else 1
@@ -250,6 +343,11 @@ def ingest_dir(
 
             try:
                 text = extract_text(file)
+                if save_text and file.suffix.lower() == ".pdf":
+                    sidecar = file.with_suffix(".txt")
+                    if force or not sidecar.exists():
+                        sidecar.write_text(text, encoding="utf-8")
+                        logger.debug(f"Saved text sidecar: {sidecar}")
             except ExtractionError as e:
                 logger.error(f"Skipping {file.name}: {e}")
                 with Session(engine) as session:
@@ -264,7 +362,16 @@ def ingest_dir(
                 return
 
             try:
-                result = await extract_all(text, model=model)
+                sparse = len(text.strip()) < MIN_TEXT_CHARS
+                pdf_path = file if (sparse and file.suffix.lower() == ".pdf") else None
+                result = await _extract_with_provider(
+                    text,
+                    provider=provider,
+                    model=model,
+                    source_label=file_path,
+                    pdf_path=pdf_path,
+                )
+                result = merge_extraction_results(result, extract_all_regex(text))
                 with Session(engine) as session:
                     report = write_report(
                         session=session,
@@ -329,6 +436,105 @@ def ingest_dir(
         marker = " ◄" if pct == 0 else ""
         typer.echo(f"{key:<45} {found:>7} {missing:>8} {pct:>6.0f}%{marker}")
     typer.echo("─" * 72)
+
+
+@app.command(name="backfill-regex")
+def backfill_regex(
+    city: str | None = typer.Option(None, "--city", help="Limit to one bank (partial city match)"),
+    year: int | None = typer.Option(None, "--year", help="Limit to one year"),
+) -> None:
+    """Fill currently-missing fields in existing reports using deterministic regex extraction."""
+    create_db_and_tables()
+
+    with Session(engine) as session:
+        reports = session.exec(select(AnnualReport)).all()
+        bank_by_id = {b.id: b for b in session.exec(select(Foodbank)).all()}
+
+        if city:
+            city_lower = city.lower()
+            reports = [
+                report for report in reports
+                if city_lower in bank_by_id.get(report.foodbank_id).city.lower()
+            ]
+        if year is not None:
+            reports = [report for report in reports if report.year == year]
+
+        updated_reports = 0
+        updated_fields = 0
+
+        section_specs = [
+            ("food_volume", FoodVolume),
+            ("food_categories", FoodCategories),
+            ("people_served", PeopleServed),
+            ("operations", Operations),
+            ("donations", Donations),
+        ]
+
+        def _apply_backfill(row: object, extraction_section: object) -> int:
+            changed = 0
+            for field_name in type(extraction_section).model_fields:
+                if field_name.endswith(("_method", "_evidence", "_confidence")):
+                    continue
+                if getattr(row, field_name, None) is not None:
+                    continue
+                value = getattr(extraction_section, field_name, None)
+                if value is None:
+                    continue
+                setattr(row, field_name, value)
+                setattr(row, f"{field_name}_source", SourceEnum.extracted)
+                setattr(row, f"{field_name}_method", getattr(extraction_section, f"{field_name}_method", None))
+                setattr(row, f"{field_name}_evidence", getattr(extraction_section, f"{field_name}_evidence", None))
+                setattr(row, f"{field_name}_confidence", getattr(extraction_section, f"{field_name}_confidence", None))
+                changed += 1
+            return changed
+
+        for report in reports:
+            foodbank = bank_by_id.get(report.foodbank_id)
+            try:
+                text = extract_text(_resolve_report_file(report, foodbank))
+            except ExtractionError as exc:
+                logger.warning(f"Skip report {report.id}: {exc}")
+                continue
+
+            regex_result = extract_all_regex(text)
+            report_changed = 0
+
+            for section_name, model_cls in section_specs:
+                row = session.exec(
+                    select(model_cls).where(model_cls.report_id == report.id)  # type: ignore[attr-defined]
+                ).first()
+                extraction_section = getattr(regex_result, section_name)
+                if row is None:
+                    continue
+                report_changed += _apply_backfill(row, extraction_section)
+
+            if report_changed == 0:
+                continue
+
+            updated_reports += 1
+            updated_fields += report_changed
+
+            rec = session.exec(
+                select(IngestionRecord).where(IngestionRecord.report_id == report.id)
+            ).first()
+            if rec:
+                missing = []
+                for section_name, model_cls in section_specs:
+                    row = session.exec(
+                        select(model_cls).where(model_cls.report_id == report.id)  # type: ignore[attr-defined]
+                    ).first()
+                    if row is None:
+                        continue
+                    for field_name in type(getattr(regex_result, section_name)).model_fields:
+                        if field_name.endswith(("_method", "_evidence", "_confidence")):
+                            continue
+                        if getattr(row, field_name, None) is None:
+                            missing.append(f"{section_name}.{field_name}")
+                rec.missing_fields = json.dumps(missing)
+
+        session.commit()
+
+    logger.success(f"Regex backfill complete — updated {updated_fields} fields across {updated_reports} reports")
 
 
 @app.command(name="recalculate-frame")

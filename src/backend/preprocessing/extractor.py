@@ -2,6 +2,8 @@ from pathlib import Path
 
 from loguru import logger
 
+MIN_TEXT_CHARS = 500
+
 
 class ExtractionError(Exception):
     pass
