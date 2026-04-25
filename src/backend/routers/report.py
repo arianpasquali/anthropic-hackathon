@@ -10,7 +10,7 @@ from src.backend.models.marketplace import FundSubscription
 from src.backend.services.auth import get_current_user
 from src.backend.services.report import get_report_path, stream_report
 
-router = APIRouter(prefix="/report")
+router = APIRouter(prefix="/report", tags=["report"])
 
 
 def _get_owned_sub(sub_id: uuid.UUID, session: Session, user: User) -> FundSubscription:

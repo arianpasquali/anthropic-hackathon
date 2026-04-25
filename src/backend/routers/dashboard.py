@@ -13,7 +13,7 @@ from src.backend.models.marketplace import CsrReport, FundSubscription, Package
 from src.backend.models.user import User
 from src.backend.services.auth import get_current_user
 
-router = APIRouter(prefix="/dashboard")
+router = APIRouter(prefix="/dashboard", tags=["dashboard"])
 
 
 class AllocationDetail(BaseModel):

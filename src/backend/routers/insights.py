@@ -4,7 +4,8 @@ from __future__ import annotations
 import uuid
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel
 from sqlmodel import Session, select
 
@@ -140,7 +141,7 @@ def _build_bank_summary(session: Session, fb: Foodbank) -> BankSummary:
 
 
 @router.get("/aggregate", response_model=AggregateStats)
-def aggregate_stats(session: Session = Depends(get_session)) -> AggregateStats:
+def aggregate_stats(request: Request, session: Session = Depends(get_session)) -> AggregateStats:
     """Platform-wide totals: tCO₂e, kg rescued, households, bank count."""
     banks = session.exec(select(Foodbank)).all()
 

@@ -61,3 +61,42 @@ def test_link_header_on_packages(client):
     """Discovery Link header present on all responses."""
     r = client.get("/packages")
     assert "llms.txt" in r.headers.get("link", "")
+
+
+def test_openapi_tags_present(client):
+    r = client.get("/openapi.json")
+    assert r.status_code == 200
+    spec = r.json()
+    tags_used = {
+        tag
+        for path in spec["paths"].values()
+        for method in path.values()
+        for tag in method.get("tags", [])
+    }
+    for expected_tag in ["auth", "packages", "checkout", "dashboard", "report", "insights"]:
+        assert expected_tag in tags_used, f"tag '{expected_tag}' missing from OpenAPI spec"
+
+
+def test_openapi_summaries_present(client):
+    r = client.get("/openapi.json")
+    spec = r.json()
+    missing = []
+    for path, methods in spec["paths"].items():
+        for method, op in methods.items():
+            if "summary" not in op:
+                missing.append(f"{method.upper()} {path}")
+    assert missing == [], f"Endpoints missing summaries: {missing}"
+
+
+def test_packages_markdown_negotiation(client):
+    r = client.get("/packages", headers={"Accept": "text/markdown"})
+    assert r.status_code == 200
+    assert r.headers["content-type"].startswith("text/markdown")
+    assert "## Impact Packages" in r.text
+
+
+def test_aggregate_markdown_negotiation(client):
+    r = client.get("/insights/aggregate", headers={"Accept": "text/markdown"})
+    assert r.status_code == 200
+    assert r.headers["content-type"].startswith("text/markdown")
+    assert "tCO" in r.text or "CO2" in r.text or "CO₂" in r.text

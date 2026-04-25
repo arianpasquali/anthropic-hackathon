@@ -17,7 +17,7 @@ from src.backend.services.auth import (
     verify_password,
 )
 
-router = APIRouter(prefix="/auth")
+router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 class RegisterRequest(BaseModel):
