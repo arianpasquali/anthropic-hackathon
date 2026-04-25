@@ -30,7 +30,7 @@ def detect_drift(raw: dict[str, Any], schema: type[BaseModel]) -> bool:
     return len(overlap) / len(non_null_keys) < 0.5
 
 
-_RETRY_DELAYS = [5, 15, 30]
+_RETRY_DELAYS = [1, 2, 5, 10, 20, 30, 60, 120]
 
 
 def _call_claude(
@@ -47,10 +47,7 @@ def _call_claude(
 
     logger.debug(f"[{tool_name}] calling {model} ({len(text)} chars)")
 
-    for attempt, delay in enumerate([0] + _RETRY_DELAYS):
-        if delay:
-            logger.warning(f"[{tool_name}] rate limited, retrying in {delay}s (attempt {attempt + 1})")
-            time.sleep(delay)
+    for attempt in range(len(_RETRY_DELAYS) + 1):
         try:
             response = client.messages.create(
                 model=model,
@@ -60,10 +57,18 @@ def _call_claude(
                 tool_choice={"type": "tool", "name": tool_name},
                 messages=[{"role": "user", "content": text[:20000]}],
             )
-        except anthropic.RateLimitError:
-            if attempt < len(_RETRY_DELAYS):
-                continue
-            raise
+        except anthropic.RateLimitError as exc:
+            if attempt >= len(_RETRY_DELAYS):
+                raise
+            retry_after = None
+            try:
+                retry_after = float(exc.response.headers.get("retry-after", 0))
+            except Exception:
+                pass
+            delay = max(_RETRY_DELAYS[attempt], retry_after or 0)
+            logger.warning(f"[{tool_name}] rate limited, retrying in {delay}s (attempt {attempt + 1}/{len(_RETRY_DELAYS)})")
+            time.sleep(delay)
+            continue
         raw = response.content[0].input
         logger.debug(
             f"[{tool_name}] {model} → stop={response.stop_reason} "
