@@ -172,12 +172,24 @@ def aggregate_stats(request: Request, session: Session = Depends(get_session)) -
         if ps and ps.households_weekly:
             total_hh += ps.households_weekly
 
-    return AggregateStats(
+    stats = AggregateStats(
         banks_count=len(banks),
         total_tco2e_yr=round(total_tco2e, 1),
         total_kg_rescued_yr=round(total_kg, 0),
         total_households_wk=total_hh,
     )
+
+    if "text/markdown" in request.headers.get("accept", ""):
+        md = (
+            "## Klimaatkracht Platform Stats\n\n"
+            f"- **Foodbanks tracked:** {stats.banks_count}\n"
+            f"- **Total CO₂e avoided:** {stats.total_tco2e_yr:,.1f} tCO₂e/year\n"
+            f"- **Food rescued:** {stats.total_kg_rescued_yr:,.0f} kg/year\n"
+            f"- **Households served weekly:** {stats.total_households_wk:,}\n"
+        )
+        return PlainTextResponse(content=md, media_type="text/markdown; charset=utf-8")
+
+    return stats
 
 
 @router.get("/banks", response_model=list[BankSummary])
