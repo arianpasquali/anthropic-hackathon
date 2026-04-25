@@ -2,6 +2,8 @@ import uuid
 from datetime import datetime, timezone
 from sqlmodel import Field, SQLModel
 
+from src.backend.models.enums import CounterfactualEnum
+
 
 class FrameResult(SQLModel, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
@@ -13,7 +15,10 @@ class FrameResult(SQLModel, table=True):
     co2e_dairy_eggs_kg: float
     co2e_dry_goods_kg: float
     co2e_bread_kg: float
+    co2e_prepared_kg: float | None = None
 
+    # methodology parameters — belong here, not in Operations
+    counterfactual_route: CounterfactualEnum = CounterfactualEnum.incineration_energy_recovery
     emission_factor_source: str
     methodology_version: str
     computed_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
