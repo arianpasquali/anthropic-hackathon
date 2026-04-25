@@ -1,0 +1,118 @@
+Generate the CSR impact report from the payload below. The factor_table_md is provided pre-rendered for use in the Methodology Appendix → Emission Factors subsection.
+
+```json
+{
+  "corporate_name": "Heineken N.V.",
+  "quarter": "Q2 2026",
+  "foodbank": {
+    "name": "Voedselbank Rotterdam",
+    "region": "Zuid-Holland",
+    "households_weekly": 1682,
+    "people_served": null,
+    "annual_kg_rescued": 4160000,
+    "is_rdc": true,
+    "rdc_satellite_count": 33,
+    "cluster_banks": []
+  },
+  "package": {
+    "amount_eur": 25000.0,
+    "price_per_tco2e": 41.67
+  },
+  "impact": {
+    "attributed_tco2e": 600.0,
+    "attributed_kg_food": 323389.0,
+    "attribution_share_pct": 7.77,
+    "bank_annual_tco2e": 7718.3,
+    "weighted_emission_factor": 1.855
+  },
+  "category_breakdown": {
+    "produce": {
+      "tco2e": 150.38,
+      "kg_food": 161695.0,
+      "emission_factor": 1.0
+    },
+    "dry_goods": {
+      "tco2e": 108.27,
+      "kg_food": 58210.0,
+      "emission_factor": 2.0
+    },
+    "dairy": {
+      "tco2e": 96.24,
+      "kg_food": 32339.0,
+      "emission_factor": 3.2
+    },
+    "bakery": {
+      "tco2e": 45.11,
+      "kg_food": 32339.0,
+      "emission_factor": 1.5
+    },
+    "meat": {
+      "tco2e": 127.82,
+      "kg_food": 16169.0,
+      "emission_factor": 8.5
+    },
+    "prepared": {
+      "tco2e": 45.11,
+      "kg_food": 16169.0,
+      "emission_factor": 3.0
+    },
+    "eggs": {
+      "tco2e": 27.07,
+      "kg_food": 6468.0,
+      "emission_factor": 4.5
+    }
+  },
+  "methodology_trail": [
+    "Sponsor: Heineken N.V.",
+    "Quarter: Q2 2026",
+    "Foodbank: Voedselbank Rotterdam (Zuid-Holland)",
+    "Sponsor amount: \u20ac25,000",
+    "Package economics: \u20ac25,000 per 600 tCO2e (\u20ac41.67 per tCO2e)",
+    "",
+    "Step 1 \u2014 Bank operational throughput",
+    "  Annual food rescued: 4,160,000 kg",
+    "  Households served weekly: 1,682",
+    "  Source: Annual rescue cited directly in Voedselbank Rotterdam Jaarverslag 2024 as 'ongeveer 80.000 kilogram per week' across the Rotterdam regional network (incl. 33 satellite banks). Category mix derived from published parcel composition (13 of 25 units fresh F&V for 2-person households).",
+    "",
+    "Step 2 \u2014 Category mix and weighted emission factor",
+    "  produce: 50% \u00d7 1.0 kg CO2e/kg = 0.500",
+    "  dry_goods: 18% \u00d7 2.0 kg CO2e/kg = 0.360",
+    "  dairy: 10% \u00d7 3.2 kg CO2e/kg = 0.320",
+    "  bakery: 10% \u00d7 1.5 kg CO2e/kg = 0.150",
+    "  meat: 5% \u00d7 8.5 kg CO2e/kg = 0.425",
+    "  prepared: 5% \u00d7 3.0 kg CO2e/kg = 0.150",
+    "  eggs: 2% \u00d7 4.5 kg CO2e/kg = 0.090",
+    "  Weighted factor before counterfactual: 1.995 kg CO2e/kg",
+    "  NL counterfactual factor: \u00d70.93",
+    "  Final weighted factor: 1.855 kg CO2e/kg food rescued",
+    "",
+    "Step 3 \u2014 Bank-level annual avoided emissions",
+    "  4,160,000 kg \u00d7 1.855 kg CO2e/kg = 7,718.3 tCO2e/yr",
+    "",
+    "Step 4 \u2014 Sponsor attribution (pro-rata by package economics)",
+    "  Attributed tCO2e = \u20ac25,000 \u00f7 \u20ac41.67/tCO2e = 600.0 tCO2e",
+    "  Attributed kg food = 600.0 tCO2e \u00d7 1000 \u00f7 1.855 = 323,389 kg",
+    "  Attribution share = 600.0 \u00f7 7718.3 = 7.77% of bank annual rescue"
+  ],
+  "sources": [
+    "Foodbank operational data: https://voedselbank.nl/jaarrekeningen/",
+    "Emission factors: FAO Food Wastage Footprint (2013); WRAP Courtauld 2030; RIVM Dutch dairy LCA; Poore & Nemecek (2018)",
+    "Counterfactual disposal route: RIVM Afvalmonitor 2024 + CBS Waste Statistics; NL incineration-with-energy-recovery mix vs. US-default landfill assumption.",
+    "Methodology framework: Global Foodbanking Network FRAME (Food Recovery to Avoid Methane Emissions) \u2014 alignment, not certification"
+  ]
+}
+```
+
+Pre-rendered factor table for the Emission Factors subsection:
+
+| Category | kg CO2e / kg food | Source |
+|---|---|---|
+| produce | 1.0 | FAO Food Wastage Footprint (2013), Table 4.2 |
+| bakery | 1.5 | WRAP Courtauld Commitment 2030, Bakery sector data |
+| dairy | 3.2 | FAO FWF + RIVM Dutch dairy LCA |
+| meat | 8.5 | FAO FWF (2013) weighted Dutch meat consumption mix |
+| dry_goods | 2.0 | FAO FWF cereals + Poore & Nemecek (2018) for staples |
+| prepared | 3.0 | Composite of Poore & Nemecek (2018) for processed foods |
+| eggs | 4.5 | FAO FWF + Dutch egg sector data |
+
+Today's date (for signature line): 2026-04-25
