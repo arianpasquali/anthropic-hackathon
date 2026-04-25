@@ -1,3 +1,5 @@
+.env
+test_extraction.py
 .superpowers/
 docs/superpowers/
 .venv/
