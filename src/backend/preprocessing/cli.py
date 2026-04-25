@@ -16,7 +16,13 @@ from src.backend.preprocessing.writer import write_report
 
 load_dotenv()
 
-app = typer.Typer(name="ingest", help="Foodbank report ingestion pipeline")
+app = typer.Typer(name="ingest", help="Foodbank report ingestion pipeline", invoke_without_command=True)
+
+
+@app.callback()
+def _default(ctx: typer.Context) -> None:
+    if ctx.invoked_subcommand is None:
+        typer.echo(ctx.get_help())
 app.add_typer(db_app, name="db")
 
 logger.remove()
