@@ -119,6 +119,29 @@ body {
   border-radius: 2px;
 }
 
+/* Leaflet tooltip — token-driven, light theme, no glass */
+.kk-leaflet-tip.leaflet-tooltip {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 1px 2px oklch(22% 0.012 155 / 0.06);
+}
+.kk-leaflet-tip.leaflet-tooltip::before { display: none; }
+.kk-province-tip strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 1px;
+}
+.kk-province-tip span {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
 /* Anti-AI-slop guards (informational; enforced by code review) */
 /* NEVER use border-left/right > 1px as a colored stripe */
 /* NEVER use background-clip: text with a gradient */

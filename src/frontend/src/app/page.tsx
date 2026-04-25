@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { api } from "@/lib/api"
 import { NLProvinceFoodbankHeatMapDynamic } from "@/components/map/NLProvinceFoodbankHeatMapDynamic"
+import { ProvinceFoodbankList } from "@/components/map/ProvinceFoodbankList"
 
 import { Badge } from "@/components/ui/Badge"
 import { formatNumber, formatTCO2e } from "@/lib/format"
@@ -134,7 +135,12 @@ export default async function Home() {
               Open marketplace →
             </Link>
           </div>
-          <NLProvinceFoodbankHeatMapDynamic banks={banks} height={640} />
+          <div>
+            <NLProvinceFoodbankHeatMapDynamic banks={banks} height={520} />
+            <div className="mt-6">
+              <ProvinceFoodbankList banks={banks} />
+            </div>
+          </div>
         </div>
       </section>
     </div>
