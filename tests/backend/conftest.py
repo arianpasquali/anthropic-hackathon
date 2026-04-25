@@ -9,6 +9,7 @@ import src.backend.models.foodbank  # noqa: F401
 import src.backend.models.measurements  # noqa: F401
 import src.backend.models.frame  # noqa: F401
 import src.backend.models.marketplace  # noqa: F401
+import src.backend.models.allocation  # noqa: F401
 
 from src.backend.models.foodbank import Foodbank, AnnualReport
 from src.backend.models.enums import RegionEnum
