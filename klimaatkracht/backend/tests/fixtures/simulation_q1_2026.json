@@ -1,0 +1,163 @@
+{
+  "period": "q1_2026",
+  "period_start": "2026-01-06",
+  "period_end": "2026-03-30",
+  "methodology_version": "KKM-2026.1",
+  "coefficients": {
+    "fresh_produce": 1.4,
+    "bread_bakery": 1.1,
+    "dairy": 3.2,
+    "meat_processed": 6.0,
+    "ready_meals": 2.5,
+    "dry_goods": 1.0,
+    "canned": 1.5,
+    "frozen": 2.0
+  },
+  "chapters": [
+    {
+      "id": "VB-AMS-OOST",
+      "name": "Voedselbank Amsterdam-Oost",
+      "period_start": "2026-01-06",
+      "period_end": "2026-03-30",
+      "households_quarter": 4940,
+      "needs_score": 0.78,
+      "regional_bonus": 1.0,
+      "operational_footprint_per_tonne": 38.0,
+      "category_breakdown": {
+        "fresh_produce": 59647.0,
+        "bread_bakery": 36450.9,
+        "dairy": 16568.6,
+        "meat_processed": 6627.4,
+        "ready_meals": 6627.4,
+        "dry_goods": 28166.6,
+        "canned": 8284.3,
+        "frozen": 3313.7
+      },
+      "total_food_kg": 165685.9,
+      "gross_avoided_kgco2e": 280174.7,
+      "operational_kgco2e": 6296.1,
+      "net_avoided_kgco2e": 273878.6,
+      "quarterly_cost_eur": 53352.0
+    },
+    {
+      "id": "VB-RDM-ZUID",
+      "name": "Voedselbank Rotterdam-Zuid",
+      "period_start": "2026-01-06",
+      "period_end": "2026-03-30",
+      "households_quarter": 5460,
+      "needs_score": 0.92,
+      "regional_bonus": 1.0,
+      "operational_footprint_per_tonne": 38.0,
+      "category_breakdown": {
+        "fresh_produce": 53762.2,
+        "bread_bakery": 32854.7,
+        "dairy": 14933.9,
+        "meat_processed": 5973.6,
+        "ready_meals": 5973.6,
+        "dry_goods": 25387.7,
+        "canned": 7467.0,
+        "frozen": 2986.8
+      },
+      "total_food_kg": 149339.5,
+      "gross_avoided_kgco2e": 252533.1,
+      "operational_kgco2e": 5674.9,
+      "net_avoided_kgco2e": 246858.2,
+      "quarterly_cost_eur": 58968.0
+    },
+    {
+      "id": "VB-LEI-CTR",
+      "name": "Voedselbank Leiden Centrum",
+      "period_start": "2026-01-06",
+      "period_end": "2026-03-30",
+      "households_quarter": 3120,
+      "needs_score": 0.61,
+      "regional_bonus": 1.0,
+      "operational_footprint_per_tonne": 38.0,
+      "category_breakdown": {
+        "fresh_produce": 37969.9,
+        "bread_bakery": 23203.8,
+        "dairy": 10547.2,
+        "meat_processed": 4218.9,
+        "ready_meals": 4218.9,
+        "dry_goods": 17930.2,
+        "canned": 5273.6,
+        "frozen": 2109.4
+      },
+      "total_food_kg": 105471.9,
+      "gross_avoided_kgco2e": 178353.1,
+      "operational_kgco2e": 4007.9,
+      "net_avoided_kgco2e": 174345.2,
+      "quarterly_cost_eur": 33696.0
+    },
+    {
+      "id": "VB-FRL-NRD",
+      "name": "Voedselbank Friesland-Noord",
+      "period_start": "2026-01-06",
+      "period_end": "2026-03-30",
+      "households_quarter": 1235,
+      "needs_score": 0.71,
+      "regional_bonus": 1.15,
+      "operational_footprint_per_tonne": 38.0,
+      "category_breakdown": {
+        "fresh_produce": 14153.0,
+        "bread_bakery": 8649.0,
+        "dairy": 3931.4,
+        "meat_processed": 1572.6,
+        "ready_meals": 1572.6,
+        "dry_goods": 6683.3,
+        "canned": 1965.7,
+        "frozen": 786.3
+      },
+      "total_food_kg": 39313.9,
+      "gross_avoided_kgco2e": 66480.1,
+      "operational_kgco2e": 1493.9,
+      "net_avoided_kgco2e": 64986.2,
+      "quarterly_cost_eur": 13338.0
+    },
+    {
+      "id": "VB-EHV-CTR",
+      "name": "Voedselbank Eindhoven Centrum",
+      "period_start": "2026-01-06",
+      "period_end": "2026-03-30",
+      "households_quarter": 3705,
+      "needs_score": 0.68,
+      "regional_bonus": 1.0,
+      "operational_footprint_per_tonne": 38.0,
+      "category_breakdown": {
+        "fresh_produce": 43365.1,
+        "bread_bakery": 26500.9,
+        "dairy": 12045.9,
+        "meat_processed": 4818.3,
+        "ready_meals": 4818.3,
+        "dry_goods": 20478.0,
+        "canned": 6022.9,
+        "frozen": 2409.2
+      },
+      "total_food_kg": 120458.6,
+      "gross_avoided_kgco2e": 203695.3,
+      "operational_kgco2e": 4577.4,
+      "net_avoided_kgco2e": 199117.9,
+      "quarterly_cost_eur": 40014.0
+    }
+  ],
+  "corp_x_commitment_eur": 100000,
+  "corp_x_preferences": {
+    "max_climate_impact": 0.4,
+    "max_social_need": 0.4,
+    "balanced_distribution": 0.2
+  },
+  "corp_x_allocations": {
+    "VB-AMS-OOST": 27877.06,
+    "VB-RDM-ZUID": 29431.6,
+    "VB-LEI-CTR": 16140.97,
+    "VB-FRL-NRD": 7066.04,
+    "VB-EHV-CTR": 19484.33
+  },
+  "expected_totals": {
+    "net_avoided_tco2e": 959.19,
+    "total_food_kg": 580269.8,
+    "corp_x_attributed_tco2e": 481.21,
+    "corp_x_attributed_food_kg": 291115.9,
+    "corp_x_attributed_households": 9259.3
+  }
+}

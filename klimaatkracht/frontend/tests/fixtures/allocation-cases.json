@@ -1,0 +1,412 @@
+{
+  "chapters": [
+    {
+      "id": "VB-AMS-OOST",
+      "net_avoided_tco2e": 274.0,
+      "households_served_quarter": 4940,
+      "needs_score": 0.78,
+      "regional_bonus": 1.0,
+      "total_tonnes": 162.5
+    },
+    {
+      "id": "VB-RDM-ZUID",
+      "net_avoided_tco2e": 247.0,
+      "households_served_quarter": 5460,
+      "needs_score": 0.92,
+      "regional_bonus": 1.0,
+      "total_tonnes": 145.6
+    },
+    {
+      "id": "VB-LEI-CTR",
+      "net_avoided_tco2e": 174.5,
+      "households_served_quarter": 3120,
+      "needs_score": 0.61,
+      "regional_bonus": 1.0,
+      "total_tonnes": 101.4
+    },
+    {
+      "id": "VB-FRL-NRD",
+      "net_avoided_tco2e": 64.8,
+      "households_served_quarter": 1235,
+      "needs_score": 0.71,
+      "regional_bonus": 1.15,
+      "total_tonnes": 44.2
+    },
+    {
+      "id": "VB-EHV-CTR",
+      "net_avoided_tco2e": 199.2,
+      "households_served_quarter": 3705,
+      "needs_score": 0.68,
+      "regional_bonus": 1.0,
+      "total_tonnes": 118.3
+    }
+  ],
+  "cases": [
+    {
+      "label": "blended_400_400_200",
+      "amount_eur": 100000,
+      "preferences": {
+        "max_climate_impact": 0.4,
+        "max_social_need": 0.4,
+        "balanced_distribution": 0.2
+      },
+      "expected": [
+        {
+          "chapter_id": "VB-AMS-OOST",
+          "weight": 0.27877058251086867,
+          "amount_eur": 27877.058251086866,
+          "axis_weights": {
+            "climate": 0.28556539864512764,
+            "social": 0.2693156030865894,
+            "balanced": 0.2840909090909091
+          }
+        },
+        {
+          "chapter_id": "VB-RDM-ZUID",
+          "weight": 0.29431602630945264,
+          "amount_eur": 29431.602630945265,
+          "axis_weights": {
+            "climate": 0.25742574257425743,
+            "social": 0.3510915959266469,
+            "balanced": 0.2545454545454545
+          }
+        },
+        {
+          "chapter_id": "VB-LEI-CTR",
+          "weight": 0.161409680119763,
+          "amount_eur": 16140.9680119763,
+          "axis_weights": {
+            "climate": 0.1818655549765503,
+            "social": 0.13302228168649355,
+            "balanced": 0.17727272727272728
+          }
+        },
+        {
+          "chapter_id": "VB-FRL-NRD",
+          "weight": 0.07066043450311939,
+          "amount_eur": 7066.043450311939,
+          "axis_weights": {
+            "climate": 0.06753517457008859,
+            "social": 0.07047954805134622,
+            "balanced": 0.07727272727272728
+          }
+        },
+        {
+          "chapter_id": "VB-EHV-CTR",
+          "weight": 0.19484327655679634,
+          "amount_eur": 19484.327655679634,
+          "axis_weights": {
+            "climate": 0.207608129233976,
+            "social": 0.17609097124892384,
+            "balanced": 0.20681818181818182
+          }
+        }
+      ]
+    },
+    {
+      "label": "climate_only",
+      "amount_eur": 100000,
+      "preferences": {
+        "max_climate_impact": 1.0,
+        "max_social_need": 0.0,
+        "balanced_distribution": 0.0
+      },
+      "expected": [
+        {
+          "chapter_id": "VB-AMS-OOST",
+          "weight": 0.28556539864512764,
+          "amount_eur": 28556.539864512764,
+          "axis_weights": {
+            "climate": 0.28556539864512764,
+            "social": 0.2693156030865894,
+            "balanced": 0.2840909090909091
+          }
+        },
+        {
+          "chapter_id": "VB-RDM-ZUID",
+          "weight": 0.25742574257425743,
+          "amount_eur": 25742.574257425742,
+          "axis_weights": {
+            "climate": 0.25742574257425743,
+            "social": 0.3510915959266469,
+            "balanced": 0.2545454545454545
+          }
+        },
+        {
+          "chapter_id": "VB-LEI-CTR",
+          "weight": 0.1818655549765503,
+          "amount_eur": 18186.55549765503,
+          "axis_weights": {
+            "climate": 0.1818655549765503,
+            "social": 0.13302228168649355,
+            "balanced": 0.17727272727272728
+          }
+        },
+        {
+          "chapter_id": "VB-FRL-NRD",
+          "weight": 0.06753517457008859,
+          "amount_eur": 6753.517457008859,
+          "axis_weights": {
+            "climate": 0.06753517457008859,
+            "social": 0.07047954805134622,
+            "balanced": 0.07727272727272728
+          }
+        },
+        {
+          "chapter_id": "VB-EHV-CTR",
+          "weight": 0.207608129233976,
+          "amount_eur": 20760.8129233976,
+          "axis_weights": {
+            "climate": 0.207608129233976,
+            "social": 0.17609097124892384,
+            "balanced": 0.20681818181818182
+          }
+        }
+      ]
+    },
+    {
+      "label": "social_only",
+      "amount_eur": 100000,
+      "preferences": {
+        "max_climate_impact": 0.0,
+        "max_social_need": 1.0,
+        "balanced_distribution": 0.0
+      },
+      "expected": [
+        {
+          "chapter_id": "VB-AMS-OOST",
+          "weight": 0.2693156030865895,
+          "amount_eur": 26931.560308658947,
+          "axis_weights": {
+            "climate": 0.28556539864512764,
+            "social": 0.2693156030865894,
+            "balanced": 0.2840909090909091
+          }
+        },
+        {
+          "chapter_id": "VB-RDM-ZUID",
+          "weight": 0.35109159592664696,
+          "amount_eur": 35109.1595926647,
+          "axis_weights": {
+            "climate": 0.25742574257425743,
+            "social": 0.3510915959266469,
+            "balanced": 0.2545454545454545
+          }
+        },
+        {
+          "chapter_id": "VB-LEI-CTR",
+          "weight": 0.13302228168649358,
+          "amount_eur": 13302.228168649357,
+          "axis_weights": {
+            "climate": 0.1818655549765503,
+            "social": 0.13302228168649355,
+            "balanced": 0.17727272727272728
+          }
+        },
+        {
+          "chapter_id": "VB-FRL-NRD",
+          "weight": 0.07047954805134624,
+          "amount_eur": 7047.954805134624,
+          "axis_weights": {
+            "climate": 0.06753517457008859,
+            "social": 0.07047954805134622,
+            "balanced": 0.07727272727272728
+          }
+        },
+        {
+          "chapter_id": "VB-EHV-CTR",
+          "weight": 0.17609097124892387,
+          "amount_eur": 17609.097124892385,
+          "axis_weights": {
+            "climate": 0.207608129233976,
+            "social": 0.17609097124892384,
+            "balanced": 0.20681818181818182
+          }
+        }
+      ]
+    },
+    {
+      "label": "balanced_only",
+      "amount_eur": 100000,
+      "preferences": {
+        "max_climate_impact": 0.0,
+        "max_social_need": 0.0,
+        "balanced_distribution": 1.0
+      },
+      "expected": [
+        {
+          "chapter_id": "VB-AMS-OOST",
+          "weight": 0.2840909090909091,
+          "amount_eur": 28409.09090909091,
+          "axis_weights": {
+            "climate": 0.28556539864512764,
+            "social": 0.2693156030865894,
+            "balanced": 0.2840909090909091
+          }
+        },
+        {
+          "chapter_id": "VB-RDM-ZUID",
+          "weight": 0.2545454545454545,
+          "amount_eur": 25454.545454545452,
+          "axis_weights": {
+            "climate": 0.25742574257425743,
+            "social": 0.3510915959266469,
+            "balanced": 0.2545454545454545
+          }
+        },
+        {
+          "chapter_id": "VB-LEI-CTR",
+          "weight": 0.17727272727272728,
+          "amount_eur": 17727.272727272728,
+          "axis_weights": {
+            "climate": 0.1818655549765503,
+            "social": 0.13302228168649355,
+            "balanced": 0.17727272727272728
+          }
+        },
+        {
+          "chapter_id": "VB-FRL-NRD",
+          "weight": 0.07727272727272728,
+          "amount_eur": 7727.272727272729,
+          "axis_weights": {
+            "climate": 0.06753517457008859,
+            "social": 0.07047954805134622,
+            "balanced": 0.07727272727272728
+          }
+        },
+        {
+          "chapter_id": "VB-EHV-CTR",
+          "weight": 0.20681818181818182,
+          "amount_eur": 20681.81818181818,
+          "axis_weights": {
+            "climate": 0.207608129233976,
+            "social": 0.17609097124892384,
+            "balanced": 0.20681818181818182
+          }
+        }
+      ]
+    },
+    {
+      "label": "small_amount_climate_heavy",
+      "amount_eur": 5000,
+      "preferences": {
+        "max_climate_impact": 0.7,
+        "max_social_need": 0.2,
+        "balanced_distribution": 0.1
+      },
+      "expected": [
+        {
+          "chapter_id": "VB-AMS-OOST",
+          "weight": 0.28216799057799813,
+          "amount_eur": 1410.8399528899906,
+          "axis_weights": {
+            "climate": 0.28556539864512764,
+            "social": 0.2693156030865894,
+            "balanced": 0.2840909090909091
+          }
+        },
+        {
+          "chapter_id": "VB-RDM-ZUID",
+          "weight": 0.27587088444185504,
+          "amount_eur": 1379.354422209275,
+          "axis_weights": {
+            "climate": 0.25742574257425743,
+            "social": 0.3510915959266469,
+            "balanced": 0.2545454545454545
+          }
+        },
+        {
+          "chapter_id": "VB-LEI-CTR",
+          "weight": 0.17163761754815665,
+          "amount_eur": 858.1880877407832,
+          "axis_weights": {
+            "climate": 0.1818655549765503,
+            "social": 0.13302228168649355,
+            "balanced": 0.17727272727272728
+          }
+        },
+        {
+          "chapter_id": "VB-FRL-NRD",
+          "weight": 0.069097804536604,
+          "amount_eur": 345.48902268302,
+          "axis_weights": {
+            "climate": 0.06753517457008859,
+            "social": 0.07047954805134622,
+            "balanced": 0.07727272727272728
+          }
+        },
+        {
+          "chapter_id": "VB-EHV-CTR",
+          "weight": 0.20122570289538616,
+          "amount_eur": 1006.1285144769308,
+          "axis_weights": {
+            "climate": 0.207608129233976,
+            "social": 0.17609097124892384,
+            "balanced": 0.20681818181818182
+          }
+        }
+      ]
+    },
+    {
+      "label": "rural_focus_social_heavy",
+      "amount_eur": 250000,
+      "preferences": {
+        "max_climate_impact": 0.1,
+        "max_social_need": 0.7,
+        "balanced_distribution": 0.2
+      },
+      "expected": [
+        {
+          "chapter_id": "VB-AMS-OOST",
+          "weight": 0.27389564384330717,
+          "amount_eur": 68473.91096082679,
+          "axis_weights": {
+            "climate": 0.28556539864512764,
+            "social": 0.2693156030865894,
+            "balanced": 0.2840909090909091
+          }
+        },
+        {
+          "chapter_id": "VB-RDM-ZUID",
+          "weight": 0.3224157823151695,
+          "amount_eur": 80603.94557879237,
+          "axis_weights": {
+            "climate": 0.25742574257425743,
+            "social": 0.3510915959266469,
+            "balanced": 0.2545454545454545
+          }
+        },
+        {
+          "chapter_id": "VB-LEI-CTR",
+          "weight": 0.14675669813274597,
+          "amount_eur": 36689.174533186495,
+          "axis_weights": {
+            "climate": 0.1818655549765503,
+            "social": 0.13302228168649355,
+            "balanced": 0.17727272727272728
+          }
+        },
+        {
+          "chapter_id": "VB-FRL-NRD",
+          "weight": 0.07154374654749668,
+          "amount_eur": 17885.93663687417,
+          "axis_weights": {
+            "climate": 0.06753517457008859,
+            "social": 0.07047954805134622,
+            "balanced": 0.07727272727272728
+          }
+        },
+        {
+          "chapter_id": "VB-EHV-CTR",
+          "weight": 0.18538812916128067,
+          "amount_eur": 46347.03229032017,
+          "axis_weights": {
+            "climate": 0.207608129233976,
+            "social": 0.17609097124892384,
+            "balanced": 0.20681818181818182
+          }
+        }
+      ]
+    }
+  ]
+}
