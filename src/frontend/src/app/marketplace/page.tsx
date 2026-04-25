@@ -1,6 +1,6 @@
 import { api } from "@/lib/api"
 import { MarketplaceFilters } from "@/components/marketing/MarketplaceFilters"
-import { NLMapDark } from "@/components/map/NLMapDark"
+import { NLProvinceFoodbankHeatMapDynamic } from "@/components/map/NLProvinceFoodbankHeatMapDynamic"
 import { formatNumber, formatTCO2e } from "@/lib/format"
 import Link from "next/link"
 
@@ -62,7 +62,7 @@ export default async function MarketplacePage() {
             </div>
           </dl>
         </div>
-        <NLMapDark banks={banks} height={480} />
+        <NLProvinceFoodbankHeatMapDynamic banks={banks} height={560} />
       </section>
 
       <section className="mt-24 grid md:grid-cols-2 gap-x-12 gap-y-6 border-t border-line pt-10">

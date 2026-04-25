@@ -17,7 +17,7 @@ export interface NLMapProps {
   showLinks?: boolean
 }
 
-export function NLMap({ banks, height = 320, highlightSlug = null, showLinks = true }: NLMapProps) {
+export function NLMap({ banks, height = 520, highlightSlug = null, showLinks = true }: NLMapProps) {
   // Disable scroll wheel zoom by default — feels less aggressive on long pages.
   useEffect(() => {
     // ensures leaflet recalculates size after CSS load
@@ -33,8 +33,11 @@ export function NLMap({ banks, height = 320, highlightSlug = null, showLinks = t
       <MapContainer
         center={NL_CENTRE}
         zoom={7}
-        scrollWheelZoom={false}
-        zoomControl={false}
+        minZoom={6}
+        maxZoom={12}
+        scrollWheelZoom={true}
+        zoomControl={true}
+        doubleClickZoom={true}
         style={{ height: "100%", width: "100%", background: "var(--surface-2)" }}
         attributionControl={false}
       >

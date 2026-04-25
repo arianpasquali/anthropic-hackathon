@@ -101,8 +101,11 @@ export function NLProvinceHeatMap({
       <MapContainer
         center={NL_CENTRE}
         zoom={7}
-        scrollWheelZoom={false}
-        zoomControl={false}
+        minZoom={6}
+        maxZoom={11}
+        scrollWheelZoom={true}
+        zoomControl={true}
+        doubleClickZoom={true}
         style={{ height: "100%", width: "100%", background: "var(--surface-2)" }}
         attributionControl={false}
       >
