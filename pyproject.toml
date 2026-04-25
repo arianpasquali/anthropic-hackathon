@@ -22,7 +22,7 @@ dependencies = [
 ]
 
 [project.scripts]
-ingest = "src.backend.preprocessing.cli:app"
+ncc = "src.backend.preprocessing.cli:app"
 
 [project.optional-dependencies]
 dev = [
