@@ -118,3 +118,55 @@ export interface DashboardSubscriptionDetail {
 // Compatibility aliases used by some pages
 export type SubscriptionDetail = DashboardSubscriptionDetail
 export interface SubscriptionAllocation extends DashboardAllocationDetail {}
+
+export interface TimelinePoint {
+  year: number
+  co2e_kg: number
+  annual_kg_rescued: number | null
+  households_weekly: number | null
+}
+
+export interface QuarterlyPoint {
+  label: string
+  year: number
+  quarter: number
+  co2e_kg: number
+  realised: boolean
+  cumulative_co2e_kg: number
+}
+
+export interface ProvenanceMix {
+  extracted_pct: number
+  inferred_national_avg_pct: number
+  inferred_category_split_pct: number
+  inferred_calculation_pct: number
+  manual_pct: number
+  confidence_band: "high" | "medium" | "low"
+}
+
+export interface CoverageRegion {
+  region: string
+  weight_pct: number
+  foodbanks: number
+}
+
+export interface DashboardMetrics {
+  period_co2e_kg: number
+  period_delta_pct: number | null
+  cumulative_co2e_kg: number
+  eur_per_tco2e: number | null
+  households_weighted: number
+  individuals_weighted: number
+  provenance: ProvenanceMix
+  cars_equivalent: number
+  nl_households_equivalent: number
+  flights_equivalent: number
+  regions: CoverageRegion[]
+}
+
+export interface SubscriptionPacing {
+  quarters_realised: number
+  quarters_contracted: number
+  cycle_pct: number
+  next_disclosure_quarter: string
+}

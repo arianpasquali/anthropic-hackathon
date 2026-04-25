@@ -1,19 +1,21 @@
 import type {
   Bank,
+  DashboardMetrics,
   DashboardSubscriptionSummary,
   ImpactProfile,
   Package,
   PackageDetail,
+  QuarterlyPoint,
   Subscription,
   SubscriptionDetail,
+  SubscriptionPacing,
+  TimelinePoint,
   User,
 } from "./types"
 
 const BASE = process.env.NEXT_PUBLIC_API_BASE ?? "/api"
 
-// On the server we hit the backend directly (server components cannot use the
-// Next rewrite proxy). On the browser we use the proxy so the session cookie
-// is treated as same-origin.
+// Server components cannot use the Next rewrite proxy; hit the backend directly.
 const SERVER_BASE = process.env.BACKEND_URL ?? "http://localhost:8000"
 
 function absoluteUrl(path: string): string {
@@ -31,16 +33,38 @@ export class ApiError extends Error {
   }
 }
 
+async function serverHeaders(): Promise<Record<string, string>> {
+  // On the server, manually forward the incoming request's cookies to the
+  // backend so authenticated routes (/dashboard, /report, etc.) keep working.
+  if (typeof window !== "undefined") return {}
+  try {
+    const { cookies } = await import("next/headers")
+    const jar = await cookies()
+    const all = jar.getAll()
+    if (!all.length) return {}
+    return { cookie: all.map((c) => `${c.name}=${c.value}`).join("; ") }
+  } catch {
+    return {}
+  }
+}
+
 async function req<T>(path: string, init?: RequestInit): Promise<T> {
+  const fwd = await serverHeaders()
   const res = await fetch(absoluteUrl(path), {
     credentials: "include",
     cache: "no-store",
+    redirect: "manual",
     ...init,
     headers: {
       "content-type": "application/json",
+      ...fwd,
       ...(init?.headers ?? {}),
     },
   })
+  // Treat backend redirects (303 to /login when unauthenticated) as 401.
+  if (res.status >= 300 && res.status < 400) {
+    throw new ApiError(401, "unauthenticated")
+  }
   const text = await res.text()
   if (!res.ok) throw new ApiError(res.status, text)
   return text ? (JSON.parse(text) as T) : (undefined as T)
@@ -53,6 +77,14 @@ export const api = {
   listPackages: (profile?: ImpactProfile) =>
     req<Package[]>(`/packages${profile ? `?profile=${profile}` : ""}`),
   getPackage: (id: string) => req<PackageDetail>(`/packages/${id}`),
+  getFoodbankTimeline: (slug: string) => req<TimelinePoint[]>(`/foodbanks/${slug}/timeline`),
+  getPackageTimeline: (id: string) => req<TimelinePoint[]>(`/packages/${id}/timeline`),
+  getDashboardTimeline: (subId: string, forecastQuarters = 8) =>
+    req<QuarterlyPoint[]>(`/dashboard/${subId}/timeline?forecast_quarters=${forecastQuarters}`),
+  getDashboardMetrics: (subId: string) =>
+    req<DashboardMetrics>(`/dashboard/${subId}/metrics`),
+  getDashboardPacing: (subId: string) =>
+    req<SubscriptionPacing>(`/dashboard/${subId}/pacing`),
 
   // auth
   login: (email: string, password: string) =>

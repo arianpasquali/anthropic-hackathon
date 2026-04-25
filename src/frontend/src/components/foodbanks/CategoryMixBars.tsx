@@ -15,8 +15,8 @@ export function CategoryMixBars({ mix, totalKg }: { mix: CategoryMix; totalKg: n
     pct: (mix[k] ?? 0) * 100,
   }))
   return (
-    <div style={{ height: 280 }}>
-      <ResponsiveContainer width="100%" height="100%">
+    <div style={{ height: 280, width: "100%", minWidth: 0 }}>
+      <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
         <BarChart data={rows} layout="vertical" margin={{ top: 10, right: 16, left: 12, bottom: 8 }}>
           <CartesianGrid stroke="var(--line)" strokeDasharray="2 4" horizontal={false} />
           <XAxis

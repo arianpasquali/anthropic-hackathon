@@ -3,6 +3,7 @@ import { api, ApiError } from "@/lib/api"
 import { Badge } from "@/components/ui/Badge"
 import { CategoryMixBars } from "@/components/foodbanks/CategoryMixBars"
 import { ProvenanceList } from "@/components/foodbanks/ProvenanceList"
+import { TimelineChart } from "@/components/charts/TimelineChart"
 import { formatKg, formatNumber, formatTCO2e } from "@/lib/format"
 
 export default async function FoodbankProfilePage({
@@ -16,6 +17,7 @@ export default async function FoodbankProfilePage({
     throw e
   })
   if (!bank) notFound()
+  const timeline = await api.getFoodbankTimeline(slug).catch(() => [])
 
   return (
     <div className="mx-auto max-w-[1100px] px-6 pt-12 pb-24">
@@ -53,8 +55,27 @@ export default async function FoodbankProfilePage({
         />
       </section>
 
+      {timeline.length > 0 ? (
+        <section className="mt-16 min-w-0">
+          <div className="flex items-end justify-between flex-wrap gap-3">
+            <div>
+              <p className="eyebrow">Historical performance</p>
+              <h2 className="display text-3xl mt-3 tracking-[-0.02em] max-w-[24ch]">
+                Annual CO₂e baseline since {timeline[0].year}.
+              </h2>
+            </div>
+            <p className="text-[12.5px] text-text-faint tabular">
+              {timeline.length} reports · FRAME-computed
+            </p>
+          </div>
+          <div className="mt-6">
+            <TimelineChart data={timeline} height={280} />
+          </div>
+        </section>
+      ) : null}
+
       <section className="mt-16 grid lg:grid-cols-[1.4fr_1fr] gap-x-12 gap-y-10 items-start">
-        <div>
+        <div className="min-w-0">
           <p className="eyebrow">Category mix</p>
           <h2 className="display text-3xl mt-3 tracking-[-0.02em]">
             What this bank rescues, by mass.
@@ -97,14 +118,20 @@ export default async function FoodbankProfilePage({
       {bank.source_url ? (
         <section className="mt-16 pt-10 border-t border-line">
           <p className="eyebrow">Source document</p>
-          <a
-            href={bank.source_url}
-            target="_blank"
-            rel="noreferrer"
-            className="display-italic text-2xl text-emerald-deep hover:underline mt-2 inline-block"
-          >
-            {bank.source_url} →
-          </a>
+          {/^https?:\/\//.test(bank.source_url) ? (
+            <a
+              href={bank.source_url}
+              target="_blank"
+              rel="noreferrer"
+              className="display-italic text-2xl text-emerald-deep hover:underline mt-2 inline-block"
+            >
+              {bank.source_url} →
+            </a>
+          ) : (
+            <p className="display-italic text-2xl text-emerald-deep mt-2 break-all">
+              {bank.source_url}
+            </p>
+          )}
           <p className="text-text-faint text-[12.5px] mt-2 tabular">
             The original annual report this profile was derived from.
           </p>

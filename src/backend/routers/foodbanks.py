@@ -213,6 +213,43 @@ def _build_response(fb: Foodbank, session: Session) -> FoodbankResponse:
 
 # --- endpoints ------------------------------------------------------------
 
+class TimelinePoint(BaseModel):
+    year: int
+    co2e_kg: float
+    annual_kg_rescued: float | None = None
+    households_weekly: int | None = None
+
+
+def _foodbank_timeline(fb: Foodbank, session: Session) -> list[TimelinePoint]:
+    reports = session.exec(
+        select(AnnualReport)
+        .where(AnnualReport.foodbank_id == fb.id)
+        .order_by(AnnualReport.year)
+    ).all()
+    out: list[TimelinePoint] = []
+    for r in reports:
+        frame = session.exec(select(FrameResult).where(FrameResult.report_id == r.id)).first()
+        cats = session.exec(select(FoodCategories).where(FoodCategories.report_id == r.id)).first()
+        people = session.exec(select(PeopleServed).where(PeopleServed.report_id == r.id)).first()
+        if not frame:
+            continue
+        annual_kg = None
+        if cats:
+            annual_kg = sum(
+                v for v in (
+                    cats.kg_produce, cats.kg_dry_goods, cats.kg_dairy_eggs,
+                    cats.kg_bread_bakery, cats.kg_meat_fish, cats.kg_prepared,
+                ) if v
+            ) or None
+        out.append(TimelinePoint(
+            year=r.year,
+            co2e_kg=frame.co2e_total_kg,
+            annual_kg_rescued=annual_kg,
+            households_weekly=people.households_weekly if people else None,
+        ))
+    return out
+
+
 @router.get("", response_model=list[FoodbankResponse])
 def list_foodbanks(session: Session = Depends(get_session)):
     foodbanks = session.exec(select(Foodbank).order_by(Foodbank.name)).all()
@@ -225,4 +262,13 @@ def get_foodbank(slug: str, session: Session = Depends(get_session)):
     for fb in foodbanks:
         if _slugify(fb.city) == slug:
             return _build_response(fb, session)
+    raise HTTPException(status_code=404, detail="foodbank not found")
+
+
+@router.get("/{slug}/timeline", response_model=list[TimelinePoint])
+def get_foodbank_timeline(slug: str, session: Session = Depends(get_session)):
+    foodbanks = session.exec(select(Foodbank)).all()
+    for fb in foodbanks:
+        if _slugify(fb.city) == slug:
+            return _foodbank_timeline(fb, session)
     raise HTTPException(status_code=404, detail="foodbank not found")

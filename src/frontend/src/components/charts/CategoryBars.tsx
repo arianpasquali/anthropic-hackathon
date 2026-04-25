@@ -20,8 +20,8 @@ export function CategoryBars({ data, height = 280, yLabel = "tCO₂e" }: Categor
   }))
 
   return (
-    <div style={{ height }}>
-      <ResponsiveContainer width="100%" height="100%">
+    <div style={{ height, width: "100%", minWidth: 0 }}>
+      <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
         <BarChart data={rows} margin={{ top: 10, right: 8, left: 0, bottom: 8 }}>
           <CartesianGrid stroke="var(--line)" strokeDasharray="2 4" vertical={false} />
           <XAxis

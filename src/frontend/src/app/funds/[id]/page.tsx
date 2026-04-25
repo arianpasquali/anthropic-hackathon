@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { AllocationTable } from "@/components/funds/AllocationTable"
 import { BuyPanel } from "@/components/funds/BuyPanel"
 import { CategoryBars } from "@/components/charts/CategoryBars"
+import { TimelineChart } from "@/components/charts/TimelineChart"
 import { Badge } from "@/components/ui/Badge"
 import { CF_NL, EMISSION_FACTORS } from "@/lib/methodology"
 import { formatEur, formatNumber, formatPercent, formatTCO2e } from "@/lib/format"
@@ -20,6 +21,7 @@ export default async function FundDetailPage({
     throw e
   })
   if (!pkg) notFound()
+  const timeline = await api.getPackageTimeline(id).catch(() => [])
 
   const totals = pkg.projected_allocations.reduce(
     (acc, a) => ({
@@ -73,8 +75,32 @@ export default async function FundDetailPage({
           </div>
         </section>
 
+        {timeline.length > 0 ? (
+          <section className="mt-16 min-w-0">
+            <div className="flex items-end justify-between flex-wrap gap-3">
+              <div>
+                <p className="eyebrow">Historical performance</p>
+                <h2 className="display text-3xl mt-3 tracking-[-0.02em] max-w-[26ch]">
+                  Fund-weighted CO₂e since {timeline[0].year}.
+                </h2>
+              </div>
+              <p className="text-[12.5px] text-text-faint tabular">
+                aggregated across top {pkg.top_n} banks
+              </p>
+            </div>
+            <p className="text-text-muted text-[14px] mt-4 max-w-[58ch] leading-relaxed">
+              Each year sums every food bank&apos;s baseline weighted by what its
+              allocation share would be if the fund had been bought that year.
+              Use this to project realised impact for your subscription.
+            </p>
+            <div className="mt-6">
+              <TimelineChart data={timeline} height={280} />
+            </div>
+          </section>
+        ) : null}
+
         <section className="mt-16 grid lg:grid-cols-[2fr_1fr] gap-10 items-start">
-          <div>
+          <div className="min-w-0">
             <p className="eyebrow">Category breakdown</p>
             <h2 className="display text-3xl mt-3 tracking-[-0.02em]">
               CO₂e per food category, fund-wide.

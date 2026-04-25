@@ -7,8 +7,10 @@ from sqlmodel import Session, select
 
 from src.backend.database import get_session
 from src.backend.models.enums import ImpactProfileEnum
+from src.backend.models.foodbank import AnnualReport
+from src.backend.models.frame import FrameResult
 from src.backend.models.marketplace import Package
-from src.backend.routers.foodbanks import FoodbankResponse, _build_response
+from src.backend.routers.foodbanks import FoodbankResponse, TimelinePoint, _build_response, _foodbank_timeline
 from src.backend.services.allocation import score_foodbanks
 
 router = APIRouter(prefix="/packages")
@@ -89,3 +91,41 @@ def get_package(package_id: uuid.UUID, session: Session = Depends(get_session)):
         **base.model_dump(),
         projected_allocations=projected,
     )
+
+
+@router.get("/{package_id}/timeline", response_model=list[TimelinePoint])
+def get_package_timeline(package_id: uuid.UUID, session: Session = Depends(get_session)):
+    """Aggregate timeline across the fund's projected top-N foodbanks.
+
+    Sums per-year CO2e and kg rescued over the banks the fund would currently
+    allocate to. Years are taken from the union of report years across the set.
+    """
+    pkg = session.get(Package, package_id)
+    if not pkg:
+        raise HTTPException(status_code=404)
+    scored = score_foodbanks(session, pkg)
+    if not scored:
+        return []
+    per_bank = [(row, _foodbank_timeline(row.foodbank, session)) for row in scored]
+    years = sorted({pt.year for _, pts in per_bank for pt in pts})
+    out: list[TimelinePoint] = []
+    for y in years:
+        co2 = 0.0
+        kg = 0.0
+        hh = 0
+        for row, pts in per_bank:
+            pt = next((p for p in pts if p.year == y), None)
+            if not pt:
+                continue
+            co2 += pt.co2e_kg * row.weight_pct
+            if pt.annual_kg_rescued:
+                kg += pt.annual_kg_rescued * row.weight_pct
+            if pt.households_weekly:
+                hh += int(pt.households_weekly * row.weight_pct)
+        out.append(TimelinePoint(
+            year=y,
+            co2e_kg=co2,
+            annual_kg_rescued=kg or None,
+            households_weekly=hh or None,
+        ))
+    return out
