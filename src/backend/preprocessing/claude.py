@@ -76,8 +76,9 @@ def _call_claude(
 
 
 def _parse_section(raw: dict, schema_cls: type[BaseModel]) -> BaseModel:
+    cleaned = {k: (None if v == "" else v) for k, v in raw.items()}
     try:
-        return schema_cls.model_validate(raw)
+        return schema_cls.model_validate(cleaned)
     except Exception as e:
         logger.warning(f"Validation failed for {schema_cls.__name__}: {e} — returning empty")
         return schema_cls()
