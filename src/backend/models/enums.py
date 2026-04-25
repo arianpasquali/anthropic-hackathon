@@ -18,6 +18,7 @@ class RoleEnum(str, Enum):
 class RegionEnum(str, Enum):
     noord = "noord"
     oost = "oost"
+    zuidoost = "zuidoost"
     zuid = "zuid"
     west = "west"
     randstad = "randstad"

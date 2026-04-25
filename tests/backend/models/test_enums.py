@@ -19,7 +19,7 @@ def test_role_enum_values():
 
 
 def test_region_enum_values():
-    expected = {"noord", "oost", "zuid", "west", "randstad"}
+    expected = {"noord", "oost", "zuidoost", "zuid", "west", "randstad"}
     assert {r.value for r in RegionEnum} == expected
 
 
