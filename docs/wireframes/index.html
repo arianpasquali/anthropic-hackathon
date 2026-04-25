@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klimaatkracht — Wireframes</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #222; }
+
+  /* Nav */
+  .page-nav { display: flex; gap: 8px; padding: 16px 24px; background: #1a1a1a; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; }
+  .page-nav a { color: #ccc; text-decoration: none; font-size: 12px; padding: 6px 12px; border-radius: 4px; border: 1px solid #444; }
+  .page-nav a:hover, .page-nav a.active { background: #444; color: #fff; }
+  .page-nav span { color: #666; font-size: 12px; padding: 6px 0; align-self: center; }
+
+  /* Wireframe container */
+  .screen { display: none; padding: 24px; max-width: 1200px; margin: 0 auto; }
+  .screen.active { display: block; }
+
+  /* WF primitives */
+  .wf-bar { background: #d0d0d0; border: 1px solid #bbb; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #666; font-weight: 500; }
+  .wf-box { background: #e8e8e8; border: 1px solid #ccc; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #666; text-align: center; padding: 8px; }
+  .wf-box.dark { background: #555; color: #fff; border-color: #444; }
+  .wf-box.accent { background: #c8e6c9; border-color: #a5d6a7; color: #1b5e20; }
+  .wf-box.highlight { background: #fff3cd; border-color: #ffc107; color: #856404; }
+  .wf-img { background: #ddd; border: 1px dashed #bbb; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #999; }
+
+  /* Layout helpers */
+  .row { display: flex; gap: 12px; }
+  .col { display: flex; flex-direction: column; gap: 12px; }
+  .flex1 { flex: 1; }
+  .flex2 { flex: 2; }
+  .flex3 { flex: 3; }
+
+  /* Screen chrome */
+  .browser-chrome { background: #fff; border: 2px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+  .browser-address { background: #f0f0f0; border-bottom: 1px solid #ddd; padding: 8px 16px; font-size: 11px; color: #666; display: flex; gap: 8px; align-items: center; }
+  .browser-address .url { background: #fff; border: 1px solid #ccc; border-radius: 12px; padding: 3px 12px; flex: 1; max-width: 400px; }
+  .browser-address .dot { width: 10px; height: 10px; border-radius: 50%; background: #ddd; }
+  .browser-content { padding: 0; }
+
+  /* Page label */
+  .screen-label { font-size: 22px; font-weight: 700; margin-bottom: 16px; color: #333; }
+  .screen-label span { font-size: 13px; font-weight: 400; color: #888; margin-left: 8px; }
+
+  /* Navbar wf */
+  .wf-navbar { background: #fff; border-bottom: 1px solid #e0e0e0; padding: 12px 24px; display: flex; align-items: center; gap: 16px; }
+  .wf-logo { background: #388e3c; color: #fff; padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: 700; }
+  .wf-navlinks { display: flex; gap: 16px; margin-left: auto; }
+  .wf-navlink { font-size: 11px; color: #666; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
+
+  /* Hero */
+  .wf-hero { background: #37474f; color: #fff; padding: 48px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; min-height: 220px; }
+  .wf-hero-side { display: flex; flex-direction: column; gap: 10px; }
+  .wf-label-tiny { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
+  .wf-h1 { height: 20px; background: rgba(255,255,255,0.3); border-radius: 3px; }
+  .wf-h1.sm { width: 70%; }
+  .wf-body-line { height: 12px; background: rgba(255,255,255,0.15); border-radius: 2px; }
+  .wf-btn { display: inline-block; padding: 8px 16px; border-radius: 4px; font-size: 11px; font-weight: 600; text-align: center; width: fit-content; }
+  .wf-btn.primary { background: #388e3c; color: #fff; }
+  .wf-btn.secondary { background: transparent; border: 1px solid rgba(255,255,255,0.4); color: #fff; }
+  .wf-divider { width: 1px; background: rgba(255,255,255,0.15); }
+
+  /* Stats bar */
+  .wf-stats { background: #f1f8e9; border: 1px solid #c8e6c9; padding: 16px 32px; display: grid; grid-template-columns: repeat(3, 1fr); }
+  .wf-stat { text-align: center; }
+  .wf-stat-num { font-size: 22px; font-weight: 700; color: #2e7d32; }
+  .wf-stat-label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* Steps */
+  .wf-steps { padding: 32px; background: #fff; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .wf-step { border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .wf-step-num { width: 28px; height: 28px; border-radius: 50%; background: #388e3c; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+  .wf-step-title { height: 14px; background: #ddd; border-radius: 2px; width: 80%; }
+  .wf-step-body { height: 10px; background: #eee; border-radius: 2px; }
+
+  /* Map */
+  .wf-map { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 6px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .wf-map::after { content: '[ NL Map — Leaflet ]'; font-size: 12px; color: #1565c0; }
+  .wf-pin { position: absolute; width: 12px; height: 12px; background: #388e3c; border-radius: 50%; border: 2px solid #fff; }
+
+  /* Cards */
+  .wf-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .wf-card-title { height: 14px; background: #ccc; border-radius: 2px; width: 60%; }
+  .wf-card-sub { height: 10px; background: #eee; border-radius: 2px; width: 40%; }
+  .wf-card-big { height: 32px; background: #d0d0d0; border-radius: 3px; width: 50%; }
+  .wf-card-stat { height: 10px; background: #eee; border-radius: 2px; }
+  .wf-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+  .wf-badge.green { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+  .wf-badge.amber { background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
+  .wf-badge.blue { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+
+  /* Progress bar */
+  .wf-progress-track { height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden; }
+  .wf-progress-fill { height: 100%; background: #388e3c; border-radius: 3px; }
+
+  /* Chart */
+  .wf-chart { background: #fafafa; border: 1px solid #e0e0e0; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .wf-chart-title { height: 12px; background: #ccc; border-radius: 2px; width: 40%; }
+  .wf-bars { display: flex; align-items: flex-end; gap: 8px; height: 80px; }
+  .wf-bar-col { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+  .wf-bar-fill { background: #66bb6a; border-radius: 2px 2px 0 0; width: 100%; }
+  .wf-bar-label { font-size: 9px; color: #999; text-align: center; }
+
+  /* Table */
+  .wf-table { border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden; }
+  .wf-table-header { background: #f5f5f5; padding: 8px 16px; display: grid; gap: 8px; border-bottom: 1px solid #e0e0e0; }
+  .wf-table-row { padding: 10px 16px; display: grid; gap: 8px; border-bottom: 1px solid #f0f0f0; }
+  .wf-table-cell { height: 12px; background: #e0e0e0; border-radius: 2px; }
+  .wf-table-cell.sm { width: 60%; }
+
+  /* Upload */
+  .wf-upload { border: 2px dashed #bbb; border-radius: 8px; padding: 40px; text-align: center; background: #fafafa; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .wf-upload-icon { font-size: 32px; }
+  .wf-upload-text { font-size: 12px; color: #666; }
+
+  /* Section title */
+  .wf-section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #999; padding: 16px 0 4px; }
+
+  /* Footer */
+  .wf-footer { background: #f5f5f5; border-top: 1px solid #ddd; padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; }
+  .wf-footer-text { height: 10px; background: #ddd; border-radius: 2px; width: 200px; }
+
+  /* Annotation */
+  .annotation { display: inline-block; background: #fff9c4; border: 1px solid #f9a825; border-radius: 3px; font-size: 10px; padding: 2px 6px; color: #5d4037; margin-left: 6px; }
+
+  .screen-title-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Methodology page animations ── */
+  .meth-screen { background: #fff; }
+
+  /* Fade-slide in on scroll */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* Pipeline flow */
+  .pipeline { display: flex; align-items: center; gap: 0; overflow: hidden; }
+  .pipe-step {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    padding: 20px 16px; background: #f9fafb; border: 1.5px solid #e5e7eb;
+    border-radius: 10px; flex: 1; text-align: center; position: relative;
+    min-width: 110px;
+  }
+  .pipe-step.highlight { background: #ecfdf5; border-color: #6ee7b7; }
+  .pipe-icon { font-size: 26px; }
+  .pipe-label { font-size: 11px; font-weight: 700; color: #111; line-height: 1.3; }
+  .pipe-sub { font-size: 9px; color: #6b7280; }
+  .pipe-arrow {
+    width: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .pipe-arrow::before {
+    content: ''; position: absolute; left: -100%; top: 50%; width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, #059669);
+    animation: flow 1.8s ease-in-out infinite;
+  }
+  .pipe-arrow::after { content: '▶'; color: #059669; font-size: 12px; }
+  @keyframes flow { 0% { left: -100%; } 100% { left: 100%; } }
+
+  /* Formula */
+  .formula-box {
+    background: #0f172a; color: #f8fafc; border-radius: 12px;
+    padding: 32px; font-family: 'Courier New', monospace;
+    font-size: 14px; line-height: 2; position: relative; overflow: hidden;
+  }
+  .formula-box::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 40%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(52,211,153,0.08), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  @keyframes shimmer { 0% { left: -100%; } 100% { left: 200%; } }
+  .f-var { color: #6ee7b7; font-weight: 700; }
+  .f-op { color: #94a3b8; }
+  .f-comment { color: #475569; font-size: 11px; }
+  .f-result { color: #34d399; font-size: 16px; font-weight: 700; }
+
+  /* Emission factor bars */
+  .ef-row {
+    display: grid; grid-template-columns: 100px 48px 1fr 180px;
+    gap: 12px; align-items: center; padding: 10px 0;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .ef-bar-track { height: 8px; background: #f3f4f6; border-radius: 4px; overflow: hidden; }
+  .ef-bar-fill { height: 100%; background: linear-gradient(90deg, #059669, #34d399); border-radius: 4px; width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+  .ef-bar-fill.animate { width: var(--w); }
+  .ef-val { font-size: 13px; font-weight: 700; color: #1a1a1a; text-align: right; }
+  .ef-name { font-size: 12px; font-weight: 600; color: #374151; text-transform: capitalize; }
+  .ef-source { font-size: 9px; color: #9ca3af; line-height: 1.4; }
+
+  /* Provenance badges */
+  .prov-badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 600; }
+  .prov-extracted { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+  .prov-inferred { background: #fef9c3; color: #713f12; border: 1px solid #fde047; }
+  .prov-calculation { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+  .prov-manual { background: #fce7f3; color: #831843; border: 1px solid #f9a8d4; }
+
+  /* Trust pillars */
+  .pillar { border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .pillar-icon { font-size: 28px; }
+  .pillar-title { font-size: 13px; font-weight: 700; color: #111; }
+  .pillar-body { font-size: 11px; color: #6b7280; line-height: 1.6; }
+
+  /* Counterfactual compare */
+  .cf-compare { display: grid; grid-template-columns: 1fr 40px 1fr; gap: 0; align-items: center; }
+  .cf-box { padding: 20px; border-radius: 10px; text-align: center; }
+  .cf-box.nl { background: #ecfdf5; border: 2px solid #6ee7b7; }
+  .cf-box.global { background: #fef2f2; border: 2px solid #fca5a5; opacity: 0.7; }
+  .cf-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .cf-num { font-size: 28px; font-weight: 800; }
+  .cf-desc { font-size: 10px; color: #6b7280; margin-top: 4px; line-height: 1.4; }
+
+  /* Audit trail */
+  .audit-step { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid #f3f4f6; }
+  .audit-num { width: 28px; height: 28px; border-radius: 50%; background: #059669; color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .audit-title { font-size: 12px; font-weight: 700; color: #111; margin-bottom: 3px; }
+  .audit-detail { font-size: 11px; color: #6b7280; line-height: 1.5; }
+  .audit-badge { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600; background: #dcfce7; color: #166534; border: 1px solid #86efac; margin-left: 6px; }
+
+  /* Section headers */
+  .meth-section { padding: 48px 48px 32px; }
+  .meth-section + .meth-section { border-top: 1px solid #f3f4f6; }
+  .meth-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #059669; margin-bottom: 8px; }
+  .meth-title { font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 12px; line-height: 1.3; }
+  .meth-body { font-size: 13px; color: #6b7280; line-height: 1.7; max-width: 680px; }
+
+  /* Hero strip */
+  .meth-hero {
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
+    padding: 48px; color: #fff; position: relative; overflow: hidden;
+  }
+  .meth-hero::after {
+    content: ''; position: absolute; right: -80px; top: -80px;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: rgba(52,211,153,0.1); pointer-events: none;
+  }
+  .meth-hero-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #6ee7b7; margin-bottom: 12px; }
+  .meth-hero-h1 { font-size: 30px; font-weight: 800; margin-bottom: 12px; line-height: 1.2; }
+  .meth-hero-sub { font-size: 14px; color: rgba(255,255,255,0.75); max-width: 560px; line-height: 1.6; }
+  .meth-hero-badges { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+  .meth-hero-badge { padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 600; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #fff; }
+
+  /* Pulse dot */
+  .pulse { width: 10px; height: 10px; border-radius: 50%; background: #059669; position: relative; display: inline-block; }
+  .pulse::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid #059669; animation: pulse-ring 1.5s ease-out infinite; }
+  @keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
+</style>
+</head>
+<body>
+
+<div class="page-nav">
+  <span>Klimaatkracht wireframes</span>
+  <a href="#" class="active" onclick="show('landing')">1. Landing</a>
+  <a href="#" onclick="show('marketplace')">2. Marketplace</a>
+  <a href="#" onclick="show('pkgdetail')">3. Package Detail</a>
+  <a href="#" onclick="show('corporate')">4. Corporate Dashboard</a>
+  <a href="#" onclick="show('foodbank')">5. Food Bank Dashboard</a>
+  <a href="#" onclick="show('methodology')">6. Methodology</a>
+</div>
+
+<!-- ===================== LANDING ===================== -->
+<div class="screen active" id="screen-landing">
+  <div class="screen-title-row">
+    <div class="screen-label">Landing Page <span>/ · both audiences</span></div>
+    <span class="annotation">NEW</span>
+  </div>
+  <div class="browser-chrome">
+    <div class="browser-address">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="url">klimaatkracht.nl/</div>
+    </div>
+    <div class="browser-content">
+
+      <!-- Navbar -->
+      <div class="wf-navbar">
+        <div class="wf-logo">KK</div>
+        <span style="font-size:12px;font-weight:600;color:#333;">Klimaatkracht</span>
+        <div class="wf-navlinks">
+          <div class="wf-navlink">Marketplace</div>
+          <div class="wf-navlink">Methodology</div>
+          <div class="wf-navlink">For Food Banks</div>
+        </div>
+      </div>
+
+      <!-- Hero split -->
+      <div class="wf-hero">
+        <div class="wf-hero-side">
+          <div class="wf-label-tiny">For corporates</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div class="wf-h1"></div>
+            <div class="wf-h1 sm"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;">
+            <div class="wf-body-line"></div>
+            <div class="wf-body-line" style="width:85%"></div>
+            <div class="wf-body-line" style="width:70%"></div>
+          </div>
+          <div style="margin-top:8px;">
+            <div class="wf-btn primary">Browse packages →</div>
+          </div>
+          <div style="font-size:10px;color:#aaa;margin-top:4px;">→ /marketplace</div>
+        </div>
+        <div class="wf-divider"></div>
+        <div class="wf-hero-side">
+          <div class="wf-label-tiny">For food banks</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div class="wf-h1"></div>
+            <div class="wf-h1 sm"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;">
+            <div class="wf-body-line"></div>
+            <div class="wf-body-line" style="width:80%"></div>
+            <div class="wf-body-line" style="width:65%"></div>
+          </div>
+          <div style="margin-top:8px;">
+            <div class="wf-btn secondary">Join as food bank →</div>
+          </div>
+          <div style="font-size:10px;color:#aaa;margin-top:4px;">→ /dashboard/foodbank</div>
+        </div>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="wf-stats">
+        <div class="wf-stat">
+          <div class="wf-stat-num">18,015</div>
+          <div class="wf-stat-label">tCO₂e avoided / yr</div>
+          <div style="font-size:9px;color:#999;margin-top:2px;">sum of 6 banks from banks.json</div>
+        </div>
+        <div class="wf-stat">
+          <div class="wf-stat-num">7.2M kg</div>
+          <div class="wf-stat-label">food rescued / yr</div>
+        </div>
+        <div class="wf-stat">
+          <div class="wf-stat-num">4,700+</div>
+          <div class="wf-stat-label">households / week</div>
+        </div>
+      </div>
+
+      <!-- How it works -->
+      <div style="padding:24px 32px 8px;background:#fff;"><div class="wf-section-title">How it works</div></div>
+      <div class="wf-steps">
+        <div class="wf-step">
+          <div class="wf-step-num">1</div>
+          <div class="wf-step-title"></div>
+          <div style="font-size:11px;color:#555;">Food bank uploads annual report PDF</div>
+          <div class="wf-step-body"></div>
+          <div class="wf-step-body" style="width:80%"></div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-step-num">2</div>
+          <div class="wf-step-title"></div>
+          <div style="font-size:11px;color:#555;">FRAME engine computes tCO₂e avoided</div>
+          <div class="wf-step-body"></div>
+          <div class="wf-step-body" style="width:60%"></div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-step-num">3</div>
+          <div class="wf-step-title"></div>
+          <div style="font-size:11px;color:#555;">Corporate buys package, receives quarterly CSR report</div>
+          <div class="wf-step-body"></div>
+          <div class="wf-step-body" style="width:75%"></div>
+        </div>
+      </div>
+
+      <!-- Map teaser -->
+      <div style="padding:24px 32px;background:#f9f9f9;border-top:1px solid #eee;">
+        <div class="wf-section-title">Food banks on the map</div>
+        <div style="margin-top:12px;display:flex;gap:16px;align-items:flex-start;">
+          <div class="wf-map" style="height:200px;flex:2;position:relative;">
+            <div class="wf-pin" style="top:40%;left:45%;"></div>
+            <div class="wf-pin" style="top:28%;left:48%;"></div>
+            <div class="wf-pin" style="top:35%;left:42%;"></div>
+            <div class="wf-pin" style="top:60%;left:52%;"></div>
+            <div class="wf-pin" style="top:12%;left:55%;"></div>
+            <div class="wf-pin" style="top:62%;left:44%;"></div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+            <div style="font-size:11px;color:#555;">6 food banks across the Netherlands</div>
+            <div class="wf-btn primary" style="font-size:11px;">Explore all food banks →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="wf-footer">
+        <div class="wf-footer-text"></div>
+        <div style="font-size:10px;color:#999;">Methodology aligned with FRAME · Global Foodbanking Network</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MARKETPLACE ===================== -->
+<div class="screen" id="screen-marketplace">
+  <div class="screen-title-row">
+    <div class="screen-label">Marketplace <span>/marketplace · moved from /</span></div>
+    <span class="annotation">EXISTING + NL map added</span>
+  </div>
+  <div class="browser-chrome">
+    <div class="browser-address">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="url">klimaatkracht.nl/marketplace</div>
+    </div>
+    <div class="browser-content">
+      <div class="wf-navbar">
+        <div class="wf-logo">KK</div>
+        <span style="font-size:12px;font-weight:600;color:#333;">Klimaatkracht</span>
+        <div class="wf-navlinks">
+          <div class="wf-navlink" style="border-bottom:2px solid #388e3c;color:#388e3c;">Marketplace</div>
+          <div class="wf-navlink">Methodology</div>
+          <div class="wf-navlink">For Food Banks</div>
+        </div>
+      </div>
+
+      <!-- Existing hero (simplified) -->
+      <div style="padding:24px 32px;background:#fff;border-bottom:1px solid #eee;">
+        <div style="font-size:10px;color:#388e3c;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:6px;">Verified Avoided Emissions · CSRD-Ready</div>
+        <div style="height:20px;background:#ddd;border-radius:3px;width:55%;margin-bottom:12px;"></div>
+        <div style="height:12px;background:#eee;border-radius:2px;width:70%;margin-bottom:6px;"></div>
+        <div style="height:12px;background:#eee;border-radius:2px;width:60%;"></div>
+      </div>
+
+      <!-- Impact profile filter (NEW) -->
+      <div style="padding:12px 32px;background:#fff;border-bottom:1px solid #eee;display:flex;align-items:center;gap:8px;">
+        <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-right:4px;">Impact profile:</div>
+        <div style="padding:6px 14px;border-radius:16px;background:#388e3c;color:#fff;font-size:11px;font-weight:600;cursor:pointer;">All</div>
+        <div style="padding:6px 14px;border-radius:16px;border:1px solid #ccc;font-size:11px;color:#555;cursor:pointer;">🌱 CO₂ focus</div>
+        <div style="padding:6px 14px;border-radius:16px;border:1px solid #ccc;font-size:11px;color:#555;cursor:pointer;">👥 Social focus</div>
+        <div style="padding:6px 14px;border-radius:16px;border:1px solid #ccc;font-size:11px;color:#555;cursor:pointer;">⚖️ Balanced</div>
+        <div style="margin-left:auto;font-size:10px;color:#888;font-style:italic;">HTMX hx-get · hx-swap="innerHTML" on filter</div>
+      </div>
+
+      <!-- Map + cards layout (NEW) -->
+      <div style="padding:24px 32px;background:#f9f9f9;">
+        <div class="wf-section-title">NL map <span class="annotation">NEW — react-leaflet</span></div>
+        <div style="margin-top:12px;" class="row">
+          <!-- Map -->
+          <div class="wf-map flex2" style="height:260px;position:relative;">
+            <div class="wf-pin" style="top:42%;left:42%;"></div>
+            <div class="wf-pin" style="top:26%;left:50%;"></div>
+            <div class="wf-pin" style="top:36%;left:40%;"></div>
+            <div class="wf-pin" style="top:62%;left:54%;"></div>
+            <div class="wf-pin" style="top:10%;left:57%;"></div>
+            <div class="wf-pin" style="top:64%;left:43%;"></div>
+            <!-- popup -->
+            <div style="position:absolute;top:20%;left:52%;background:#fff;border:1px solid #ccc;border-radius:4px;padding:6px 10px;font-size:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+              <div style="font-weight:600;">Voedselbank Rotterdam</div>
+              <div style="color:#388e3c;">7,718 tCO₂e/yr</div>
+              <div style="color:#1565c0;text-decoration:underline;margin-top:2px;">View →</div>
+            </div>
+          </div>
+
+          <!-- Card list -->
+          <div class="flex1 col" style="max-height:260px;overflow-y:auto;">
+            <div style="font-size:11px;color:#666;padding:4px 0;">6 Dutch foodbanks · FRAME methodology</div>
+            <!-- Bank card (repeat pattern) -->
+            <div class="wf-card" style="border-left:3px solid #388e3c;">
+              <div class="row" style="justify-content:space-between;align-items:flex-start;">
+                <div>
+                  <div style="font-size:12px;font-weight:600;">Voedselbank Rotterdam</div>
+                  <div style="font-size:10px;color:#888;">Zuid-Holland</div>
+                </div>
+                <div class="wf-badge green">Solo eligible</div>
+              </div>
+              <div style="font-size:18px;font-weight:700;color:#333;">7,718 <span style="font-size:11px;font-weight:400;color:#888;">tCO₂e/yr</span></div>
+              <div class="row" style="gap:16px;">
+                <div><div style="font-size:9px;color:#888;">Food rescued</div><div style="font-size:11px;font-weight:600;">4,160 t</div></div>
+                <div><div style="font-size:9px;color:#888;">Households/wk</div><div style="font-size:11px;font-weight:600;">1,682</div></div>
+              </div>
+              <div class="row" style="justify-content:space-between;border-top:1px solid #f0f0f0;padding-top:8px;">
+                <div style="font-size:11px;color:#555;">€25k buys <strong>7.8%</strong> share</div>
+                <div style="font-size:11px;color:#388e3c;font-weight:600;">View →</div>
+              </div>
+            </div>
+            <div class="wf-card">
+              <div style="font-size:12px;font-weight:600;">Voedselbank Haaglanden</div>
+              <div style="font-size:10px;color:#888;">Zuid-Holland</div>
+              <div style="font-size:16px;font-weight:700;color:#333;">4,698 <span style="font-size:10px;font-weight:400;color:#888;">tCO₂e/yr</span></div>
+            </div>
+            <div class="wf-card">
+              <div style="font-size:12px;font-weight:600;">Voedselbank Amsterdam</div>
+              <div style="font-size:10px;color:#888;">Noord-Holland</div>
+              <div style="font-size:16px;font-weight:700;color:#333;">2,928 <span style="font-size:10px;font-weight:400;color:#888;">tCO₂e/yr</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PACKAGE DETAIL ===================== -->
+<div class="screen" id="screen-pkgdetail">
+  <div class="screen-title-row">
+    <div class="screen-label">Package Detail <span>/packages/{id} · pre-checkout allocation preview</span></div>
+    <span class="annotation">NEW</span>
+  </div>
+  <div class="browser-chrome">
+    <div class="browser-address">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="url">klimaatkracht.nl/packages/co2-focus-nl</div>
+    </div>
+    <div class="browser-content">
+      <div class="wf-navbar">
+        <div class="wf-logo">KK</div>
+        <span style="font-size:12px;font-weight:600;color:#333;">Klimaatkracht</span>
+        <div class="wf-navlinks">
+          <div class="wf-navlink" style="border-bottom:2px solid #388e3c;color:#388e3c;">Marketplace</div>
+          <div class="wf-navlink">Methodology</div>
+          <div class="wf-navlink">For Food Banks</div>
+        </div>
+      </div>
+
+      <div style="padding:24px 32px;">
+        <!-- Package header -->
+        <div class="row" style="align-items:flex-start;gap:24px;margin-bottom:24px;">
+          <div style="flex:1;">
+            <div style="font-size:10px;color:#388e3c;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:6px;">🌱 CO₂ Focus · top 50 banks by tCO₂e/yr</div>
+            <div style="font-size:24px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Netherlands CO₂ Climate Package</div>
+            <div style="font-size:13px;color:#555;line-height:1.5;">Your €25,000 is allocated across the top 50 Dutch food banks ranked by annual avoided CO₂e. Attribution is proportional to each bank's verified FRAME result.</div>
+          </div>
+          <!-- Sticky buy panel -->
+          <div class="wf-card" style="width:240px;border:2px solid #388e3c;flex-shrink:0;">
+            <div style="font-size:22px;font-weight:700;color:#1a1a1a;">€25,000</div>
+            <div style="font-size:11px;color:#555;margin-top:2px;">per quarter · ESRS E1 + S3 report</div>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px;">
+              <div class="row" style="gap:6px;font-size:11px;"><span style="color:#388e3c;font-weight:700;">600</span><span style="color:#666;">tCO₂e attributed</span></div>
+              <div class="row" style="gap:6px;font-size:11px;"><span style="color:#388e3c;font-weight:700;">50</span><span style="color:#666;">food banks</span></div>
+              <div class="row" style="gap:6px;font-size:11px;"><span style="color:#388e3c;font-weight:700;">4,700+</span><span style="color:#666;">households/wk</span></div>
+            </div>
+            <div style="margin-top:16px;">
+              <div class="wf-btn primary" style="width:100%;text-align:center;padding:10px 0;font-size:12px;">Buy package →</div>
+            </div>
+            <div style="font-size:9px;color:#aaa;text-align:center;margin-top:6px;">POST /packages/{id}/checkout</div>
+          </div>
+        </div>
+
+        <div class="row" style="gap:20px;">
+          <!-- Projected allocation table -->
+          <div style="flex:2;">
+            <div style="font-size:12px;font-weight:600;margin-bottom:12px;">Projected allocation <span class="annotation">top 6 of 50 shown</span></div>
+            <div class="wf-table">
+              <div class="wf-table-row" style="grid-template-columns:2fr 1fr 1fr 1fr;font-size:10px;font-weight:600;background:#f5f5f5;color:#666;">
+                <div>Food bank</div><div>tCO₂e/yr</div><div>Share</div><div>Your CO₂e</div>
+              </div>
+              <div class="wf-table-row" style="grid-template-columns:2fr 1fr 1fr 1fr;font-size:11px;align-items:center;">
+                <div><span style="font-weight:600;">Rotterdam RDC</span><br><span style="font-size:9px;color:#888;">Zuid-Holland</span></div>
+                <div>7,718</div>
+                <div><span class="wf-badge green">42.8%</span></div>
+                <div style="font-weight:600;color:#2e7d32;">257 t</div>
+              </div>
+              <div class="wf-table-row" style="grid-template-columns:2fr 1fr 1fr 1fr;font-size:11px;align-items:center;">
+                <div><span style="font-weight:600;">Haaglanden</span><br><span style="font-size:9px;color:#888;">Zuid-Holland</span></div>
+                <div>4,698</div>
+                <div><span style="font-size:10px;color:#555;">26.0%</span></div>
+                <div style="color:#2e7d32;">156 t</div>
+              </div>
+              <div class="wf-table-row" style="grid-template-columns:2fr 1fr 1fr 1fr;font-size:11px;align-items:center;">
+                <div><span style="font-weight:600;">Amsterdam</span><br><span style="font-size:9px;color:#888;">Noord-Holland</span></div>
+                <div>2,928</div>
+                <div><span style="font-size:10px;color:#555;">16.2%</span></div>
+                <div style="color:#2e7d32;">97 t</div>
+              </div>
+              <div class="wf-table-row" style="grid-template-columns:2fr 1fr 1fr 1fr;font-size:11px;align-items:center;color:#aaa;">
+                <div colspan="4" style="font-style:italic;font-size:10px;">+ 47 more food banks …</div>
+              </div>
+            </div>
+            <div style="font-size:10px;color:#888;margin-top:8px;">Allocation is computed at purchase time using the FRAME allocation engine. Weights may shift as new food banks upload data.</div>
+          </div>
+
+          <!-- Methodology note -->
+          <div style="flex:1;">
+            <div class="wf-card" style="background:#f1f8e9;border-color:#c8e6c9;">
+              <div style="font-size:11px;font-weight:700;color:#1b5e20;margin-bottom:8px;">FRAME Methodology</div>
+              <div style="font-size:10px;color:#555;line-height:1.5;">CO₂e savings computed using the Global Foodbanking Network's FRAME model. Each food bank's annual report is parsed by Claude and cross-validated against national emission factors.</div>
+              <div style="margin-top:10px;"><a href="#" style="font-size:10px;color:#388e3c;">/methodology →</a></div>
+            </div>
+            <div class="wf-card" style="margin-top:12px;">
+              <div style="font-size:11px;font-weight:600;margin-bottom:6px;">Report delivered</div>
+              <div style="font-size:10px;color:#555;">ESRS E1 + S3 report generated by Claude within 48h of quarter close. Streamed live on the dashboard.</div>
+              <div style="margin-top:6px;"><div class="wf-badge green">ESRS E1</div> <div class="wf-badge green" style="margin-left:4px;">S3</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CORPORATE DASHBOARD ===================== -->
+<div class="screen" id="screen-corporate">
+  <div class="screen-title-row">
+    <div class="screen-label">Corporate Dashboard <span>/dashboard/corporate</span></div>
+    <span class="annotation">NEW</span>
+  </div>
+  <div class="browser-chrome">
+    <div class="browser-address">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="url">klimaatkracht.nl/dashboard/corporate</div>
+    </div>
+    <div class="browser-content">
+      <div class="wf-navbar">
+        <div class="wf-logo">KK</div>
+        <span style="font-size:12px;font-weight:600;color:#333;">Klimaatkracht</span>
+        <div class="wf-navlinks" style="gap:8px;">
+          <div class="wf-badge blue">Heineken N.V.</div>
+          <div class="wf-badge green">Corporate sponsor</div>
+        </div>
+      </div>
+
+      <div style="padding:24px 32px;">
+        <!-- Header -->
+        <div class="row" style="justify-content:space-between;align-items:flex-end;margin-bottom:20px;">
+          <div>
+            <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;">Q2 2026 · Voedselbank Rotterdam</div>
+            <div style="font-size:22px;font-weight:700;margin-top:4px;">Impact Summary</div>
+          </div>
+          <div class="wf-btn primary" style="font-size:11px;">View CSR report →</div>
+        </div>
+
+        <!-- Summary cards -->
+        <div class="row" style="margin-bottom:20px;">
+          <div class="wf-card flex1">
+            <div style="font-size:10px;color:#888;text-transform:uppercase;">Avoided emissions</div>
+            <div style="font-size:28px;font-weight:700;color:#2e7d32;">600</div>
+            <div style="font-size:11px;color:#666;">tCO₂e attributed</div>
+          </div>
+          <div class="wf-card flex1">
+            <div style="font-size:10px;color:#888;text-transform:uppercase;">Food rescued</div>
+            <div style="font-size:28px;font-weight:700;color:#333;">323k</div>
+            <div style="font-size:11px;color:#666;">kg attributed</div>
+          </div>
+          <div class="wf-card flex1">
+            <div style="font-size:10px;color:#888;text-transform:uppercase;">Investment</div>
+            <div style="font-size:28px;font-weight:700;color:#333;">€25k</div>
+            <div style="font-size:11px;color:#666;">€41.67 / tCO₂e</div>
+          </div>
+          <div class="wf-card flex1">
+            <div style="font-size:10px;color:#888;text-transform:uppercase;">People reached</div>
+            <div style="font-size:28px;font-weight:700;color:#333;">8,400</div>
+            <div style="font-size:11px;color:#666;">individuals · attributed share</div>
+          </div>
+        </div>
+
+        <div class="row" style="gap:20px;">
+          <!-- Chart -->
+          <div class="flex2 col">
+            <div class="wf-chart">
+              <div style="font-size:12px;font-weight:600;">CO₂e breakdown by food category <span class="annotation">Recharts BarChart</span></div>
+              <div class="wf-bars" style="margin-top:8px;">
+                <div class="wf-bar-col">
+                  <div class="wf-bar-fill" style="height:75px;background:#66bb6a;"></div>
+                  <div class="wf-bar-label">produce</div>
+                </div>
+                <div class="wf-bar-col">
+                  <div class="wf-bar-fill" style="height:54px;background:#66bb6a;"></div>
+                  <div class="wf-bar-label">dry goods</div>
+                </div>
+                <div class="wf-bar-col">
+                  <div class="wf-bar-fill" style="height:48px;background:#66bb6a;"></div>
+                  <div class="wf-bar-label">dairy</div>
+                </div>
+                <div class="wf-bar-col">
+                  <div class="wf-bar-fill" style="height:64px;background:#a5d6a7;"></div>
+                  <div class="wf-bar-label">meat</div>
+                </div>
+                <div class="wf-bar-col">
+                  <div class="wf-bar-fill" style="height:22px;background:#66bb6a;"></div>
+                  <div class="wf-bar-label">bakery</div>
+                </div>
+                <div class="wf-bar-col">
+                  <div class="wf-bar-fill" style="height:22px;background:#66bb6a;"></div>
+                  <div class="wf-bar-label">prepared</div>
+                </div>
+                <div class="wf-bar-col">
+                  <div class="wf-bar-fill" style="height:13px;background:#66bb6a;"></div>
+                  <div class="wf-bar-label">eggs</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Allocation breakdown per bank -->
+            <div class="wf-card">
+              <div style="font-size:12px;font-weight:600;margin-bottom:10px;">Allocation breakdown <span class="annotation">top 3 of 50 banks shown</span></div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div>
+                  <div class="row" style="justify-content:space-between;margin-bottom:3px;">
+                    <div style="font-size:11px;font-weight:600;">Rotterdam RDC</div>
+                    <div style="font-size:11px;color:#2e7d32;font-weight:600;">257 tCO₂e · 42.8%</div>
+                  </div>
+                  <div class="wf-progress-track"><div class="wf-progress-fill" style="width:42.8%"></div></div>
+                </div>
+                <div>
+                  <div class="row" style="justify-content:space-between;margin-bottom:3px;">
+                    <div style="font-size:11px;">Haaglanden</div>
+                    <div style="font-size:11px;color:#555;">156 tCO₂e · 26.0%</div>
+                  </div>
+                  <div class="wf-progress-track"><div class="wf-progress-fill" style="width:26%;background:#81c784;"></div></div>
+                </div>
+                <div>
+                  <div class="row" style="justify-content:space-between;margin-bottom:3px;">
+                    <div style="font-size:11px;">Amsterdam</div>
+                    <div style="font-size:11px;color:#555;">97 tCO₂e · 16.2%</div>
+                  </div>
+                  <div class="wf-progress-track"><div class="wf-progress-fill" style="width:16.2%;background:#a5d6a7;"></div></div>
+                </div>
+                <div style="font-size:10px;color:#aaa;font-style:italic;margin-top:2px;">+ 47 more food banks …</div>
+              </div>
+            </div>
+
+            <!-- NL Region heatmap -->
+            <div class="wf-card">
+              <div style="font-size:12px;font-weight:600;margin-bottom:10px;">Allocation by region <span class="annotation">SVG heatmap</span></div>
+              <div style="display:flex;gap:16px;align-items:flex-start;">
+                <!-- NL schematic map -->
+                <div style="flex-shrink:0;">
+                  <svg width="140" height="160" viewBox="0 0 140 160" style="display:block;">
+                    <!-- Noord (Groningen/Friesland/Drenthe) -->
+                    <rect x="30" y="5" width="80" height="40" rx="6"
+                      fill="#059669" opacity="0.25" stroke="#059669" stroke-width="1.5"/>
+                    <text x="70" y="28" text-anchor="middle" font-size="9" fill="#065f46" font-weight="600">Noord</text>
+                    <text x="70" y="38" text-anchor="middle" font-size="8" fill="#065f46">8%</text>
+
+                    <!-- West/Randstad (Amsterdam, Haaglanden) -->
+                    <rect x="5" y="52" width="75" height="48" rx="6"
+                      fill="#059669" opacity="0.70" stroke="#059669" stroke-width="1.5"/>
+                    <text x="42" y="76" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">West / Randstad</text>
+                    <text x="42" y="88" text-anchor="middle" font-size="9" fill="#d1fae5" font-weight="700">69%</text>
+
+                    <!-- Zuid (Rotterdam, Breda) -->
+                    <rect x="5" y="107" width="75" height="45" rx="6"
+                      fill="#059669" opacity="0.50" stroke="#059669" stroke-width="1.5"/>
+                    <text x="42" y="130" text-anchor="middle" font-size="9" fill="#fff" font-weight="600">Zuid</text>
+                    <text x="42" y="143" text-anchor="middle" font-size="8" fill="#d1fae5">15%</text>
+
+                    <!-- Oost (Eindhoven area) -->
+                    <rect x="88" y="52" width="45" height="48" rx="6"
+                      fill="#059669" opacity="0.35" stroke="#059669" stroke-width="1.5"/>
+                    <text x="110" y="74" text-anchor="middle" font-size="8" fill="#065f46" font-weight="600">Oost</text>
+                    <text x="110" y="86" text-anchor="middle" font-size="8" fill="#065f46">8%</text>
+                  </svg>
+                </div>
+                <!-- Legend -->
+                <div style="flex:1;display:flex;flex-direction:column;gap:6px;font-size:10px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 8px;background:#f0fdf4;border-radius:5px;border:1px solid #bbf7d0;">
+                    <span style="font-weight:600;color:#065f46;">West / Randstad</span>
+                    <span style="font-weight:700;color:#059669;">69%</span>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 8px;background:#f9fafb;border-radius:5px;border:1px solid #e5e7eb;">
+                    <span style="color:#374151;">Zuid</span>
+                    <span style="color:#555;">15%</span>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 8px;background:#f9fafb;border-radius:5px;border:1px solid #e5e7eb;">
+                    <span style="color:#374151;">Noord</span>
+                    <span style="color:#555;">8%</span>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 8px;background:#f9fafb;border-radius:5px;border:1px solid #e5e7eb;">
+                    <span style="color:#374151;">Oost</span>
+                    <span style="color:#555;">8%</span>
+                  </div>
+                  <div style="margin-top:4px;font-size:9px;color:#9ca3af;line-height:1.4;">Darker = higher allocation share. Driven by food bank FRAME scores in each region.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right panel -->
+          <div class="flex1 col">
+            <!-- CSR Report expanded -->
+            <div class="wf-card" style="border:1px solid #c8e6c9;background:#f1f8e9;">
+              <div class="row" style="justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+                <div style="font-size:12px;font-weight:700;color:#1b5e20;">CSR Report — Q2 2026</div>
+                <div class="wf-badge green">ready</div>
+              </div>
+              <div style="display:flex;gap:4px;margin-bottom:10px;">
+                <div class="wf-badge green">ESRS E1</div>
+                <div class="wf-badge green">ESRS S3</div>
+                <div class="wf-badge blue">CSRD-ready</div>
+              </div>
+              <!-- Report sections preview -->
+              <div style="border-top:1px solid #bbf7d0;padding-top:10px;display:flex;flex-direction:column;gap:6px;">
+                <div style="font-size:10px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Contents</div>
+                <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:#374151;">
+                  <span style="color:#059669;">✓</span> Executive summary · climate materiality
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:#374151;">
+                  <span style="color:#059669;">✓</span> E1-1 Transition plan reference
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:#374151;">
+                  <span style="color:#059669;">✓</span> E1-4 tCO₂e targets & progress
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:#374151;">
+                  <span style="color:#059669;">✓</span> E1-6 Gross Scope 3 avoided emissions
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:#374151;">
+                  <span style="color:#059669;">✓</span> S3-1 Material impact on communities
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:#374151;">
+                  <span style="color:#059669;">✓</span> S3-4 People reached (8,400 individuals)
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:#374151;">
+                  <span style="color:#059669;">✓</span> FRAME calculation workings · emission factors
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:#374151;">
+                  <span style="color:#059669;">✓</span> Source citations · provenance trail
+                </div>
+              </div>
+              <div style="border-top:1px solid #bbf7d0;padding-top:10px;margin-top:4px;font-size:9px;color:#6b7280;">
+                Generated by claude-sonnet-4-6 · FRAME v1.0 · 2026-04-15T09:22Z
+              </div>
+              <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">
+                <div class="wf-btn primary" style="font-size:11px;width:100%;text-align:center;">View full report →</div>
+                <div style="font-size:10px;color:#888;text-align:center;">/banks/rotterdam/report</div>
+              </div>
+            </div>
+
+            <!-- Subscription -->
+            <div class="wf-card">
+              <div style="font-size:11px;font-weight:600;">Subscription</div>
+              <div class="wf-table" style="margin-top:8px;">
+                <div class="wf-table-row" style="grid-template-columns:1fr 80px 60px;font-size:10px;background:#f5f5f5;font-weight:600;">
+                  <div>Package</div><div>Amount</div><div>Status</div>
+                </div>
+                <div class="wf-table-row" style="grid-template-columns:1fr 80px 60px;font-size:11px;align-items:center;">
+                  <div>Rotterdam Q2 2026</div>
+                  <div style="font-weight:600;">€25,000</div>
+                  <div><span class="wf-badge green">paid</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== FOODBANK DASHBOARD ===================== -->
+<div class="screen" id="screen-foodbank">
+  <div class="screen-title-row">
+    <div class="screen-label">Food Bank Dashboard <span>/dashboard/foodbank</span></div>
+    <span class="annotation">NEW</span>
+  </div>
+  <div class="browser-chrome">
+    <div class="browser-address">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="url">klimaatkracht.nl/dashboard/foodbank</div>
+    </div>
+    <div class="browser-content">
+      <div class="wf-navbar">
+        <div class="wf-logo">KK</div>
+        <span style="font-size:12px;font-weight:600;color:#333;">Klimaatkracht</span>
+        <div class="wf-navlinks" style="gap:8px;">
+          <div class="wf-badge blue">Voedselbank Amsterdam</div>
+          <div class="wf-badge amber">Food bank operator</div>
+        </div>
+      </div>
+
+      <div style="padding:24px 32px;">
+        <!-- Header -->
+        <div class="row" style="justify-content:space-between;align-items:flex-end;margin-bottom:20px;">
+          <div>
+            <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;">Noord-Holland · Amsterdam</div>
+            <div style="font-size:22px;font-weight:700;margin-top:4px;">Operator Dashboard</div>
+          </div>
+          <div style="font-size:11px;color:#888;">vbn_member_id: AMS-001</div>
+        </div>
+
+        <!-- Funding cards -->
+        <div class="row" style="margin-bottom:20px;">
+          <div class="wf-card flex1">
+            <div style="font-size:10px;color:#888;text-transform:uppercase;">Funding received</div>
+            <div style="font-size:28px;font-weight:700;color:#888;">€0</div>
+            <div style="font-size:11px;color:#999;">No sponsors yet</div>
+          </div>
+          <div class="wf-card flex1">
+            <div style="font-size:10px;color:#888;text-transform:uppercase;">Active sponsors</div>
+            <div style="font-size:28px;font-weight:700;color:#888;">0</div>
+            <div style="font-size:11px;color:#999;">—</div>
+          </div>
+          <div class="wf-card flex1" style="border:1px solid #ffe082;background:#fffde7;">
+            <div style="font-size:10px;color:#f57f17;text-transform:uppercase;">Annual data</div>
+            <div style="margin-top:6px;"><div class="wf-badge amber">Not uploaded</div></div>
+            <div style="font-size:11px;color:#f57f17;margin-top:6px;">Upload required</div>
+          </div>
+        </div>
+
+        <div class="row" style="gap:20px;">
+          <!-- Upload widget -->
+          <div class="flex1 col">
+            <div class="wf-card">
+              <div style="font-size:12px;font-weight:600;">Upload annual report <span class="annotation">mock ingestion</span></div>
+              <div style="display:flex;gap:8px;margin-top:4px;">
+                <div class="wf-bar" style="height:28px;flex:1;font-size:10px;">Year: 2024 ▾</div>
+              </div>
+
+              <!-- Upload zone -->
+              <div class="wf-upload">
+                <div class="wf-upload-icon">⬆</div>
+                <div class="wf-upload-text">Drop PDF / Excel / CSV here</div>
+                <div style="font-size:10px;color:#999;">or click to browse</div>
+              </div>
+
+              <!-- Progress states (shown after drop) -->
+              <div style="border:1px solid #e0e0e0;border-radius:6px;padding:12px;margin-top:4px;">
+                <div style="font-size:10px;color:#888;margin-bottom:8px;">Upload progress (shown after file drop):</div>
+                <div style="display:flex;flex-direction:column;gap:6px;">
+                  <div class="row" style="align-items:center;gap:8px;">
+                    <div style="width:16px;height:16px;background:#388e3c;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;">✓</div>
+                    <div style="font-size:11px;">Uploading</div>
+                  </div>
+                  <div class="row" style="align-items:center;gap:8px;">
+                    <div style="width:16px;height:16px;background:#388e3c;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;">✓</div>
+                    <div style="font-size:11px;">Parsing with Claude</div>
+                    <div style="font-size:9px;color:#888;">claude-sonnet-4-6</div>
+                  </div>
+                  <div class="row" style="align-items:center;gap:8px;">
+                    <div style="width:16px;height:16px;border:2px solid #bbb;border-radius:50%;animation:spin 1s linear infinite;"></div>
+                    <div style="font-size:11px;color:#888;">Computing FRAME…</div>
+                  </div>
+                  <div class="row" style="align-items:center;gap:8px;">
+                    <div style="width:16px;height:16px;border:1px solid #ddd;border-radius:50%;background:#f5f5f5;"></div>
+                    <div style="font-size:11px;color:#ccc;">Done</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sponsorship tracker -->
+            <div class="wf-card">
+              <div style="font-size:12px;font-weight:600;">Sponsorship tracker</div>
+              <div style="background:#f9f9f9;border:1px solid #eee;border-radius:6px;padding:16px;text-align:center;">
+                <div style="font-size:11px;color:#888;">Your bank will appear in the marketplace once</div>
+                <div style="font-size:11px;color:#888;">data is uploaded and reviewed.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Metrics (revealed post-upload) -->
+          <div class="flex1 col">
+            <div style="font-size:11px;color:#888;font-style:italic;margin-bottom:-4px;">Revealed after successful upload ↓</div>
+            <div class="wf-card" style="opacity:0.5;pointer-events:none;">
+              <div style="font-size:12px;font-weight:600;margin-bottom:8px;">Impact metrics</div>
+              <!-- Stat row -->
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
+                <div style="text-align:center;background:#f0fdf4;border-radius:6px;padding:10px;border:1px solid #bbf7d0;">
+                  <div style="font-size:18px;font-weight:700;color:#059669;">2,928</div>
+                  <div style="font-size:9px;color:#166534;font-weight:600;">tCO₂e/yr</div>
+                </div>
+                <div style="text-align:center;background:#f5f5f5;border-radius:6px;padding:10px;">
+                  <div style="font-size:18px;font-weight:700;">1.58M</div>
+                  <div style="font-size:9px;color:#888;">kg rescued</div>
+                </div>
+                <div style="text-align:center;background:#f5f5f5;border-radius:6px;padding:10px;">
+                  <div style="font-size:18px;font-weight:700;">560</div>
+                  <div style="font-size:9px;color:#888;">households/wk</div>
+                </div>
+              </div>
+              <!-- People stat -->
+              <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;padding:10px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;">
+                <div style="font-size:10px;color:#1e40af;font-weight:600;">People reached</div>
+                <div style="font-size:20px;font-weight:700;color:#1d4ed8;">1,960</div>
+                <div style="font-size:9px;color:#3b82f6;">individuals served</div>
+              </div>
+              <!-- CO₂e bar chart (same as screenshot) -->
+              <div style="font-size:10px;font-weight:600;color:#374151;margin-bottom:8px;">CO₂e breakdown by food category <span class="annotation">Recharts BarChart</span></div>
+              <div class="wf-bars" style="height:90px;align-items:flex-end;">
+                <div class="wf-bar-col">
+                  <div class="wf-bar-fill" style="height:80px;background:#4ade80;"></div>
+                  <div class="wf-bar-label">produce</div>
+                </div>
+                <div class="wf-bar-col">
+                  <div class="wf-bar-fill" style="height:60px;background:#4ade80;"></div>
+                  <div class="wf-bar-label">dry goods</div>
+                </div>
+                <div class="wf-bar-col">
+                  <div class="wf-bar-fill" style="height:52px;background:#4ade80;"></div>
+                  <div class="wf-bar-label">dairy</div>
+                </div>
+                <div class="wf-bar-col">
+                  <div class="wf-bar-fill" style="height:70px;background:#86efac;"></div>
+                  <div class="wf-bar-label">meat</div>
+                </div>
+                <div class="wf-bar-col">
+                  <div class="wf-bar-fill" style="height:28px;background:#4ade80;"></div>
+                  <div class="wf-bar-label">bakery</div>
+                </div>
+                <div class="wf-bar-col">
+                  <div class="wf-bar-fill" style="height:24px;background:#4ade80;"></div>
+                  <div class="wf-bar-label">prepared</div>
+                </div>
+                <div class="wf-bar-col">
+                  <div class="wf-bar-fill" style="height:14px;background:#4ade80;"></div>
+                  <div class="wf-bar-label">eggs</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wf-card" style="opacity:0.5;pointer-events:none;">
+              <div style="font-size:12px;font-weight:600;">Source transparency</div>
+              <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;">
+                <div class="row" style="align-items:center;gap:8px;">
+                  <div class="wf-badge green">extracted</div>
+                  <div style="font-size:10px;color:#555;">Value read directly from PDF</div>
+                </div>
+                <div class="row" style="align-items:center;gap:8px;">
+                  <div class="wf-badge amber">inferred</div>
+                  <div style="font-size:10px;color:#555;">Derived from national averages</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== METHODOLOGY ===================== -->
+<div class="screen meth-screen" id="screen-methodology">
+  <div class="screen-title-row">
+    <div class="screen-label">Methodology <span>/methodology · animated infographic · auditor view</span></div>
+    <span class="annotation">EXISTING — redesigned</span>
+  </div>
+  <div class="browser-chrome">
+    <div class="browser-address">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="url">klimaatkracht.nl/methodology</div>
+    </div>
+    <div class="browser-content" style="overflow-y:auto;max-height:700px;" id="meth-scroll">
+
+      <!-- Navbar -->
+      <div class="wf-navbar" style="position:sticky;top:0;z-index:10;background:#fff;">
+        <div class="wf-logo">KK</div>
+        <span style="font-size:12px;font-weight:600;color:#333;">Klimaatkracht</span>
+        <div class="wf-navlinks">
+          <div class="wf-navlink">Marketplace</div>
+          <div class="wf-navlink" style="border-bottom:2px solid #388e3c;color:#388e3c;">Methodology</div>
+          <div class="wf-navlink">For Food Banks</div>
+        </div>
+      </div>
+
+      <!-- ① HERO -->
+      <div class="meth-hero">
+        <div class="meth-hero-eyebrow">Public methodology disclosure · Updated Q2 2026</div>
+        <div class="meth-hero-h1">Audit-ready CO₂e proof,<br>every step documented.</div>
+        <div class="meth-hero-sub">Every tCO₂e number in a sponsor report traces to a peer-reviewed source, a published annual PDF, or a cited national dataset. This page documents the full calculation chain — designed so an external auditor can reconstruct any figure independently.</div>
+        <div class="meth-hero-badges">
+          <div class="meth-hero-badge">FRAME-aligned</div>
+          <div class="meth-hero-badge">ESRS E1 · ESRS S3</div>
+          <div class="meth-hero-badge">CSRD-ready</div>
+          <div class="meth-hero-badge">Per-value provenance</div>
+          <div class="meth-hero-badge">NL counterfactual</div>
+        </div>
+      </div>
+
+      <!-- ② PIPELINE FLOW -->
+      <div class="meth-section reveal" id="r1">
+        <div class="meth-eyebrow">Step-by-step trust chain</div>
+        <div class="meth-title">From annual PDF to audit-ready CSR report</div>
+        <div class="meth-body" style="margin-bottom:28px;">Each stage is deterministic and traceable. An auditor following the chain from left to right arrives at the same CO₂e number.</div>
+        <div class="pipeline" style="gap:6px;">
+          <div class="pipe-step">
+            <div class="pipe-icon">📄</div>
+            <div class="pipe-label">Annual Report PDF</div>
+            <div class="pipe-sub">Published by food bank · official</div>
+          </div>
+          <div class="pipe-arrow"></div>
+          <div class="pipe-step highlight">
+            <div class="pipe-icon">🤖</div>
+            <div class="pipe-label">Claude Extraction</div>
+            <div class="pipe-sub">claude-sonnet-4-6 · 5 parallel sections</div>
+          </div>
+          <div class="pipe-arrow"></div>
+          <div class="pipe-step">
+            <div class="pipe-icon">🏷️</div>
+            <div class="pipe-label">Provenance tagging</div>
+            <div class="pipe-sub">extracted / inferred / manual per value</div>
+          </div>
+          <div class="pipe-arrow"></div>
+          <div class="pipe-step highlight">
+            <div class="pipe-icon">⚙️</div>
+            <div class="pipe-label">FRAME Engine</div>
+            <div class="pipe-sub">deterministic · v1.0 · open formula</div>
+          </div>
+          <div class="pipe-arrow"></div>
+          <div class="pipe-step">
+            <div class="pipe-icon">📊</div>
+            <div class="pipe-label">tCO₂e result</div>
+            <div class="pipe-sub">category breakdown · counterfactual applied</div>
+          </div>
+          <div class="pipe-arrow"></div>
+          <div class="pipe-step highlight">
+            <div class="pipe-icon">📋</div>
+            <div class="pipe-label">ESRS E1+S3 Report</div>
+            <div class="pipe-sub">Claude-generated · source-cited</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding:12px 16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:11px;color:#166534;">
+          <span class="pulse" style="margin-right:8px;"></span>
+          <strong>Live auditability:</strong> Every extracted value stores a <code style="background:#dcfce7;padding:1px 5px;border-radius:3px;">_method</code> field with the exact PDF page, table, and model that produced it. Any sponsor report can be re-derived from these stored fields.
+        </div>
+      </div>
+
+      <!-- ③ FRAME FORMULA -->
+      <div class="meth-section reveal" id="r2" style="background:#0f172a;color:#f8fafc;">
+        <div style="color:#6ee7b7;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">The calculation</div>
+        <div style="font-size:20px;font-weight:700;margin-bottom:16px;">FRAME formula — open and deterministic</div>
+        <div style="font-size:12px;color:#94a3b8;margin-bottom:24px;max-width:600px;">The formula is identical for every food bank. No judgement calls. If you have the source data and emission factors, you can reproduce the result in a spreadsheet.</div>
+
+        <div class="formula-box">
+<span class="f-comment"># CO₂e avoided per food category (kg)</span>
+<span class="f-var">co2e_category</span> <span class="f-op">=</span> <span class="f-var">kg_rescued_category</span> <span class="f-op">×</span> <span class="f-var">ef_category</span> <span class="f-op">×</span> <span class="f-var">counterfactual_nl</span>
+
+<span class="f-comment"># Total CO₂e avoided (kg), sum across all categories</span>
+<span class="f-var">co2e_total</span> <span class="f-op">=</span> Σ <span class="f-var">co2e_category</span>  <span class="f-comment">— for c in {produce, bakery, dairy, meat, dry_goods, prepared, eggs}</span>
+
+<span class="f-comment"># NL counterfactual: incineration-with-energy-recovery vs US landfill default</span>
+<span class="f-var">counterfactual_nl</span> <span class="f-op">=</span> <span class="f-result">0.93</span>  <span class="f-comment">— RIVM Afvalmonitor 2024 + CBS Waste Statistics</span>
+
+<span class="f-comment"># Attribution to sponsor (economic pro-rata)</span>
+<span class="f-var">sponsor_co2e</span> <span class="f-op">=</span> <span class="f-var">co2e_total</span> <span class="f-op">×</span> <span class="f-op">(</span><span class="f-var">sponsor_eur</span> <span class="f-op">÷</span> <span class="f-var">foodbank_annual_budget</span><span class="f-op">)</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;">
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:14px;">
+            <div style="font-size:10px;color:#6ee7b7;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">ef_category</div>
+            <div style="font-size:11px;color:#94a3b8;">FAO Food Wastage Footprint + WRAP + RIVM LCA data. Conservative (low) end of published ranges.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:14px;">
+            <div style="font-size:10px;color:#6ee7b7;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">counterfactual_nl</div>
+            <div style="font-size:11px;color:#94a3b8;">0.93 vs US-default 1.0. NL waste is 72% incinerated (energy recovery), not landfilled. Makes claims conservative.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:14px;">
+            <div style="font-size:10px;color:#6ee7b7;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">methodology_version</div>
+            <div style="font-size:11px;color:#94a3b8;">Stored on every FrameResult row. Quarterly review. Breaking changes increment version; reports re-generated.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ④ EMISSION FACTORS TABLE -->
+      <div class="meth-section reveal" id="r3">
+        <div class="meth-eyebrow">Category emission factors</div>
+        <div class="meth-title">kg CO₂e per kg food — peer-reviewed sources</div>
+        <div class="meth-body" style="margin-bottom:24px;">Factors represent the conservative end of published ranges. Non-food items (hygiene, baby supplies) are out of scope for FRAME and excluded from CO₂e calculations.</div>
+
+        <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+          <div style="display:grid;grid-template-columns:100px 48px 1fr 180px;gap:12px;padding-bottom:8px;border-bottom:2px solid #e5e7eb;margin-bottom:4px;">
+            <div style="font-size:10px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:1px;">Category</div>
+            <div style="font-size:10px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:1px;text-align:right;">kg CO₂e/kg</div>
+            <div style="font-size:10px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:1px;">Relative weight</div>
+            <div style="font-size:10px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:1px;">Source</div>
+          </div>
+
+          <div class="ef-row reveal-delay-1" id="efr1">
+            <div class="ef-name">🥩 Meat</div>
+            <div class="ef-val">8.5</div>
+            <div class="ef-bar-track"><div class="ef-bar-fill" style="--w:100%"></div></div>
+            <div class="ef-source">FAO FWF (2013) · Dutch meat mix (pork-dominant)</div>
+          </div>
+          <div class="ef-row reveal-delay-2" id="efr2">
+            <div class="ef-name">🥚 Eggs</div>
+            <div class="ef-val">4.5</div>
+            <div class="ef-bar-track"><div class="ef-bar-fill" style="--w:53%"></div></div>
+            <div class="ef-source">FAO FWF + Dutch egg sector data</div>
+          </div>
+          <div class="ef-row reveal-delay-3" id="efr3">
+            <div class="ef-name">🥛 Dairy</div>
+            <div class="ef-val">3.2</div>
+            <div class="ef-bar-track"><div class="ef-bar-fill" style="--w:37.6%"></div></div>
+            <div class="ef-source">FAO FWF + RIVM Dutch dairy LCA</div>
+          </div>
+          <div class="ef-row reveal-delay-4" id="efr4">
+            <div class="ef-name">🍱 Prepared</div>
+            <div class="ef-val">3.0</div>
+            <div class="ef-bar-track"><div class="ef-bar-fill" style="--w:35.3%"></div></div>
+            <div class="ef-source">Poore & Nemecek (2018) — processed foods composite</div>
+          </div>
+          <div class="ef-row reveal-delay-1" id="efr5">
+            <div class="ef-name">🌾 Dry goods</div>
+            <div class="ef-val">2.0</div>
+            <div class="ef-bar-track"><div class="ef-bar-fill" style="--w:23.5%"></div></div>
+            <div class="ef-source">FAO FWF cereals + Poore & Nemecek (2018)</div>
+          </div>
+          <div class="ef-row reveal-delay-2" id="efr6">
+            <div class="ef-name">🍞 Bakery</div>
+            <div class="ef-val">1.5</div>
+            <div class="ef-bar-track"><div class="ef-bar-fill" style="--w:17.6%"></div></div>
+            <div class="ef-source">WRAP Courtauld Commitment 2030 · bakery sector</div>
+          </div>
+          <div class="ef-row reveal-delay-3" id="efr7" style="border-bottom:none;">
+            <div class="ef-name">🥦 Produce</div>
+            <div class="ef-val">1.0</div>
+            <div class="ef-bar-track"><div class="ef-bar-fill" style="--w:11.8%"></div></div>
+            <div class="ef-source">FAO FWF Table 4.2 — NL fresh fruit & veg mix</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;padding:10px 16px;background:#fef9c3;border:1px solid #fde047;border-radius:6px;font-size:11px;color:#713f12;">
+          ⚠️ <strong>Conservative by design:</strong> Meat factor (8.5 kg CO₂e/kg) uses NL pork-dominant mix. Beef-heavy mix would push ~15 kg CO₂e/kg. We report the lower figure. Every claim errs toward understatement.
+        </div>
+      </div>
+
+      <!-- ⑤ COUNTERFACTUAL -->
+      <div class="meth-section reveal" id="r4" style="background:#f9fafb;">
+        <div class="meth-eyebrow">Dutch disposal counterfactual</div>
+        <div class="meth-title">NL-specific, not US-default</div>
+        <div class="meth-body" style="margin-bottom:24px;">The standard FRAME model assumes US landfill as the counterfactual (high methane). The Netherlands uses predominantly incineration with energy recovery. Applying the NL-specific factor makes our estimates conservative relative to global defaults.</div>
+
+        <div class="cf-compare">
+          <div class="cf-box nl reveal reveal-delay-1">
+            <div class="cf-label" style="color:#166534;">🇳🇱 Netherlands (used)</div>
+            <div class="cf-num" style="color:#059669;">0.93</div>
+            <div class="cf-desc" style="color:#166534;">Incineration with energy recovery (72% of waste). RIVM Afvalmonitor 2024 + CBS Waste Statistics.</div>
+          </div>
+          <div style="text-align:center;font-size:18px;color:#9ca3af;">≠</div>
+          <div class="cf-box global reveal reveal-delay-2">
+            <div class="cf-label" style="color:#991b1b;">🇺🇸 US default (not used)</div>
+            <div class="cf-num" style="color:#dc2626;">1.00</div>
+            <div class="cf-desc">Landfill assumed. Higher methane emissions. Would inflate NL CO₂e numbers — we choose not to use it.</div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;font-size:11px;color:#6b7280;padding:14px;background:#fff;border-radius:8px;border:1px solid #e5e7eb;line-height:1.7;">
+          <strong style="color:#111;">What this means for an auditor:</strong> Any third-party recalculating our figures using global FRAME defaults will get a ~7% higher number. Our reports state the counterfactual used and its source. Sponsors reporting to CSRD reviewers should note that our factor is <em>more conservative</em> than the GFN default.
+        </div>
+      </div>
+
+      <!-- ⑥ PROVENANCE SYSTEM -->
+      <div class="meth-section reveal" id="r5">
+        <div class="meth-eyebrow">Per-value provenance</div>
+        <div class="meth-title">Every number carries its origin</div>
+        <div class="meth-body" style="margin-bottom:24px;">Each extracted field in the data model stores a <code style="background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:12px;">_source</code> enum and a <code style="background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:12px;">_method</code> citation string. An auditor can reconstruct any figure to its origin.</div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#374151;margin-bottom:12px;">Source types (SourceEnum)</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb;">
+                <span class="prov-badge prov-extracted">extracted</span>
+                <div style="font-size:11px;color:#6b7280;line-height:1.5;">Value read directly from the bank's annual report PDF. Claude cites page and table number in <code>_method</code>.</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb;">
+                <span class="prov-badge prov-inferred">inferred_national_avg</span>
+                <div style="font-size:11px;color:#6b7280;line-height:1.5;">NL national average applied when bank doesn't report the figure. Source is cited (e.g. CBS 2024).</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb;">
+                <span class="prov-badge prov-calculation">inferred_calculation</span>
+                <div style="font-size:11px;color:#6b7280;line-height:1.5;">Derived mathematically from other extracted values (e.g. weekly households × 52 = annual).</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb;">
+                <span class="prov-badge prov-manual">manual</span>
+                <div style="font-size:11px;color:#6b7280;line-height:1.5;">Human-entered override. Logged with operator ID and timestamp. Triggers re-computation of all dependent fields.</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#374151;margin-bottom:12px;">Example: Rotterdam 2024 kg_received_total</div>
+            <div style="background:#0f172a;border-radius:10px;padding:20px;font-family:'Courier New',monospace;font-size:11px;line-height:1.9;">
+              <div style="color:#6ee7b7;">kg_received_total</div>
+              <div style="color:#f8fafc;padding-left:12px;">4,160,000 <span style="color:#94a3b8;">kg</span></div>
+              <div style="color:#6ee7b7;margin-top:8px;">kg_received_total_source</div>
+              <div style="padding-left:12px;"><span class="prov-badge prov-extracted" style="font-size:9px;">extracted</span></div>
+              <div style="color:#6ee7b7;margin-top:8px;">kg_received_total_method</div>
+              <div style="color:#94a3b8;padding-left:12px;font-size:10px;">"claude-sonnet-4-6 extracted from<br>Jaarverslag 2024 p.14 Table 2:<br>'Ontvangen voedsel (kg)'"</div>
+            </div>
+            <div style="margin-top:12px;padding:10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:11px;color:#166534;line-height:1.5;">
+              ✓ An auditor can download the Rotterdam 2024 jaarverslag, turn to page 14, and verify this number matches Table 2.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ⑦ AUDIT TRAIL -->
+      <div class="meth-section reveal" id="r6" style="background:#f9fafb;">
+        <div class="meth-eyebrow">For external auditors</div>
+        <div class="meth-title">What an ISAE 3000 reviewer needs — and where to find it</div>
+        <div class="meth-body" style="margin-bottom:24px;">Sponsor reports are not subject to third-party assurance. The chain is designed so that limited or reasonable assurance can be obtained independently. Here is what a reviewer would check and where the evidence lives.</div>
+
+        <div>
+          <div class="audit-step reveal reveal-delay-1">
+            <div class="audit-num">1</div>
+            <div>
+              <div class="audit-title">Source document <span class="audit-badge">PDF on file</span></div>
+              <div class="audit-detail">Each food bank's annual report PDF is stored unmodified at the path referenced in <code>AnnualReport.raw_file_path</code>. Source URL links to the bank's own website. Hash of stored file matches published document.</div>
+            </div>
+          </div>
+          <div class="audit-step reveal reveal-delay-2">
+            <div class="audit-num">2</div>
+            <div>
+              <div class="audit-title">Extraction trace <span class="audit-badge">_method field</span></div>
+              <div class="audit-detail">Every numeric field stores its extraction method string: model, PDF page, table name, and the exact Dutch text it was parsed from. Reviewers can compare field values to the cited page in the original PDF.</div>
+            </div>
+          </div>
+          <div class="audit-step reveal reveal-delay-3">
+            <div class="audit-num">3</div>
+            <div>
+              <div class="audit-title">FRAME calculation <span class="audit-badge">open formula</span></div>
+              <div class="audit-detail">The formula on this page is complete and non-proprietary. FrameResult stores every intermediate: co2e per category, emission factor version, methodology version, computed_at timestamp. Reviewers can rerun the formula in a spreadsheet.</div>
+            </div>
+          </div>
+          <div class="audit-step reveal reveal-delay-4">
+            <div class="audit-num">4</div>
+            <div>
+              <div class="audit-title">Attribution mechanics <span class="audit-badge">economic pro-rata</span></div>
+              <div class="audit-detail">Attribution share = sponsor_eur ÷ foodbank_annual_budget. The annual budget figure carries its own <code>_source</code> and <code>_method</code>. Both sides of the ratio are auditable. The <code>attribution_share</code> field in every report is derived, not asserted.</div>
+            </div>
+          </div>
+          <div class="audit-step reveal reveal-delay-5" style="border-bottom:none;">
+            <div class="audit-num">5</div>
+            <div>
+              <div class="audit-title">Report generation <span class="audit-badge">model + timestamp</span></div>
+              <div class="audit-detail">CSR reports are generated by Claude (model ID logged). The report references every source by section and page. <code>CsrReport.generated_at</code> and <code>frame_result_id</code> lock the report to a specific data snapshot — later updates do not silently alter a delivered report.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:24px;padding:16px 20px;background:#fff;border:1.5px solid #e5e7eb;border-radius:10px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#111;margin-bottom:3px;">Audit queries</div>
+            <div style="font-size:11px;color:#6b7280;">Contact us to request the full data export for a specific subscription, including all <code>_source</code> and <code>_method</code> fields and the source PDFs.</div>
+          </div>
+          <div style="background:#059669;color:#fff;padding:8px 16px;border-radius:6px;font-size:11px;font-weight:600;flex-shrink:0;margin-left:16px;">audit@klimaatkracht.eu</div>
+        </div>
+      </div>
+
+      <!-- ⑧ FOOTER -->
+      <div style="background:#0f172a;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="color:#6ee7b7;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Methodology version 1.0 · Q2 2026</div>
+          <div style="color:#94a3b8;font-size:11px;">Framework: Global Foodbanking Network FRAME — alignment, not certification.</div>
+        </div>
+        <div style="color:#475569;font-size:10px;text-align:right;">Reviewed quarterly · Breaking changes<br>increment version and regenerate reports</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function show(page) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.page-nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('screen-' + page).classList.add('active');
+  event.target.classList.add('active');
+  if (page === 'methodology') initMethAnimations();
+}
+
+function initMethAnimations() {
+  const scroll = document.getElementById('meth-scroll');
+  if (!scroll) return;
+
+  // Observe .reveal elements inside the scrollable div
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // Trigger bar fills inside this element
+        e.target.querySelectorAll('.ef-bar-fill').forEach(b => b.classList.add('animate'));
+      }
+    });
+  }, { root: scroll, threshold: 0.15 });
+
+  scroll.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Also trigger bars for any already-visible ones
+  scroll.querySelectorAll('.reveal').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    const scrollRect = scroll.getBoundingClientRect();
+    if (rect.top < scrollRect.bottom && rect.bottom > scrollRect.top) {
+      el.classList.add('visible');
+      el.querySelectorAll('.ef-bar-fill').forEach(b => b.classList.add('animate'));
+    }
+  });
+}
+</script>
+
+</body>
+</html>
