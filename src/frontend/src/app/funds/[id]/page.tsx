@@ -1,13 +1,10 @@
 import { api, ApiError } from "@/lib/api"
 import { notFound } from "next/navigation"
 import { AllocationTable } from "@/components/funds/AllocationTable"
-import { BuyPanel } from "@/components/funds/BuyPanel"
-import { CategoryBars } from "@/components/charts/CategoryBars"
 import { TimelineChart } from "@/components/charts/TimelineChart"
+import Link from "next/link"
 import { Badge } from "@/components/ui/Badge"
-import { CF_NL, EMISSION_FACTORS } from "@/lib/methodology"
 import { formatEur, formatNumber, formatPercent, formatTCO2e } from "@/lib/format"
-import type { ProjectedAllocation } from "@/lib/types"
 
 export default async function FundDetailPage({
   params,
@@ -32,7 +29,6 @@ export default async function FundDetailPage({
     { kg: 0, tco2e: 0, banks: 0 },
   )
 
-  const categoryTotals = aggregateCategoryTotals(pkg.projected_allocations)
 
   return (
     <div className="mx-auto max-w-[1280px] px-6 pt-12 pb-24 grid lg:grid-cols-[1fr_360px] gap-x-12">
@@ -99,22 +95,8 @@ export default async function FundDetailPage({
           </section>
         ) : null}
 
-        <section className="mt-16 grid lg:grid-cols-[2fr_1fr] gap-10 items-start">
-          <div className="min-w-0">
-            <p className="eyebrow">Category breakdown</p>
-            <h2 className="display text-3xl mt-3 tracking-[-0.02em]">
-              CO₂e per food category, fund-wide.
-            </h2>
-            <p className="text-text-muted text-[14px] mt-4 max-w-[52ch]">
-              Computed from each bank&apos;s extracted category mix × kg attributed to this fund ×
-              FRAME emission factor × NL counterfactual ({CF_NL}).
-            </p>
-            <div className="mt-6">
-              <CategoryBars data={categoryTotals} />
-            </div>
-          </div>
-
-          <div className="border border-line rounded-[var(--radius-lg)] p-6 bg-surface">
+        <section className="mt-16">
+          <div className="border border-line rounded-[var(--radius-lg)] p-6 bg-surface max-w-[52ch]">
             <p className="eyebrow mb-3">What you receive</p>
             <ul className="flex flex-col gap-3 text-[13.5px]">
               <Item>Quarterly ESRS E1 + S3 disclosure (markdown + PDF)</Item>
@@ -152,7 +134,20 @@ export default async function FundDetailPage({
         </section>
       </div>
 
-      <BuyPanel pkg={pkg} />
+      <aside className="lg:sticky lg:top-24 flex flex-col items-center justify-center gap-4 p-7 bg-[#f0fdf4] border-2 border-[#bbf7d0] rounded-xl min-w-[200px] text-center">
+        <div className="text-[11px] text-[#059669] font-semibold uppercase tracking-wide">From €10k / year</div>
+        <Link
+          href="/pricing"
+          className="block w-full px-8 py-3.5 bg-[#388e3c] text-white rounded-lg text-[14px] font-extrabold hover:bg-[#2e7d32] transition-colors"
+        >
+          Invest in this fund →
+        </Link>
+        <div className="text-[11px] text-text-muted leading-relaxed">
+          No lock-in · ESRS E1+S3 report included
+          <br />
+          Invoiced via Solvimon
+        </div>
+      </aside>
     </div>
   )
 }
@@ -175,21 +170,3 @@ function Item({ children }: { children: React.ReactNode }) {
   )
 }
 
-// Aggregate per-category tCO2e across the fund's projected allocations.
-// Uses each bank's category_mix (fractional) × attributed_kg × EF × CF_NL.
-function aggregateCategoryTotals(allocations: ProjectedAllocation[]) {
-  const out: Record<string, number> = {
-    produce: 0, dry_goods: 0, dairy: 0, bakery: 0, meat: 0, prepared: 0, eggs: 0,
-  }
-  for (const a of allocations) {
-    const mix = a.foodbank.category_mix
-    if (!mix) continue
-    for (const k of Object.keys(out) as (keyof typeof EMISSION_FACTORS)[]) {
-      const frac = mix[k] ?? 0
-      const ef = EMISSION_FACTORS[k]
-      // tCO2e = (kg × frac × EF × CF_NL) / 1000
-      out[k] += (a.attributed_kg * frac * ef * CF_NL) / 1000
-    }
-  }
-  return out
-}

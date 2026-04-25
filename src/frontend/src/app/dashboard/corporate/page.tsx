@@ -10,9 +10,7 @@ import { CostEffectivenessGauge } from "@/components/dashboard/CostEffectiveness
 import { Equivalents } from "@/components/dashboard/Equivalents"
 import { PacingBar } from "@/components/dashboard/PacingBar"
 import { MethodologyInline } from "@/components/dashboard/MethodologyInline"
-import { CategoryBars } from "@/components/charts/CategoryBars"
 import { QuarterlyTimelineChart } from "@/components/charts/QuarterlyTimelineChart"
-import { CF_NL, EMISSION_FACTORS } from "@/lib/methodology"
 import { formatEur, formatNumber, formatPercent, formatTCO2e } from "@/lib/format"
 
 const REGION_LABEL: Record<string, string> = {
@@ -50,26 +48,6 @@ export default async function CorporateDashboardPage() {
   // Quarterly forecast totals (for the timeline header)
   const realisedTotalT = timeline.filter((p) => p.realised).reduce((s, p) => s + p.co2e_kg, 0) / 1000
   const forecastTotalT = timeline.filter((p) => !p.realised).reduce((s, p) => s + p.co2e_kg, 0) / 1000
-
-  // Per-category tCO2e for the chart
-  const categoryTotals: Record<string, number> = {
-    produce: 0, dry_goods: 0, dairy: 0, bakery: 0, meat: 0, prepared: 0, eggs: 0,
-  }
-  // Scale factor: align category totals with the subscription's annual claim,
-  // not the raw weighted bank baseline.
-  const periodAnnualKg = metrics?.period_co2e_kg ? metrics.period_co2e_kg * 4 : detail.total_co2e_kg
-  const rawWeightedKg = detail.allocations.reduce((s, a) => s + a.co2e_attributed_kg, 0)
-  const scale = rawWeightedKg > 0 ? periodAnnualKg / rawWeightedKg : 1
-
-  for (const alloc of detail.allocations) {
-    const bank = banksByName.get(alloc.foodbank_name)
-    if (!bank?.category_mix || !bank.annual_kg_rescued) continue
-    const attributedKg = bank.annual_kg_rescued * alloc.weight_pct * scale
-    for (const k of Object.keys(categoryTotals) as (keyof typeof EMISSION_FACTORS)[]) {
-      const frac = bank.category_mix[k] ?? 0
-      categoryTotals[k] += (attributedKg * frac * EMISSION_FACTORS[k] * CF_NL) / 1000
-    }
-  }
 
   const periodTco2e = (metrics?.period_co2e_kg ?? 0) / 1000
   const cumulativeTco2e = (metrics?.cumulative_co2e_kg ?? 0) / 1000
@@ -187,22 +165,8 @@ export default async function CorporateDashboardPage() {
         ) : null}
       </section>
 
-      {/* Category breakdown + coverage */}
-      <section className="mt-16 grid lg:grid-cols-[1.6fr_1fr] gap-x-12 gap-y-10 items-start">
-        <div className="min-w-0">
-          <p className="eyebrow">CO₂e by category</p>
-          <h2 className="display text-3xl mt-3 tracking-[-0.02em]">
-            Where the rescue avoids emissions.
-          </h2>
-          <p className="text-text-muted text-[14px] mt-4 max-w-[52ch]">
-            Each bank&apos;s category mix × your attributed kg × FRAME emission
-            factor × NL counterfactual ({CF_NL}).
-          </p>
-          <div className="mt-6">
-            <CategoryBars data={categoryTotals} />
-          </div>
-        </div>
-
+      {/* Coverage + history */}
+      <section className="mt-16 grid lg:grid-cols-[1fr_1fr] gap-x-12 gap-y-10 items-start">
         <div>
           <p className="eyebrow">Geographic coverage</p>
           <h2 className="display text-2xl mt-3 tracking-[-0.02em]">
