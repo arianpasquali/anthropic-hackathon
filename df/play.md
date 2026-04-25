@@ -481,3 +481,118 @@ Even though OBA scores 22 vs 24 on paper, three things can flip it:
 3. **Lower scope = fewer demo failure modes** = higher chance of a clean live demo. A clean demo at 22 beats a broken one at 24.
 
 If your team is risk-averse, has a strong workflow designer, and can secure a printer + an OBA branch quote: pick OBA.
+
+---
+
+# Playbook C — Carbon-Funded Voedselbank (CarbonPakket)
+
+Honest analysis: this scores **~18–19**, below all three picks above. It's an interesting fintech-impact angle that resonates with Adriaan Mol (Mollie founder) and Solvimon's metering primitives, but it has three structural problems on the 5-axis rubric. Pivot options at the end recover most of the lost ground.
+
+## Score (vs. the leaderboard)
+
+| Idea | Score |
+|---|:--:|
+| Toeslagen Reconstructor | 25 |
+| InrichtingsBuddy | 24 |
+| Halal Surplus Match | 23 |
+| LeergeldExpress | 23 |
+| OBA Co-pilot | 22 |
+| **CarbonPakket (this idea)** | **18–19** |
+| RepairWijzer | 19 |
+
+| Axis | Score | Why |
+|---|:--:|---|
+| Innovation | 4 | Genuine white space — no NL player monetises voedselbank carbon impact today. Solvimon-as-charity-rail is novel. |
+| Build Local | 4 | Voedselbanken NL is iconic but the "carbon monetisation" framing is global. Less inherently local than refugee/library/repair plays. |
+| Technical | 4 | Solvimon + receipt parsing + LCA lookup is solid, but Claude isn't *uniquely* required. Much of it is fintech plumbing. |
+| Impact / viability | 3 | Three problems below. |
+| Pitch | 3–4 | Operators love the fintech angle (Mol especially); but viscerally less emotional than a refugee or library demo. |
+
+## The three structural problems
+
+### 1. Voedselbanken's actual constraint isn't money — it's supply
+
+- Demand **fell ~20% YoY in 2024** (tighter qualification criteria after minimum-wage rise).
+- Food supply fell *more* — retail waste is **down 33% since 2018** (CBL Monitor 2024). Voedselbanken now compete with composting/anaerobic-digestion for a *shrinking* surplus.
+- Per-pakket cost is only **€5–6**; AH alone donates >€5M/year + the Postcodeloterij gives €1M/year + Rabobank partners structurally.
+- **You're solving a misidentified problem.** Cash channels work; quality-fresh-food procurement is the bottleneck. Henk Staghouwer (chairman) himself flags this in 2024 communications.
+
+### 2. The "carbon credit" framing is greenwashing-adjacent
+
+The research surfaced a hard wall:
+- **Verra VM0046** (the food-loss methodology, July 2023) requires additionality. Voedselbanken NL has been operating since 2002 — a Verra reviewer can credibly argue these credits are *not* additional. **No NL voedselbank project is on the Verra registry.**
+- **GHG Protocol Scope 3** explicitly classifies "avoided emissions" as a separate **Scope 4 narrative — not deductible from Scope 1/2/3 inventory.** ESRS E1/E5 require this be disclosed *separately*, not netted.
+- **Translation:** Ahold Delhaize's SBTi-validated -37% Scope 3 target *cannot* legally be helped by buying voedselbank carbon credits. So no buyer with a real net-zero plan has a regulatory reason to write a big check.
+- **The Voluntary Carbon Market is mid-credibility-recovery** after the 2023 Guardian/Verra investigation found ~94% of rainforest credits were "phantom." Pitching "carbon credits to fund voedselbanken" lands on a panel that reads The Guardian.
+
+### 3. The financial math doesn't move the needle
+
+Realistic top-of-stack:
+- **68M products × ~0.5 kg/product × 2.5 kg CO2e/kg = ~85 kt CO2e/year** (using WUR/RIVM factors — defensible; *don't* use WRAP's 4 kg/kg).
+- At voluntary credit prices ($10/t avg) that's **~$850k/year direct revenue** at full national deployment.
+- Voedselbanken's annual revenue is ~€20M+. You're a 4% supplement, not a transformation.
+
+## What you *can* defensibly pitch
+
+**Don't sell carbon credits. Sell transparent CSR impact pricing.**
+
+> *"A Solvimon-powered checkout layer that lets Dutch retailers and corporates round up to fund voedselbank rescue, with every donation auto-converted into an audited kg-CO2e impact receipt using WUR/RIVM factors — turning CSR spend into a measurable ESRS E5 disclosure."*
+
+Defensibility moves: WUR/RIVM-backed factors (stricter than Too Good To Go's 2.7 kg/meal), no Verra issuance attempt, framed as ESRS E5 *narrative* reporting (not Scope 3 netting), Solvimon as the white-space rail Mollie/Stripe haven't productised.
+
+## The three hardest jury objections + answers
+
+1. **"This is greenwashing — AH already donates €1 at checkout."**
+   *We don't sell offsets and we don't let buyers net against Scope 3. We sell transparent audited impact attribution under ESRS E5 narrative reporting, with WUR/RIVM-backed factors stricter than Too Good To Go. Differentiator vs AH's flat €1: per-transaction CO2 receipt + CSRD-ready aggregation for the corporate.*
+
+2. **"Where's the additionality? Voedselbanken already exists."**
+   *We are explicitly not pursuing Verra VM0046 issuance. The unit we sell is a verified rescued-food pakket, priced as CSR contribution; the CO2e number is a disclosure label, not a tradable credit. We dodge additionality and the Verra credibility crisis on purpose.*
+
+3. **"The numbers don't move the needle — under €1M/yr."**
+   *Direct revenue is secondary. The wedge is (a) checkout round-up infrastructure that turns dormant Solvimon billing primitives into a charity rail, (b) closing the supply-side gap voedselbanken actually have today (procurement, not just cash), (c) CSRD-grade impact data Voedselbanken NL cannot publish themselves. Deloitte's €1=€12 multiplier turns €1M direct into €12M social value, and the data layer is the moat.*
+
+If you can't recite all three of these answers cold, don't pick this idea.
+
+## Two pivots that recover most of the lost score
+
+### Pivot 1 — "AI Procurement Officer for Voedselbanken" (recovers to ~21)
+
+Reframe around the *real* bottleneck. Claude becomes a **procurement matching engine** between surplus producers (supermarket back-rooms, growers, foodservice, festivals) and voedselbank locations, with carbon-impact attribution as a *byproduct* that powers the funding layer.
+
+- **Claude is load-bearing:** vision-classifies surplus listings (best-by date, condition, halal flags), matches to voedselbank inventory needs, generates multilingual outreach to suppliers, drafts donation receipts with auto-computed CO2e.
+- **Solvimon:** routes the matched-donation payments and the corporate sponsorship money.
+- **Pitch:** "Voedselbanken's cash works; their fresh-food supply is shrinking. We close that gap with an AI matchmaker — and turn each transaction into an audited impact receipt corporates can put on their CSRD page."
+- **Local:** anchor in 1–2 named Amsterdam voedselbank locations + a named supermarket partner.
+- **Score lift:** Build Local 4→4, Tech 4→5, Impact 3→4, Pitch 3→4.
+
+### Pivot 2 — Merge with Halal Surplus Match (Playbook C+) (recovers to ~22)
+
+Halal Surplus Match (research_circular.md §4, score 23) and CarbonPakket share infrastructure: vision + classification + multilingual + Solvimon checkout. Combine them:
+
+- **Front-end:** Halal Surplus Match handles the *recipient* dignity layer (halal/lactose/baby/diabetes-aware boxes via Reson8 voice intake).
+- **Back-end:** CarbonPakket handles the *donor* layer (round-up checkout, carbon-impact receipts, CSRD-ready dashboards).
+- **Single platform pitch:** "From the supermarket pallet to the Tigrinya-speaking mother's table — every kg tracked, every euro receipted, every CO2 disclosure auto-generated."
+- **Risk:** scope creep in 24h. Only viable with 4 people and a tight scope freeze at noon Saturday.
+
+## Comparison table — when (if ever) to pick this
+
+| Question | Pick CarbonPakket if... | Otherwise pick... |
+|---|---|---|
+| Strongest team skill is fintech / payments | ✓ | InrichtingsBuddy or OBA |
+| You want to impress Adriaan Mol specifically | ✓ (Mollie/payments DNA) | InrichtingsBuddy |
+| You're confident on CSRD / ESRS terminology | ✓ | Don't pick if not |
+| You can recite the additionality answer cold | ✓ | Don't pick if not |
+| Risk-averse on demo polish | ✗ | OBA |
+| 4-person team | Pivot 2 only | InrichtingsBuddy |
+| 2–3 person team | ✗ (too thin) | OBA |
+| Want emotional pitch | ✗ | InrichtingsBuddy / OBA |
+
+## Bottom line
+
+**Don't pick CarbonPakket as primary.** It scores below all three top picks because (1) it solves a misidentified problem, (2) the carbon-credit framing carries greenwashing risk that operator jurors will probe, and (3) the direct revenue doesn't justify the pitch.
+
+**Do consider:**
+- **Pivot 1 (Procurement Officer)** as a standalone Option D if your team is strongly fintech/data-engineering and weak on multilingual UX.
+- **A Solvimon round-up + CO2 receipt as a *feature inside InrichtingsBuddy*** — adds a payments-rail moment that Mol will love, costs you ~3 hours of build, and lifts InrichtingsBuddy's Innovation axis from 4 to 5.
+
+**Highest-leverage move from this research: bolt the round-up + impact-receipt into InrichtingsBuddy.** When the statushouder family reaches Solvimon checkout for their €1,800 furniture spend, surface "Round up to €1,805 → fund 1 voedselbank pakket → 2.5 kg CO2e avoided receipt" as a final line item. That's the Mollie-founder slide and it costs almost nothing.
