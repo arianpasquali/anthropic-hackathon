@@ -53,21 +53,23 @@ def compute_frame(
     fv = session.exec(select(FoodVolume).where(FoodVolume.report_id == report.id)).first()
     fc = session.exec(select(FoodCategories).where(FoodCategories.report_id == report.id)).first()
 
-    if fc and any(
-        getattr(fc, f) is not None
-        for f in ("kg_produce", "kg_meat_fish", "kg_dairy_eggs",
-                  "kg_dry_goods", "kg_bread_bakery", "kg_prepared")
-    ):
-        # Use per-category data directly
+    _CAT_FIELDS = ("kg_produce", "kg_meat_fish", "kg_dairy_eggs", "kg_dry_goods", "kg_bread_bakery", "kg_prepared")
+    # Require ≥3 non-zero categories to trust the breakdown; a single non-null field is likely
+    # a partial supplier figure extracted from a callout, not the bank's full category split.
+    _cat_populated = sum(1 for f in _CAT_FIELDS if getattr(fc, f, None) not in (None, 0.0)) if fc else 0
+    if fc and _cat_populated >= 3:
         produce    = fc.kg_produce     or 0.0
         meat_fish  = fc.kg_meat_fish   or 0.0
         dairy      = fc.kg_dairy_eggs  or 0.0
         dry_goods  = fc.kg_dry_goods   or 0.0
         bakery     = fc.kg_bread_bakery or 0.0
         prepared   = fc.kg_prepared    or 0.0
-    elif fv and fv.kg_received_total:
-        # Fall back to national average split
-        total = float(fv.kg_received_total)
+    elif fv and (fv.kg_received_total or (fv.kg_direct or 0) + (fv.kg_via_national_dc or 0)):
+        # Fall back to national average split over best available total weight
+        total = float(
+            fv.kg_received_total
+            or (fv.kg_direct or 0.0) + (fv.kg_via_national_dc or 0.0)
+        )
         produce   = total * _DEFAULT_SPLIT["produce"]
         meat_fish = total * _DEFAULT_SPLIT["meat_fish"]
         dairy     = total * _DEFAULT_SPLIT["dairy"]

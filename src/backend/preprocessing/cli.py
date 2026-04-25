@@ -89,6 +89,14 @@ BANK_MAP: dict[str, tuple[str, str, RegionEnum]] = {
     "venlo":          ("Voedselbank Venlo",            "Venlo",          RegionEnum.zuidoost),
     "woerden":        ("Voedselbank Woerden",          "Woerden",        RegionEnum.west),
     "zwolle":         ("Voedselbank Zwolle",           "Zwolle",         RegionEnum.oost),
+    "ede":            ("Voedselbank Ede",              "Ede",            RegionEnum.oost),
+    "alphen":         ("Voedselbank Alphen",           "Alphen aan den Rijn", RegionEnum.west),
+    "schiedam":       ("Voedselbank Schiedam",         "Schiedam",       RegionEnum.west),
+    "purmerend":      ("Voedselbank Purmerend",        "Purmerend",      RegionEnum.randstad),
+    "almelo":         ("Voedselbank Almelo",           "Almelo",         RegionEnum.oost),
+    "denhelder":      ("Voedselbank Den Helder",       "Den Helder",     RegionEnum.randstad),
+    "waalwijk":       ("Voedselbank Waalwijk",         "Waalwijk",       RegionEnum.zuidoost),
+    "drachten":       ("Voedselbank Smallingerland",   "Drachten",       RegionEnum.noord),
 }
 
 # National federation docs — never ingest as individual bank reports

@@ -306,6 +306,10 @@ Fields to extract:
 - kg_dry_goods: Kilograms of dry pantry staples (droge kruidenierswaren, houdbaar, pasta, rijst)
 - kg_bread_bakery: Kilograms of bread and bakery items (brood, banket, gebak)
 - kg_prepared: Kilograms of prepared or ready meals (bereide maaltijden, kant-en-klaar)
+
+IMPORTANT: Only extract values that represent the foodbank's own total intake per category across all sources.
+Do NOT extract figures attributed to a single named external supplier or partner (e.g. "Groente & Fruitbrigade leverde 50.000 kg" is a supplier subtotal, not the bank's total produce intake).
+If the report only mentions a category figure in the context of one named partner, set that field to null.
 </task>""",
 
     "extract_people_served": f"""{_BASE_INSTRUCTIONS}

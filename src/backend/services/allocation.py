@@ -1,4 +1,5 @@
 import uuid
+from sqlalchemy import func
 from sqlmodel import Session, select
 
 from src.backend.models.allocation import Allocation
@@ -41,9 +42,21 @@ def compute_allocations(
 
     co2_weight, social_weight = _get_profile_weights(session, package.impact_profile.value)
 
+    # Subquery: latest year per foodbank that has a FrameResult
+    latest_year_sq = (
+        select(AnnualReport.foodbank_id, func.max(AnnualReport.year).label("max_year"))
+        .join(FrameResult, FrameResult.report_id == AnnualReport.id)
+        .group_by(AnnualReport.foodbank_id)
+        .subquery()
+    )
     rows = session.exec(
         select(Foodbank, FrameResult, PeopleServed)
         .join(AnnualReport, AnnualReport.foodbank_id == Foodbank.id)
+        .join(
+            latest_year_sq,
+            (latest_year_sq.c.foodbank_id == AnnualReport.foodbank_id)
+            & (latest_year_sq.c.max_year == AnnualReport.year),
+        )
         .join(FrameResult, FrameResult.report_id == AnnualReport.id)
         .join(PeopleServed, PeopleServed.report_id == AnnualReport.id)
     ).all()

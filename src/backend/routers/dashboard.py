@@ -3,6 +3,7 @@ from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
+from sqlalchemy import func
 from sqlmodel import Session, select
 
 from src.backend.database import get_session
@@ -50,7 +51,16 @@ def _get_allocations_detail(session: Session, sub: FundSubscription) -> tuple[li
     details = []
     for alloc in allocs:
         fb = session.get(Foodbank, alloc.foodbank_id)
-        annual = session.exec(select(AnnualReport).where(AnnualReport.foodbank_id == alloc.foodbank_id)).first()
+        # Pick latest report that has a FrameResult
+        latest_year = session.exec(
+            select(func.max(AnnualReport.year))
+            .join(FrameResult, FrameResult.report_id == AnnualReport.id)
+            .where(AnnualReport.foodbank_id == alloc.foodbank_id)
+        ).first()
+        annual = session.exec(
+            select(AnnualReport)
+            .where(AnnualReport.foodbank_id == alloc.foodbank_id, AnnualReport.year == latest_year)
+        ).first() if latest_year else None
         frame = session.exec(select(FrameResult).where(FrameResult.report_id == annual.id)).first() if annual else None
         co2e = (frame.co2e_total_kg * alloc.weight_pct) if frame else 0.0
         details.append(AllocationDetail(
