@@ -146,6 +146,34 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* Live-status pulse dot — civic register, no neon glow */
+.kk-live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--emerald);
+  position: relative;
+}
+.kk-live-dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  border: 1.5px solid var(--emerald);
+  opacity: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .kk-live-dot::after {
+    animation: kk-live-pulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+}
+@keyframes kk-live-pulse {
+  0%   { opacity: 0.55; transform: scale(0.6); }
+  80%  { opacity: 0;    transform: scale(1.8); }
+  100% { opacity: 0;    transform: scale(1.8); }
+}
+
 /* Anti-AI-slop guards (informational; enforced by code review) */
 /* NEVER use border-left/right > 1px as a colored stripe */
 /* NEVER use background-clip: text with a gradient */

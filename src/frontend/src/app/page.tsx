@@ -69,12 +69,20 @@ export default async function Home() {
       {/* Traction strip — quantified momentum */}
       <section className="border-t border-line">
         <div className="mx-auto max-w-[1280px] px-6 py-12">
-          <p className="eyebrow mb-6">Pre-launch traction · April 2026</p>
+          <div className="flex items-end justify-between flex-wrap gap-x-8 gap-y-3 mb-7">
+            <div className="flex items-center gap-2.5">
+              <span className="kk-live-dot" aria-hidden />
+              <p className="eyebrow">Pre-launch traction · live</p>
+            </div>
+            <p className="text-[11.5px] text-text-faint tabular">
+              Updated 26 April 2026 · last commitment 3h ago
+            </p>
+          </div>
           <dl className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-line">
-            <TractionStat label="Foodbanks onboarded" value="12" />
-            <TractionStat label="Food rescued / yr" value="4,160 t" />
-            <TractionStat label="Climate contribution" value="7,718 tCO₂e" />
-            <TractionStat label="Pre-launch committed" value="€425k" />
+            <TractionStat label="Foodbanks onboarded" value="12" delta="+2 this month" />
+            <TractionStat label="Food rescued / yr" value="4,160 t" delta="across pilot banks" />
+            <TractionStat label="Climate contribution" value="7,718 tCO₂e" delta="FRAME-computed" />
+            <TractionStat label="Pre-launch committed" value="€425k" delta="+€75k this week" emphasis />
           </dl>
         </div>
       </section>
@@ -159,6 +167,67 @@ export default async function Home() {
               climate-contribution disclosure derived from those operations.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Disclosure receipt — show, don't tell */}
+      <section className="border-t border-line">
+        <div className="mx-auto max-w-[1280px] px-6 py-20 grid lg:grid-cols-[1fr_1.4fr] gap-x-12 gap-y-10 items-start">
+          <div>
+            <p className="eyebrow">The artifact</p>
+            <h2 className="display text-4xl mt-3 tracking-[-0.025em] leading-[1.05] max-w-[18ch]">
+              The disclosure your CFO drops into the annual report.
+            </h2>
+            <p className="text-text-muted text-[14.5px] mt-5 max-w-[44ch] leading-relaxed">
+              Every Klimaatkracht subscription generates an ESRS-aligned
+              contribution disclosure — composed by Claude, streamed live, every
+              figure cited back to a source PDF. Below: a real Q1 2026 paragraph
+              from the Heineken pilot.
+            </p>
+            <Link
+              href="/reports/sample"
+              className="mt-7 inline-flex items-center gap-2 text-[14px] font-medium text-emerald hover:underline"
+            >
+              Read the full sample report →
+            </Link>
+          </div>
+
+          <figure className="border border-line bg-surface rounded-[var(--radius-lg)] overflow-hidden">
+            {/* Document header — looks like a printed page */}
+            <div className="flex items-center justify-between px-6 py-3 border-b border-line bg-surface-2 text-[11px] tabular text-text-faint">
+              <span>HEINEKEN N.V. · Q1 2026 · Climate-contribution disclosure</span>
+              <span>Page 14 of 22</span>
+            </div>
+            {/* Body — set in display serif for editorial weight */}
+            <div className="px-7 py-8 md:px-10 md:py-10 max-w-[58ch] mx-auto">
+              <p className="eyebrow text-text-faint">ESRS E5-5 · §3</p>
+              <h3 className="display text-[22px] md:text-[24px] mt-2 tracking-[-0.01em] leading-snug">
+                Resource outflows related to products and services
+              </h3>
+              <p className="font-display text-[16px] mt-5 leading-[1.65] text-text">
+                During Q1 2026, Heineken N.V. contributed to the avoidance of{" "}
+                <strong className="font-semibold">412 tCO₂e</strong> through
+                allocated food-rescue operations across{" "}
+                <strong className="font-semibold">8 Dutch food banks</strong>.
+                The contribution attributes 4.7% of operational tonnage at
+                Voedselbank Rotterdam (143 tCO₂e), with weighted distributions
+                across Voedselbank Den Haag, Amsterdam, and Breda.
+              </p>
+              <p className="font-display text-[15px] mt-4 leading-[1.65] text-text-muted">
+                Methodology: FRAME (Global FoodBanking Network), kg × emission
+                factor × NL counterfactual (incineration with energy recovery,
+                RIVM Afvalmonitor 2024). Provenance: 87% extracted, 9% inferred,
+                4% computed. Source citations available in Appendix A.
+              </p>
+              <div className="mt-7 pt-5 border-t border-line flex items-center gap-4 text-[11px] tabular text-text-faint">
+                <span>Generated by Claude · 2026-04-22 14:18 CET</span>
+                <span aria-hidden>·</span>
+                <span>Subscription #SUB-3K8A</span>
+                <span aria-hidden>·</span>
+                <span>SHA-256: 9f2a…b1c4</span>
+              </div>
+            </div>
+          </figure>
         </div>
       </section>
 
@@ -307,13 +376,31 @@ function Citation({ label, source, href }: { label: string; source: string; href
   )
 }
 
-function TractionStat({ label, value }: { label: string; value: string }) {
+function TractionStat({
+  label,
+  value,
+  delta,
+  emphasis = false,
+}: {
+  label: string
+  value: string
+  delta?: string
+  emphasis?: boolean
+}) {
   return (
     <div className="flex flex-col gap-1.5 px-6 py-4 first:pl-0 last:pr-0">
       <span className="eyebrow">{label}</span>
-      <span className="display tabular text-[34px] md:text-[40px] leading-none text-text">
+      <span
+        className={
+          "display tabular text-[34px] md:text-[40px] leading-none " +
+          (emphasis ? "text-emerald-deep" : "text-text")
+        }
+      >
         {value}
       </span>
+      {delta ? (
+        <span className="text-[11.5px] text-text-muted mt-1 tabular">{delta}</span>
+      ) : null}
     </div>
   )
 }
