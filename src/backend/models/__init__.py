@@ -9,6 +9,7 @@ from src.backend.models.measurements import (
 )
 from src.backend.models.frame import FrameResult
 from src.backend.models.marketplace import Package, PackageFoodbank, FundSubscription, CsrReport
+from src.backend.models.allocation import Allocation
 
 __all__ = [
     "SourceEnum", "RoleEnum", "RegionEnum", "StatusEnum", "CounterfactualEnum", "TemplateEnum", "ImpactProfileEnum",
@@ -17,4 +18,5 @@ __all__ = [
     "FoodVolume", "FoodCategories", "PeopleServed", "Operations", "Donations",
     "FrameResult",
     "Package", "PackageFoodbank", "FundSubscription", "CsrReport",
+    "Allocation",
 ]

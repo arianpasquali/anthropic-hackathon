@@ -151,3 +151,33 @@ def test_package_impact_profile_defaults_to_balanced(session: Session):
     session.refresh(pkg)
     assert pkg.impact_profile == ImpactProfileEnum.balanced
     assert pkg.top_n == 50
+
+
+from src.backend.models.allocation import Allocation
+
+def test_allocation_stores_weight_pct(session: Session, report: AnnualReport):
+    from src.backend.models.enums import RoleEnum
+    from src.backend.models.user import User
+
+    user = User(email="corp@test.com", hashed_password="x", role=RoleEnum.corporate)
+    session.add(user)
+    session.commit()
+
+    pkg = Package(name="Test Pkg", region=RegionEnum.west, price_eur=10000.0, co2e_claim_kg=200000.0)
+    session.add(pkg)
+    session.commit()
+
+    sub = FundSubscription(user_id=user.id, package_id=pkg.id, amount_eur=10000.0)
+    session.add(sub)
+    session.commit()
+
+    alloc = Allocation(
+        subscription_id=sub.id,
+        foodbank_id=report.foodbank_id,
+        weight_pct=0.6,
+    )
+    session.add(alloc)
+    session.commit()
+    session.refresh(alloc)
+    assert alloc.weight_pct == 0.6
+    assert alloc.subscription_id == sub.id
