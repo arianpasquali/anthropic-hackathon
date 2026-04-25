@@ -5,13 +5,15 @@ from pathlib import Path
 import typer
 from dotenv import load_dotenv
 from loguru import logger
-from sqlmodel import Session
+from sqlmodel import Session, select
 
 from src.backend.database import create_db_and_tables, engine
-from src.backend.models.enums import RegionEnum
+from src.backend.models import IngestionRecord
+from src.backend.models.enums import IngestionStatus, RegionEnum
 from src.backend.preprocessing.claude import DEFAULT_MODEL, extract_all
 from src.backend.preprocessing.extractor import ExtractionError, extract_text
 from src.backend.models.foodbank import AnnualReport, Foodbank
+from datetime import datetime, timezone
 from src.backend.models.frame import FrameResult
 from src.backend.preprocessing.db_inspect import app as db_app
 from src.backend.preprocessing.writer import write_report
@@ -223,25 +225,77 @@ def ingest_dir(
         year: int,
     ) -> None:
         async with sem:
+            file_path = str(file)
             logger.info(f"Processing {file.name} → {bank_name} {year}")
+
+            # Create or update ingestion record
+            with Session(engine) as session:
+                rec = session.exec(
+                    select(IngestionRecord).where(IngestionRecord.file_path == file_path)
+                ).first()
+                if rec is None:
+                    rec = IngestionRecord(file_path=file_path, bank_name=bank_name, year=year, model=model)
+                    session.add(rec)
+                if rec.status == IngestionStatus.done and not force:
+                    logger.info(f"Already ingested {file.name} — skipping (use --force)")
+                    return
+                rec.status = IngestionStatus.running
+                rec.started_at = datetime.now(timezone.utc)
+                rec.error = None
+                session.commit()
+
             try:
                 text = extract_text(file)
             except ExtractionError as e:
                 logger.error(f"Skipping {file.name}: {e}")
+                with Session(engine) as session:
+                    rec = session.exec(
+                        select(IngestionRecord).where(IngestionRecord.file_path == file_path)
+                    ).first()
+                    if rec:
+                        rec.status = IngestionStatus.failed
+                        rec.error = str(e)
+                        rec.completed_at = datetime.now(timezone.utc)
+                        session.commit()
                 return
-            result = await extract_all(text, model=model)
-            with Session(engine) as session:
-                write_report(
-                    session=session,
-                    foodbank_name=bank_name,
-                    city=city,
-                    region=region_enum,
-                    year=year,
-                    pdf_path=str(file),
-                    result=result,
-                    model=model,
-                    force=force,
-                )
+
+            try:
+                result = await extract_all(text, model=model)
+                with Session(engine) as session:
+                    report = write_report(
+                        session=session,
+                        foodbank_name=bank_name,
+                        city=city,
+                        region=region_enum,
+                        year=year,
+                        pdf_path=file_path,
+                        result=result,
+                        model=model,
+                        force=force,
+                    )
+                    report_id = report.id
+                with Session(engine) as session:
+                    rec = session.exec(
+                        select(IngestionRecord).where(IngestionRecord.file_path == file_path)
+                    ).first()
+                    if rec:
+                        rec.status = IngestionStatus.done
+                        rec.completed_at = datetime.now(timezone.utc)
+                        rec.report_id = report_id
+                        session.commit()
+            except Exception as e:
+                logger.error(f"Failed {file.name}: {e}")
+                with Session(engine) as session:
+                    rec = session.exec(
+                        select(IngestionRecord).where(IngestionRecord.file_path == file_path)
+                    ).first()
+                    if rec:
+                        rec.status = IngestionStatus.failed
+                        rec.error = str(e)[:2000]
+                        rec.completed_at = datetime.now(timezone.utc)
+                        session.commit()
+                return
+
             counts = _count_fields(result)
             async with stats_lock:
                 for key, found in counts.items():
