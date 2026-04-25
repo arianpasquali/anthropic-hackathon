@@ -1,4 +1,5 @@
 import os
+import uuid
 from typing import Optional
 
 from fastapi import Cookie, Depends, HTTPException, status
@@ -43,7 +44,11 @@ def get_current_user(
     user_id = decode_session_cookie(session_cookie)
     if not user_id:
         raise HTTPException(status_code=status.HTTP_303_SEE_OTHER, headers={"Location": "/login"})
-    user = session.get(User, user_id)
+    try:
+        user_uuid = uuid.UUID(user_id)
+    except (ValueError, AttributeError):
+        raise HTTPException(status_code=status.HTTP_303_SEE_OTHER, headers={"Location": "/login"})
+    user = session.get(User, user_uuid)
     if not user:
         raise HTTPException(status_code=status.HTTP_303_SEE_OTHER, headers={"Location": "/login"})
     return user
