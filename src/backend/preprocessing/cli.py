@@ -11,11 +11,13 @@ from src.backend.database import create_db_and_tables, engine
 from src.backend.models.enums import RegionEnum
 from src.backend.preprocessing.claude import DEFAULT_MODEL, extract_all
 from src.backend.preprocessing.extractor import ExtractionError, extract_text
+from src.backend.preprocessing.db_inspect import app as db_app
 from src.backend.preprocessing.writer import write_report
 
 load_dotenv()
 
 app = typer.Typer(name="ingest", help="Foodbank report ingestion pipeline")
+app.add_typer(db_app, name="db")
 
 logger.remove()
 logger.add(sys.stderr, level="INFO", format="<green>{time:HH:mm:ss}</green> | <level>{level:<7}</level> | {message}")
@@ -186,28 +188,45 @@ def ingest_dir(
         return
 
     create_db_and_tables()
-    with Session(engine) as session:
-        for file, (bank_name, city, region_enum), year in queued:
+
+    async def _ingest_one(
+        sem: asyncio.Semaphore,
+        file: Path,
+        bank_name: str,
+        city: str,
+        region_enum: RegionEnum,
+        year: int,
+    ) -> None:
+        async with sem:
             logger.info(f"Processing {file.name} → {bank_name} {year}")
             try:
                 text = extract_text(file)
             except ExtractionError as e:
                 logger.error(f"Skipping {file.name}: {e}")
-                continue
+                return
+            result = await extract_all(text, model=model)
+            with Session(engine) as session:
+                write_report(
+                    session=session,
+                    foodbank_name=bank_name,
+                    city=city,
+                    region=region_enum,
+                    year=year,
+                    pdf_path=str(file),
+                    result=result,
+                    model=model,
+                    force=force,
+                )
 
-            result = asyncio.run(extract_all(text, model=model))
-            write_report(
-                session=session,
-                foodbank_name=bank_name,
-                city=city,
-                region=region_enum,
-                year=year,
-                pdf_path=str(file),
-                result=result,
-                model=model,
-                force=force,
-            )
+    async def _run_all() -> None:
+        sem = asyncio.Semaphore(10)
+        tasks = [
+            _ingest_one(sem, file, bank_name, city, region_enum, year)
+            for file, (bank_name, city, region_enum), year in queued
+        ]
+        await asyncio.gather(*tasks)
 
+    asyncio.run(_run_all())
     logger.success("Batch ingest complete")
 
 
