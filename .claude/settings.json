@@ -1,0 +1,12 @@
+{
+  "enabledPlugins": {
+    "next-project-starter@claudesmith-marketplace": true,
+    "impeccable@impeccable": true
+  },
+  "marketplaces": [
+    "https://github.com/JNLei/claude-tools.git"
+  ],
+  "plugins": [
+    "next-project-starter@claudesmith-general"
+  ]
+}
