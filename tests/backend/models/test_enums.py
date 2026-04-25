@@ -39,3 +39,9 @@ def test_counterfactual_enum_values():
 def test_template_enum_values():
     expected = {"gri", "csrd", "esrs_e1", "generic"}
     assert {t.value for t in TemplateEnum} == expected
+
+
+def test_db_import():
+    from src.backend.database import create_db_and_tables, get_session
+    assert callable(create_db_and_tables)
+    assert callable(get_session)
