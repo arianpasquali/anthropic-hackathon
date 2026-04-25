@@ -1,111 +1,146 @@
 # Klimaatkracht — Wireframe Spec
 
-**Date:** 2026-04-25  
-**File:** `docs/wireframes/index.html`  
-**Format:** Single-page HTML, tab-switched, browser-chrome wrapper per screen  
-**Brand:** stone/emerald (`#388e3c` green, `#37474f` dark slate)
+**Date:** 2026-04-25 (updated)
+**File:** `docs/wireframes/index.html`
+**Format:** Single-page HTML, tab-switched, browser-chrome wrapper per screen
+**Brand:** stone/emerald (`#388e3c` green, `#064e3b` dark emerald, `#37474f` dark slate)
 
 ---
 
 ## Navigation
 
-Top sticky bar, dark (`#1a1a1a`), 6 tabs:
+Top sticky bar (`#1a1a1a`), 7 tabs:
 
 | # | Label | Screen ID | Route |
 |---|---|---|---|
 | 1 | Landing | `screen-landing` | `/` |
-| 2 | Marketplace | `screen-marketplace` | `/marketplace` |
-| 3 | Package Detail | `screen-pkgdetail` | `/packages/{id}` |
+| 2 | Funds | `screen-marketplace` | `/funds` |
+| 3 | Fund Profile | `screen-pkgdetail` | `/funds/{id}` |
 | 4 | Corporate Dashboard | `screen-corporate` | `/dashboard/corporate` |
 | 5 | Food Bank Dashboard | `screen-foodbank` | `/dashboard/foodbank` |
 | 6 | Methodology | `screen-methodology` | `/methodology` |
+| 7 | Pricing | `screen-pricing` | `/pricing` |
 
 ---
 
 ## Screen 1 — Landing (`/`)
 
-**Status:** NEW  
-**Audience:** Both (split hero)
+**Audience:** Corporate (primary) · Food banks (ghost link)
 
 ### Sections (top → bottom)
 
-1. **Navbar** — KK logo (emerald pill) · "Klimaatkracht" · links: Marketplace / Methodology / For Food Banks
+1. **Navbar** — KK logo · "Klimaatkracht" · links: Investment funds / Methodology / For Food Banks (muted)
 
-2. **HeroSplit** — `bg-slate-700`, 2-column grid  
-   - Left col: "For corporates" — headline placeholder lines · "Browse marketplace →" (green CTA) · "View methodology →" (ghost)  
-   - Right col: "For food banks" — headline placeholder lines · "Join as food bank →" (green CTA)  
-   - `wf-divider` separator column between
+2. **Hero** — full-width emerald gradient (`#064e3b → #065f46 → #047857`), decorative circle overlays
+   - Eyebrow: `CSRD-READY · ESRS E1 + S3 · FRAME ALIGNED · 180 FOODBANKS`
+   - H1: "Turn Dutch food rescue into audit-ready climate impact"
+   - Sub: invest in verified Dutch foodbank funds, FRAME-weighted CO₂e, quarterly ESRS reports
+   - Single primary CTA: **"View investment opportunities →"** (emerald `#10b981`)
+   - Ghost link: "For food banks →" (muted, `opacity:0.55`)
 
-3. **ImpactStats bar** — `bg-green-50`, 3-column grid  
-   - `4,200 tCO₂e/yr avoided` · `7.84M kg rescued/yr` · `5,800 households/wk`  
-   - Values aggregated from `banks.json` (6 NL banks)
+3. **Stats bar** — `bg-green-50`, 3-column
+   - `18,015 tCO₂e / yr` · `9.2M kg food rescued / yr` · `7,582 hh / wk`
+   - Sub-label: "6 regions · 180 foodbanks · FRAME verified"
 
-4. **HowItWorks** — white bg, 3-step grid  
-   1. Food bank uploads annual data  
-   2. FRAME engine computes CO₂e  
-   3. Corporate buys package, receives quarterly CSR report  
+4. **HowItWorks** — white bg, 3-step grid
+   1. Select a fund profile (Carbon Certified / Community First / CSRD Complete / Impact Balanced)
+   2. Capital flows to 180 foodbanks weighted by FRAME CO₂e scores
+   3. Receive quarterly CSRD-ready ESRS E1 + S3 report
 
-5. **Map teaser** — `wf-map` placeholder (`[ NL Map — Leaflet ]`), 6 green dot pins positioned, "Explore all food banks →" link
+5. **Map teaser** — `wf-map` Leaflet placeholder, 6 green dot pins (NL geographic positions), "Explore all food banks →" link
 
 6. **Footer** — FRAME attribution · methodology link
 
 ---
 
-## Screen 2 — Marketplace (`/marketplace`)
+## Screen 2 — Funds (`/funds`)
 
-**Status:** EXISTING + NL map added  
-**Audience:** Corporates browsing packages
+**Audience:** Corporates browsing fund profiles
 
 ### Sections
 
-1. **Navbar** (same as landing)
+1. **Navbar** — "Investment funds" active
 
-2. **Page header** — "Verified Avoided Emissions · CSRD-Ready" eyebrow · headline + sub placeholders · impact profile filter bar:  
-   `All | CO₂ Focus | Social Focus | Balanced` (tab pills)
+2. **Page header** — eyebrow "Verified Avoided Emissions · CSRD-Ready"
 
-3. **NL map** — `react-leaflet` placeholder, `height: 260px`, 6 pin dots with approximate NL coordinates:  
-   Rotterdam (51.92, 4.48) · Amsterdam (52.37, 4.90) · Haaglanden (52.07, 4.30) · Eindhoven (51.44, 5.47) · Groningen (53.22, 6.57) · Breda (51.57, 4.77)
+3. **Filter row** (two groups):
+   - Profile: `All | 🌍 Carbon Certified | 👥 Community First | ⚖️ CSRD Complete | 🎯 Impact Balanced`
+   - Region: `All NL | West/Randstad | Zuid | Noord`
 
-4. **Bank cards grid** — 3 cards shown  
-   - Card 1 (Rotterdam): highlighted green border, `€25,000 · Q package`, green "Solo eligible" badge · metric lines  
-   - Cards 2–3: standard  
+4. **Fund carousel** — full-width, `scroll-snap-type: x mandatory`, 4 cards:
+
+   | Fund | Profile | Accent color | Top region |
+   |---|---|---|---|
+   | NL Climate Fund | 🌍 Carbon Certified | emerald | West/Randstad 69% |
+   | NL Social Fund | 👥 Community First | purple | West/Randstad 57% |
+   | NL Balanced Fund | ⚖️ CSRD Complete | blue | West/Randstad 63% |
+   | NL Impact Fund | 🎯 Impact Balanced | amber | West/Randstad 65% |
+
+   Each card: fund name · "6 regions · 180 foodbanks" chip · top-2 region mini progress bars · tCO₂e/kg/hh stats · price pills (€10k · €100k · Custom) · **"View fund →"** CTA
+
+   Scroll indicator: 4 dots below carousel
+
+5. **NL Map** — full-width below carousel, `height: 280px`, Leaflet placeholder (`react-leaflet`), 6 green pin dots at approximate NL geographic positions:
+   - Rotterdam (left:36%, top:62%) · Amsterdam (40%, 52%) · Haaglanden (33%, 58%)
+   - Eindhoven (46%, 71%) · Groningen (58%, 28%) · Breda (38%, 68%)
+   - Tooltip on hover: bank name · allocation % · tCO₂e · kg
+   - Legend below: "Active RDC (6)" · "Explore all food banks →"
 
 ---
 
-## Screen 3 — Package Detail (`/packages/{id}`)
+## Screen 3 — Fund Profile (`/funds/{id}`)
 
-**Status:** NEW  
-**Audience:** Corporate pre-purchase
+**Mock state:** NL Climate Fund · Carbon Certified profile
+**Audience:** Corporate pre-investment
 
 ### Sections
 
-1. **Navbar**
+1. **Navbar** — "Investment funds" active
 
-2. **Main layout** — 2-col (content | sticky sidebar)
+2. **Fund header** (2-col: info | CTA)
+   - Left: profile label ("🌍 Carbon Certified") · H1 "NL Climate Fund" · description · badges (ESRS E1 · ESRS S3 · CSRD-ready · FRAME Aligned · 6 regions · 180 foodbanks)
+   - Right: invest CTA card (green-tinted, `bg-green-50`):
+     - "From €10k / year"
+     - **"Invest in this fund →"** button (emerald, `onclick → show('pricing')`)
+     - "No lock-in · ESRS E1+S3 report included · Solvimon invoice"
 
-   **Left — package info:**  
-   - Package name · region badge · ESRS E1 + S3 badges  
-   - 3 stat pills: attributed tCO₂e · kg rescued · households  
-   - "Projected allocation" table — shows top 6 of 50 banks, Rotterdam row: 42.8% share (highlighted green)  
-   - "What's included" card (green bg): quarterly ESRS E1+S3 report · FRAME workings · source citations  
-   - "About the methodology" card → link to `/methodology`
+3. **Aggregate stats pills** (3-col): `18,015 tCO₂e/yr` · `9.2M kg` · `7,582 hh/wk`
 
-   **Right — sticky buy sidebar (240px):**  
-   - Package name · `€25,000` price · "Purchase" CTA  
-   - Billing info placeholder lines
+4. **Two-col main body** (content | right sidebar)
+
+   **Left col:**
+   - Regional allocation table (6 RDCs):
+     | RDC | Region | Share | Banks | tCO₂e |
+     |---|---|---|---|---|
+     | Rotterdam RDC | West/Randstad | 43% | ~50 | 7,746 |
+     | Haaglanden RDC | West/Randstad | 26% | ~46 | 4,684 |
+     | Amsterdam RDC | West/Randstad | 16% | ~32 | 2,928 |
+     | Breda RDC | Zuid | 6% | ~27 | 1,034 |
+     | Eindhoven RDC | Zuid | 4% | ~26 | 652 |
+     | Groningen RDC | Noord | 5% | ~37 | 986 |
+   - Footer: "Weights recomputed quarterly as foodbanks upload new annual data."
+   - **Fund mix tabs** — `[By Category | By Region]` toggle
+     - By Category: 7-bar Recharts BarChart (produce · dry_goods · dairy · meat · bakery · prepared · eggs)
+
+   **Right col:**
+   - Mini SVG choropleth — 4 schematic regions, opacity ∝ allocation (Noord 5%/0.20 · West/Randstad 69%/0.78 · Zuid 15%/0.42 · Oost 11%/0.30)
+   - CSR Report profile card (green-tinted):
+     - Quarterly · 48h delivery · generated by Claude
+     - Badges: ESRS E1 · ESRS S3 · CSRD-ready
+     - Contents: E1-1 · E1-4 · E1-6 · S3-1 · S3-4 · FRAME workings · Sources
+     - "generated by claude-sonnet-4-6"
 
 ---
 
 ## Screen 4 — Corporate Dashboard (`/dashboard/corporate`)
 
-**Status:** NEW  
 **Mock state:** Heineken N.V., Rotterdam package, Q2 2026
 
 ### Sections
 
 1. **Header row** — "Heineken N.V." blue badge · "Corporate sponsor" green badge · "Q2 2026" · "View CSR report →" CTA
 
-2. **Stat cards** (4-col row)  
+2. **Stat cards** (4-col):
    | Stat | Value |
    |---|---|
    | tCO₂e avoided | 600 |
@@ -113,36 +148,26 @@ Top sticky bar, dark (`#1a1a1a`), 6 tabs:
    | People reached | 8,400 individuals |
    | Amount invested | €25,000 |
 
-   > "Report status" card removed per design decision.
+3. **Impact timeline + projection scenarios** — Recharts AreaChart + dashed projections
+   - X axis: Q1'25 → Q4'26 (8 points)
+   - Solid emerald area/line: historical actuals Q1'25 → Q2'26 (current)
+   - "NOW · Q2 2026" vertical marker
+   - Three dashed projection lines from Q2'26 → Q4'26:
+     - 🚀 Optimistic: 3,200 tCO₂e (emerald dashed)
+     - 📊 Base: 2,800 tCO₂e (gray dashed)
+     - 🛡 Conservative: 2,100 tCO₂e (light gray dashed)
+   - Scenario summary row (3 cards): Optimistic/Base/Conservative with value + rationale
 
-3. **CO₂e breakdown chart** — Recharts `BarChart`, 7 food categories, green bars, height proportional to emission factor × volume:  
-   `produce · dry_goods · dairy · meat · bakery · prepared · eggs`
-
-4. **Attribution panel** — "7.77% of Rotterdam's annual baseline" · shadcn `Progress` bar (emerald fill)
+4. **Attribution panel** — "7.77% of Rotterdam's annual baseline" · `shadcn Progress` bar (emerald)
 
 5. **Allocation panels** (2-col row)
+   - Left: top-3 bank allocation table — bank name / region / share% / kg / tCO₂e
+   - Right: NL Region heatmap SVG — 4 schematic rectangles (Noord · West/Randstad · Zuid · Oost), emerald opacity ∝ allocation weight; legend
 
-   **Left — Top bank allocation table:**  
-   - Top 3 of 50 banks shown  
-   - Columns: bank name / region / share % / kg / tCO₂e  
-
-   **Right — NL Region heatmap (SVG):**  
-   - 4 regions (schematic rectangles): Noord · West/Randstad · Zuid · Oost  
-   - Emerald opacity scaled by allocation weight:  
-     West/Randstad 69% (darkest) · Zuid 15% · Noord 8% · Oost 8%  
-   - Legend sidebar: opacity swatch + label + percentage
-
-6. **CSR Report panel** — green-tinted card  
-   - Header: "CSR Report — Q2 2026" · "ready" badge · ESRS E1 + ESRS S3 + CSRD-ready badges  
-   - Contents list:
-     - E1-1 Climate transition plan (progress bars)
-     - E1-4 GHG reduction targets (metric: −600 tCO₂e)
-     - E1-6 Gross Scope 3 emissions (upstream food waste)
-     - S3-1 Material impacts on affected communities
-     - S3-4 Channels for engagement
-     - FRAME methodology workings (attribution calculation)
-     - Source citations (RIVM, FAO, WRAP, CBS)
-   - Footer: `generated: claude-sonnet-4-6 · 2026-04-25` · "View full report →" link
+6. **CSR Report panel** — green-tinted card
+   - "CSR Report — Q2 2026" · "ready" badge · ESRS E1 + ESRS S3 + CSRD-ready badges
+   - Contents: E1-1 · E1-4 · E1-6 · S3-1 · S3-4 · FRAME workings · Sources
+   - Footer: `generated: claude-sonnet-4-6 · 2026-04-25` · "View full report →"
 
 7. **Subscription row** — `€25,000` · "paid" green badge · Q2 2026
 
@@ -150,144 +175,136 @@ Top sticky bar, dark (`#1a1a1a`), 6 tabs:
 
 ## Screen 5 — Food Bank Dashboard (`/dashboard/foodbank`)
 
-**Status:** NEW  
 **Mock state:** Voedselbank Amsterdam, no sponsor yet
 
 ### Sections
 
 1. **Header row** — "Voedselbank Amsterdam" blue badge · "Food bank operator" amber badge · "Noord-Holland" region
 
-2. **Stat cards** (3-col row)  
-   | Stat | Value |
-   |---|---|
-   | Funding received | €0 |
-   | Active sponsors | 0 |
-   | Annual data | Not uploaded (amber badge) |
+2. **Stat cards** (3-col): Funding received €0 · Active sponsors 0 · Annual data "Not uploaded" (amber)
 
-3. **Upload widget** — `wf-upload` dashed-border zone  
-   - "Drop PDF / Excel / CSV here"  
-   - Year selector (2024 / 2025)  
-   - Mock progress bar (4-stage): Uploading (1s) → Parsing with Claude (2s) → Computing FRAME (1s) → Done ✓  
-   - `annotation: mock ingestion`
+3. **Upload widget** — dashed drag-and-drop zone
+   - "Drop PDF / Excel / CSV here"
+   - Year selector (2024 / 2025)
+   - Mock progress bar 4-stage: Uploading → Parsing with Claude → Computing FRAME → Done ✓
 
 4. **Pre-upload locked state** — right sidebar card (grayed, `opacity:0.5`, `pointer-events:none`): marketplace preview placeholder
 
-5. **Post-upload metrics** (revealed after upload completes)  
-   - Stat row: `tCO₂e/yr · kg rescued · households/wk`  
-   - **People reached:** 1,960 individuals (blue card)  
-   - **CO₂e bar chart** (7-category, green bars) — identical pattern to corporate dashboard  
-     `produce · dry_goods · dairy · meat · bakery · prepared · eggs`  
-   - `annotation: Recharts BarChart`
+5. **Post-upload metrics** (revealed after upload)
+   - Stat row: tCO₂e/yr · kg rescued · hh/wk
+   - People reached: 1,960 individuals (blue card)
+   - CO₂e bar chart (7-category, green bars) — Recharts BarChart
 
-6. **Sponsorship tracker** — empty state: "Your bank will appear in the marketplace once data is uploaded and reviewed"
+6. **Sponsorship tracker** — empty: "Your bank will appear in the marketplace once data is uploaded and reviewed"
 
-7. **Source legend** — "extracted" (green badge, from PDF) vs "inferred" (amber badge, national average)  
-   - `annotation: locked until upload complete`
+7. **Source legend** — `extracted` (green) vs `inferred` (amber) — locked until upload complete
 
 ---
 
 ## Screen 6 — Methodology (`/methodology`)
 
-**Status:** EXISTING — redesigned as animated infographic  
-**Audience:** Auditors, compliance teams  
 **Scroll behavior:** IntersectionObserver reveals sections on scroll
 
 ### Hero strip
 
-Dark emerald gradient (`#064e3b → #047857`), decorative circle overlay.  
-- Eyebrow: "METHODOLOGY" in `#6ee7b7`  
-- H1: "How we calculate avoided CO₂e"  
-- Sub: "deterministic, source-cited, auditor-grade" framing  
-- Badges: `FRAME Aligned · CSRD-Ready · ESRS E1 + S3 · NL-specific`  
-- Pulse dot (animated) — live indicator
+Dark emerald gradient (`#064e3b → #047857`) · decorative circle
+- Eyebrow: "METHODOLOGY" `#6ee7b7`
+- H1: "How we calculate avoided CO₂e"
+- Sub: "deterministic, source-cited, auditor-grade"
+- Badges: FRAME Aligned · CSRD-Ready · ESRS E1 + S3 · NL-specific
+- Animated pulse dot
 
 ### Section 1 — Ingestion pipeline
 
-5-step pipeline (`pipeline` flex layout), animated arrows between steps:
-
+5-step `@keyframes flow` animated arrows:
 ```
-📄 Annual Report  →  🤖 Claude Extraction  →  ✅ Provenance Tagging  →  🧮 FRAME Calculation  →  📊 CSR Report
+📄 Annual Report → 🤖 Claude Extraction → ✅ Provenance Tagging → 🧮 FRAME Calculation → 📊 CSR Report
 ```
-
-- Arrows: `@keyframes flow` — green gradient sweeping left→right, 1.8s infinite  
-- "FRAME Calculation" step highlighted (emerald bg)  
-- Pipeline reveals on scroll (`.reveal` + IntersectionObserver)
+"FRAME Calculation" step highlighted (emerald bg). Reveals on scroll.
 
 ### Section 2 — Core formula
 
-Dark code panel (`bg-slate-900`), monospace, shimmer animation:
-
+Dark code panel (`bg-slate-900`), `@keyframes shimmer`:
 ```
 CO₂e = Σ(kg_i × EF_i) × CF_NL
        ─────────────────────────
        where CF_NL = 0.93
 ```
 
-- `@keyframes shimmer` — light sweep across dark panel, 3s infinite  
-- Variables colored emerald (`#6ee7b7`)  
-- Operators muted slate  
-- Result line: `#34d399`, 16px bold
-
 ### Section 3 — Emission factors table
 
-7 rows, scroll-triggered bar animation:
+7 rows, scroll-triggered bar animation (`cubic-bezier(0.4,0,0.2,1)` 1.2s):
 
-| Category | EF (kg CO₂e/kg) | Bar width | Source |
-|---|---|---|---|
-| Produce | 1.0 | 12% | FAO Food Wastage Footprint (2013), Table 4.2 |
-| Bakery | 1.5 | 18% | WRAP Courtauld Commitment 2030 |
-| Dry goods | 2.0 | 24% | FAO FWF cereals + Poore & Nemecek (2018) |
-| Prepared | 3.0 | 35% | Poore & Nemecek (2018) |
-| Dairy | 3.2 | 38% | FAO FWF + RIVM Dutch dairy LCA |
-| Eggs | 4.5 | 53% | FAO FWF + Dutch egg sector data |
-| Meat | 8.5 | 100% | FAO FWF (2013) weighted Dutch meat mix |
-
-Bar widths: `--w` CSS custom property, `width: var(--w)` set via JS when `.animate` class applied on scroll.  
-Transition: `cubic-bezier(0.4,0,0.2,1)` 1.2s.
+| Category | EF (kg CO₂e/kg) | Source |
+|---|---|---|
+| Produce | 1.0 | FAO FWF (2013) |
+| Bakery | 1.5 | WRAP Courtauld 2030 |
+| Dry goods | 2.0 | FAO FWF + Poore & Nemecek (2018) |
+| Prepared | 3.0 | Poore & Nemecek (2018) |
+| Dairy | 3.2 | FAO FWF + RIVM Dutch dairy LCA |
+| Eggs | 4.5 | FAO FWF + Dutch egg sector data |
+| Meat | 8.5 | FAO FWF (2013) weighted Dutch meat mix |
 
 ### Section 4 — NL counterfactual
 
-Side-by-side comparison (`cf-compare` grid):
-
-| NL (used) | vs | Global avg (not used) |
-|---|---|---|
-| `0.93` — incineration with energy recovery | ≠ | `1.0` — US landfill baseline |
-
-- NL box: emerald border (`#6ee7b7`)  
-- Global box: red border, 0.7 opacity (strikethrough intent)  
-- Source: RIVM Afvalmonitor 2024 + CBS Waste Statistics
+`0.93` (NL incineration with energy recovery) vs `1.0` (US landfill baseline, not used). Source: RIVM Afvalmonitor 2024 + CBS.
 
 ### Section 5 — Provenance system
 
-4 badge types explained:
-
 | Badge | Color | Meaning |
 |---|---|---|
-| `extracted` | Green | Parsed directly from PDF/annual report |
-| `inferred_national_avg` | Amber | National average applied where missing |
-| `inferred_calculation` | Blue | Derived via formula from other fields |
-| `manual` | Pink | Operator-entered, flagged for review |
+| `extracted` | Green | Parsed from PDF/annual report |
+| `inferred_national_avg` | Amber | National average applied |
+| `inferred_calculation` | Blue | Derived via formula |
+| `manual` | Pink | Operator-entered, flagged |
 
-### Section 6 — Audit trail
+### Section 6 — Audit trail (6-step numbered list)
 
-6-step numbered list, each step shows badge status:
+### Section 7 — Trust pillars (3-col grid)
 
-1. Food bank submits annual report (PDF/Excel/CSV)
-2. Claude extracts measurements — `extracted` badge
-3. Missing values filled from national averages — `inferred` badge
-4. FRAME calculation applied — `calculation` badge
-5. Output reviewed by FRAME-aligned algorithm
-6. CSR report generated — `ESRS E1 · S3 · FRAME` badges
+🧮 Deterministic formula · 📚 Source citations · 🇳🇱 Conservative NL baseline
 
-### Section 7 — Trust pillars
+---
 
-3-column grid:
+## Screen 7 — Pricing (`/pricing`)
 
-| Pillar | Icon | Content |
-|---|---|---|
-| Deterministic formula | 🧮 | Same inputs always produce same output; no ML black box in the calculation |
-| Source citations | 📚 | Every emission factor traces to FAO, WRAP, RIVM, or CBS publications |
-| Conservative NL baseline | 🇳🇱 | CF 0.93 uses Dutch incineration, not higher-impact landfill assumption |
+**Audience:** Corporates ready to invest
+
+### Sections
+
+1. **Navbar** — "Pricing" active (or can be reached from Fund Profile "Invest →")
+
+2. **Hero** — dark emerald gradient
+   - "For Corporates" eyebrow
+   - H1: "Turn food rescue into audit-ready CO₂e proof"
+   - Sub: quarterly subscription, ESRS E1+S3 included, same science three price points
+   - Badges: CSRD-ready · ESRS E1 + S3 · FRAME aligned · Quarterly reports
+
+3. **Price anchoring bar** — `€30 / tCO₂e` · same emission factor table across tiers · NL counterfactual 0.93 · prices ex-VAT, billed quarterly, cancel anytime
+
+4. **Three-column pricing table**:
+
+   | | Starter | Partner | Enterprise |
+   |---|---|---|---|
+   | Price | **€10k / yr** | **€100k / yr** | **Custom / yr** |
+   | tCO₂e | ~333 / yr | ~3,330 / yr | Custom |
+   | Badge | — | Most popular | — |
+   | ESRS E1 | ✓ | ✓ | ✓ |
+   | ESRS S3 | ✗ | ✓ | ✓ |
+   | Co-branded report | ✗ | ✓ | ✓ |
+   | Big-4 audit package | ✗ | ✗ | ✓ |
+   | Account manager | ✗ | ✗ | ✓ |
+   | CTA | **Buy →** | **Buy →** | **Schedule a call →** |
+
+5. **Price-per-tCO₂e comparison bar** — all tiers at €30/tCO₂e (Enterprise: "Negotiated · same formula")
+
+6. **What you receive** (3 cards) — Impact dashboard · ESRS E1+S3 report · Audit-ready workings
+
+7. **How it works** (3-step) — Choose tier → FRAME computes impact → Receive quarterly report
+
+8. **FAQ strip** — 4 common questions (2-col grid)
+
+9. **CTA footer** — dark emerald · "Buy Starter €10k →" · "Buy Partner €100k →" · "Schedule a call →"
 
 ---
 
@@ -303,51 +320,35 @@ Side-by-side comparison (`cf-compare` grid):
 | `.reveal-delay-{1-5}` | Same | Staggered 0.1s–0.5s delays |
 | `.ef-bar-fill.animate` | IntersectionObserver scroll | `width: 0 → var(--w)`, 1.2s cubic-bezier |
 
-`initMethAnimations()` called when methodology tab activated — attaches observer to `#meth-scroll` container.
-
 ---
 
-## Wireframe Primitive Classes
+## Key Data
 
-| Class | Purpose |
+All numbers from `archive/df/web/public/banks.json` (6 RDCs):
+
+| Field | Value |
 |---|---|
-| `.wf-bar` | Generic grey placeholder bar |
-| `.wf-box` / `.wf-box.dark` / `.wf-box.accent` | Content placeholders with variants |
-| `.wf-navbar` | Page navigation chrome |
-| `.wf-hero` | Split hero section |
-| `.wf-stats` | Green-tinted stat bar |
-| `.wf-steps` | 3-column how-it-works grid |
-| `.wf-map` | Leaflet map placeholder |
-| `.wf-card` | shadcn Card equivalent |
-| `.wf-badge.green/.amber/.blue` | Status badges |
-| `.wf-progress-track/.wf-progress-fill` | Progress bar |
-| `.wf-chart` / `.wf-bars` / `.wf-bar-col` | Bar chart skeleton |
-| `.wf-upload` | Dashed drag-and-drop zone |
-| `.wf-table` / `.wf-table-header` / `.wf-table-row` | Data table |
-| `.annotation` | Yellow inline annotation tag |
-| `.browser-chrome` / `.browser-address` | Simulated browser frame |
+| Total tCO₂e/yr | 18,015 |
+| Total kg rescued/yr | 9.2M |
+| Total households/wk | 7,582 |
+| Total foodbanks | 180 |
+| Regions | 6 |
+| Mock corporate | Heineken N.V. · 600 tCO₂e · 323,389 kg · €25,000 · 8,400 people |
+| Mock foodbank | Voedselbank Amsterdam · 1,960 people reached |
+| NL counterfactual | 0.93 (RIVM Afvalmonitor 2024 + CBS) |
 
----
+Emission factors: produce 1.0 · bakery 1.5 · dry_goods 2.0 · prepared 3.0 · dairy 3.2 · eggs 4.5 · meat 8.5
 
-## Data References
-
-All numbers from `archive/df/web/public/banks.json`:
-
-- **6 banks:** Rotterdam, Amsterdam, Haaglanden, Eindhoven, Groningen, Breda
-- **Aggregate stats:** 4,200 tCO₂e/yr · 7.84M kg/yr · 5,800 households/wk
-- **Mock corporate:** Heineken N.V. · 600 tCO₂e · 323,389 kg · €25,000 · 8,400 people
-- **Mock foodbank:** Voedselbank Amsterdam · 1,960 people reached
-- **Emission factors:** produce 1.0 · bakery 1.5 · dry_goods 2.0 · prepared 3.0 · dairy 3.2 · eggs 4.5 · meat 8.5
-- **NL counterfactual:** `0.93` (RIVM Afvalmonitor 2024 + CBS)
-- **Attribution share:** 7.77% of Rotterdam annual baseline
+Carbon Certified allocation (West/Randstad dominant): Rotterdam 43% · Haaglanden 26% · Amsterdam 16% · Breda 6% · Groningen 5% · Eindhoven 4%
 
 ---
 
 ## Implementation Notes
 
-- Wireframe → implementation target: `src/frontend/` (Next.js 16 App Router, from `archive/df/web/`)
-- Full implementation spec: `docs/specs/2026-04-25-klimaatkracht-frontend-design.md`
-- shadcn/ui components: `card`, `badge`, `button`, `progress`, `separator`
-- Map: `react-leaflet`
-- Charts: `recharts` (`BarChart`, `PieChart`)
-- NL heatmap on corporate dashboard: inline SVG (no external dep)
+- Wireframe → implementation target: `src/frontend/` (Next.js 16 App Router)
+- shadcn/ui: `card`, `badge`, `button`, `progress`, `separator`
+- Map: `react-leaflet` (6 RDC pins)
+- Charts: `recharts` (`AreaChart` for timeline, `BarChart` for food categories)
+- NL heatmap: inline SVG (4 schematic region rectangles)
+- Fund choropleth on Funds page: inline SVG (same 4-region schema)
+- Pricing screen reached from Fund Profile "Invest in this fund →" CTA

@@ -257,18 +257,19 @@
 <div class="page-nav">
   <span>Klimaatkracht wireframes</span>
   <a href="#" class="active" onclick="show('landing')">1. Landing</a>
-  <a href="#" onclick="show('marketplace')">2. Marketplace</a>
-  <a href="#" onclick="show('pkgdetail')">3. Package Detail</a>
+  <a href="#" onclick="show('marketplace')">2. Funds</a>
+  <a href="#" onclick="show('pkgdetail')">3. Fund Profile</a>
   <a href="#" onclick="show('corporate')">4. Corporate Dashboard</a>
   <a href="#" onclick="show('foodbank')">5. Food Bank Dashboard</a>
   <a href="#" onclick="show('methodology')">6. Methodology</a>
+  <a href="#" onclick="show('pricing')">7. Pricing</a>
 </div>
 
 <!-- ===================== LANDING ===================== -->
 <div class="screen active" id="screen-landing">
   <div class="screen-title-row">
-    <div class="screen-label">Landing Page <span>/ · both audiences</span></div>
-    <span class="annotation">NEW</span>
+    <div class="screen-label">Landing Page <span>/ · corporate audience</span></div>
+    <span class="annotation">REDESIGNED — corporate focus</span>
   </div>
   <div class="browser-chrome">
     <div class="browser-address">
@@ -282,46 +283,25 @@
         <div class="wf-logo">KK</div>
         <span style="font-size:12px;font-weight:600;color:#333;">Klimaatkracht</span>
         <div class="wf-navlinks">
-          <div class="wf-navlink">Marketplace</div>
+          <div class="wf-navlink">Investment funds</div>
           <div class="wf-navlink">Methodology</div>
-          <div class="wf-navlink">For Food Banks</div>
+          <div class="wf-navlink" style="color:#aaa;font-size:10px;">For Food Banks</div>
         </div>
       </div>
 
-      <!-- Hero split -->
-      <div class="wf-hero">
-        <div class="wf-hero-side">
-          <div class="wf-label-tiny">For corporates</div>
-          <div style="display:flex;flex-direction:column;gap:6px;">
-            <div class="wf-h1"></div>
-            <div class="wf-h1 sm"></div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;">
-            <div class="wf-body-line"></div>
-            <div class="wf-body-line" style="width:85%"></div>
-            <div class="wf-body-line" style="width:70%"></div>
-          </div>
-          <div style="margin-top:8px;">
-            <div class="wf-btn primary">Browse packages →</div>
-          </div>
-          <div style="font-size:10px;color:#aaa;margin-top:4px;">→ /marketplace</div>
+      <!-- Hero — full-width corporate -->
+      <div style="background:linear-gradient(135deg,#064e3b 0%,#065f46 55%,#047857 100%);padding:48px 32px 44px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-40px;right:-40px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,0.04);"></div>
+        <div style="position:absolute;bottom:-30px;left:8%;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,0.03);"></div>
+        <div style="font-size:10px;color:#6ee7b7;text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:14px;">CSRD-READY · ESRS E1 + S3 · FRAME ALIGNED · 180 FOODBANKS</div>
+        <div style="font-size:32px;font-weight:800;color:#fff;line-height:1.2;max-width:540px;margin-bottom:14px;">Turn Dutch food rescue into<br>audit-ready climate impact</div>
+        <div style="font-size:13px;color:#a7f3d0;max-width:480px;line-height:1.65;margin-bottom:28px;">Invest in verified Dutch foodbank funds. Your capital is allocated across 180 foodbanks weighted by FRAME-verified CO₂e scores. Receive quarterly ESRS E1 + S3 reports ready for CSRD auditors.</div>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="padding:13px 28px;background:#10b981;color:#fff;font-size:13px;font-weight:700;border-radius:8px;cursor:pointer;letter-spacing:0.2px;">View investment opportunities →</div>
+          <div style="font-size:10px;color:#6ee7b7;opacity:0.6;">→ /marketplace</div>
         </div>
-        <div class="wf-divider"></div>
-        <div class="wf-hero-side">
-          <div class="wf-label-tiny">For food banks</div>
-          <div style="display:flex;flex-direction:column;gap:6px;">
-            <div class="wf-h1"></div>
-            <div class="wf-h1 sm"></div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;">
-            <div class="wf-body-line"></div>
-            <div class="wf-body-line" style="width:80%"></div>
-            <div class="wf-body-line" style="width:65%"></div>
-          </div>
-          <div style="margin-top:8px;">
-            <div class="wf-btn secondary">Join as food bank →</div>
-          </div>
-          <div style="font-size:10px;color:#aaa;margin-top:4px;">→ /dashboard/foodbank</div>
+        <div style="margin-top:18px;">
+          <a href="#" style="font-size:10px;color:#6ee7b7;opacity:0.55;text-decoration:underline;">For food banks →</a>
         </div>
       </div>
 
@@ -330,67 +310,42 @@
         <div class="wf-stat">
           <div class="wf-stat-num">18,015</div>
           <div class="wf-stat-label">tCO₂e avoided / yr</div>
-          <div style="font-size:9px;color:#999;margin-top:2px;">sum of 6 banks from banks.json</div>
+          <div style="font-size:9px;color:#999;margin-top:2px;">6 regions · 180 foodbanks · FRAME verified</div>
         </div>
         <div class="wf-stat">
-          <div class="wf-stat-num">7.2M kg</div>
+          <div class="wf-stat-num">9.2M kg</div>
           <div class="wf-stat-label">food rescued / yr</div>
         </div>
         <div class="wf-stat">
-          <div class="wf-stat-num">4,700+</div>
+          <div class="wf-stat-num">7,582</div>
           <div class="wf-stat-label">households / week</div>
         </div>
       </div>
 
-      <!-- How it works -->
+      <!-- How it works — corporate framing -->
       <div style="padding:24px 32px 8px;background:#fff;"><div class="wf-section-title">How it works</div></div>
       <div class="wf-steps">
         <div class="wf-step">
           <div class="wf-step-num">1</div>
-          <div class="wf-step-title"></div>
-          <div style="font-size:11px;color:#555;">Food bank uploads annual report PDF</div>
-          <div class="wf-step-body"></div>
-          <div class="wf-step-body" style="width:80%"></div>
+          <div class="wf-step-title" style="font-size:11px;font-weight:600;color:#1a1a1a;margin-bottom:4px;">Select a fund profile</div>
+          <div style="font-size:11px;color:#555;">Choose CO₂e-optimised, social-impact, or balanced — we handle allocation across all 180 banks</div>
         </div>
         <div class="wf-step">
           <div class="wf-step-num">2</div>
-          <div class="wf-step-title"></div>
-          <div style="font-size:11px;color:#555;">FRAME engine computes tCO₂e avoided</div>
-          <div class="wf-step-body"></div>
-          <div class="wf-step-body" style="width:60%"></div>
+          <div class="wf-step-title" style="font-size:11px;font-weight:600;color:#1a1a1a;margin-bottom:4px;">Capital flows to foodbanks</div>
+          <div style="font-size:11px;color:#555;">Allocation weighted by FRAME-verified tCO₂e and household scores — no black box</div>
         </div>
         <div class="wf-step">
           <div class="wf-step-num">3</div>
-          <div class="wf-step-title"></div>
-          <div style="font-size:11px;color:#555;">Corporate buys package, receives quarterly CSR report</div>
-          <div class="wf-step-body"></div>
-          <div class="wf-step-body" style="width:75%"></div>
-        </div>
-      </div>
-
-      <!-- Map teaser -->
-      <div style="padding:24px 32px;background:#f9f9f9;border-top:1px solid #eee;">
-        <div class="wf-section-title">Food banks on the map</div>
-        <div style="margin-top:12px;display:flex;gap:16px;align-items:flex-start;">
-          <div class="wf-map" style="height:200px;flex:2;position:relative;">
-            <div class="wf-pin" style="top:40%;left:45%;"></div>
-            <div class="wf-pin" style="top:28%;left:48%;"></div>
-            <div class="wf-pin" style="top:35%;left:42%;"></div>
-            <div class="wf-pin" style="top:60%;left:52%;"></div>
-            <div class="wf-pin" style="top:12%;left:55%;"></div>
-            <div class="wf-pin" style="top:62%;left:44%;"></div>
-          </div>
-          <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
-            <div style="font-size:11px;color:#555;">6 food banks across the Netherlands</div>
-            <div class="wf-btn primary" style="font-size:11px;">Explore all food banks →</div>
-          </div>
+          <div class="wf-step-title" style="font-size:11px;font-weight:600;color:#1a1a1a;margin-bottom:4px;">Receive CSRD-ready reports</div>
+          <div style="font-size:11px;color:#555;">Quarterly ESRS E1 + S3 report with full attribution traceability, generated by Claude</div>
         </div>
       </div>
 
       <!-- Footer -->
       <div class="wf-footer">
-        <div class="wf-footer-text"></div>
         <div style="font-size:10px;color:#999;">Methodology aligned with FRAME · Global Foodbanking Network</div>
+        <div style="font-size:10px;color:#388e3c;cursor:pointer;">/methodology →</div>
       </div>
 
     </div>
@@ -400,8 +355,8 @@
 <!-- ===================== MARKETPLACE ===================== -->
 <div class="screen" id="screen-marketplace">
   <div class="screen-title-row">
-    <div class="screen-label">Marketplace <span>/marketplace · moved from /</span></div>
-    <span class="annotation">EXISTING + NL map added</span>
+    <div class="screen-label">Investment Funds <span>/marketplace · fund carousel + choropleth</span></div>
+    <span class="annotation">REDESIGNED</span>
   </div>
   <div class="browser-chrome">
     <div class="browser-address">
@@ -413,83 +368,236 @@
         <div class="wf-logo">KK</div>
         <span style="font-size:12px;font-weight:600;color:#333;">Klimaatkracht</span>
         <div class="wf-navlinks">
-          <div class="wf-navlink" style="border-bottom:2px solid #388e3c;color:#388e3c;">Marketplace</div>
+          <div class="wf-navlink" style="border-bottom:2px solid #388e3c;color:#388e3c;">Investment funds</div>
           <div class="wf-navlink">Methodology</div>
-          <div class="wf-navlink">For Food Banks</div>
+          <div class="wf-navlink" style="color:#aaa;font-size:10px;">For Food Banks</div>
         </div>
       </div>
 
-      <!-- Existing hero (simplified) -->
-      <div style="padding:24px 32px;background:#fff;border-bottom:1px solid #eee;">
-        <div style="font-size:10px;color:#388e3c;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:6px;">Verified Avoided Emissions · CSRD-Ready</div>
-        <div style="height:20px;background:#ddd;border-radius:3px;width:55%;margin-bottom:12px;"></div>
-        <div style="height:12px;background:#eee;border-radius:2px;width:70%;margin-bottom:6px;"></div>
-        <div style="height:12px;background:#eee;border-radius:2px;width:60%;"></div>
+      <!-- Page header -->
+      <div style="padding:20px 32px 14px;background:#fff;border-bottom:1px solid #eee;">
+        <div style="font-size:10px;color:#388e3c;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:6px;">VERIFIED AVOIDED EMISSIONS · CSRD-READY</div>
+        <div style="font-size:20px;font-weight:700;margin-bottom:4px;">Foodbank Investment Funds</div>
+        <div style="font-size:12px;color:#666;">4 portfolio strategies · 6 regions · 180 Dutch foodbanks</div>
       </div>
 
-      <!-- Impact profile filter (NEW) -->
-      <div style="padding:12px 32px;background:#fff;border-bottom:1px solid #eee;display:flex;align-items:center;gap:8px;">
-        <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-right:4px;">Impact profile:</div>
-        <div style="padding:6px 14px;border-radius:16px;background:#388e3c;color:#fff;font-size:11px;font-weight:600;cursor:pointer;">All</div>
-        <div style="padding:6px 14px;border-radius:16px;border:1px solid #ccc;font-size:11px;color:#555;cursor:pointer;">🌱 CO₂ focus</div>
-        <div style="padding:6px 14px;border-radius:16px;border:1px solid #ccc;font-size:11px;color:#555;cursor:pointer;">👥 Social focus</div>
-        <div style="padding:6px 14px;border-radius:16px;border:1px solid #ccc;font-size:11px;color:#555;cursor:pointer;">⚖️ Balanced</div>
-        <div style="margin-left:auto;font-size:10px;color:#888;font-style:italic;">HTMX hx-get · hx-swap="innerHTML" on filter</div>
+      <!-- Filters -->
+      <div style="padding:10px 32px;background:#fff;border-bottom:1px solid #eee;display:flex;align-items:center;gap:7px;flex-wrap:wrap;">
+        <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;">Profile:</div>
+        <div style="padding:5px 12px;border-radius:14px;background:#388e3c;color:#fff;font-size:10px;font-weight:600;">All</div>
+        <div style="padding:5px 12px;border-radius:14px;border:1px solid #ccc;font-size:10px;color:#555;">🌍 Carbon Certified</div>
+        <div style="padding:5px 12px;border-radius:14px;border:1px solid #ccc;font-size:10px;color:#555;">👥 Community First</div>
+        <div style="padding:5px 12px;border-radius:14px;border:1px solid #ccc;font-size:10px;color:#555;">⚖️ CSRD Complete</div>
+        <div style="padding:5px 12px;border-radius:14px;border:1px solid #ccc;font-size:10px;color:#555;">🎯 Impact Balanced</div>
+        <div style="width:1px;height:16px;background:#e5e7eb;margin:0 6px;"></div>
+        <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;">Region:</div>
+        <div style="padding:5px 12px;border-radius:14px;background:#1e293b;color:#fff;font-size:10px;font-weight:600;">All NL</div>
+        <div style="padding:5px 12px;border-radius:14px;border:1px solid #ccc;font-size:10px;color:#555;">West/Randstad</div>
+        <div style="padding:5px 12px;border-radius:14px;border:1px solid #ccc;font-size:10px;color:#555;">Zuid</div>
+        <div style="padding:5px 12px;border-radius:14px;border:1px solid #ccc;font-size:10px;color:#555;">Noord</div>
       </div>
 
-      <!-- Map + cards layout (NEW) -->
-      <div style="padding:24px 32px;background:#f9f9f9;">
-        <div class="wf-section-title">NL map <span class="annotation">NEW — react-leaflet</span></div>
-        <div style="margin-top:12px;" class="row">
-          <!-- Map -->
-          <div class="wf-map flex2" style="height:260px;position:relative;">
-            <div class="wf-pin" style="top:42%;left:42%;"></div>
-            <div class="wf-pin" style="top:26%;left:50%;"></div>
-            <div class="wf-pin" style="top:36%;left:40%;"></div>
-            <div class="wf-pin" style="top:62%;left:54%;"></div>
-            <div class="wf-pin" style="top:10%;left:57%;"></div>
-            <div class="wf-pin" style="top:64%;left:43%;"></div>
-            <!-- popup -->
-            <div style="position:absolute;top:20%;left:52%;background:#fff;border:1px solid #ccc;border-radius:4px;padding:6px 10px;font-size:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);">
-              <div style="font-weight:600;">Voedselbank Rotterdam</div>
-              <div style="color:#388e3c;">7,718 tCO₂e/yr</div>
-              <div style="color:#1565c0;text-decoration:underline;margin-top:2px;">View →</div>
-            </div>
-          </div>
+      <!-- Full-width carousel -->
+      <div style="padding:20px 32px;background:#f9f9f9;">
+        <div style="min-width:0;">
+          <div style="font-size:11px;color:#888;margin-bottom:12px;">4 funds · scroll to explore <span class="annotation">CSS scroll-snap</span></div>
+          <div style="display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory;">
 
-          <!-- Card list -->
-          <div class="flex1 col" style="max-height:260px;overflow-y:auto;">
-            <div style="font-size:11px;color:#666;padding:4px 0;">6 Dutch foodbanks · FRAME methodology</div>
-            <!-- Bank card (repeat pattern) -->
-            <div class="wf-card" style="border-left:3px solid #388e3c;">
-              <div class="row" style="justify-content:space-between;align-items:flex-start;">
-                <div>
-                  <div style="font-size:12px;font-weight:600;">Voedselbank Rotterdam</div>
-                  <div style="font-size:10px;color:#888;">Zuid-Holland</div>
+            <!-- Card 1: Carbon Certified (active) -->
+            <div class="wf-card" style="min-width:215px;max-width:215px;border:2px solid #388e3c;flex-shrink:0;scroll-snap-align:start;">
+              <div style="margin-bottom:8px;">
+                <div style="font-size:10px;color:#059669;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">🌍 Carbon Certified</div>
+                <div style="font-size:14px;font-weight:700;color:#1a1a1a;line-height:1.2;">NL Climate Fund</div>
+              </div>
+              <div style="font-size:10px;color:#888;background:#f0fdf4;padding:3px 7px;border-radius:10px;display:inline-block;margin-bottom:10px;">6 regions · 180 foodbanks</div>
+              <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;">
+                  <span style="color:#666;">West/Randstad</span>
+                  <div style="display:flex;align-items:center;gap:4px;">
+                    <div style="width:40px;height:5px;background:#e5e7eb;border-radius:2px;overflow:hidden;"><div style="width:69%;height:100%;background:#059669;"></div></div>
+                    <span style="font-weight:600;color:#059669;">69%</span>
+                  </div>
                 </div>
-                <div class="wf-badge green">Solo eligible</div>
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;">
+                  <span style="color:#666;">Zuid</span>
+                  <div style="display:flex;align-items:center;gap:4px;">
+                    <div style="width:40px;height:5px;background:#e5e7eb;border-radius:2px;overflow:hidden;"><div style="width:15%;height:100%;background:#86efac;"></div></div>
+                    <span style="color:#555;">15%</span>
+                  </div>
+                </div>
               </div>
-              <div style="font-size:18px;font-weight:700;color:#333;">7,718 <span style="font-size:11px;font-weight:400;color:#888;">tCO₂e/yr</span></div>
-              <div class="row" style="gap:16px;">
-                <div><div style="font-size:9px;color:#888;">Food rescued</div><div style="font-size:11px;font-weight:600;">4,160 t</div></div>
-                <div><div style="font-size:9px;color:#888;">Households/wk</div><div style="font-size:11px;font-weight:600;">1,682</div></div>
+              <div style="border-top:1px solid #f0f0f0;padding-top:8px;display:flex;gap:8px;margin-bottom:10px;">
+                <div style="text-align:center;flex:1;">
+                  <div style="font-size:9px;color:#888;">tCO₂e/yr</div>
+                  <div style="font-size:13px;font-weight:700;color:#059669;">18,015</div>
+                </div>
+                <div style="text-align:center;flex:1;">
+                  <div style="font-size:9px;color:#888;">kg rescued</div>
+                  <div style="font-size:13px;font-weight:700;">9.2M</div>
+                </div>
+                <div style="text-align:center;flex:1;">
+                  <div style="font-size:9px;color:#888;">hh/wk</div>
+                  <div style="font-size:13px;font-weight:700;">7,582</div>
+                </div>
               </div>
-              <div class="row" style="justify-content:space-between;border-top:1px solid #f0f0f0;padding-top:8px;">
-                <div style="font-size:11px;color:#555;">€25k buys <strong>7.8%</strong> share</div>
-                <div style="font-size:11px;color:#388e3c;font-weight:600;">View →</div>
+              <div style="display:flex;gap:4px;margin-bottom:10px;">
+                <div style="padding:3px 7px;border-radius:4px;background:#f0fdf4;border:1px solid #bbf7d0;font-size:10px;font-weight:600;color:#065f46;">€10k</div>
+                <div style="padding:3px 7px;border-radius:4px;background:#f0fdf4;border:1px solid #bbf7d0;font-size:10px;font-weight:600;color:#065f46;">€100k</div>
+                <div style="padding:3px 7px;border-radius:4px;background:#f0fdf4;border:1px solid #bbf7d0;font-size:10px;font-weight:600;color:#065f46;">Custom</div>
               </div>
+              <div style="text-align:center;font-size:11px;padding:7px 0;background:#388e3c;color:#fff;border-radius:6px;font-weight:600;cursor:pointer;">View fund →</div>
             </div>
-            <div class="wf-card">
-              <div style="font-size:12px;font-weight:600;">Voedselbank Haaglanden</div>
-              <div style="font-size:10px;color:#888;">Zuid-Holland</div>
-              <div style="font-size:16px;font-weight:700;color:#333;">4,698 <span style="font-size:10px;font-weight:400;color:#888;">tCO₂e/yr</span></div>
+
+            <!-- Card 2: Community First -->
+            <div class="wf-card" style="min-width:215px;max-width:215px;flex-shrink:0;scroll-snap-align:start;">
+              <div style="margin-bottom:8px;">
+                <div style="font-size:10px;color:#7c3aed;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">👥 Community First</div>
+                <div style="font-size:14px;font-weight:700;color:#1a1a1a;line-height:1.2;">NL Social Fund</div>
+              </div>
+              <div style="font-size:10px;color:#888;background:#f5f3ff;padding:3px 7px;border-radius:10px;display:inline-block;margin-bottom:10px;">6 regions · 180 foodbanks</div>
+              <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;">
+                  <span style="color:#666;">West/Randstad</span>
+                  <div style="display:flex;align-items:center;gap:4px;">
+                    <div style="width:40px;height:5px;background:#e5e7eb;border-radius:2px;overflow:hidden;"><div style="width:57%;height:100%;background:#7c3aed;"></div></div>
+                    <span style="font-weight:600;color:#7c3aed;">57%</span>
+                  </div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;">
+                  <span style="color:#666;">Zuid</span>
+                  <div style="display:flex;align-items:center;gap:4px;">
+                    <div style="width:40px;height:5px;background:#e5e7eb;border-radius:2px;overflow:hidden;"><div style="width:28%;height:100%;background:#a78bfa;"></div></div>
+                    <span style="color:#555;">28%</span>
+                  </div>
+                </div>
+              </div>
+              <div style="border-top:1px solid #f0f0f0;padding-top:8px;display:flex;gap:8px;margin-bottom:10px;">
+                <div style="text-align:center;flex:1;"><div style="font-size:9px;color:#888;">tCO₂e/yr</div><div style="font-size:13px;font-weight:700;">18,015</div></div>
+                <div style="text-align:center;flex:1;"><div style="font-size:9px;color:#888;">kg rescued</div><div style="font-size:13px;font-weight:700;">9.2M</div></div>
+                <div style="text-align:center;flex:1;"><div style="font-size:9px;color:#888;">hh/wk</div><div style="font-size:13px;font-weight:700;">7,582</div></div>
+              </div>
+              <div style="display:flex;gap:4px;margin-bottom:10px;">
+                <div style="padding:3px 7px;border-radius:4px;background:#faf5ff;border:1px solid #e9d5ff;font-size:10px;font-weight:600;color:#6d28d9;">€10k</div>
+                <div style="padding:3px 7px;border-radius:4px;background:#faf5ff;border:1px solid #e9d5ff;font-size:10px;font-weight:600;color:#6d28d9;">€100k</div>
+                <div style="padding:3px 7px;border-radius:4px;background:#faf5ff;border:1px solid #e9d5ff;font-size:10px;font-weight:600;color:#6d28d9;">Custom</div>
+              </div>
+              <div style="text-align:center;font-size:11px;padding:7px 0;background:#f3f4f6;color:#374151;border-radius:6px;font-weight:600;cursor:pointer;">View fund →</div>
             </div>
-            <div class="wf-card">
-              <div style="font-size:12px;font-weight:600;">Voedselbank Amsterdam</div>
-              <div style="font-size:10px;color:#888;">Noord-Holland</div>
-              <div style="font-size:16px;font-weight:700;color:#333;">2,928 <span style="font-size:10px;font-weight:400;color:#888;">tCO₂e/yr</span></div>
+
+            <!-- Card 3: CSRD Complete -->
+            <div class="wf-card" style="min-width:215px;max-width:215px;flex-shrink:0;scroll-snap-align:start;">
+              <div style="margin-bottom:8px;">
+                <div style="font-size:10px;color:#1d4ed8;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">⚖️ CSRD Complete</div>
+                <div style="font-size:14px;font-weight:700;color:#1a1a1a;line-height:1.2;">NL Balanced Fund</div>
+              </div>
+              <div style="font-size:10px;color:#888;background:#eff6ff;padding:3px 7px;border-radius:10px;display:inline-block;margin-bottom:10px;">6 regions · 180 foodbanks</div>
+              <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;">
+                  <span style="color:#666;">West/Randstad</span>
+                  <div style="display:flex;align-items:center;gap:4px;">
+                    <div style="width:40px;height:5px;background:#e5e7eb;border-radius:2px;overflow:hidden;"><div style="width:63%;height:100%;background:#1d4ed8;"></div></div>
+                    <span style="font-weight:600;color:#1d4ed8;">63%</span>
+                  </div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;">
+                  <span style="color:#666;">Zuid</span>
+                  <div style="display:flex;align-items:center;gap:4px;">
+                    <div style="width:40px;height:5px;background:#e5e7eb;border-radius:2px;overflow:hidden;"><div style="width:22%;height:100%;background:#93c5fd;"></div></div>
+                    <span style="color:#555;">22%</span>
+                  </div>
+                </div>
+              </div>
+              <div style="border-top:1px solid #f0f0f0;padding-top:8px;display:flex;gap:8px;margin-bottom:10px;">
+                <div style="text-align:center;flex:1;"><div style="font-size:9px;color:#888;">tCO₂e/yr</div><div style="font-size:13px;font-weight:700;">18,015</div></div>
+                <div style="text-align:center;flex:1;"><div style="font-size:9px;color:#888;">kg rescued</div><div style="font-size:13px;font-weight:700;">9.2M</div></div>
+                <div style="text-align:center;flex:1;"><div style="font-size:9px;color:#888;">hh/wk</div><div style="font-size:13px;font-weight:700;">7,582</div></div>
+              </div>
+              <div style="display:flex;gap:4px;margin-bottom:10px;">
+                <div style="padding:3px 7px;border-radius:4px;background:#eff6ff;border:1px solid #bfdbfe;font-size:10px;font-weight:600;color:#1d4ed8;">€10k</div>
+                <div style="padding:3px 7px;border-radius:4px;background:#eff6ff;border:1px solid #bfdbfe;font-size:10px;font-weight:600;color:#1d4ed8;">€100k</div>
+                <div style="padding:3px 7px;border-radius:4px;background:#eff6ff;border:1px solid #bfdbfe;font-size:10px;font-weight:600;color:#1d4ed8;">Custom</div>
+              </div>
+              <div style="text-align:center;font-size:11px;padding:7px 0;background:#f3f4f6;color:#374151;border-radius:6px;font-weight:600;cursor:pointer;">View fund →</div>
             </div>
+
+            <!-- Card 4: Impact Balanced -->
+            <div class="wf-card" style="min-width:215px;max-width:215px;flex-shrink:0;scroll-snap-align:start;">
+              <div style="margin-bottom:8px;">
+                <div style="font-size:10px;color:#b45309;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">🎯 Impact Balanced</div>
+                <div style="font-size:14px;font-weight:700;color:#1a1a1a;line-height:1.2;">NL Impact Fund</div>
+              </div>
+              <div style="font-size:10px;color:#888;background:#fffbeb;padding:3px 7px;border-radius:10px;display:inline-block;margin-bottom:10px;">6 regions · 180 foodbanks</div>
+              <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;">
+                  <span style="color:#666;">West/Randstad</span>
+                  <div style="display:flex;align-items:center;gap:4px;">
+                    <div style="width:40px;height:5px;background:#e5e7eb;border-radius:2px;overflow:hidden;"><div style="width:65%;height:100%;background:#b45309;"></div></div>
+                    <span style="font-weight:600;color:#b45309;">65%</span>
+                  </div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;">
+                  <span style="color:#666;">Zuid</span>
+                  <div style="display:flex;align-items:center;gap:4px;">
+                    <div style="width:40px;height:5px;background:#e5e7eb;border-radius:2px;overflow:hidden;"><div style="width:20%;height:100%;background:#fcd34d;"></div></div>
+                    <span style="color:#555;">20%</span>
+                  </div>
+                </div>
+              </div>
+              <div style="border-top:1px solid #f0f0f0;padding-top:8px;display:flex;gap:8px;margin-bottom:10px;">
+                <div style="text-align:center;flex:1;"><div style="font-size:9px;color:#888;">tCO₂e/yr</div><div style="font-size:13px;font-weight:700;">18,015</div></div>
+                <div style="text-align:center;flex:1;"><div style="font-size:9px;color:#888;">kg rescued</div><div style="font-size:13px;font-weight:700;">9.2M</div></div>
+                <div style="text-align:center;flex:1;"><div style="font-size:9px;color:#888;">hh/wk</div><div style="font-size:13px;font-weight:700;">7,582</div></div>
+              </div>
+              <div style="display:flex;gap:4px;margin-bottom:10px;">
+                <div style="padding:3px 7px;border-radius:4px;background:#fffbeb;border:1px solid #fde68a;font-size:10px;font-weight:600;color:#b45309;">€10k</div>
+                <div style="padding:3px 7px;border-radius:4px;background:#fffbeb;border:1px solid #fde68a;font-size:10px;font-weight:600;color:#b45309;">€100k</div>
+                <div style="padding:3px 7px;border-radius:4px;background:#fffbeb;border:1px solid #fde68a;font-size:10px;font-weight:600;color:#b45309;">Custom</div>
+              </div>
+              <div style="text-align:center;font-size:11px;padding:7px 0;background:#f3f4f6;color:#374151;border-radius:6px;font-weight:600;cursor:pointer;">View fund →</div>
+            </div>
+
           </div>
+          <!-- Scroll indicator dots -->
+          <div style="display:flex;justify-content:center;gap:6px;margin-top:10px;">
+            <div style="width:18px;height:4px;border-radius:2px;background:#388e3c;"></div>
+            <div style="width:6px;height:4px;border-radius:2px;background:#d1d5db;"></div>
+            <div style="width:6px;height:4px;border-radius:2px;background:#d1d5db;"></div>
+            <div style="width:6px;height:4px;border-radius:2px;background:#d1d5db;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full-width map section -->
+      <div style="padding:0 32px 28px;background:#f9f9f9;">
+        <div style="font-size:11px;color:#888;margin-bottom:8px;">Foodbanks on the map · pin = active RDC <span class="annotation">react-leaflet · 6 pins</span></div>
+
+        <!-- Leaflet map placeholder full width -->
+        <div style="position:relative;width:100%;height:280px;background:#dbeafe;border-radius:10px;border:1.5px solid #bfdbfe;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+          <div style="font-size:13px;color:#3b82f6;font-family:monospace;">[ NL Map — Leaflet ]</div>
+          <!-- Pin dots at approximate NL geographic positions (% of container) -->
+          <!-- Rotterdam 51.92°N 4.48°E -->
+          <div style="position:absolute;left:36%;top:62%;width:11px;height:11px;border-radius:50%;background:#059669;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3);" title="Rotterdam RDC"></div>
+          <!-- Amsterdam 52.37°N 4.90°E -->
+          <div style="position:absolute;left:40%;top:52%;width:11px;height:11px;border-radius:50%;background:#059669;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3);" title="Amsterdam"></div>
+          <!-- Haaglanden 52.07°N 4.30°E -->
+          <div style="position:absolute;left:33%;top:58%;width:11px;height:11px;border-radius:50%;background:#059669;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3);" title="Haaglanden"></div>
+          <!-- Eindhoven 51.44°N 5.47°E -->
+          <div style="position:absolute;left:46%;top:71%;width:11px;height:11px;border-radius:50%;background:#059669;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3);" title="Eindhoven"></div>
+          <!-- Groningen 53.22°N 6.57°E -->
+          <div style="position:absolute;left:58%;top:28%;width:11px;height:11px;border-radius:50%;background:#059669;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3);" title="Groningen"></div>
+          <!-- Breda 51.57°N 4.77°E -->
+          <div style="position:absolute;left:38%;top:68%;width:11px;height:11px;border-radius:50%;background:#059669;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3);" title="Breda"></div>
+          <!-- Tooltip example on Rotterdam -->
+          <div style="position:absolute;left:calc(36% + 14px);top:calc(62% - 26px);background:#fff;border:1px solid #e5e7eb;border-radius:6px;padding:4px 8px;font-size:9px;color:#374151;box-shadow:0 2px 6px rgba(0,0,0,.12);white-space:nowrap;">
+            <strong>Rotterdam RDC</strong> · 43% allocation<br/>
+            <span style="color:#059669;">257 tCO₂e · 138,257 kg</span>
+          </div>
+        </div>
+
+        <!-- Region legend below map -->
+        <div style="display:flex;gap:10px;margin-top:10px;">
+          <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:#374151;"><div style="width:10px;height:10px;border-radius:50%;background:#059669;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2);"></div> Active RDC (6)</div>
+          <div style="margin-left:auto;font-size:9px;color:#9ca3af;">Explore all food banks →</div>
         </div>
       </div>
 
@@ -500,94 +608,195 @@
 <!-- ===================== PACKAGE DETAIL ===================== -->
 <div class="screen" id="screen-pkgdetail">
   <div class="screen-title-row">
-    <div class="screen-label">Package Detail <span>/packages/{id} · pre-checkout allocation preview</span></div>
-    <span class="annotation">NEW</span>
+    <div class="screen-label">Fund Profile <span>/funds/carbon-certified · corporate pre-purchase</span></div>
+    <span class="annotation">REDESIGNED</span>
   </div>
   <div class="browser-chrome">
     <div class="browser-address">
       <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-      <div class="url">klimaatkracht.nl/packages/co2-focus-nl</div>
+      <div class="url">klimaatkracht.nl/funds/carbon-certified</div>
     </div>
     <div class="browser-content">
       <div class="wf-navbar">
         <div class="wf-logo">KK</div>
         <span style="font-size:12px;font-weight:600;color:#333;">Klimaatkracht</span>
         <div class="wf-navlinks">
-          <div class="wf-navlink" style="border-bottom:2px solid #388e3c;color:#388e3c;">Marketplace</div>
+          <div class="wf-navlink" style="border-bottom:2px solid #388e3c;color:#388e3c;">Investment funds</div>
           <div class="wf-navlink">Methodology</div>
-          <div class="wf-navlink">For Food Banks</div>
+          <div class="wf-navlink" style="color:#aaa;font-size:10px;">For Food Banks</div>
         </div>
       </div>
 
       <div style="padding:24px 32px;">
-        <!-- Package header -->
-        <div class="row" style="align-items:flex-start;gap:24px;margin-bottom:24px;">
+        <!-- Fund header + pricing sidebar -->
+        <div style="display:flex;gap:24px;align-items:flex-start;margin-bottom:22px;">
+
+          <!-- Left: fund info -->
           <div style="flex:1;">
-            <div style="font-size:10px;color:#388e3c;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:6px;">🌱 CO₂ Focus · top 50 banks by tCO₂e/yr</div>
-            <div style="font-size:24px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">Netherlands CO₂ Climate Package</div>
-            <div style="font-size:13px;color:#555;line-height:1.5;">Your €25,000 is allocated across the top 50 Dutch food banks ranked by annual avoided CO₂e. Attribution is proportional to each bank's verified FRAME result.</div>
+            <div style="font-size:10px;color:#059669;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:6px;">🌍 Carbon Certified</div>
+            <div style="font-size:24px;font-weight:800;color:#1a1a1a;margin-bottom:8px;line-height:1.2;">NL Climate Fund</div>
+            <div style="font-size:12px;color:#555;line-height:1.6;max-width:480px;margin-bottom:12px;">Allocation weighted by FRAME-verified annual tCO₂e scores. Maximises Scope 3 avoided-emission attribution for ESRS E1 disclosure. Reaches all 180 Dutch foodbanks through 6 regional RDCs.</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <div class="wf-badge green">ESRS E1</div>
+              <div class="wf-badge green">ESRS S3</div>
+              <div class="wf-badge blue">CSRD-ready</div>
+              <div class="wf-badge green">FRAME Aligned</div>
+              <div class="wf-badge green">6 regions</div>
+              <div class="wf-badge green">180 foodbanks</div>
+            </div>
           </div>
-          <!-- Sticky buy panel -->
-          <div class="wf-card" style="width:240px;border:2px solid #388e3c;flex-shrink:0;">
-            <div style="font-size:22px;font-weight:700;color:#1a1a1a;">€25,000</div>
-            <div style="font-size:11px;color:#555;margin-top:2px;">per quarter · ESRS E1 + S3 report</div>
-            <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px;">
-              <div class="row" style="gap:6px;font-size:11px;"><span style="color:#388e3c;font-weight:700;">600</span><span style="color:#666;">tCO₂e attributed</span></div>
-              <div class="row" style="gap:6px;font-size:11px;"><span style="color:#388e3c;font-weight:700;">50</span><span style="color:#666;">food banks</span></div>
-              <div class="row" style="gap:6px;font-size:11px;"><span style="color:#388e3c;font-weight:700;">4,700+</span><span style="color:#666;">households/wk</span></div>
-            </div>
-            <div style="margin-top:16px;">
-              <div class="wf-btn primary" style="width:100%;text-align:center;padding:10px 0;font-size:12px;">Buy package →</div>
-            </div>
-            <div style="font-size:9px;color:#aaa;text-align:center;margin-top:6px;">POST /packages/{id}/checkout</div>
+
+          <!-- Right: single invest CTA -->
+          <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px 28px;background:#f0fdf4;border:2px solid #bbf7d0;border-radius:12px;min-width:200px;">
+            <div style="font-size:10px;color:#059669;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">From €10k / year</div>
+            <div onclick="show('pricing')" style="padding:14px 32px;background:#388e3c;color:#fff;border-radius:8px;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:0.3px;text-align:center;">Invest in this fund →</div>
+            <div style="font-size:10px;color:#9ca3af;text-align:center;line-height:1.4;">No lock-in · ESRS E1+S3 report included<br>Solvimon invoice</div>
           </div>
         </div>
 
-        <div class="row" style="gap:20px;">
-          <!-- Projected allocation table -->
-          <div style="flex:2;">
-            <div style="font-size:12px;font-weight:600;margin-bottom:12px;">Projected allocation <span class="annotation">top 6 of 50 shown</span></div>
-            <div class="wf-table">
-              <div class="wf-table-row" style="grid-template-columns:2fr 1fr 1fr 1fr;font-size:10px;font-weight:600;background:#f5f5f5;color:#666;">
-                <div>Food bank</div><div>tCO₂e/yr</div><div>Share</div><div>Your CO₂e</div>
+        <!-- Aggregate stats pills -->
+        <div style="display:flex;gap:12px;margin-bottom:22px;">
+          <div style="flex:1;padding:12px 16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;text-align:center;">
+            <div style="font-size:22px;font-weight:800;color:#059669;">18,015</div>
+            <div style="font-size:10px;color:#065f46;margin-top:2px;">tCO₂e / yr · all regions</div>
+          </div>
+          <div style="flex:1;padding:12px 16px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;text-align:center;">
+            <div style="font-size:22px;font-weight:800;color:#333;">9.2M kg</div>
+            <div style="font-size:10px;color:#888;margin-top:2px;">food rescued / yr</div>
+          </div>
+          <div style="flex:1;padding:12px 16px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;text-align:center;">
+            <div style="font-size:22px;font-weight:800;color:#333;">7,582</div>
+            <div style="font-size:10px;color:#888;margin-top:2px;">households / week</div>
+          </div>
+        </div>
+
+        <!-- Two-col main body -->
+        <div style="display:flex;gap:20px;">
+
+          <!-- Left col -->
+          <div style="flex:2;display:flex;flex-direction:column;gap:18px;">
+
+            <!-- Regional allocation table -->
+            <div>
+              <div style="font-size:12px;font-weight:600;margin-bottom:10px;">Regional allocation <span class="annotation">6 RDCs · weighted by tCO₂e</span></div>
+              <div class="wf-table">
+                <div class="wf-table-row" style="grid-template-columns:1.8fr 1.2fr 0.8fr 0.6fr 0.8fr;font-size:10px;font-weight:600;background:#f5f5f5;color:#666;padding:6px 10px;">
+                  <div>Region / RDC</div><div>Province</div><div>Weight</div><div>~Banks</div><div>tCO₂e/yr</div>
+                </div>
+                <div class="wf-table-row" style="grid-template-columns:1.8fr 1.2fr 0.8fr 0.6fr 0.8fr;font-size:11px;align-items:center;">
+                  <div><span style="font-weight:600;">Rotterdam RDC</span><br><span style="font-size:9px;color:#888;">West/Randstad</span></div>
+                  <div style="font-size:10px;color:#555;">Zuid-Holland</div>
+                  <div><span class="wf-badge green">43%</span></div>
+                  <div style="font-size:10px;">~30</div>
+                  <div style="font-weight:600;color:#2e7d32;">7,718</div>
+                </div>
+                <div class="wf-table-row" style="grid-template-columns:1.8fr 1.2fr 0.8fr 0.6fr 0.8fr;font-size:11px;align-items:center;">
+                  <div><span style="font-weight:600;">Haaglanden RDC</span><br><span style="font-size:9px;color:#888;">West/Randstad</span></div>
+                  <div style="font-size:10px;color:#555;">Zuid-Holland</div>
+                  <div style="font-size:10px;">26%</div>
+                  <div style="font-size:10px;">~28</div>
+                  <div style="color:#2e7d32;">4,698</div>
+                </div>
+                <div class="wf-table-row" style="grid-template-columns:1.8fr 1.2fr 0.8fr 0.6fr 0.8fr;font-size:11px;align-items:center;">
+                  <div><span style="font-weight:600;">Amsterdam RDC</span><br><span style="font-size:9px;color:#888;">West/Randstad</span></div>
+                  <div style="font-size:10px;color:#555;">Noord-Holland</div>
+                  <div style="font-size:10px;">16%</div>
+                  <div style="font-size:10px;">~32</div>
+                  <div>2,928</div>
+                </div>
+                <div class="wf-table-row" style="grid-template-columns:1.8fr 1.2fr 0.8fr 0.6fr 0.8fr;font-size:11px;align-items:center;">
+                  <div><span style="font-weight:600;">Breda RDC</span><br><span style="font-size:9px;color:#888;">Zuid</span></div>
+                  <div style="font-size:10px;color:#555;">Noord-Brabant</div>
+                  <div style="font-size:10px;">6%</div>
+                  <div style="font-size:10px;">~27</div>
+                  <div>1,034</div>
+                </div>
+                <div class="wf-table-row" style="grid-template-columns:1.8fr 1.2fr 0.8fr 0.6fr 0.8fr;font-size:11px;align-items:center;">
+                  <div><span style="font-weight:600;">Eindhoven RDC</span><br><span style="font-size:9px;color:#888;">Zuid</span></div>
+                  <div style="font-size:10px;color:#555;">Noord-Brabant</div>
+                  <div style="font-size:10px;">4%</div>
+                  <div style="font-size:10px;">~26</div>
+                  <div>652</div>
+                </div>
+                <div class="wf-table-row" style="grid-template-columns:1.8fr 1.2fr 0.8fr 0.6fr 0.8fr;font-size:11px;align-items:center;">
+                  <div><span style="font-weight:600;">Groningen RDC</span><br><span style="font-size:9px;color:#888;">Noord</span></div>
+                  <div style="font-size:10px;color:#555;">Groningen</div>
+                  <div style="font-size:10px;">5%</div>
+                  <div style="font-size:10px;">~37</div>
+                  <div>986</div>
+                </div>
               </div>
-              <div class="wf-table-row" style="grid-template-columns:2fr 1fr 1fr 1fr;font-size:11px;align-items:center;">
-                <div><span style="font-weight:600;">Rotterdam RDC</span><br><span style="font-size:9px;color:#888;">Zuid-Holland</span></div>
-                <div>7,718</div>
-                <div><span class="wf-badge green">42.8%</span></div>
-                <div style="font-weight:600;color:#2e7d32;">257 t</div>
+              <div style="font-size:9px;color:#9ca3af;margin-top:6px;">Weights recomputed quarterly as foodbanks upload new annual data. Sum = 100%.</div>
+            </div>
+
+            <!-- Fund mix (tabbed) -->
+            <div>
+              <div style="display:flex;gap:0;margin-bottom:12px;border:1px solid #e5e7eb;border-radius:7px;overflow:hidden;width:fit-content;">
+                <div style="padding:6px 14px;background:#388e3c;color:#fff;font-size:11px;font-weight:600;cursor:pointer;">By Category</div>
+                <div style="padding:6px 14px;background:#f9fafb;color:#555;font-size:11px;border-left:1px solid #e5e7eb;cursor:pointer;">By Region</div>
               </div>
-              <div class="wf-table-row" style="grid-template-columns:2fr 1fr 1fr 1fr;font-size:11px;align-items:center;">
-                <div><span style="font-weight:600;">Haaglanden</span><br><span style="font-size:9px;color:#888;">Zuid-Holland</span></div>
-                <div>4,698</div>
-                <div><span style="font-size:10px;color:#555;">26.0%</span></div>
-                <div style="color:#2e7d32;">156 t</div>
-              </div>
-              <div class="wf-table-row" style="grid-template-columns:2fr 1fr 1fr 1fr;font-size:11px;align-items:center;">
-                <div><span style="font-weight:600;">Amsterdam</span><br><span style="font-size:9px;color:#888;">Noord-Holland</span></div>
-                <div>2,928</div>
-                <div><span style="font-size:10px;color:#555;">16.2%</span></div>
-                <div style="color:#2e7d32;">97 t</div>
-              </div>
-              <div class="wf-table-row" style="grid-template-columns:2fr 1fr 1fr 1fr;font-size:11px;align-items:center;color:#aaa;">
-                <div colspan="4" style="font-style:italic;font-size:10px;">+ 47 more food banks …</div>
+              <div class="wf-chart" style="background:#fff;border:1px solid #e5e7eb;">
+                <div style="font-size:11px;font-weight:600;margin-bottom:10px;color:#374151;">CO₂e mix by food category <span class="annotation">aggregate · €10k tier shown</span></div>
+                <div class="wf-bars">
+                  <div class="wf-bar-col"><div class="wf-bar-fill" style="height:44px;background:#66bb6a;"></div><div class="wf-bar-label">produce</div></div>
+                  <div class="wf-bar-col"><div class="wf-bar-fill" style="height:34px;background:#66bb6a;"></div><div class="wf-bar-label">dry goods</div></div>
+                  <div class="wf-bar-col"><div class="wf-bar-fill" style="height:37px;background:#66bb6a;"></div><div class="wf-bar-label">dairy</div></div>
+                  <div class="wf-bar-col"><div class="wf-bar-fill" style="height:80px;background:#2e7d32;"></div><div class="wf-bar-label">meat</div></div>
+                  <div class="wf-bar-col"><div class="wf-bar-fill" style="height:24px;background:#a5d6a7;"></div><div class="wf-bar-label">bakery</div></div>
+                  <div class="wf-bar-col"><div class="wf-bar-fill" style="height:27px;background:#66bb6a;"></div><div class="wf-bar-label">prepared</div></div>
+                  <div class="wf-bar-col"><div class="wf-bar-fill" style="height:17px;background:#a5d6a7;"></div><div class="wf-bar-label">eggs</div></div>
+                </div>
               </div>
             </div>
-            <div style="font-size:10px;color:#888;margin-top:8px;">Allocation is computed at purchase time using the FRAME allocation engine. Weights may shift as new food banks upload data.</div>
+
           </div>
 
-          <!-- Methodology note -->
-          <div style="flex:1;">
-            <div class="wf-card" style="background:#f1f8e9;border-color:#c8e6c9;">
-              <div style="font-size:11px;font-weight:700;color:#1b5e20;margin-bottom:8px;">FRAME Methodology</div>
-              <div style="font-size:10px;color:#555;line-height:1.5;">CO₂e savings computed using the Global Foodbanking Network's FRAME model. Each food bank's annual report is parsed by Claude and cross-validated against national emission factors.</div>
-              <div style="margin-top:10px;"><a href="#" style="font-size:10px;color:#388e3c;">/methodology →</a></div>
+          <!-- Right col: choropleth + CSR report -->
+          <div style="flex:1;display:flex;flex-direction:column;gap:14px;">
+
+            <!-- Mini choropleth -->
+            <div class="wf-card" style="padding:14px;">
+              <div style="font-size:11px;font-weight:600;margin-bottom:10px;color:#374151;">Allocation by region <span class="annotation">SVG choropleth</span></div>
+              <div style="display:flex;gap:10px;align-items:center;">
+                <svg width="90" height="115" viewBox="0 0 90 115" style="display:block;flex-shrink:0;">
+                  <rect x="15" y="3" width="60" height="28" rx="5" fill="#059669" opacity="0.20" stroke="#059669" stroke-width="1"/>
+                  <text x="45" y="18" text-anchor="middle" font-size="7" fill="#065f46" font-weight="600">Noord 5%</text>
+                  <rect x="3" y="36" width="52" height="36" rx="5" fill="#059669" opacity="0.78" stroke="#059669" stroke-width="1.5"/>
+                  <text x="29" y="53" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">W/Randstad</text>
+                  <text x="29" y="63" text-anchor="middle" font-size="8" fill="#d1fae5" font-weight="800">69%</text>
+                  <rect x="3" y="77" width="52" height="32" rx="5" fill="#059669" opacity="0.42" stroke="#059669" stroke-width="1"/>
+                  <text x="29" y="95" text-anchor="middle" font-size="7" fill="#fff" font-weight="600">Zuid 15%</text>
+                  <rect x="60" y="36" width="27" height="36" rx="5" fill="#059669" opacity="0.30" stroke="#059669" stroke-width="1"/>
+                  <text x="73" y="56" text-anchor="middle" font-size="7" fill="#065f46">Oost</text>
+                  <text x="73" y="65" text-anchor="middle" font-size="7" fill="#065f46">11%</text>
+                </svg>
+                <div style="flex:1;font-size:9px;color:#6b7280;line-height:1.5;">Opacity ∝ allocation weight. Reacts to profile filter.</div>
+              </div>
             </div>
-            <div class="wf-card" style="margin-top:12px;">
-              <div style="font-size:11px;font-weight:600;margin-bottom:6px;">Report delivered</div>
-              <div style="font-size:10px;color:#555;">ESRS E1 + S3 report generated by Claude within 48h of quarter close. Streamed live on the dashboard.</div>
-              <div style="margin-top:6px;"><div class="wf-badge green">ESRS E1</div> <div class="wf-badge green" style="margin-left:4px;">S3</div></div>
+
+            <!-- CSR Report profile -->
+            <div class="wf-card" style="border:1px solid #c8e6c9;background:#f1f8e9;">
+              <div style="font-size:12px;font-weight:700;color:#1b5e20;margin-bottom:4px;">CSR Report profile</div>
+              <div style="font-size:10px;color:#555;margin-bottom:10px;">Quarterly · delivered within 48h of quarter close · generated by Claude</div>
+              <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px;">
+                <div class="wf-badge green">ESRS E1</div>
+                <div class="wf-badge green">ESRS S3</div>
+                <div class="wf-badge blue">CSRD-ready</div>
+              </div>
+              <div style="border-top:1px solid #bbf7d0;padding-top:10px;display:flex;flex-direction:column;gap:5px;">
+                <div style="font-size:9px;color:#166534;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Contents</div>
+                <div style="font-size:10px;color:#374151;">✓ E1-1 Climate transition plan reference</div>
+                <div style="font-size:10px;color:#374151;">✓ E1-4 GHG reduction targets & progress</div>
+                <div style="font-size:10px;color:#374151;">✓ E1-6 Gross Scope 3 (upstream food waste)</div>
+                <div style="font-size:10px;color:#374151;">✓ S3-1 Material impacts on communities</div>
+                <div style="font-size:10px;color:#374151;">✓ S3-4 Engagement channels</div>
+                <div style="font-size:10px;color:#374151;">✓ FRAME attribution workings</div>
+                <div style="font-size:10px;color:#374151;">✓ Sources: RIVM · FAO · WRAP · CBS</div>
+              </div>
+              <div style="margin-top:10px;font-size:9px;color:#9ca3af;">generated by claude-sonnet-4-6</div>
+              <div style="margin-top:6px;"><a href="#" style="font-size:10px;color:#388e3c;">/methodology →</a></div>
             </div>
+
           </div>
         </div>
       </div>
@@ -653,36 +862,96 @@
         <div class="row" style="gap:20px;">
           <!-- Chart -->
           <div class="flex2 col">
-            <div class="wf-chart">
-              <div style="font-size:12px;font-weight:600;">CO₂e breakdown by food category <span class="annotation">Recharts BarChart</span></div>
-              <div class="wf-bars" style="margin-top:8px;">
-                <div class="wf-bar-col">
-                  <div class="wf-bar-fill" style="height:75px;background:#66bb6a;"></div>
-                  <div class="wf-bar-label">produce</div>
+            <!-- Impact timeline + projection scenarios -->
+            <div class="wf-card" style="padding:16px;">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
+                <div>
+                  <div style="font-size:12px;font-weight:700;color:#1a1a1a;">Cumulative impact & projections</div>
+                  <div style="font-size:10px;color:#9ca3af;margin-top:2px;">tCO₂e avoided · Q1 2025 → Q4 2026 <span class="annotation">Recharts AreaChart + dashed projections</span></div>
                 </div>
-                <div class="wf-bar-col">
-                  <div class="wf-bar-fill" style="height:54px;background:#66bb6a;"></div>
-                  <div class="wf-bar-label">dry goods</div>
+                <div style="display:flex;gap:10px;font-size:9px;color:#555;align-items:center;">
+                  <div style="display:flex;align-items:center;gap:4px;"><div style="width:18px;height:2px;background:#059669;"></div> Actual</div>
+                  <div style="display:flex;align-items:center;gap:4px;"><div style="width:18px;height:2px;background:#059669;opacity:0.5;border-top:2px dashed #059669;"></div> Optimistic</div>
+                  <div style="display:flex;align-items:center;gap:4px;"><div style="width:18px;height:2px;border-top:2px dashed #6b7280;"></div> Base</div>
+                  <div style="display:flex;align-items:center;gap:4px;"><div style="width:18px;height:2px;border-top:2px dashed #d1d5db;"></div> Conservative</div>
                 </div>
-                <div class="wf-bar-col">
-                  <div class="wf-bar-fill" style="height:48px;background:#66bb6a;"></div>
-                  <div class="wf-bar-label">dairy</div>
+              </div>
+
+              <!-- SVG chart area -->
+              <svg width="100%" viewBox="0 0 540 160" style="display:block;overflow:visible;">
+                <!-- Y axis labels -->
+                <text x="30" y="18" font-size="8" fill="#9ca3af" text-anchor="end">2,400</text>
+                <text x="30" y="58" font-size="8" fill="#9ca3af" text-anchor="end">1,800</text>
+                <text x="30" y="98" font-size="8" fill="#9ca3af" text-anchor="end">1,200</text>
+                <text x="30" y="138" font-size="8" fill="#9ca3af" text-anchor="end">600</text>
+                <!-- Grid lines -->
+                <line x1="36" y1="15" x2="530" y2="15" stroke="#f3f4f6" stroke-width="1"/>
+                <line x1="36" y1="55" x2="530" y2="55" stroke="#f3f4f6" stroke-width="1"/>
+                <line x1="36" y1="95" x2="530" y2="95" stroke="#f3f4f6" stroke-width="1"/>
+                <line x1="36" y1="135" x2="530" y2="135" stroke="#f3f4f6" stroke-width="1"/>
+
+                <!-- Historical area fill (Q1 2025 → Q2 2026, 6 points) -->
+                <defs>
+                  <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#059669" stop-opacity="0.18"/>
+                    <stop offset="100%" stop-color="#059669" stop-opacity="0.02"/>
+                  </linearGradient>
+                </defs>
+                <polygon points="36,135 100,128 164,114 228,98 292,78 356,55 356,135" fill="url(#areaGrad)"/>
+                <!-- Historical line (solid emerald) -->
+                <polyline points="36,135 100,128 164,114 228,98 292,78 356,55" fill="none" stroke="#059669" stroke-width="2.5" stroke-linejoin="round"/>
+                <!-- Data dots -->
+                <circle cx="36" cy="135" r="3.5" fill="#fff" stroke="#059669" stroke-width="2"/>
+                <circle cx="100" cy="128" r="3.5" fill="#fff" stroke="#059669" stroke-width="2"/>
+                <circle cx="164" cy="114" r="3.5" fill="#fff" stroke="#059669" stroke-width="2"/>
+                <circle cx="228" cy="98" r="3.5" fill="#fff" stroke="#059669" stroke-width="2"/>
+                <circle cx="292" cy="78" r="3.5" fill="#fff" stroke="#059669" stroke-width="2"/>
+                <circle cx="356" cy="55" r="5" fill="#059669" stroke="#fff" stroke-width="2"/>
+
+                <!-- "Now" marker -->
+                <line x1="356" y1="10" x2="356" y2="148" stroke="#374151" stroke-width="1" stroke-dasharray="3,3"/>
+                <rect x="330" y="2" width="54" height="14" rx="3" fill="#374151"/>
+                <text x="357" y="12" font-size="8" fill="#fff" text-anchor="middle" font-weight="700">NOW · Q2 2026</text>
+
+                <!-- Projection: Optimistic (dashed emerald) -->
+                <polyline points="356,55 420,32 484,16 530,8" fill="none" stroke="#059669" stroke-width="2" stroke-dasharray="5,4" opacity="0.65"/>
+                <!-- Projection: Base (dashed gray) -->
+                <polyline points="356,55 420,42 484,30 530,22" fill="none" stroke="#6b7280" stroke-width="2" stroke-dasharray="5,4"/>
+                <!-- Projection: Conservative (dashed light gray) -->
+                <polyline points="356,55 420,52 484,48 530,44" fill="none" stroke="#d1d5db" stroke-width="2" stroke-dasharray="5,4"/>
+
+                <!-- Projection end labels -->
+                <text x="533" y="11" font-size="8" fill="#059669" font-weight="600">3,200</text>
+                <text x="533" y="25" font-size="8" fill="#6b7280">2,800</text>
+                <text x="533" y="47" font-size="8" fill="#d1d5db">2,100</text>
+
+                <!-- X axis labels -->
+                <text x="36"  y="152" font-size="8" fill="#9ca3af" text-anchor="middle">Q1'25</text>
+                <text x="100" y="152" font-size="8" fill="#9ca3af" text-anchor="middle">Q2'25</text>
+                <text x="164" y="152" font-size="8" fill="#9ca3af" text-anchor="middle">Q3'25</text>
+                <text x="228" y="152" font-size="8" fill="#9ca3af" text-anchor="middle">Q4'25</text>
+                <text x="292" y="152" font-size="8" fill="#9ca3af" text-anchor="middle">Q1'26</text>
+                <text x="356" y="152" font-size="8" fill="#374151" text-anchor="middle" font-weight="700">Q2'26</text>
+                <text x="420" y="152" font-size="8" fill="#9ca3af" text-anchor="middle">Q3'26</text>
+                <text x="484" y="152" font-size="8" fill="#9ca3af" text-anchor="middle">Q4'26</text>
+              </svg>
+
+              <!-- Scenario summary row -->
+              <div style="display:flex;gap:10px;margin-top:14px;border-top:1px solid #f3f4f6;padding-top:12px;">
+                <div style="flex:1;padding:10px;background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;">
+                  <div style="font-size:9px;color:#059669;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">🚀 Optimistic</div>
+                  <div style="font-size:18px;font-weight:800;color:#065f46;">3,200 <span style="font-size:11px;font-weight:500;">tCO₂e</span></div>
+                  <div style="font-size:9px;color:#6b7280;margin-top:2px;">+growth from new banks joining</div>
                 </div>
-                <div class="wf-bar-col">
-                  <div class="wf-bar-fill" style="height:64px;background:#a5d6a7;"></div>
-                  <div class="wf-bar-label">meat</div>
+                <div style="flex:1;padding:10px;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb;">
+                  <div style="font-size:9px;color:#374151;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">📊 Base</div>
+                  <div style="font-size:18px;font-weight:800;color:#374151;">2,800 <span style="font-size:11px;font-weight:500;">tCO₂e</span></div>
+                  <div style="font-size:9px;color:#6b7280;margin-top:2px;">+steady state, current bank mix</div>
                 </div>
-                <div class="wf-bar-col">
-                  <div class="wf-bar-fill" style="height:22px;background:#66bb6a;"></div>
-                  <div class="wf-bar-label">bakery</div>
-                </div>
-                <div class="wf-bar-col">
-                  <div class="wf-bar-fill" style="height:22px;background:#66bb6a;"></div>
-                  <div class="wf-bar-label">prepared</div>
-                </div>
-                <div class="wf-bar-col">
-                  <div class="wf-bar-fill" style="height:13px;background:#66bb6a;"></div>
-                  <div class="wf-bar-label">eggs</div>
+                <div style="flex:1;padding:10px;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb;">
+                  <div style="font-size:9px;color:#9ca3af;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">🛡 Conservative</div>
+                  <div style="font-size:18px;font-weight:800;color:#9ca3af;">2,100 <span style="font-size:11px;font-weight:500;">tCO₂e</span></div>
+                  <div style="font-size:9px;color:#6b7280;margin-top:2px;">+seasonal dip in H2 volumes</div>
                 </div>
               </div>
             </div>
@@ -1344,6 +1613,280 @@
 
     </div>
   </div>
+</div>
+
+<!-- ===================== PRICING ===================== -->
+<div class="screen" id="screen-pricing">
+  <div class="screen-title-row">
+    <div class="screen-label">Pricing <span>/pricing · corporate audience</span></div>
+    <span class="annotation">NEW</span>
+  </div>
+  <div class="browser-chrome">
+    <div class="browser-address">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="url">klimaatkracht.nl/pricing</div>
+    </div>
+    <div class="browser-content">
+
+      <!-- Navbar -->
+      <div class="wf-navbar">
+        <div class="wf-logo">KK</div>
+        <span style="font-size:12px;font-weight:600;color:#333;">Klimaatkracht</span>
+        <div class="wf-navlinks">
+          <div class="wf-navlink">Marketplace</div>
+          <div class="wf-navlink" style="border-bottom:2px solid #388e3c;color:#388e3c;font-weight:700;">Pricing</div>
+          <div class="wf-navlink">Methodology</div>
+          <div class="wf-navlink">For Food Banks</div>
+        </div>
+      </div>
+
+      <!-- Hero -->
+      <div style="background:linear-gradient(135deg,#064e3b 0%,#065f46 60%,#047857 100%);padding:48px 48px 40px;color:#fff;">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#6ee7b7;margin-bottom:10px;">For Corporates</div>
+        <div style="font-size:28px;font-weight:800;margin-bottom:10px;line-height:1.2;">Turn food rescue into audit-ready CO₂e proof</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.75);max-width:560px;line-height:1.6;margin-bottom:20px;">
+          One quarterly subscription. ESRS E1 + S3 report included. All packages locked at <strong style="color:#6ee7b7;">€41.67 / tCO₂e</strong> — same science, three price points.
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span style="padding:4px 12px;border-radius:20px;font-size:10px;font-weight:600;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;">CSRD-ready</span>
+          <span style="padding:4px 12px;border-radius:20px;font-size:10px;font-weight:600;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;">ESRS E1 + S3</span>
+          <span style="padding:4px 12px;border-radius:20px;font-size:10px;font-weight:600;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;">FRAME aligned</span>
+          <span style="padding:4px 12px;border-radius:20px;font-size:10px;font-weight:600;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;">Quarterly reports</span>
+        </div>
+      </div>
+
+      <!-- Price anchoring bar -->
+      <div style="background:#f1f8e9;border-bottom:1px solid #c8e6c9;padding:12px 48px;display:flex;align-items:center;gap:32px;">
+        <div style="font-size:11px;color:#2e7d32;font-weight:700;">€41.67 / tCO₂e</div>
+        <div style="width:1px;height:20px;background:#c8e6c9;"></div>
+        <div style="font-size:11px;color:#555;">Same emission factor table across all tiers · NL counterfactual 0.93 applied · RIVM + FAO sourced</div>
+        <div style="margin-left:auto;font-size:10px;color:#888;">Prices ex-VAT · billed quarterly · cancel anytime</div>
+      </div>
+
+      <!-- Three-column pricing table -->
+      <div style="padding:40px 48px;background:#fff;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:start;">
+
+          <!-- STARTER €10k -->
+          <div style="border:1px solid #e0e0e0;border-radius:12px;overflow:hidden;">
+            <div style="padding:24px 24px 20px;background:#fafafa;border-bottom:1px solid #e0e0e0;">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:8px;">Starter</div>
+              <div style="font-size:32px;font-weight:800;color:#0f172a;">€10k</div>
+              <div style="font-size:11px;color:#6b7280;margin-top:2px;">/ year</div>
+              <div style="margin-top:12px;padding:8px 12px;background:#f1f8e9;border-radius:6px;border:1px solid #c8e6c9;">
+                <div style="font-size:20px;font-weight:800;color:#2e7d32;">~333 tCO₂e</div>
+                <div style="font-size:10px;color:#4a7c59;">attributed / year</div>
+              </div>
+              <div style="margin-top:10px;font-size:11px;color:#555;line-height:1.5;">Ideal for SMEs and first CSRD reporting year. Reaches all 180 foodbanks via fund allocation.</div>
+            </div>
+            <div style="padding:20px 24px;">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#999;margin-bottom:10px;">Included</div>
+              <div style="display:flex;flex-direction:column;gap:8px;font-size:11px;color:#374151;">
+                <div>✓ &nbsp;Fund allocation across all 6 regions</div>
+                <div>✓ &nbsp;Annual ESRS E1 report</div>
+                <div>✓ &nbsp;FRAME methodology workings</div>
+                <div>✓ &nbsp;Source citations (RIVM, FAO)</div>
+                <div>✓ &nbsp;Corporate impact dashboard</div>
+                <div style="color:#9ca3af;">✗ &nbsp;ESRS S3 social addendum</div>
+                <div style="color:#9ca3af;">✗ &nbsp;Co-branded report</div>
+                <div style="color:#9ca3af;">✗ &nbsp;Priority support</div>
+              </div>
+              <div style="margin-top:20px;">
+                <div style="background:#388e3c;color:#fff;padding:11px;border-radius:6px;font-size:12px;font-weight:700;text-align:center;cursor:pointer;">Buy →</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PARTNER €100k (highlighted) -->
+          <div style="border:2px solid #388e3c;border-radius:12px;overflow:hidden;position:relative;box-shadow:0 4px 20px rgba(56,142,60,0.15);">
+            <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:#388e3c;color:#fff;font-size:9px;font-weight:700;padding:4px 12px;border-radius:0 0 8px 8px;letter-spacing:1px;text-transform:uppercase;">Most popular</div>
+            <div style="padding:28px 24px 20px;background:#f1f8e9;border-bottom:1px solid #c8e6c9;">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#388e3c;margin-bottom:8px;">Partner</div>
+              <div style="font-size:32px;font-weight:800;color:#0f172a;">€100k</div>
+              <div style="font-size:11px;color:#6b7280;margin-top:2px;">/ year</div>
+              <div style="margin-top:12px;padding:8px 12px;background:#388e3c;border-radius:6px;">
+                <div style="font-size:20px;font-weight:800;color:#fff;">~3,330 tCO₂e</div>
+                <div style="font-size:10px;color:#a5d6a7;">attributed / year</div>
+              </div>
+              <div style="margin-top:10px;font-size:11px;color:#555;line-height:1.5;">Full attribution with ESRS E1 + S3 disclosure. Recommended for CSRD-obligated companies.</div>
+            </div>
+            <div style="padding:20px 24px;">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#999;margin-bottom:10px;">Included</div>
+              <div style="display:flex;flex-direction:column;gap:8px;font-size:11px;color:#374151;">
+                <div>✓ &nbsp;Fund allocation across all 6 regions</div>
+                <div>✓ &nbsp;Annual ESRS E1 + S3 report</div>
+                <div>✓ &nbsp;FRAME methodology workings</div>
+                <div>✓ &nbsp;Source citations (RIVM, FAO)</div>
+                <div>✓ &nbsp;Corporate impact dashboard</div>
+                <div>✓ &nbsp;Co-branded quarterly report</div>
+                <div>✓ &nbsp;"Lead partner" recognition</div>
+                <div style="color:#9ca3af;">✗ &nbsp;Priority support / account manager</div>
+              </div>
+              <div style="margin-top:20px;">
+                <div class="wf-btn primary" style="width:100%;text-align:center;padding:10px;background:#388e3c;">Buy →</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ENTERPRISE Custom -->
+          <div style="border:1px solid #e0e0e0;border-radius:12px;overflow:hidden;background:#0f172a;color:#f8fafc;">
+            <div style="padding:24px 24px 20px;border-bottom:1px solid #1e293b;">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6ee7b7;margin-bottom:8px;">Enterprise</div>
+              <div style="font-size:32px;font-weight:800;color:#f8fafc;">Custom</div>
+              <div style="font-size:11px;color:#94a3b8;margin-top:2px;">/ year</div>
+              <div style="margin-top:12px;padding:8px 12px;background:#1e293b;border-radius:6px;border:1px solid #334155;">
+                <div style="font-size:20px;font-weight:800;color:#34d399;">Custom tCO₂e</div>
+                <div style="font-size:10px;color:#6ee7b7;">tailored to your GHG target</div>
+              </div>
+              <div style="margin-top:10px;font-size:11px;color:#94a3b8;line-height:1.5;">Custom amount, custom scope. Co-branded report, dedicated account manager, Big-4 audit package.</div>
+            </div>
+            <div style="padding:20px 24px;">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569;margin-bottom:10px;">Included</div>
+              <div style="display:flex;flex-direction:column;gap:8px;font-size:11px;color:#cbd5e1;">
+                <div>✓ &nbsp;Fund allocation across all 6 regions</div>
+                <div>✓ &nbsp;Annual ESRS E1 + S3 report</div>
+                <div>✓ &nbsp;FRAME methodology workings</div>
+                <div>✓ &nbsp;Big-4 audit package (data export)</div>
+                <div>✓ &nbsp;Co-branded landing page</div>
+                <div>✓ &nbsp;"Lead partner" badge across all banks</div>
+                <div>✓ &nbsp;Dedicated account manager</div>
+                <div>✓ &nbsp;Annual GHG inventory integration</div>
+              </div>
+              <div style="margin-top:20px;">
+                <div style="background:#059669;color:#fff;padding:11px;border-radius:6px;font-size:12px;font-weight:700;text-align:center;cursor:pointer;">Schedule a call →</div>
+                <div style="font-size:10px;color:#64748b;text-align:center;margin-top:6px;">enterprise@klimaatkracht.eu</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Price-per-tCO₂e comparison bar -->
+      <div style="padding:0 48px 32px;background:#fff;">
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px 24px;">
+          <div style="font-size:11px;font-weight:700;color:#374151;margin-bottom:14px;">Price per tCO₂e — consistent across tiers · €30 / tCO₂e</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+            <div style="text-align:center;">
+              <div style="font-size:10px;color:#6b7280;margin-bottom:4px;">Starter</div>
+              <div style="background:#e8f5e9;border-radius:4px;padding:6px 0;font-size:13px;font-weight:700;color:#2e7d32;">€30 / tCO₂e</div>
+              <div style="font-size:10px;color:#9ca3af;margin-top:3px;">€10k ÷ ~333 tCO₂e/yr</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:10px;color:#6b7280;margin-bottom:4px;">Partner</div>
+              <div style="background:#c8e6c9;border-radius:4px;padding:6px 0;font-size:13px;font-weight:700;color:#1b5e20;">€30 / tCO₂e</div>
+              <div style="font-size:10px;color:#9ca3af;margin-top:3px;">€100k ÷ ~3,330 tCO₂e/yr</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:10px;color:#6b7280;margin-bottom:4px;">Enterprise</div>
+              <div style="background:#e8f5e9;border-radius:4px;padding:6px 0;font-size:13px;font-weight:700;color:#2e7d32;">Negotiated</div>
+              <div style="font-size:10px;color:#9ca3af;margin-top:3px;">custom scope · same formula</div>
+            </div>
+          </div>
+          <div style="margin-top:12px;font-size:10px;color:#94a3b8;">Consistent pricing signals methodology integrity — you pay for verified impact, not for the bank's size.</div>
+        </div>
+      </div>
+
+      <!-- What you receive section -->
+      <div style="padding:0 48px 40px;background:#fff;border-top:1px solid #f3f4f6;">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#059669;margin-bottom:8px;padding-top:32px;">What you receive</div>
+        <div style="font-size:20px;font-weight:700;color:#0f172a;margin-bottom:20px;">Every package includes a quarterly CSR report</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+
+          <div style="border:1px solid #e0e0e0;border-radius:10px;padding:20px;">
+            <div style="font-size:20px;margin-bottom:10px;">📊</div>
+            <div style="font-size:12px;font-weight:700;color:#0f172a;margin-bottom:6px;">Impact dashboard</div>
+            <div style="font-size:11px;color:#6b7280;line-height:1.6;">Live view of tCO₂e avoided, kg rescued, people reached. Category breakdown by food type. Attribution share of bank's annual baseline.</div>
+          </div>
+
+          <div style="border:1px solid #e0e0e0;border-radius:10px;padding:20px;">
+            <div style="font-size:20px;margin-bottom:10px;">📋</div>
+            <div style="font-size:12px;font-weight:700;color:#0f172a;margin-bottom:6px;">ESRS E1 + S3 report</div>
+            <div style="font-size:11px;color:#6b7280;line-height:1.6;">Structured disclosure covering E1-1, E1-4, E1-6 (emissions), S3-1, S3-4 (affected communities). Drop-in section for your annual CSRD filing.</div>
+          </div>
+
+          <div style="border:1px solid #e0e0e0;border-radius:10px;padding:20px;">
+            <div style="font-size:20px;margin-bottom:10px;">🔬</div>
+            <div style="font-size:12px;font-weight:700;color:#0f172a;margin-bottom:6px;">Audit-ready workings</div>
+            <div style="font-size:11px;color:#6b7280;line-height:1.6;">Full FRAME methodology trace. Every input value shows source: <span class="prov-extracted" style="font-size:9px;padding:2px 6px;border-radius:10px;">extracted</span> from PDF or <span class="prov-inferred" style="font-size:9px;padding:2px 6px;border-radius:10px;">inferred</span> from national average. Big-4 ready.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- How it works (3-step) -->
+      <div style="padding:0 48px 40px;background:#f8fafc;border-top:1px solid #e2e8f0;">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#059669;margin-bottom:8px;padding-top:32px;">How it works</div>
+        <div style="font-size:20px;font-weight:700;color:#0f172a;margin-bottom:20px;">From purchase to CSRD filing in 3 steps</div>
+        <div style="display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr;gap:0;align-items:start;">
+
+          <div style="background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:20px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:#388e3c;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">1</div>
+            <div style="font-size:12px;font-weight:700;color:#0f172a;margin-bottom:6px;">Choose your tier</div>
+            <div style="font-size:11px;color:#6b7280;line-height:1.6;">Pick Starter, Standard, or Enterprise based on your CO₂e target and preferred bank. Pay via Solvimon invoice — no subscription lock-in.</div>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:center;padding-top:28px;">
+            <div style="font-size:16px;color:#388e3c;">▶</div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:20px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:#388e3c;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">2</div>
+            <div style="font-size:12px;font-weight:700;color:#0f172a;margin-bottom:6px;">We compute your impact</div>
+            <div style="font-size:11px;color:#6b7280;line-height:1.6;">FRAME engine attributes kg rescued → tCO₂e to your subscription using the bank's verified annual report. NL counterfactual 0.93 applied.</div>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:center;padding-top:28px;">
+            <div style="font-size:16px;color:#388e3c;">▶</div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:20px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:#388e3c;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">3</div>
+            <div style="font-size:12px;font-weight:700;color:#0f172a;margin-bottom:6px;">Receive your report</div>
+            <div style="font-size:11px;color:#6b7280;line-height:1.6;">Quarterly ESRS E1 + S3 report generated by Claude. Drop the section directly into your sustainability report. Audit trail included.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- FAQ strip -->
+      <div style="padding:32px 48px;background:#fff;border-top:1px solid #f3f4f6;">
+        <div style="font-size:14px;font-weight:700;color:#0f172a;margin-bottom:16px;">Common questions</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#374151;margin-bottom:4px;">Is this Scope 1, 2 or 3?</div>
+            <div style="font-size:11px;color:#6b7280;line-height:1.5;">Scope 3 category 15 (investments) or category 1 depending on your value chain mapping. The ESRS E1-6 section documents the classification.</div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#374151;margin-bottom:4px;">Can our auditor verify the numbers?</div>
+            <div style="font-size:11px;color:#6b7280;line-height:1.5;">Yes. Enterprise tier includes full data export with all _source and _method fields. Starter/Standard can request on demand.</div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#374151;margin-bottom:4px;">What if a food bank's data is late?</div>
+            <div style="font-size:11px;color:#6b7280;line-height:1.5;">We use the prior year's annual report and flag the report as "preliminary". Final values are issued when new data arrives, with a delta note.</div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#374151;margin-bottom:4px;">Is this certified carbon offsetting?</div>
+            <div style="font-size:11px;color:#6b7280;line-height:1.5;">No — this is food rescue impact reporting, not carbon credit issuance. We are FRAME-aligned. Credits and offsets are a separate regulatory category.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA footer -->
+      <div style="background:#064e3b;padding:32px 48px;display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">Ready to start your first quarter?</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.65);">Reports ship within 14 days of purchase · No long-term contract</div>
+        </div>
+        <div style="display:flex;gap:12px;">
+          <div style="background:#388e3c;color:#fff;padding:10px 20px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;">Buy Starter €10k →</div>
+          <div style="background:#388e3c;color:#fff;padding:10px 20px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;">Buy Partner €100k →</div>
+          <div style="background:transparent;color:#6ee7b7;padding:10px 20px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #6ee7b7;">Schedule a call →</div>
+        </div>
+      </div>
+
+    </div><!-- /browser-content -->
+  </div><!-- /browser-chrome -->
 </div>
 
 <script>
