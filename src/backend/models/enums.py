@@ -11,7 +11,7 @@ class SourceEnum(str, Enum):
 
 class RoleEnum(str, Enum):
     corporate = "corporate"
-    foodbank_op = "foodbank_op"
+    foodbank = "foodbank"
     admin = "admin"
 
 

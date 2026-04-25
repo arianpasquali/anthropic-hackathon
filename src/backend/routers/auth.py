@@ -24,6 +24,7 @@ class RegisterRequest(BaseModel):
     email: str
     password: str
     org_name: str
+    role: RoleEnum
 
 
 class LoginRequest(BaseModel):
@@ -46,7 +47,7 @@ def register(body: RegisterRequest, session: Session = Depends(get_session)):
     user = User(
         email=body.email,
         hashed_password=hash_password(body.password),
-        role=RoleEnum.corporate,
+        role=body.role,
         org_name=body.org_name,
     )
     session.add(user)

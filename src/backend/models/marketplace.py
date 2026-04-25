@@ -36,7 +36,7 @@ class FundSubscription(SQLModel, table=True):
 class CsrReport(SQLModel, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     subscription_id: uuid.UUID = Field(foreign_key="fundsubscription.id")
-    frame_result_id: uuid.UUID = Field(foreign_key="frameresult.id")
+    frame_result_id: uuid.UUID | None = Field(default=None, foreign_key="frameresult.id")
     generated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     file_path: str
     template: TemplateEnum = TemplateEnum.generic
