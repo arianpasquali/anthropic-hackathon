@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { api } from "@/lib/api"
-import { NLMapDynamic } from "@/components/map/NLMapDynamic"
+import { NLMapDark } from "@/components/map/NLMapDark"
 import { Badge } from "@/components/ui/Badge"
 import { formatNumber, formatTCO2e } from "@/lib/format"
 
@@ -132,7 +132,7 @@ export default async function Home() {
               Open marketplace →
             </Link>
           </div>
-          <NLMapDynamic banks={banks} height={460} />
+          <NLMapDark banks={banks} height={460} />
         </div>
       </section>
     </div>

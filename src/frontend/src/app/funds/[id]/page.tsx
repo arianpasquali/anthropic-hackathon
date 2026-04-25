@@ -134,19 +134,19 @@ export default async function FundDetailPage({
         </section>
       </div>
 
-      <aside className="lg:sticky lg:top-24 flex flex-col items-center justify-center gap-4 p-7 bg-[#f0fdf4] border-2 border-[#bbf7d0] rounded-xl min-w-[200px] text-center">
-        <div className="text-[11px] text-[#059669] font-semibold uppercase tracking-wide">From €10k / year</div>
+      <aside className="self-start lg:sticky lg:top-24 flex flex-col gap-4 p-6 bg-emerald-soft/60 border border-emerald/30 rounded-[var(--radius-lg)]">
+        <div className="eyebrow text-emerald-deep">From €10k / year</div>
+        <p className="display tabular text-3xl">{formatEur(pkg.price_eur)}</p>
+        <p className="text-[12.5px] text-text-muted -mt-2">per quarter · invoiced via Solvimon</p>
         <Link
           href="/pricing"
-          className="block w-full px-8 py-3.5 bg-[#388e3c] text-white rounded-lg text-[14px] font-extrabold hover:bg-[#2e7d32] transition-colors"
+          className="block w-full text-center px-5 h-11 leading-[44px] bg-emerald text-text-on-emerald rounded-[var(--radius)] text-[14px] font-medium hover:bg-emerald-deep transition-colors"
         >
           Invest in this fund →
         </Link>
-        <div className="text-[11px] text-text-muted leading-relaxed">
-          No lock-in · ESRS E1+S3 report included
-          <br />
-          Invoiced via Solvimon
-        </div>
+        <p className="text-[12px] text-text-faint leading-relaxed">
+          No lock-in · ESRS E1+S3 report included.
+        </p>
       </aside>
     </div>
   )
