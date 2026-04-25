@@ -1,0 +1,435 @@
+{
+  "generated_at": "2026-04-25T14:36:05.879495+00:00",
+  "package": {
+    "price_eur": 25000.0,
+    "tco2e": 600.0,
+    "price_per_tco2e": 41.67
+  },
+  "methodology": {
+    "framework": "Global Foodbanking Network FRAME \u2014 alignment, not certification",
+    "counterfactual_factor_nl": 0.93,
+    "counterfactual_source": "RIVM Afvalmonitor 2024 + CBS Waste Statistics; NL incineration-with-energy-recovery mix vs. US-default landfill assumption.",
+    "emission_factors": [
+      {
+        "category": "produce",
+        "kg_co2e_per_kg": 1.0,
+        "source": "FAO Food Wastage Footprint (2013), Table 4.2",
+        "notes": "Mix of fresh fruit and vegetables; weighted toward NL-typical supply."
+      },
+      {
+        "category": "bakery",
+        "kg_co2e_per_kg": 1.5,
+        "source": "WRAP Courtauld Commitment 2030, Bakery sector data",
+        "notes": "Bread and baked goods."
+      },
+      {
+        "category": "dairy",
+        "kg_co2e_per_kg": 3.2,
+        "source": "FAO FWF + RIVM Dutch dairy LCA",
+        "notes": "Mixed milk, yoghurt, cheese; cheese-heavy mix would push higher."
+      },
+      {
+        "category": "meat",
+        "kg_co2e_per_kg": 8.5,
+        "source": "FAO FWF (2013) weighted Dutch meat consumption mix",
+        "notes": "Pork-dominant with poultry and beef share; beef-heavy would push to ~15."
+      },
+      {
+        "category": "dry_goods",
+        "kg_co2e_per_kg": 2.0,
+        "source": "FAO FWF cereals + Poore & Nemecek (2018) for staples",
+        "notes": "Pasta, rice, legumes, canned goods, cooking oils."
+      },
+      {
+        "category": "prepared",
+        "kg_co2e_per_kg": 3.0,
+        "source": "Composite of Poore & Nemecek (2018) for processed foods",
+        "notes": "Ready meals, sauces, prepared mixes."
+      },
+      {
+        "category": "eggs",
+        "kg_co2e_per_kg": 4.5,
+        "source": "FAO FWF + Dutch egg sector data",
+        "notes": ""
+      }
+    ]
+  },
+  "banks": [
+    {
+      "id": "rotterdam",
+      "name": "Voedselbank Rotterdam",
+      "region": "Zuid-Holland",
+      "annual_kg_rescued": 4160000,
+      "annual_tco2e": 7718.3,
+      "weighted_emission_factor": 1.855,
+      "households_weekly": 1682,
+      "people_served": null,
+      "is_rdc": true,
+      "rdc_satellite_count": 33,
+      "cluster_banks": [],
+      "category_mix": {
+        "produce": 0.5,
+        "dry_goods": 0.18,
+        "dairy": 0.1,
+        "bakery": 0.1,
+        "meat": 0.05,
+        "prepared": 0.05,
+        "eggs": 0.02
+      },
+      "source_url": "https://voedselbank.nl/jaarrekeningen/",
+      "provenance": "Annual rescue cited directly in Voedselbank Rotterdam Jaarverslag 2024 as 'ongeveer 80.000 kilogram per week' across the Rotterdam regional network (incl. 33 satellite banks). Category mix derived from published parcel composition (13 of 25 units fresh F&V for 2-person households).",
+      "standard_package": {
+        "amount_eur": 25000,
+        "attributed_tco2e": 600.0,
+        "attributed_kg_food": 323389.0,
+        "attribution_share": 0.0777,
+        "is_solo_capable": true,
+        "category_breakdown": {
+          "produce": {
+            "tco2e": 150.38,
+            "kg_food": 161695.0
+          },
+          "dry_goods": {
+            "tco2e": 108.27,
+            "kg_food": 58210.0
+          },
+          "dairy": {
+            "tco2e": 96.24,
+            "kg_food": 32339.0
+          },
+          "bakery": {
+            "tco2e": 45.11,
+            "kg_food": 32339.0
+          },
+          "meat": {
+            "tco2e": 127.82,
+            "kg_food": 16169.0
+          },
+          "prepared": {
+            "tco2e": 45.11,
+            "kg_food": 16169.0
+          },
+          "eggs": {
+            "tco2e": 27.07,
+            "kg_food": 6468.0
+          }
+        }
+      }
+    },
+    {
+      "id": "amsterdam",
+      "name": "Voedselbank Amsterdam",
+      "region": "Noord-Holland",
+      "annual_kg_rescued": 1437840,
+      "annual_tco2e": 2928.4,
+      "weighted_emission_factor": 2.037,
+      "households_weekly": 1535,
+      "people_served": 3799,
+      "is_rdc": true,
+      "rdc_satellite_count": 18,
+      "cluster_banks": [],
+      "category_mix": {
+        "produce": 0.32,
+        "dry_goods": 0.36,
+        "dairy": 0.1,
+        "bakery": 0.09,
+        "meat": 0.05,
+        "prepared": 0.06,
+        "eggs": 0.02
+      },
+      "source_url": "https://voedselbank.amsterdam/over-ons/",
+      "provenance": "Households (1,535) and parcel size (~30 products) cited in Voedselbank Amsterdam Jaarverslag 2024. Annual kg estimated from 1,535 hh \u00d7 30 products/wk \u00d7 0.6 kg/unit \u00d7 52 weeks. Cross-check: 228,939 kg of fresh F&V from Groente & Fruitbrigade alone in 2024.",
+      "standard_package": {
+        "amount_eur": 25000,
+        "attributed_tco2e": 600.0,
+        "attributed_kg_food": 294594.0,
+        "attribution_share": 0.2049,
+        "is_solo_capable": true,
+        "category_breakdown": {
+          "produce": {
+            "tco2e": 87.67,
+            "kg_food": 94270.0
+          },
+          "dry_goods": {
+            "tco2e": 197.26,
+            "kg_food": 106054.0
+          },
+          "dairy": {
+            "tco2e": 87.67,
+            "kg_food": 29459.0
+          },
+          "bakery": {
+            "tco2e": 36.99,
+            "kg_food": 26513.0
+          },
+          "meat": {
+            "tco2e": 116.44,
+            "kg_food": 14730.0
+          },
+          "prepared": {
+            "tco2e": 49.32,
+            "kg_food": 17676.0
+          },
+          "eggs": {
+            "tco2e": 24.66,
+            "kg_food": 5892.0
+          }
+        }
+      }
+    },
+    {
+      "id": "haaglanden",
+      "name": "Voedselbank Haaglanden",
+      "region": "Zuid-Holland",
+      "annual_kg_rescued": 2265120,
+      "annual_tco2e": 4697.6,
+      "weighted_emission_factor": 2.074,
+      "households_weekly": 2904,
+      "people_served": 6840,
+      "is_rdc": false,
+      "rdc_satellite_count": null,
+      "cluster_banks": [],
+      "category_mix": {
+        "dry_goods": 0.36,
+        "produce": 0.32,
+        "dairy": 0.1,
+        "bakery": 0.09,
+        "meat": 0.06,
+        "prepared": 0.06,
+        "eggs": 0.01
+      },
+      "source_url": "https://voedselbankhaaglanden.nl/feiten-en-cijfers-2/",
+      "provenance": "Households (2,904) and parcel composition (25 articles: 9 DKW, 8 G&F, 2-3 zuivel, ~5 other) cited directly in Voedselbank Haaglanden Jaarverslag 2024. Annual kg estimated using 0.6 kg/unit conversion. Serves Den Haag, Rijswijk, Zoetermeer via 21 distribution points.",
+      "standard_package": {
+        "amount_eur": 25000,
+        "attributed_tco2e": 600.0,
+        "attributed_kg_food": 289310.0,
+        "attribution_share": 0.1277,
+        "is_solo_capable": true,
+        "category_breakdown": {
+          "dry_goods": {
+            "tco2e": 193.72,
+            "kg_food": 104152.0
+          },
+          "produce": {
+            "tco2e": 86.1,
+            "kg_food": 92579.0
+          },
+          "dairy": {
+            "tco2e": 86.1,
+            "kg_food": 28931.0
+          },
+          "bakery": {
+            "tco2e": 36.32,
+            "kg_food": 26038.0
+          },
+          "meat": {
+            "tco2e": 137.22,
+            "kg_food": 17359.0
+          },
+          "prepared": {
+            "tco2e": 48.43,
+            "kg_food": 17359.0
+          },
+          "eggs": {
+            "tco2e": 12.11,
+            "kg_food": 2893.0
+          }
+        }
+      }
+    },
+    {
+      "id": "eindhoven",
+      "name": "Voedselbank Eindhoven",
+      "region": "Noord-Brabant",
+      "annual_kg_rescued": 320000,
+      "annual_tco2e": 651.7,
+      "weighted_emission_factor": 2.037,
+      "households_weekly": 609,
+      "people_served": 1296,
+      "is_rdc": false,
+      "rdc_satellite_count": null,
+      "cluster_banks": [
+        "Aalst-Waalre",
+        "Best",
+        "Bergeijk",
+        "Bladel",
+        "Deurne",
+        "Geldrop-Mierlo",
+        "Nuenen",
+        "Valkenswaard",
+        "Veldhoven"
+      ],
+      "category_mix": {
+        "produce": 0.32,
+        "dry_goods": 0.36,
+        "dairy": 0.1,
+        "bakery": 0.09,
+        "meat": 0.05,
+        "prepared": 0.06,
+        "eggs": 0.02
+      },
+      "source_url": "https://www.voedselbankeindhoven.nl/",
+      "provenance": "Parcels (32,000/yr) and retail value (\u20ac1.1M food / 32,000 = \u20ac34.4/parcel) cited in Voedselbank Eindhoven Jaarverslag 2024. Annual kg estimated from retail value at \u20ac3.50/kg blended NL grocery price. Eindhoven self-organises as 'Cluster Eindhoven' with 9 named neighbour banks; together delivered ~\u20ac2M food value via Tilburg RDC.",
+      "standard_package": {
+        "amount_eur": 25000,
+        "attributed_tco2e": 600.0,
+        "attributed_kg_food": 294594.0,
+        "attribution_share": 0.9206,
+        "is_solo_capable": false,
+        "category_breakdown": {
+          "produce": {
+            "tco2e": 87.67,
+            "kg_food": 94270.0
+          },
+          "dry_goods": {
+            "tco2e": 197.26,
+            "kg_food": 106054.0
+          },
+          "dairy": {
+            "tco2e": 87.67,
+            "kg_food": 29459.0
+          },
+          "bakery": {
+            "tco2e": 36.99,
+            "kg_food": 26513.0
+          },
+          "meat": {
+            "tco2e": 116.44,
+            "kg_food": 14730.0
+          },
+          "prepared": {
+            "tco2e": 49.32,
+            "kg_food": 17676.0
+          },
+          "eggs": {
+            "tco2e": 24.66,
+            "kg_food": 5892.0
+          }
+        }
+      }
+    },
+    {
+      "id": "groningen",
+      "name": "Voedselbank Gemeente Groningen",
+      "region": "Groningen",
+      "annual_kg_rescued": 484000,
+      "annual_tco2e": 985.8,
+      "weighted_emission_factor": 2.037,
+      "households_weekly": 517,
+      "people_served": 1064,
+      "is_rdc": true,
+      "rdc_satellite_count": null,
+      "cluster_banks": [],
+      "category_mix": {
+        "produce": 0.32,
+        "dry_goods": 0.36,
+        "dairy": 0.1,
+        "bakery": 0.09,
+        "meat": 0.05,
+        "prepared": 0.06,
+        "eggs": 0.02
+      },
+      "source_url": "https://voedselbank-groningen.nl/jaarverslag/",
+      "provenance": "Households (517 in gemeente Groningen, 1,675 in RDC region incl. Noordenveld) cited in Voedselbank Gemeente Groningen Jaarverslag 2024. Annual kg estimated from city households \u00d7 30 products/wk \u00d7 0.6 kg/unit \u00d7 52 weeks. RDC role for northern provinces.",
+      "standard_package": {
+        "amount_eur": 25000,
+        "attributed_tco2e": 600.0,
+        "attributed_kg_food": 294594.0,
+        "attribution_share": 0.6087,
+        "is_solo_capable": false,
+        "category_breakdown": {
+          "produce": {
+            "tco2e": 87.67,
+            "kg_food": 94270.0
+          },
+          "dry_goods": {
+            "tco2e": 197.26,
+            "kg_food": 106054.0
+          },
+          "dairy": {
+            "tco2e": 87.67,
+            "kg_food": 29459.0
+          },
+          "bakery": {
+            "tco2e": 36.99,
+            "kg_food": 26513.0
+          },
+          "meat": {
+            "tco2e": 116.44,
+            "kg_food": 14730.0
+          },
+          "prepared": {
+            "tco2e": 49.32,
+            "kg_food": 17676.0
+          },
+          "eggs": {
+            "tco2e": 24.66,
+            "kg_food": 5892.0
+          }
+        }
+      }
+    },
+    {
+      "id": "breda",
+      "name": "Voedselbank Breda",
+      "region": "Noord-Brabant",
+      "annual_kg_rescued": 507496,
+      "annual_tco2e": 1033.6,
+      "weighted_emission_factor": 2.037,
+      "households_weekly": 335,
+      "people_served": 2046,
+      "is_rdc": false,
+      "rdc_satellite_count": null,
+      "cluster_banks": [],
+      "category_mix": {
+        "produce": 0.32,
+        "dry_goods": 0.36,
+        "dairy": 0.1,
+        "bakery": 0.09,
+        "meat": 0.05,
+        "prepared": 0.06,
+        "eggs": 0.02
+      },
+      "source_url": "https://voedselbankbreda.nl/anbi/",
+      "provenance": "Annual rescue cited directly in Voedselbank Breda Jaarbeeld 2025: 507,496 kg ontvangen voedsel (of which 195,528 kg from supermarkets). Households (335 wkly, 867 unique) cited in same source. Note: 2025 figure used as 2024 fin not yet published in machine-readable form.",
+      "standard_package": {
+        "amount_eur": 25000,
+        "attributed_tco2e": 600.0,
+        "attributed_kg_food": 294594.0,
+        "attribution_share": 0.5805,
+        "is_solo_capable": false,
+        "category_breakdown": {
+          "produce": {
+            "tco2e": 87.67,
+            "kg_food": 94270.0
+          },
+          "dry_goods": {
+            "tco2e": 197.26,
+            "kg_food": 106054.0
+          },
+          "dairy": {
+            "tco2e": 87.67,
+            "kg_food": 29459.0
+          },
+          "bakery": {
+            "tco2e": 36.99,
+            "kg_food": 26513.0
+          },
+          "meat": {
+            "tco2e": 116.44,
+            "kg_food": 14730.0
+          },
+          "prepared": {
+            "tco2e": 49.32,
+            "kg_food": 17676.0
+          },
+          "eggs": {
+            "tco2e": 24.66,
+            "kg_food": 5892.0
+          }
+        }
+      }
+    }
+  ]
+}

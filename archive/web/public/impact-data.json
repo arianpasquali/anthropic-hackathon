@@ -1,0 +1,166 @@
+{
+  "generated_at": "2026-04-25T20:08:40.688379+00:00",
+  "poverty": {
+    "people_under_poverty_line_nl": {
+      "value": 1033923,
+      "unit": "people",
+      "label": "Dutch people under the poverty line",
+      "source_label": "VBN Feiten en Cijfers 2023, citing SCP 2021",
+      "source_url": "https://voedselbankennederland.nl/wp-content/uploads/2024/09/Feiten-en-Cijfers-per-31-12-2023.pdf"
+    },
+    "people_helped_2024": {
+      "value": 144750,
+      "unit": "people",
+      "label": "Reached by foodbanks in 2024",
+      "source_label": "VBN Jaarverslag 2024",
+      "source_url": "https://voedselbankennederland.nl/wp-content/uploads/2025/06/Voedselbanken-Jaarverslag-2024.pdf"
+    },
+    "reach_rate_pct": {
+      "value": 14.0,
+      "unit": "%",
+      "label": "Foodbank reach rate among people in poverty",
+      "source_label": "Derived (144,750 / 1,033,923)",
+      "source_url": ""
+    }
+  },
+  "food_paradox": {
+    "nl_food_waste_kg": {
+      "value": 2800000000,
+      "unit": "kg",
+      "label": "Food wasted in NL annually",
+      "source_label": "Stichting Samen tegen Voedselverspilling, cited in VBN F&C 2023",
+      "source_url": "https://samentegenvoedselverspilling.nl/"
+    },
+    "foodbanks_rescued_kg": {
+      "value": 40000000,
+      "unit": "kg",
+      "label": "Food rescued by Dutch foodbanks annually",
+      "source_label": "Derived from VBN 2024 (68.1M units \u00d7 0.6 kg/unit)",
+      "source_url": "https://voedselbankennederland.nl/wp-content/uploads/2025/06/Voedselbanken-Jaarverslag-2024.pdf"
+    },
+    "rescue_share_pct": {
+      "value": 1.43,
+      "unit": "%",
+      "label": "Share of NL food waste recovered by foodbanks",
+      "source_label": "Derived (40M / 2.8B)",
+      "source_url": ""
+    }
+  },
+  "history": {
+    "series": [
+      {
+        "year": 2018,
+        "people": 100000,
+        "note": "Pre-COVID baseline"
+      },
+      {
+        "year": 2020,
+        "people": 130000,
+        "note": "COVID surge"
+      },
+      {
+        "year": 2021,
+        "people": 147500,
+        "note": ""
+      },
+      {
+        "year": 2022,
+        "people": 197000,
+        "note": "Energy crisis + Ukraine \u2014 historic record"
+      },
+      {
+        "year": 2023,
+        "people": 180579,
+        "note": "\u22128% vs 2022"
+      },
+      {
+        "year": 2024,
+        "people": 144750,
+        "note": "\u221220% \u2014 masked by Onder de Radar gap"
+      }
+    ],
+    "source_label": "VBN Jaarverslagen 2018\u20132024 + Feiten en Cijfers 2023",
+    "source_url": "https://voedselbankennederland.nl/jaarverslagen-feiten-en-cijfers/",
+    "annotation_2024": "VBN's own Onder de Radar project finds only 4\u201316% of eligible people apply. Headline numbers fall; underlying need does not."
+  },
+  "csrd_wave": {
+    "milestones": [
+      {
+        "year": 2024,
+        "label": "Wave 1: large EU public-interest entities file first ESRS reports",
+        "companies_nl": 200,
+        "is_current": false
+      },
+      {
+        "year": 2025,
+        "label": "Limited assurance begins for Wave 1 disclosures",
+        "companies_nl": 200,
+        "is_current": true
+      },
+      {
+        "year": 2027,
+        "label": "Wave 2 (post-Omnibus delay): companies >250 employees in scope",
+        "companies_nl": 7000,
+        "is_current": false
+      },
+      {
+        "year": 2029,
+        "label": "Wave 3: listed SMEs file under proportionate standard",
+        "companies_nl": 1500,
+        "is_current": false
+      }
+    ],
+    "source_label": "EU Directive 2022/2464 + Omnibus proposal Feb 2025",
+    "source_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2464"
+  },
+  "avoided_emissions_gap": {
+    "rescued_kg": 40000000,
+    "rescued_tco2e": 75000,
+    "nl_food_waste_tco2e": 7000000,
+    "currently_disclosed_tco2e": 0,
+    "current_mitigation_share_pct": 1.07,
+    "source_label": "Derived: 40M kg \u00d7 1.85 kg CO2e/kg (NL-counterfactual-adjusted FRAME weighted average \u2014 see /methodology)",
+    "source_url": "/methodology"
+  },
+  "adoption_scenarios": {
+    "package_eur": 25000,
+    "package_tco2e": 600,
+    "total_csrd_corporates_nl": 7000,
+    "vbn_annual_budget_eur": 4200000,
+    "supply_cap": {
+      "max_packages_nl": 125,
+      "max_funds_eur": 3125000,
+      "max_tco2e": 75000,
+      "max_adoption_pct": 1.79,
+      "explanation": "Cap derived from total NL foodbank avoided emissions (~75,000 tCO2e/yr) divided by package allocation (600 tCO2e). Beyond this, network expansion is required."
+    },
+    "scenarios": [
+      {
+        "adoption_pct": 0.5,
+        "companies": 35,
+        "funds_eur": 875000,
+        "tco2e": 21000
+      },
+      {
+        "adoption_pct": 1,
+        "companies": 70,
+        "funds_eur": 1750000,
+        "tco2e": 42000
+      },
+      {
+        "adoption_pct": 1.79,
+        "companies": 125,
+        "funds_eur": 3125000,
+        "tco2e": 75000
+      },
+      {
+        "adoption_pct": 5,
+        "companies": 350,
+        "funds_eur": 3125000,
+        "tco2e": 75000
+      }
+    ],
+    "vbn_budget_source_label": "VBN Feiten en Cijfers 2024",
+    "vbn_budget_source_url": "https://voedselbankennederland.nl/wp-content/uploads/2026/04/Feiten-en-cijfers-VBN-2024.pdf"
+  }
+}
