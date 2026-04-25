@@ -151,6 +151,7 @@ def ingest_dir(
     model: str = typer.Option(DEFAULT_MODEL, "--model", help="Claude model ID"),
     force: bool = typer.Option(False, "--force", help="Overwrite existing reports"),
     dry_run: bool = typer.Option(False, "--dry-run", help="Print plan without ingesting"),
+    max_concurrent: int = typer.Option(10, "--max-concurrent", help="Max parallel file ingestions"),
 ) -> None:
     """Batch ingest all jaarverslag reports in a directory (skips financial-only and national docs)."""
     if not directory.is_dir():
@@ -219,7 +220,7 @@ def ingest_dir(
                 )
 
     async def _run_all() -> None:
-        sem = asyncio.Semaphore(10)
+        sem = asyncio.Semaphore(max_concurrent)
         tasks = [
             _ingest_one(sem, file, bank_name, city, region_enum, year)
             for file, (bank_name, city, region_enum), year in queued
