@@ -2,7 +2,6 @@ import Link from "next/link"
 import { redirect } from "next/navigation"
 import { api, ApiError } from "@/lib/api"
 import { Badge } from "@/components/ui/Badge"
-import { StatCard } from "@/components/dashboard/StatCard"
 import { DashboardAllocationsTable } from "@/components/dashboard/AllocationsTable"
 import { ReportCard } from "@/components/dashboard/ReportCard"
 import { ProvenanceScorecard } from "@/components/dashboard/ProvenanceScorecard"
@@ -76,26 +75,26 @@ export default async function CorporateDashboardPage() {
         </Link>
       </header>
 
-      {/* Tier 1 — disclosure-grade stats */}
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
-        <StatCard
+      {/* Tier 1 — disclosure-grade stats, typographic row */}
+      <section className="mt-10 grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-line border-y border-line">
+        <DashStat
           label="Avoided this quarter"
           value={formatTCO2e(periodTco2e)}
           hint="ESRS E1-6 · period-locked"
           delta={metrics?.period_delta_pct ?? null}
           emphasis
         />
-        <StatCard
+        <DashStat
           label="Cumulative since inception"
           value={formatTCO2e(cumulativeTco2e)}
           hint={`${detail.allocations.length} banks · multi-year carryover`}
         />
-        <StatCard
+        <DashStat
           label="€ / tCO₂e"
           value={metrics?.eur_per_tco2e != null ? formatEur(metrics.eur_per_tco2e) : "—"}
           hint="cost effectiveness benchmark"
         />
-        <StatCard
+        <DashStat
           label="Households served"
           value={formatNumber(metrics?.households_weighted ?? 0)}
           hint={`weekly · ${formatNumber(metrics?.individuals_weighted ?? 0)} individuals (S3-1)`}
@@ -220,6 +219,48 @@ export default async function CorporateDashboardPage() {
       <section className="mt-16">
         <ReportCard subId={detail.id} hasReport={!!detail.report_id} />
       </section>
+    </div>
+  )
+}
+
+function DashStat({
+  label,
+  value,
+  hint,
+  delta,
+  emphasis = false,
+}: {
+  label: string
+  value: React.ReactNode
+  hint?: React.ReactNode
+  delta?: number | null
+  emphasis?: boolean
+}) {
+  return (
+    <div className="flex flex-col gap-1.5 px-6 py-7">
+      <span className="eyebrow">{label}</span>
+      <span
+        className={
+          "display tabular text-[40px] md:text-[44px] leading-none " +
+          (emphasis ? "text-emerald-deep" : "text-text")
+        }
+      >
+        {value}
+      </span>
+      <div className="flex items-center gap-2 text-[12px] text-text-muted mt-0.5">
+        {hint ? <span>{hint}</span> : null}
+        {delta != null && Number.isFinite(delta) ? (
+          <span
+            className={
+              "tabular font-medium " +
+              (delta >= 0 ? "text-emerald-deep" : "text-warning")
+            }
+          >
+            {delta >= 0 ? "↑" : "↓"} {(Math.abs(delta) * 100).toFixed(1)}%{" "}
+            <span className="text-text-faint font-normal">YoY</span>
+          </span>
+        ) : null}
+      </div>
     </div>
   )
 }
