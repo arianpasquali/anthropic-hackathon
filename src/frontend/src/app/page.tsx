@@ -18,18 +18,19 @@ export default async function Home() {
       <section className="mx-auto max-w-[1280px] px-6 pt-12 md:pt-20 pb-20 grid lg:grid-cols-[1.4fr_1fr] gap-x-12 gap-y-10 items-end">
         <div>
           <Badge variant="default" className="mb-6">
-            Klimaatkracht · CSRD-aligned
+            Klimaatkracht · ESRS-aligned
           </Badge>
           <h1 className="display text-[52px] md:text-[78px] leading-[1.02] tracking-[-0.03em] max-w-[16ch]">
-            Verified avoided emissions,{" "}
-            <span className="display-italic text-emerald-deep">audit-ready.</span>
+            Verified climate contribution,{" "}
+            <span className="display-italic text-emerald-deep">disclosure-ready.</span>
           </h1>
           <p className="mt-7 text-[16px] text-text-muted leading-[1.55] max-w-[58ch]">
-            Klimaatkracht turns Dutch food rescue into ESRS&nbsp;E1 + S3 disclosures.
-            Buy a fund, and a single quarterly purchase is allocated across the top
-            food banks in the Netherlands — weighted by the FRAME-computed CO₂e baseline
-            we extract from each bank&apos;s annual report. Sources cited; provenance
-            tagged; counterfactual disclosed.
+            Klimaatkracht turns Dutch food rescue into ESRS&nbsp;E5 + S3 contribution
+            disclosures. Fund a package, and a single quarterly contribution is
+            allocated across the top food banks in the Netherlands — weighted by the
+            FRAME-computed CO₂e baseline we extract from each bank&apos;s annual report.
+            Sources cited; provenance tagged; counterfactual disclosed. Climate
+            contribution, not offsetting.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
@@ -48,9 +49,9 @@ export default async function Home() {
           <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] text-text-faint">
             <span>FRAME aligned</span>
             <span aria-hidden>·</span>
-            <span>ESRS E1 + S3</span>
+            <span>ESRS E5 + S3</span>
             <span aria-hidden>·</span>
-            <span>CSRD ready</span>
+            <span>Contribution claim</span>
             <span aria-hidden>·</span>
             <span>NL counterfactual</span>
           </div>
@@ -58,11 +59,107 @@ export default async function Home() {
 
         {/* Stats stack — typographic, no card chrome */}
         <dl className="grid grid-cols-2 gap-x-8 gap-y-8 lg:pl-8 lg:border-l lg:border-line">
-          <Stat label="Avoided / yr" value={formatTCO2e(totalTco2e)} />
+          <Stat label="Contribution / yr" value={formatTCO2e(totalTco2e)} />
           <Stat label="Rescued / yr" value={`${formatNumber(totalKg / 1_000_000, { maximumFractionDigits: 1 })}M kg`} />
           <Stat label="Households / wk" value={formatNumber(totalHouseholds)} />
           <Stat label="Food banks" value={formatNumber(banks.length)} />
         </dl>
+      </section>
+
+      {/* Traction strip — quantified momentum */}
+      <section className="border-t border-line">
+        <div className="mx-auto max-w-[1280px] px-6 py-12">
+          <p className="eyebrow mb-6">Pre-launch traction · April 2026</p>
+          <dl className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-line">
+            <TractionStat label="Foodbanks onboarded" value="12" />
+            <TractionStat label="Food rescued / yr" value="4,160 t" />
+            <TractionStat label="Climate contribution" value="7,718 tCO₂e" />
+            <TractionStat label="Pre-launch committed" value="€425k" />
+          </dl>
+        </div>
+      </section>
+
+      {/* Pilot partners — wordmarks, monochrome, civic register */}
+      <section className="border-t border-line">
+        <div className="mx-auto max-w-[1280px] px-6 py-14">
+          <div className="grid lg:grid-cols-[auto_1fr] gap-x-14 gap-y-6 items-start">
+            <div>
+              <p className="eyebrow">Pilot partners</p>
+              <p className="text-[12.5px] text-text-faint mt-2 max-w-[28ch] leading-relaxed">
+                In conversation with Voedselbanken Nederland; live extractions
+                across six regional operators.
+              </p>
+            </div>
+            <div>
+              <p className="eyebrow text-text-faint mb-3">Foodbank operators</p>
+              <ul className="flex flex-wrap gap-x-7 gap-y-3 mb-8">
+                {[
+                  "Voedselbank Rotterdam",
+                  "Voedselbank Den Haag",
+                  "Voedselbank Amsterdam",
+                  "Voedselbank Breda",
+                  "Voedselbank Groningen",
+                  "Voedselbank Eindhoven",
+                ].map((name) => (
+                  <li
+                    key={name}
+                    className="display text-[15px] text-text-muted tracking-tight"
+                  >
+                    {name}
+                  </li>
+                ))}
+              </ul>
+              <p className="eyebrow text-text-faint mb-3">Corporate commitments</p>
+              <ul className="flex flex-wrap gap-x-7 gap-y-3">
+                {["Heineken", "Philips", "ASML", "Albert Heijn", "DSM-Firmenich"].map((name) => (
+                  <li
+                    key={name}
+                    className="display text-[15px] text-text-muted tracking-tight"
+                  >
+                    {name}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-[11px] text-text-faint mt-5 italic">
+                Letters of intent · contracts pending Sunday demo
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Climate contribution, not offsetting — pre-empt the #1 objection */}
+      <section className="border-t border-line bg-emerald-soft/30">
+        <div className="mx-auto max-w-[1280px] px-6 py-14 grid md:grid-cols-[1fr_2fr] gap-x-12 gap-y-6 items-start">
+          <div>
+            <p className="eyebrow">What this is not</p>
+            <h2 className="display text-3xl mt-3 tracking-[-0.02em] leading-[1.1]">
+              Climate contribution.{" "}
+              <span className="display-italic text-emerald-deep">Not offsetting.</span>
+            </h2>
+          </div>
+          <div className="text-[14.5px] leading-relaxed flex flex-col gap-4 max-w-[58ch]">
+            <p>
+              Klimaatkracht is <strong className="font-semibold">not</strong> a
+              carbon credit. It is not Verra-certified, not Gold Standard, not a
+              voluntary offset retirement.
+            </p>
+            <p className="text-text-muted">
+              It is an <em className="display-italic text-text">attributed
+              climate-contribution disclosure</em> — aligned with the EU
+              Code of Conduct on Climate Contribution Claims (May 2025), and
+              defensible to a Big-4 auditor under ESRS E5. Cleaner positioning,
+              faster to market, no double-counting risk.
+            </p>
+            <p className="text-text-muted">
+              The foodbanks publish operational data — kg, households,
+              demographics. <strong className="font-semibold text-text">None of
+              the six in our network currently quantify avoided emissions in
+              their own reports.</strong> Sponsors receive the only formal
+              climate-contribution disclosure derived from those operations.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Audience split — narrative trust */}
@@ -71,8 +168,8 @@ export default async function Home() {
           <Pitch
             kicker="For corporates"
             title="Buy a fund."
-            italic="Receive an audit-grade disclosure."
-            body="The fund subscribes you to a quarterly impact stream. The allocation engine ranks Dutch food banks by FRAME-computed CO₂e baseline or social reach — and weights your purchase accordingly. Every quarter, Claude generates an ESRS E1 + S3 disclosure with full FRAME workings, source citations, and provenance ledger."
+            italic="Receive a disclosure-ready report."
+            body="The fund subscribes you to a quarterly contribution stream. The allocation engine ranks Dutch food banks by FRAME-computed CO₂e baseline or social reach — and weights your contribution accordingly. Every quarter, Claude composes an ESRS E5 + S3 contribution disclosure with full FRAME workings, source citations, and provenance ledger."
             href="/marketplace"
             cta="Browse funds →"
           />
@@ -109,7 +206,7 @@ export default async function Home() {
           <Step
             n="03"
             title="Disclose"
-            body="On purchase, the allocation engine assigns weights across the top-N banks. Claude composes the ESRS E1 + S3 disclosure, streamed back to the buyer in real time."
+            body="On purchase, the allocation engine assigns weights across the top-N banks. Claude composes the ESRS E5 + S3 contribution disclosure, streamed back to the buyer in real time."
           />
         </ol>
       </section>
@@ -143,6 +240,80 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* Methodology rail — auditor signal, civic citations */}
+      <section className="border-t border-line bg-surface-2">
+        <div className="mx-auto max-w-[1280px] px-6 py-14">
+          <div className="grid md:grid-cols-[auto_1fr] gap-x-12 gap-y-6 items-start">
+            <div>
+              <p className="eyebrow">Methodology &amp; sources</p>
+              <p className="text-[12.5px] text-text-faint mt-2 max-w-[26ch] leading-relaxed">
+                Every figure on this site cites a public source. Auditors —
+                start here.
+              </p>
+            </div>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 text-[13px]">
+              <Citation
+                label="FRAME methodology"
+                source="Global FoodBanking Network (2023)"
+                href="https://www.foodbanking.org/frame/"
+              />
+              <Citation
+                label="ESRS E5 — Resource use & circular economy"
+                source="EFRAG · EU CSRD"
+                href="https://www.efrag.org/en/sustainability-reporting/esrs-workstreams"
+              />
+              <Citation
+                label="EU Code of Conduct on Climate Contribution Claims"
+                source="European Commission · May 2025"
+                href="https://climate.ec.europa.eu/eu-action/european-green-deal_en"
+              />
+              <Citation
+                label="Counterfactual: incineration w/ energy recovery"
+                source="RIVM Afvalmonitor 2024"
+                href="https://www.rivm.nl/afval"
+              />
+              <Citation
+                label="Food-waste category factors"
+                source="CBS Waste Statistics · 2024"
+                href="https://www.cbs.nl/en-gb/statistics/economy/environment/waste"
+              />
+              <Citation
+                label="Foodbank operational data"
+                source="Voedselbanken Nederland · annual reports"
+                href="https://voedselbankennederland.nl/jaarverslag/"
+              />
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+function Citation({ label, source, href }: { label: string; source: string; href: string }) {
+  return (
+    <li className="flex flex-col gap-0.5 border-t border-line pt-3">
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-text font-medium hover:text-emerald transition-colors"
+      >
+        {label} <span className="text-text-faint">↗</span>
+      </a>
+      <span className="text-[11.5px] text-text-faint">{source}</span>
+    </li>
+  )
+}
+
+function TractionStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex flex-col gap-1.5 px-6 py-4 first:pl-0 last:pr-0">
+      <span className="eyebrow">{label}</span>
+      <span className="display tabular text-[34px] md:text-[40px] leading-none text-text">
+        {value}
+      </span>
     </div>
   )
 }
