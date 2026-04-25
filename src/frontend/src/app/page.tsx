@@ -122,9 +122,10 @@ export default async function Home() {
               {formatNumber(banks.length)} food banks. One audit trail.
             </h2>
             <p className="text-text-muted text-[14.5px] mt-5 max-w-[44ch] leading-relaxed">
-              Each pin links to a public transparency profile — extraction, FRAME
-              computation, and provenance ledger you can cite directly in your
-              audit trail.
+              Province fill scales with the count of food banks we ingest data
+              for. Open the marketplace to drill into any operator&apos;s public
+              transparency profile — extraction, FRAME computation, and
+              provenance ledger you can cite directly in your audit trail.
             </p>
             <Link
               href="/marketplace"
