@@ -24,7 +24,7 @@ class RegisterRequest(BaseModel):
     email: str
     password: str
     org_name: str
-    role: RoleEnum
+    role: RoleEnum = RoleEnum.corporate
 
 
 class LoginRequest(BaseModel):

@@ -31,8 +31,8 @@ def test_user_email_unique(session: Session):
 
 
 def test_user_role_default(session: Session):
-    user = User(email="op@bank.nl", hashed_password="x", role=RoleEnum.foodbank_op)
+    user = User(email="op@bank.nl", hashed_password="x", role=RoleEnum.foodbank)
     session.add(user)
     session.commit()
     result = session.exec(select(User).where(User.email == "op@bank.nl")).one()
-    assert result.role == RoleEnum.foodbank_op
+    assert result.role == RoleEnum.foodbank

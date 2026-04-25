@@ -2,26 +2,30 @@ import os
 import uuid
 from typing import Optional
 
+from argon2 import PasswordHasher
+from argon2.exceptions import VerifyMismatchError
 from fastapi import Cookie, Depends, HTTPException, status
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
-from passlib.context import CryptContext
 from sqlmodel import Session, select
 
 from src.backend.database import get_session
 from src.backend.models.user import User
 
-_pwd = CryptContext(schemes=["bcrypt"], deprecated="auto")
+_ph = PasswordHasher()
 _SECRET = os.getenv("SESSION_SECRET", "dev-secret-change-in-prod")
 _signer = URLSafeTimedSerializer(_SECRET)
 COOKIE_NAME = "session"
 
 
 def hash_password(plain: str) -> str:
-    return _pwd.hash(plain)
+    return _ph.hash(plain)
 
 
 def verify_password(plain: str, hashed: str) -> bool:
-    return _pwd.verify(plain, hashed)
+    try:
+        return _ph.verify(hashed, plain)
+    except VerifyMismatchError:
+        return False
 
 
 def make_session_cookie(user_id: str) -> str:
