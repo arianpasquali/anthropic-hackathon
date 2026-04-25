@@ -1,0 +1,39 @@
+### Food Bank Marketplace Business Model
+
+- Subscription model challenges for food banks
+  - €30-200 subscription split across 100 food banks = €10 each
+  - Individual product connection weaker with subscription approach
+  - Platform reports vs direct engagement trade-offs
+- Project-based alternative approach
+  - Food banks request specific amounts (e.g., 50k for X project)
+  - Cap set by association prevents runaway costs
+  - Avoids subscription splitting issues
+
+### Corporate CSR Integration
+
+- Annual commitment structure makes most sense
+  - Monthly subscriptions don’t align with CSR planning cycles
+  - Revenue-based donation model: 1M ARR company donates 25k annually
+  - Need system to optimize 25k distribution across marketplace
+
+### Sustainability Data Translation
+
+- CO2 certification opportunity
+  - Companies provide funding, receive sustainability certification in return
+  - Translation layer needed: existing data → framework data → CO2 credits
+  - Marketplace eligibility requires open sustainability data
+- Regulatory compliance angle
+  - Companies obligated to report sustainability efforts
+  - Food bank sustainability data could fulfill reporting requirements
+  - Widens food bank mentioned as example case
+
+### Technical Implementation
+
+- Software layer development needed
+  - Translates existing food bank data into standardized framework
+  - Connects corporate funding to measurable sustainability outcomes
+  - Platform determines optimal money distribution across food banks
+
+---
+
+Chat with meeting transcript: https://notes.granola.ai/t/bc1d0374-9d5c-4105-ad61-79594d3a95be
