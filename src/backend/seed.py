@@ -154,9 +154,16 @@ def seed():
                     co2e_dry_goods_kg=co2 * 0.144,
                     co2e_bread_kg=co2 * 0.100,
                     co2e_prepared_kg=0.0,
+                    baseline_co2e_kg=co2 * 1.05,
+                    leakage_co2e_kg=co2 * 0.05,
+                    avoided_co2e_kg=co2,
                     counterfactual_route=CounterfactualEnum.incineration_energy_recovery,
-                    emission_factor_source="FAO Food Wastage Footprint 2013 + WRAP UK 2022",
-                    methodology_version="FRAME-NL-v1.0",
+                    emission_factor_source=(
+                        "GFN FRAME Methodology (Carbon Trust, Aug 2024); "
+                        "NL destination mix: CBS Afvalmonitor 2023; "
+                        "DM fractions: USDA FoodData Central"
+                    ),
+                    methodology_version="FRAME-NL-v2.0",
                 )
                 session.add(frame)
 
