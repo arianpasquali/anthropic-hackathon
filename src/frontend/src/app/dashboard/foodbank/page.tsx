@@ -85,7 +85,9 @@ export default function FoodbankDashboardPage() {
 
           {bank.category_mix && bank.annual_kg_rescued ? (
             <div className="mt-10 grid lg:grid-cols-[1.4fr_1fr] gap-x-10 gap-y-6 items-start">
-              <CategoryMixBars mix={bank.category_mix} totalKg={bank.annual_kg_rescued} />
+              <div className="min-w-0">
+                <CategoryMixBars mix={bank.category_mix} totalKg={bank.annual_kg_rescued} />
+              </div>
               <div>
                 <p className="eyebrow">Source legend</p>
                 <ul className="mt-3 flex flex-col gap-2 text-[13.5px]">
