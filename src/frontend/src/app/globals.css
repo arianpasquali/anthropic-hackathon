@@ -32,9 +32,11 @@
   --emerald-soft:   oklch(88%   0.04  155);
   --warning:        oklch(72%   0.15   75);
 
-  /* Type */
-  --font-display: 'Bricolage Grotesque', 'Editorial New', Georgia, serif;
-  --font-sans:    'Hanken Grotesk', system-ui, sans-serif;
+  /* Type — Fontshare (free, self-hosted CDN), Dutch civic editorial register
+     Display: Gambarino — editorial serif w/ character (PP Editorial New class)
+     Body:    Switzer   — Swiss grotesk, audit-grade (Söhne / ABC Diatype class) */
+  --font-display: 'Gambarino', 'Times New Roman', Georgia, serif;
+  --font-sans:    'Switzer', system-ui, -apple-system, sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 
   --radius: 4px;
