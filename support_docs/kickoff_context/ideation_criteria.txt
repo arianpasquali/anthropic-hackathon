@@ -1,0 +1,15 @@
+Hackathon Criteria:
+
+INNOVATION & CREATIVITY
+BUILD LOCAL THEME
+TECHNICAL EXECUTION
+IMPACT & VIABILITY
+PITCH & PRESENTATION
+
+Ideation Criteria:
+urgency: how critical of a problem this is to address
+impact: how many people does this affect?
+feasibility: how easy is it to build this?
+cost: how much will it cost to build this?
+risk:how likely is it that this will work?
+wow factor: how much of a wow factor does this have?

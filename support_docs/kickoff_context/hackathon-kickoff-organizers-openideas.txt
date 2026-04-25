@@ -1,0 +1,39 @@
+PERSONALIZED SUPPORT
+Background
+• Mental health conditions are among the leading causes of disability for young people worldwide, with most emerging before age 25.
+• War Child is developing a set of brief, preventative mental health interventions for youth aged 15-24.
+• Instead of one-size-fits-all, clinic-based care, we aim to offer the right support at the right time, based on young people's individual needs.
+• The challenge: how do we know who needs what? How can we do this in a youth-friendly and engaging way?
+Ask
+• How might Al help us listen better to young people in conflict-affected settings, understand their needs in real time, and connect them to personalised mental health support that fits into their everyday lives?
+
+
+REIMAGINING CASE MANAGEMENT
+Background
+• In acute humanitarian crises, children face heightened risks of violence, abuse, exploitation and separation.
+• Child protection case management is a frontline and life-saving response.
+• Yet, in many emergency contexts, the systems designed to protect children are strained or break down entirely.
+• Despite growing investment in digital innovation, solutions that are low-tech, offline-capable, and context-resilient remain underdeveloped.
+Ask:
+• Is it possible to design a practical, low-tech or offline-capable solution that strengthens child protection case management in acute humanitarian settings while preserving quality, confidentiality, and safety, especially when internet access is limited and technology may not always be available?
+
+RE-INVENT DIGITAL MAILROOM
+Background
+• Our current communication system-built on top of Salesforcehas become complex, fragile, and hard to change. We believe there's a better way. Currently we rely on automated communication flows (emails, letters) triggered by customer and agreement events. Today, this logic lives inside Salesforce and has grown into a system that is:
+• Hard to understand and maintain
+• Difficult to adapt without technical support
+• Increasingly prone to incidents
+• We're looking to explore alternative approaches that are more modular, transparent, and adaptable
+Ask:
+• Design and prototype a smarter, more flexible way to generate and manage customer communications-decoupled from core systems, transparent by design, and easy to configure.
+
+ENHACING DATA PRIVACY
+Background
+:
+Data is essential: We rely on good data over time to understand what works and improve our programs.
+Data is very sensitive: We collect personal information about children and vulnerable communities, which could cause harm if exposed.
+• We need to track people over time: To measure impact, we must link data to the same person, while still protecting their identity.
+• Work happens in tough environments: Data is collected in low-connectivity, high-risk settings, so solutions must be simple and secure.
+Strong privacy expectations: We must follow laws like GDPR (General Data Protection Regulation) and protect people's data responsibly.
+Ask:
+• Design a simple and secure solution that lets War Child track people over time without revealing who they are, It should protect identities, control who can access the data, and be easy to use in low-resource settings. Even if the system is hacked, the data should not be usable to identify or harm any individual.

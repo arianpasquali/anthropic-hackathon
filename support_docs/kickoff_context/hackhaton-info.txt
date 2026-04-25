@@ -1,0 +1,68 @@
+Theme
+​Technology is getting rapidly more powerful — but not everyone has equal access.
+
+​On April 25–26, we are bringing together 100 of the best builders to create products for people and sectors that have less access, or risk being left behind entirely.
+
+​Build local: think minorities, non-profits, municipalities, emergency services, or even countries.
+
+
+Jury
+Some of the best minds in the Amsterdam ecosystem will be there to critique your pitches.
+
+Adriaan Mol
+Founder Mollie
+One of the most influential figures in the Amsterdam startup ecosystem, founder of Bird and Mollie and supporting the majority of the Netherland’s most promising startups as angel investor.
+
+Duco van Lanschot
+CEO & co-founder at Duna
+Duna is changing the way business do KYB, a massive market. Duco was the first European hire at Stripe and led its Benelux operations until stepping into the role of CCO at Fourthline. Before that did consulting at McKinsey, running Marathon des Sables, running International Expansion for Blendle.
+
+Clare Jones
+CEO at Polarsteps
+Clare has an extremely extensive track record in social enterprise and investing. She now heads Polarsteps, one of the most used travel apps in the world.
+
+Ruben Timmermans
+Founder at The School of Moral Ambition
+Together with Rutger Bregman founded the School of Moral Ambition tackling some of the most pressing issues of our time.
+Host
+Jacqueline van den Ende
+CEO & co-founder at Carbon Equity
+Founded Carbon Equity to make investing in climate targeted businesses more accessible along with providing more capital for companies improving our planet.
+
+
+Sponsors and Partners
+Partner Tooling
+Anthropic
+🆕 Please note that:
+You can get rejected sometimes, please take into consideration to use a ‘console id’ and not a ‘non-conventional’ email as this can cause this. If you encounter any issues please send an email to hackathon+whalexanthropichack@anthropic.com which should help you solve it.
+There is a max set of $50, when run out this can be changed. However, we do encourage you to use the right tools for the right problems 😉. (And don’t spend it before the hack).
+**We’re partnering with Anthropic, an AI research and product company building reliable and steerable AI systems.
+With models like Claude, you can build AI applications that are not only powerful, but also safe, interpretable, and aligned with user intent.
+Implementation:
+Every team member can fill in this form and please do this today so your credits will be supplied.
+Note that when filling in your account id, it needs to be a Console Account (not for example on a personal Max plan).
+Claude code docs
+
+Solvimon
+We’re partnering with Solvimon, an end-to-end monetization platform that helps you design pricing, manage payments, and launch self-serve checkout flows.
+With Solvimon, you can easily add a payment integration, set up pricing plans, or create a donation check-out link for your project.
+We encourage you to think beyond the prototype and see how your project could work in the real world. Many companies, including those trying to do good, struggle because their business model doesn’t hold up.
+Implementation:
+Every team has an API-KEY configured and a platform on the Solvimon Test environment
+API-KEY (see team email)
+Use the Solvimon MCP docs to set up your check-out link
+
+Reson8
+We’re partnering with Reson8, a hyper-customizable speech recognition platform that lets you build voice-enabled AI tailored to real-world use cases. (In Dutch).
+With Reson8, you can add accurate speech-to-text to your project that adapts to your domain, whether that’s healthcare, legal, or customer support without complex setup.
+We encourage you to consider building with voice, especially since it can make your solutions more accessible to people who may not be able to rely on traditional interfaces.
+Implementation:
+Every team can issue a free tier plan at Reson8 here
+Reson8 docs
+
+boxd
+We're partnering with boxd , an agent-first cloud platform that spins up a full microVM for you - or your agent - in seconds. Each VM is a real Linux box with a public HTTPS URL, root access, and a persistent disk.
+With boxd, you can ship your project to a live URL without touching AWS, ngrok, or Vercel - and give each agent its own disposable environment to fork, break, and throw away.
+Implementation: 
+run ssh boxd.sh and connect your GitHub 
+Docs

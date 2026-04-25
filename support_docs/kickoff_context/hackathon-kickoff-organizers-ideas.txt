@@ -1,0 +1,29 @@
+some ideas based on the kickoff
+
+-   **Solve a real Warchild problem, not a demo problem.** The kickoff says the team will present **actual challenges** they face, with the goal of solving something practical over the weekend. That suggests ideas should be concrete, narrow, and deployable.
+    
+-   **Bias toward real-world communication use cases.** One clear theme is **children’s communication systems**, which is probably the strongest domain signal in the notes.
+    
+-   **Build for current limits, not frontier ambition.** The notes emphasize that timelines are unclear, many people use AI too early, and the focus should be on **product usage** and practical limits rather than pure capability. That points toward simple, reliable workflows over ambitious agentic systems.
+    
+-   **Startup-style wedge thinking fits.** The “support across all stages” and “symbiotic relationship with startups” framing suggests judges may respond well to a project with a clear initial user, painful workflow, and believable expansion path.
+
+ood hackathon directions from this meeting:
+
+-   *Communication assistant for aid workers*
+    
+    -   Turn messy field notes into structured child-case updates
+-   *Scenario triage tool*
+    
+    -   Classify incoming issues and suggest next actions
+-   *Low-friction intake system*
+    
+    -   Capture real-world cases quickly from staff with minimal typing
+-   *Constraint-aware copilot*
+    
+    -   Help teams work within policy / safety / operational limits
+-   *Weekend-solvable vertical tool*
+    
+    -   One painful Warchild workflow, done very well
+
+Best takeaway: *don’t build a general AI app; build a tight workflow tool around a real Warchild communication/problem-reporting bottleneck.*
