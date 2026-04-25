@@ -1,0 +1,367 @@
+KLIMAATKRACHT — ASCII WIREFRAMES
+=================================
+6 screens · klimaatkracht.nl
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SCREEN 1 — LANDING  /
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ ┌────────────────────────────────────────────────────────────────────┐
+ │  [KK]  Klimaatkracht       Marketplace  Methodology  For Food Banks│
+ ├──────────────────────────────────┬─────────────────────────────────┤
+ │  FOR CORPORATES                  │  FOR FOOD BANKS                 │
+ │                                  │                                 │
+ │  ████████████████████████        │  ████████████████████████       │
+ │  ███████████████                 │  ████████████████               │
+ │                                  │                                 │
+ │  ░░░░░░░░░░░░░░░░░░░░░░          │  ░░░░░░░░░░░░░░░░░░░░           │
+ │  ░░░░░░░░░░░░░░░                 │  ░░░░░░░░░░░░░                  │
+ │                                  │                                 │
+ │  [Browse marketplace →]          │  [Join as food bank →]          │
+ │  [View methodology →]            │                                 │
+ │                                  │                                 │
+ ├──────────────────────────────────┴─────────────────────────────────┤
+ │                                                                    │
+ │      4,200 tCO₂e/yr          7.84M kg/yr       5,800 hh/wk        │
+ │      avoided                 rescued            served             │
+ │                                                                    │
+ ├────────────────────────────────────────────────────────────────────┤
+ │  HOW IT WORKS                                                      │
+ │                                                                    │
+ │  ┌──────────────┐     ┌──────────────┐     ┌──────────────┐       │
+ │  │  1           │     │  2           │     │  3           │       │
+ │  │              │     │              │     │              │       │
+ │  │  Food bank   │ ──► │  FRAME       │ ──► │  Corporate   │       │
+ │  │  uploads     │     │  engine      │     │  buys pkg,   │       │
+ │  │  annual data │     │  computes    │     │  gets CSR    │       │
+ │  │              │     │  CO₂e        │     │  report      │       │
+ │  └──────────────┘     └──────────────┘     └──────────────┘       │
+ │                                                                    │
+ ├────────────────────────────────────────────────────────────────────┤
+ │  FOOD BANKS ON THE MAP                  Explore all food banks →   │
+ │                                                                    │
+ │  ┌──────────────────────────────────────────────────────────────┐  │
+ │  │                                                              │  │
+ │  │          • Groningen                                         │  │
+ │  │                                                              │  │
+ │  │    • Amsterdam       • Haaglanden                            │  │
+ │  │                                                              │  │
+ │  │                                    • Eindhoven               │  │
+ │  │      • Rotterdam                                             │  │
+ │  │                    • Breda                                   │  │
+ │  │                                                              │  │
+ │  │                  [ NL Map — Leaflet ]                        │  │
+ │  └──────────────────────────────────────────────────────────────┘  │
+ │                                                                    │
+ ├────────────────────────────────────────────────────────────────────┤
+ │  FRAME methodology · Global Foodbanking Network · /methodology     │
+ └────────────────────────────────────────────────────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SCREEN 2 — MARKETPLACE  /marketplace
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ ┌────────────────────────────────────────────────────────────────────┐
+ │  [KK]  Klimaatkracht       Marketplace  Methodology  For Food Banks│
+ ├────────────────────────────────────────────────────────────────────┤
+ │  VERIFIED AVOIDED EMISSIONS · CSRD-READY                          │
+ │  ██████████████████████████████████████████████████               │
+ │  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░                           │
+ │                                                                    │
+ │  [All]  [CO₂ Focus]  [Social Focus]  [Balanced]                   │
+ │                                                                    │
+ ├────────────────────────────────────────────────────────────────────┤
+ │  NL MAP  [NEW — react-leaflet]                                     │
+ │                                                                    │
+ │  ┌──────────────────────────────────────────────────────────────┐  │
+ │  │          • Groningen                                         │  │
+ │  │    • Amsterdam       • Haaglanden                            │  │
+ │  │      • Rotterdam  • Breda    • Eindhoven                     │  │
+ │  │                  [ NL Map — Leaflet · click pin = scroll ]   │  │
+ │  └──────────────────────────────────────────────────────────────┘  │
+ │                                                                    │
+ ├────────────────────────────────────────────────────────────────────┤
+ │  PACKAGES                                                          │
+ │                                                                    │
+ │  ┌─────────────────────┐  ┌─────────────────────┐  ┌────────────┐ │
+ │  │ ▌ROTTERDAM          │  │  AMSTERDAM          │  │ HAAGLANDEN │ │
+ │  │                     │  │                     │  │            │ │
+ │  │  €25,000 · Q pkg    │  │  ░░░░░░░░░░░░       │  │ ░░░░░░░░░░ │ │
+ │  │  600 tCO₂e avoided  │  │  ░░░░░░░░░░         │  │ ░░░░░░░    │ │
+ │  │  323k kg rescued    │  │                     │  │            │ │
+ │  │  8,400 people       │  │  ░░░░░░░░░░░░       │  │ ░░░░░░░░░░ │ │
+ │  │                     │  │                     │  │            │ │
+ │  │  [Solo eligible]    │  │                     │  │            │ │
+ │  │                     │  │  [View package →]   │  │ [View →]   │ │
+ │  │  [View package →]   │  └─────────────────────┘  └────────────┘ │
+ │  └─────────────────────┘                                           │
+ └────────────────────────────────────────────────────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SCREEN 3 — PACKAGE DETAIL  /packages/{id}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ ┌────────────────────────────────────────────────────────────────────┐
+ │  [KK]  Klimaatkracht       Marketplace  Methodology  For Food Banks│
+ ├────────────────────────────────────────────┬───────────────────────┤
+ │                                            │  ┌─────────────────┐  │
+ │  ██████████████████████████████████        │  │ Rotterdam Q pkg │  │
+ │  [Rotterdam] [Noord-Holland]               │  │                 │  │
+ │  [ESRS E1] [S3]                            │  │  €25,000        │  │
+ │                                            │  │                 │  │
+ │  ┌──────────┐  ┌──────────┐  ┌──────────┐  │  │  ░░░░░░░░░░░   │  │
+ │  │ 600      │  │ 323k kg  │  │ 4,500+   │  │  │  ░░░░░░░░░░░   │  │
+ │  │ tCO₂e    │  │ rescued  │  │ hh/wk    │  │  │                 │  │
+ │  └──────────┘  └──────────┘  └──────────┘  │  │  [Purchase →]  │  │
+ │                                            │  └─────────────────┘  │
+ │  PROJECTED ALLOCATION  [top 6 of 50 shown] │                       │
+ │                                            │  (sticky sidebar)     │
+ │  ┌──────────────────────────────────────┐  │                       │
+ │  │  Bank              Share    kg       │  │                       │
+ │  │  ─────────────────────────────────── │  │                       │
+ │  │  ▌ Rotterdam        42.8%   138k     │  │                       │
+ │  │    Amsterdam        18.3%   59k      │  │                       │
+ │  │    Haaglanden       14.1%   46k      │  │                       │
+ │  │    Eindhoven         9.7%   31k      │  │                       │
+ │  │    Groningen         8.8%   28k      │  │                       │
+ │  │    Breda             6.3%   20k      │  │                       │
+ │  └──────────────────────────────────────┘  │                       │
+ │                                            │                       │
+ │  ┌──────────────────────────────────────┐  │                       │
+ │  │  WHAT'S INCLUDED                     │  │                       │
+ │  │  · Quarterly ESRS E1 + S3 report     │  │                       │
+ │  │  · FRAME methodology workings        │  │                       │
+ │  │  · Source citations (RIVM, FAO…)     │  │                       │
+ │  └──────────────────────────────────────┘  │                       │
+ │                                            │                       │
+ │  About the methodology → /methodology      │                       │
+ └────────────────────────────────────────────┴───────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SCREEN 4 — CORPORATE DASHBOARD  /dashboard/corporate
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ ┌────────────────────────────────────────────────────────────────────┐
+ │  [KK]  Klimaatkracht       Marketplace  Methodology  For Food Banks│
+ ├────────────────────────────────────────────────────────────────────┤
+ │  [Heineken N.V.] [Corporate sponsor]  Q2 2026   [View CSR report →]│
+ ├────────────────────────────────────────────────────────────────────┤
+ │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌────────┐ │
+ │  │ 600          │  │ 323,389 kg   │  │ 8,400        │  │ €25k   │ │
+ │  │ tCO₂e        │  │ rescued      │  │ people       │  │ invest.│ │
+ │  │ avoided      │  │              │  │ reached      │  │        │ │
+ │  └──────────────┘  └──────────────┘  └──────────────┘  └────────┘ │
+ ├──────────────────────────────┬─────────────────────────────────────┤
+ │                              │                                     │
+ │  CO₂e BY FOOD CATEGORY       │  ALLOCATION BY REGION               │
+ │  [Recharts BarChart]         │  [SVG heatmap]                      │
+ │                              │                                     │
+ │        ██                    │  ┌────────────────────┐             │
+ │     ██ ██                    │  │  Noord         8%  │░░           │
+ │     ██ ██ ██                 │  │                    │             │
+ │  ██ ██ ██ ██ ██              │  │  West/Randstad 69% │████████████ │
+ │  ██ ██ ██ ██ ██ ██           │  │                    │             │
+ │  ██ ██ ██ ██ ██ ██ ██        │  │  Zuid          15% │███          │
+ │  pr dr da me ba pr eg        │  │                    │             │
+ │                              │  │  Oost           8% │░░           │
+ │  ATTRIBUTION                 │  └────────────────────┘             │
+ │  7.77% of Rotterdam baseline │                                     │
+ │  [████████░░░░░░░░░░░░░░░░]  │  TOP BANK ALLOCATION                │
+ │                              │  Rotterdam    42.8%  138k kg        │
+ │                              │  Amsterdam    18.3%   59k kg        │
+ │                              │  Haaglanden   14.1%   46k kg        │
+ ├──────────────────────────────┴─────────────────────────────────────┤
+ │  CSR REPORT — Q2 2026  [ready]  [ESRS E1]  [ESRS S3]  [CSRD-ready]│
+ │                                                                    │
+ │  ┌──────────────────────────────────────────────────────────────┐  │
+ │  │  E1-1  Climate transition plan          [██████████░░░░░░]   │  │
+ │  │  E1-4  GHG reduction targets            −600 tCO₂e           │  │
+ │  │  E1-6  Gross Scope 3 emissions          upstream food waste   │  │
+ │  │  S3-1  Material impacts on communities  8,400 individuals     │  │
+ │  │  S3-4  Channels for engagement          ░░░░░░░░░░░░░░        │  │
+ │  │  FRAME methodology workings             attribution calc      │  │
+ │  │  Source citations                       RIVM · FAO · WRAP     │  │
+ │  │                                                               │  │
+ │  │  generated: claude-sonnet-4-6 · 2026-04-25                   │  │
+ │  │  [View full report →]                                         │  │
+ │  └──────────────────────────────────────────────────────────────┘  │
+ ├────────────────────────────────────────────────────────────────────┤
+ │  €25,000  [paid]  Q2 2026                                          │
+ └────────────────────────────────────────────────────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SCREEN 5 — FOOD BANK DASHBOARD  /dashboard/foodbank
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ ┌────────────────────────────────────────────────────────────────────┐
+ │  [KK]  Klimaatkracht       Marketplace  Methodology  For Food Banks│
+ ├────────────────────────────────────────────────────────────────────┤
+ │  [Voedselbank Amsterdam] [Food bank operator]  Noord-Holland       │
+ ├────────────────────────────────────────────────────────────────────┤
+ │  ┌─────────────────────┐  ┌─────────────────────┐  ┌────────────┐ │
+ │  │ €0                  │  │ 0                   │  │ Annual data│ │
+ │  │ received            │  │ active sponsors     │  │ [Not upl.] │ │
+ │  └─────────────────────┘  └─────────────────────┘  └────────────┘ │
+ ├───────────────────────────────────┬────────────────────────────────┤
+ │                                   │  ╔════════════════════════════╗ │
+ │  UPLOAD ANNUAL REPORT             │  ║  (locked until uploaded)   ║ │
+ │  [mock ingestion]                 │  ║                            ║ │
+ │                                   │  ║  Your bank will appear     ║ │
+ │  ┌──────────────────────────────┐ │  ║  in marketplace once       ║ │
+ │  │                              │ │  ║  data uploaded & reviewed  ║ │
+ │  │     ⬆                        │ │  ╚════════════════════════════╝ │
+ │  │  Drop PDF / Excel / CSV here │ │                                │
+ │  │                              │ │                                │
+ │  │  Year: [2024 ▼] [2025 ▼]    │ │                                │
+ │  │                              │ │                                │
+ │  └──────────────────────────────┘ │                                │
+ │                                   │                                │
+ │  Upload progress (mock):          │                                │
+ │  Uploading ────────────────────── │                                │
+ │  Parsing with Claude ──────────── │                                │
+ │  Computing FRAME ──────────────── │                                │
+ │  Done ✓ ────────────────────────  │                                │
+ │                                   │                                │
+ ├───────────────────────────────────┴────────────────────────────────┤
+ │  POST-UPLOAD METRICS (revealed after upload)                       │
+ │                                                                    │
+ │  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐       │
+ │  │  2,140 tCO₂e   │  │  4.0M kg       │  │  1,850 hh/wk   │       │
+ │  │  avoided/yr    │  │  rescued/yr    │  │                │       │
+ │  └────────────────┘  └────────────────┘  └────────────────┘       │
+ │                                                                    │
+ │  ┌──────────────────────────────────────────────────────────────┐  │
+ │  │  1,960 people reached                                        │  │
+ │  └──────────────────────────────────────────────────────────────┘  │
+ │                                                                    │
+ │  CO₂e BY FOOD CATEGORY  [Recharts BarChart]                        │
+ │                                                                    │
+ │        ██                                                          │
+ │     ██ ██                                                          │
+ │     ██ ██ ██                                                       │
+ │  ██ ██ ██ ██ ██                                                    │
+ │  ██ ██ ██ ██ ██ ██                                                 │
+ │  ██ ██ ██ ██ ██ ██ ██                                              │
+ │  pr dr da me ba pr eg                                              │
+ │                                                                    │
+ ├────────────────────────────────────────────────────────────────────┤
+ │  SOURCE LEGEND                                                     │
+ │  [extracted] = parsed from PDF    [inferred] = national average    │
+ └────────────────────────────────────────────────────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SCREEN 6 — METHODOLOGY  /methodology
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ ┌────────────────────────────────────────────────────────────────────┐
+ │  [KK]  Klimaatkracht       Marketplace  Methodology  For Food Banks│
+ ├────────────────────────────────────────────────────────────────────┤
+ │                                                                    │
+ │  METHODOLOGY                                            ● live     │
+ │  How we calculate avoided CO₂e                                     │
+ │  deterministic · source-cited · auditor-grade                      │
+ │                                                                    │
+ │  [FRAME Aligned] [CSRD-Ready] [ESRS E1 + S3] [NL-specific]        │
+ │                                                                    │
+ ├────────────────────────────────────────────────────────────────────┤
+ │  INGESTION PIPELINE  (arrows animate left→right)                   │
+ │                                                                    │
+ │  ┌──────────┐  ──►  ┌──────────┐  ──►  ┌──────────┐  ──►  ┌─────┐│
+ │  │ 📄       │       │ 🤖       │       │ ✅       │       │ 🧮  ││
+ │  │ Annual   │       │ Claude   │       │Provenance│       │FRAME││
+ │  │ Report   │       │ Extract  │       │ Tagging  │       │Calc ││
+ │  └──────────┘       └──────────┘       └──────────┘       └─────┘│
+ │                                                          ──►  ┌────┐│
+ │                                                               │📊 ││
+ │                                                               │CSR ││
+ │                                                               │Rpt ││
+ │                                                               └────┘│
+ ├────────────────────────────────────────────────────────────────────┤
+ │  CORE FORMULA  (shimmer animation)                                 │
+ │                                                                    │
+ │  ┌──────────────────────────────────────────────────────────────┐  │
+ │  │  CO₂e = Σ( kg_i × EF_i ) × CF_NL                            │  │
+ │  │          ─────────────────────────                           │  │
+ │  │          where CF_NL = 0.93                                  │  │
+ │  │                                                              │  │
+ │  │  # NL uses incineration-with-energy-recovery, not landfill   │  │
+ │  └──────────────────────────────────────────────────────────────┘  │
+ │                                                                    │
+ ├────────────────────────────────────────────────────────────────────┤
+ │  EMISSION FACTORS  (bars animate in on scroll)                     │
+ │                                                                    │
+ │  Category     EF      Bar                    Source               │
+ │  ─────────────────────────────────────────────────────────────     │
+ │  Produce      1.0  [██░░░░░░░░░░░░░░]  FAO Food Wastage (2013)    │
+ │  Bakery       1.5  [███░░░░░░░░░░░░░]  WRAP Courtauld 2030        │
+ │  Dry goods    2.0  [████░░░░░░░░░░░░]  FAO FWF + Poore 2018       │
+ │  Prepared     3.0  [██████░░░░░░░░░░]  Poore & Nemecek (2018)     │
+ │  Dairy        3.2  [██████░░░░░░░░░░]  FAO FWF + RIVM dairy LCA   │
+ │  Eggs         4.5  [█████████░░░░░░░]  FAO FWF + Dutch egg data   │
+ │  Meat         8.5  [████████████████]  FAO FWF Dutch meat mix      │
+ │                                                                    │
+ ├────────────────────────────────────────────────────────────────────┤
+ │  NL COUNTERFACTUAL                                                 │
+ │                                                                    │
+ │  ┌──────────────────────┐       ┌──────────────────────┐          │
+ │  │  NL (used)           │  vs   │  Global avg (unused) │          │
+ │  │                      │       │                      │          │
+ │  │  0.93                │       │  1.0                 │          │
+ │  │  incineration +      │       │  US landfill         │          │
+ │  │  energy recovery     │       │  baseline            │          │
+ │  └──────────────────────┘       └──────────────────────┘          │
+ │  Source: RIVM Afvalmonitor 2024 + CBS Waste Statistics             │
+ │                                                                    │
+ ├────────────────────────────────────────────────────────────────────┤
+ │  PROVENANCE SYSTEM                                                 │
+ │                                                                    │
+ │  [extracted]         Parsed directly from PDF/annual report        │
+ │  [inferred_natl_avg] National average applied for missing values   │
+ │  [inferred_calc]     Derived via formula from other fields         │
+ │  [manual]            Operator-entered — flagged for review         │
+ │                                                                    │
+ ├────────────────────────────────────────────────────────────────────┤
+ │  AUDIT TRAIL                                                       │
+ │                                                                    │
+ │  ① Food bank submits annual report (PDF/Excel/CSV)                 │
+ │  ② Claude extracts measurements ─────────────── [extracted]        │
+ │  ③ Missing values → national averages ──────── [inferred]          │
+ │  ④ FRAME calculation applied ───────────────── [calculation]       │
+ │  ⑤ Output reviewed by FRAME-aligned algorithm                      │
+ │  ⑥ CSR report generated ────────────────────── [ESRS E1·S3·FRAME]  │
+ │                                                                    │
+ ├────────────────────────────────────────────────────────────────────┤
+ │  TRUST PILLARS                                                     │
+ │                                                                    │
+ │  ┌───────────────────┐  ┌───────────────────┐  ┌───────────────┐  │
+ │  │ 🧮                │  │ 📚                │  │ 🇳🇱           │  │
+ │  │ Deterministic     │  │ Source citations  │  │ Conservative  │  │
+ │  │ formula           │  │                   │  │ NL baseline   │  │
+ │  │                   │  │ Every EF traces   │  │               │  │
+ │  │ Same inputs →     │  │ to FAO, WRAP,     │  │ CF 0.93 uses  │  │
+ │  │ same output.      │  │ RIVM, or CBS.     │  │ incineration, │  │
+ │  │ No ML black box.  │  │                   │  │ not landfill. │  │
+ │  └───────────────────┘  └───────────────────┘  └───────────────┘  │
+ │                                                                    │
+ └────────────────────────────────────────────────────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+LEGEND
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ██████  = placeholder text / heading
+  ░░░░░░  = placeholder body copy / secondary text
+  ┌──┐    = card / panel
+  ╔══╗    = locked / disabled state
+  [  ]    = button or badge
+  ▌       = active / highlighted row
+  •       = map pin
+  ──►     = animated arrow / flow direction
+  ①②③    = numbered step
