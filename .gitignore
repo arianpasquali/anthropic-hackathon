@@ -6,3 +6,5 @@ __pycache__/
 *.pyc
 *.db
 logs/
+logs/extraction.log
+logs/extraction.log
