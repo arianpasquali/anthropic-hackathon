@@ -5,3 +5,4 @@ test_extraction.py
 __pycache__/
 *.pyc
 *.db
+logs/
