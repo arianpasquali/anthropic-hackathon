@@ -1,6 +1,6 @@
 import { api } from "@/lib/api"
 import { MarketplaceFilters } from "@/components/marketing/MarketplaceFilters"
-import { NLMapDynamic } from "@/components/map/NLMapDynamic"
+import { NLMapDark } from "@/components/map/NLMapDark"
 import { formatNumber, formatTCO2e } from "@/lib/format"
 import Link from "next/link"
 
@@ -41,17 +41,15 @@ export default async function MarketplacePage() {
         <MarketplaceFilters packages={packages} />
       </section>
 
-      <section className="mt-24 grid lg:grid-cols-[1fr_1.2fr] gap-12 items-start">
-        <div>
-          <p className="eyebrow">Where the rescue happens</p>
-          <h2 className="display text-4xl mt-3 tracking-[-0.02em] max-w-[18ch]">
-            {formatNumber(banks.length)} food banks across the Netherlands.
-          </h2>
-          <p className="text-text-muted text-[14.5px] mt-5 max-w-[40ch] leading-relaxed">
-            The map shows every operator we ingest data for. Each pin links to its
-            transparency profile, including extracted vs inferred provenance per field.
-          </p>
-          <dl className="grid grid-cols-2 gap-y-5 gap-x-6 mt-10 pt-8 border-t border-line">
+      <section className="mt-24">
+        <div className="flex flex-col md:flex-row md:items-end gap-6 mb-10">
+          <div className="flex-1">
+            <p className="eyebrow">Where the rescue happens</p>
+            <h2 className="display text-4xl mt-3 tracking-[-0.02em] max-w-[22ch]">
+              {formatNumber(banks.length)} food banks across the Netherlands.
+            </h2>
+          </div>
+          <dl className="flex gap-10 pb-1 shrink-0">
             <div>
               <dt className="eyebrow">Annual baseline</dt>
               <dd className="display tabular text-3xl mt-1">{formatTCO2e(totalCo2)}</dd>
@@ -64,7 +62,7 @@ export default async function MarketplacePage() {
             </div>
           </dl>
         </div>
-        <NLMapDynamic banks={banks} height={460} />
+        <NLMapDark banks={banks} height={480} />
       </section>
 
       <section className="mt-24 grid md:grid-cols-2 gap-x-12 gap-y-6 border-t border-line pt-10">
