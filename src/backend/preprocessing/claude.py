@@ -30,6 +30,9 @@ def detect_drift(raw: dict[str, Any], schema: type[BaseModel]) -> bool:
     return len(overlap) / len(non_null_keys) < 0.5
 
 
+_RETRY_DELAYS = [5, 15, 30]
+
+
 def _call_claude(
     client: anthropic.Anthropic,
     text: str,
@@ -39,21 +42,33 @@ def _call_claude(
     schema_cls = TOOL_SCHEMA_MAP[tool_name]
     system_prompt = SECTION_PROMPTS[tool_name]
     logger.debug(f"[{tool_name}] calling {model} ({len(text)} chars)")
-    response = client.messages.create(
-        model=model,
-        max_tokens=1024,
-        system=system_prompt,
-        tools=[{"name": tool_name, "input_schema": schema_cls.model_json_schema()}],
-        tool_choice={"type": "tool", "name": tool_name},
-        messages=[{"role": "user", "content": text[:20000]}],
-    )
-    raw = response.content[0].input
-    logger.debug(
-        f"[{tool_name}] {model} → stop={response.stop_reason} "
-        f"in={response.usage.input_tokens} out={response.usage.output_tokens}"
-    )
-    logger.debug(f"[{tool_name}] raw output: {raw}")
-    return raw
+
+    for attempt, delay in enumerate([0] + _RETRY_DELAYS):
+        if delay:
+            logger.warning(f"[{tool_name}] rate limited, retrying in {delay}s (attempt {attempt + 1})")
+            time.sleep(delay)
+        try:
+            response = client.messages.create(
+                model=model,
+                max_tokens=1024,
+                system=system_prompt,
+                tools=[{"name": tool_name, "input_schema": schema_cls.model_json_schema()}],
+                tool_choice={"type": "tool", "name": tool_name},
+                messages=[{"role": "user", "content": text[:20000]}],
+            )
+        except anthropic.RateLimitError:
+            if attempt < len(_RETRY_DELAYS):
+                continue
+            raise
+        raw = response.content[0].input
+        logger.debug(
+            f"[{tool_name}] {model} → stop={response.stop_reason} "
+            f"in={response.usage.input_tokens} out={response.usage.output_tokens}"
+        )
+        logger.debug(f"[{tool_name}] raw output: {raw}")
+        return raw
+
+    raise RuntimeError(f"[{tool_name}] exhausted retries")
 
 
 def _parse_section(raw: dict, schema_cls: type[BaseModel]) -> BaseModel:
