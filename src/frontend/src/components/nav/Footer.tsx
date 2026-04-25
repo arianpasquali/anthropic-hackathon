@@ -12,8 +12,8 @@ export function Footer() {
             </span>
           </div>
           <p className="text-[13px] text-text-muted leading-relaxed max-w-[36ch]">
-            Verified avoided emissions from Dutch food rescue. Built on FRAME with
-            CSRD-aligned ESRS E1+S3 reporting.
+            Verified climate contribution from Dutch food rescue. Built on FRAME with
+            ESRS&nbsp;E5+S3 contribution disclosures. Climate contribution, not offsetting.
           </p>
         </div>
 
@@ -42,11 +42,23 @@ export function Footer() {
         />
       </div>
       <div className="border-t border-line/60">
-        <div className="mx-auto max-w-[1280px] px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-2 text-[12px] text-text-faint tabular">
-          <span>Built on FRAME · Aligned with Global FoodBanking Network</span>
-          <span>
-            © {new Date().getFullYear()} Klimaatkracht · Sources: FAO · WRAP · RIVM · CBS
-          </span>
+        <div className="mx-auto max-w-[1280px] px-6 py-6 flex flex-col gap-3">
+          <p className="text-[11.5px] text-text-faint leading-relaxed max-w-[88ch]">
+            <span className="text-text-muted">Disclaimer.</span> Klimaatkracht packages
+            fund a verified climate contribution and are disclosed under ESRS&nbsp;E5
+            (resource use &amp; circular economy) and S3 (affected communities).
+            They are not carbon offsets, do not reduce the buyer&apos;s
+            Scope&nbsp;1/2/3 footprint under ESRS&nbsp;E1, and do not constitute
+            a compliance product. Avoided emissions are reported separately per
+            EFRAG&nbsp;E1-4 §AR-58. Aligned with VCMI and Oxford Net Zero contribution-claim
+            guidance and the EU Green Claims Directive.
+          </p>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-2 text-[12px] text-text-faint tabular">
+            <span>Built on FRAME · Aligned with Global FoodBanking Network</span>
+            <span>
+              © {new Date().getFullYear()} Klimaatkracht · Sources: FAO · WRAP · RIVM · CBS
+            </span>
+          </div>
         </div>
       </div>
     </footer>

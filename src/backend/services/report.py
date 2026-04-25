@@ -15,10 +15,50 @@ _REPORTS_DIR = Path("data/reports")
 _REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
 _SYSTEM = """\
-You are a sustainability reporting specialist writing CSRD/ESRS E5 compliant impact reports.
-Write in formal Dutch corporate language. Use ESRS E5 (Circulaire economie & voedselverspilling)
-and ESRS E2/S3 framing where relevant. Be precise, cite the numbers provided, avoid fluff.
-Output clean Markdown suitable for embedding in a PDF report."""
+You are a sustainability reporting specialist drafting an ESRS-aligned climate-contribution
+disclosure (NOT a CSRD/ESRS E1 offset claim) for a Dutch corporate funding Dutch foodbank
+operations via Klimaatkracht.
+
+Framing rules — STRICTLY ENFORCED:
+- Frame the disclosure under ESRS E5 (Resource use & circular economy / voedselverspilling)
+  and ESRS S3 (Affected communities). Reference ESRS E2 only where pollution is directly
+  relevant.
+- Do NOT claim the reported CO₂e reduces the buyer's Scope 1, 2, or 3 footprint.
+- Do NOT use the words "offset", "neutralisatie", "klimaatneutraal", "compensatie",
+  "CO₂-neutraal", or "compliance" in connection with this contribution.
+- Use "klimaatbijdrage" / "climate contribution" framing throughout. Avoided emissions
+  are reported separately per EFRAG E1-4 §AR-58 — disclose them as supplementary
+  information, not as a netting against own emissions.
+- Cite FRAME methodology (Global FoodBanking Network), the NL counterfactual
+  (incineration with energy recovery, RIVM Afvalmonitor 2024 + CBS Waste Statistics),
+  and the source provenance for each number.
+- Align with VCMI Claims Code of Practice and the Oxford Principles for Net Zero
+  Aligned Carbon Offsetting (contribution-claim track).
+- Acknowledge the EU Green Claims Directive: no comparative environmental superiority
+  claims, no unsubstantiated future commitments.
+
+Style:
+- Formal Dutch corporate language (CFO/auditor audience).
+- Precise. Every quantitative claim must reference the provided figures.
+- No fluff, no marketing language, no superlatives.
+- Output clean Markdown suitable for embedding in a PDF report.
+
+Required sections in the output:
+1. Strategische context (waarom voedselbanken bijdragen aan circulaire economie)
+2. Kwantitatieve klimaatbijdrage (CO₂e met expliciete vermelding "bijdrage, geen
+   compensatie", aantal voedselbanken, regio, FRAME-werking)
+3. Aansluiting bij ESRS E5 + S3 (en E2 waar relevant)
+4. Disclaimerblok aan het einde — VERBATIM:
+
+   > **Disclaimer.** Dit betreft een geverifieerde klimaatbijdrage, geen CO₂-compensatie
+   > onder ESRS E1. De gerapporteerde CO₂e wordt niet in mindering gebracht op de
+   > Scope 1/2/3 voetafdruk van de afnemer en vervangt geen wettelijke
+   > rapportageverplichting. Vermeden emissies worden afzonderlijk gerapporteerd
+   > overeenkomstig EFRAG E1-4 §AR-58. Methodologie: FRAME (Global FoodBanking Network)
+   > met Nederlandse counterfactual (RIVM Afvalmonitor 2024, CBS Waste Statistics).
+   > Aangesloten bij VCMI en Oxford Net Zero contribution-claim richtlijnen.
+
+5. Forward-looking statement over continuïteit van de klimaatbijdrage."""
 
 
 def _build_prompt(session: Session, sub: FundSubscription) -> str:
@@ -46,11 +86,14 @@ def _build_prompt(session: Session, sub: FundSubscription) -> str:
         "",
         f"Totale CO₂e impact: {sub.amount_eur * 24:.0f} kg (schatting op basis van pakketclaim)",
         "",
-        "Schrijf een CSRD-sectie (ca. 600 woorden) die:",
+        "Schrijf een ESRS E5+S3 klimaatbijdrage-sectie (ca. 600 woorden) die:",
         "1. De strategische context beschrijft (waarom voedselbanken bijdragen aan circulaire economie)",
-        "2. De kwantitatieve impact rapporteert (CO₂e, aantal voedselbanken, regio)",
-        "3. Aansluiting bij ESRS E5 en S3 toelicht",
-        "4. Eindigt met een forward-looking statement over continuïteit van de maatregel",
+        "2. De kwantitatieve klimaatbijdrage rapporteert (CO₂e expliciet als 'bijdrage, geen compensatie', aantal voedselbanken, regio, FRAME-werking)",
+        "3. Aansluiting bij ESRS E5 en S3 toelicht (geen E1-offsetclaim)",
+        "4. Het verplichte disclaimerblok bevat (zie systeemprompt — letterlijk overnemen)",
+        "5. Eindigt met een forward-looking statement over continuïteit van de klimaatbijdrage",
+        "",
+        "BELANGRIJK: vermijd de woorden 'offset', 'compensatie', 'klimaatneutraal', 'CO₂-neutraal', 'neutralisatie'. Gebruik 'klimaatbijdrage'.",
     ]
     return "\n".join(lines)
 

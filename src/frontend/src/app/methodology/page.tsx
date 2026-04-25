@@ -4,7 +4,7 @@ import { CF_NL, EMISSION_FACTORS, EMISSION_FACTOR_SOURCES, CATEGORY_LABELS } fro
 export const metadata = {
   title: "Methodology · Klimaatkracht",
   description:
-    "How Klimaatkracht computes avoided CO₂e from Dutch food rescue. FRAME methodology, NL counterfactual, emission factors, and provenance ledger.",
+    "How Klimaatkracht computes climate-contribution CO₂e from Dutch food rescue. FRAME methodology, NL counterfactual, emission factors, and provenance ledger. Contribution claim, not offsetting.",
 }
 
 const PIPELINE = [
@@ -12,7 +12,7 @@ const PIPELINE = [
   { kicker: "02", title: "Claude extraction", body: "Five parallel section-specific prompts extract typed measurements with provenance." },
   { kicker: "03", title: "Provenance ledger", body: "Every field is tagged: extracted, inferred (national avg / category split / calculation), or manual." },
   { kicker: "04", title: "FRAME compute", body: "kg × emission factor × NL counterfactual (0.93). Per-category and total CO₂e baseline persisted." },
-  { kicker: "05", title: "CSR disclosure", body: "On corporate purchase, allocation engine ranks banks; Claude composes ESRS E1 + S3 disclosure, streamed back via SSE." },
+  { kicker: "05", title: "Contribution disclosure", body: "On corporate purchase, allocation engine ranks banks; Claude composes ESRS E5 + S3 climate-contribution disclosure, streamed back via SSE." },
 ] as const
 
 const FACTOR_KEYS = ["produce", "bakery", "dry_goods", "prepared", "dairy", "eggs", "meat"] as const
@@ -25,7 +25,7 @@ export default function MethodologyPage() {
         <p className="eyebrow">Methodology</p>
         <h1 className="display text-5xl md:text-7xl mt-4 tracking-[-0.03em] max-w-[18ch]">
           How we compute{" "}
-          <span className="display-italic text-emerald-deep">avoided emissions.</span>
+          <span className="display-italic text-emerald-deep">climate contribution.</span>
         </h1>
         <p className="mt-7 text-text-muted text-[16px] max-w-[64ch] leading-relaxed">
           Klimaatkracht aligns with FRAME — the Food Recovery Avoided Methane Emissions
@@ -36,8 +36,9 @@ export default function MethodologyPage() {
         </p>
         <div className="mt-7 flex items-center gap-2 flex-wrap">
           <Badge variant="outline">FRAME aligned</Badge>
-          <Badge variant="outline">CSRD-ready</Badge>
-          <Badge variant="outline">ESRS E1 + S3</Badge>
+          <Badge variant="outline">ESRS-aligned</Badge>
+          <Badge variant="outline">ESRS E5 + S3</Badge>
+          <Badge variant="outline">Contribution claim</Badge>
           <Badge variant="outline">NL-specific</Badge>
         </div>
       </section>
@@ -46,7 +47,7 @@ export default function MethodologyPage() {
         <div className="mx-auto max-w-[1100px] px-6 py-20">
           <p className="eyebrow">Ingestion pipeline</p>
           <h2 className="display text-4xl mt-3 tracking-[-0.02em] max-w-[24ch]">
-            From an annual report PDF to a CSR disclosure.
+            From an annual report PDF to a contribution disclosure.
           </h2>
           <ol className="mt-12 grid md:grid-cols-5 gap-x-6 gap-y-8">
             {PIPELINE.map((step) => (
@@ -180,7 +181,30 @@ export default function MethodologyPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1100px] px-6 py-24">
+      <section id="claim-type" className="mx-auto max-w-[1100px] px-6 py-20">
+        <p className="eyebrow">Claim type</p>
+        <h2 className="display text-4xl mt-3 tracking-[-0.025em] max-w-[22ch]">
+          Climate contribution.{" "}
+          <span className="display-italic text-emerald-deep">Not offsetting.</span>
+        </h2>
+        <div className="mt-8 grid md:grid-cols-2 gap-x-10 gap-y-4 text-text-muted text-[14px] leading-relaxed max-w-[80ch]">
+          <p>
+            Klimaatkracht packages fund verified climate impact at Dutch foodbanks.
+            Corporates disclose this as a <span className="text-text">climate contribution</span>{" "}
+            under ESRS&nbsp;E5 (resource use &amp; circular economy) and ESRS&nbsp;S3
+            (affected communities) — not as Scope&nbsp;1/2/3 reduction or offset under
+            ESRS&nbsp;E1.
+          </p>
+          <p>
+            Avoided emissions are reported separately per EFRAG&nbsp;E1-4 §AR-58.
+            We align with VCMI &amp; Oxford Net Zero contribution-claim guidance and the
+            EU Green Claims Directive — no offset, neutrality, or compliance-substitute
+            claims are made or supported.
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1100px] px-6 py-24 border-t border-line">
         <p className="eyebrow">Trust pillars</p>
         <h2 className="display text-4xl mt-3 tracking-[-0.025em] max-w-[20ch]">
           What this approach buys you.

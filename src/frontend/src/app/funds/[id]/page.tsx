@@ -44,7 +44,7 @@ export default async function FundDetailPage({
         ) : null}
 
         <div className="grid grid-cols-3 gap-6 mt-10 pt-8 border-t border-line">
-          <Stat label="Total avoided" value={formatTCO2e(pkg.co2e_claim_kg / 1000)} />
+          <Stat label="Climate contribution" value={formatTCO2e(pkg.co2e_claim_kg / 1000)} />
           <Stat label="Allocated to" value={`${totals.banks} food banks`} />
           <Stat label="Per-bank avg" value={formatEur(pkg.price_eur / Math.max(1, totals.banks))} />
         </div>
@@ -99,7 +99,7 @@ export default async function FundDetailPage({
           <div className="border border-line rounded-[var(--radius-lg)] p-6 bg-surface max-w-[52ch]">
             <p className="eyebrow mb-3">What you receive</p>
             <ul className="flex flex-col gap-3 text-[13.5px]">
-              <Item>Quarterly ESRS E1 + S3 disclosure (markdown + PDF)</Item>
+              <Item>Quarterly ESRS E5 + S3 contribution disclosure (markdown + PDF)</Item>
               <Item>FRAME workings: kg per category × EF × counterfactual</Item>
               <Item>
                 Source citations from {pkg.projected_allocations.length} food bank annual
@@ -127,8 +127,9 @@ export default async function FundDetailPage({
           </div>
           <div className="mt-6 flex items-center gap-3">
             <Badge variant="outline">FRAME aligned</Badge>
-            <Badge variant="outline">CSRD-ready</Badge>
-            <Badge variant="outline">ESRS E1 + S3</Badge>
+            <Badge variant="outline">ESRS-aligned</Badge>
+            <Badge variant="outline">ESRS E5 + S3</Badge>
+            <Badge variant="outline">Contribution claim</Badge>
             <Badge variant="outline">NL-specific</Badge>
           </div>
         </section>
@@ -145,7 +146,7 @@ export default async function FundDetailPage({
           Invest in this fund →
         </Link>
         <p className="text-[12px] text-text-faint leading-relaxed">
-          No lock-in · ESRS E1+S3 report included.
+          No lock-in · ESRS E5+S3 contribution report included.
         </p>
       </aside>
     </div>

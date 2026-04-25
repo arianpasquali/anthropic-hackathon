@@ -88,7 +88,7 @@ function BuyForm({ fundId }: { fundId: string }) {
           <ul className="flex flex-col gap-2 mt-5 text-[13.5px]">
             <li className="flex justify-between"><span className="text-text-muted">Cadence</span><span>Quarterly</span></li>
             <li className="flex justify-between"><span className="text-text-muted">Cancel</span><span>Any quarter</span></li>
-            <li className="flex justify-between"><span className="text-text-muted">Reporting</span><span>ESRS E1+S3</span></li>
+            <li className="flex justify-between"><span className="text-text-muted">Reporting</span><span>ESRS E5+S3</span></li>
             <li className="flex justify-between"><span className="text-text-muted">Provider</span><span>Solvimon</span></li>
           </ul>
         </aside>

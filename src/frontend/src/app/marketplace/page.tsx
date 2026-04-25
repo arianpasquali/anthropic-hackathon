@@ -8,7 +8,7 @@ import Link from "next/link"
 export const metadata = {
   title: "Marketplace · Klimaatkracht",
   description:
-    "Browse verified avoided-emissions funds. Each fund spreads a single corporate purchase across the top Dutch food banks weighted by CO₂e or social reach.",
+    "Browse verified climate-contribution funds. Each fund spreads a single corporate contribution across the top Dutch food banks weighted by CO₂e or social reach. Contribution claim, not offsetting.",
 }
 
 export default async function MarketplacePage() {
@@ -24,7 +24,7 @@ export default async function MarketplacePage() {
     <div className="mx-auto max-w-[1280px] px-6 pt-12 pb-24">
       <header className="grid md:grid-cols-[1.4fr_1fr] gap-12 items-end pb-12 border-b border-line">
         <div>
-          <p className="eyebrow">Verified avoided emissions · CSRD-ready</p>
+          <p className="eyebrow">Verified climate contribution · ESRS-aligned</p>
           <h1 className="display text-5xl md:text-6xl mt-4 tracking-[-0.025em] max-w-[18ch]">
             Buy a fund.{" "}
             <span className="display-italic text-emerald-deep">Move the network forward.</span>

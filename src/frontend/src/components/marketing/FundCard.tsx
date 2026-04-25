@@ -39,7 +39,7 @@ export function FundCard({ pkg, featured = false }: { pkg: Package; featured?: b
       </div>
 
       <div className="px-7 py-4 bg-surface-2 border-t border-line/60 flex items-center justify-between">
-        <span className="text-[13px] text-text-muted">FRAME methodology · ESRS E1+S3</span>
+        <span className="text-[13px] text-text-muted">FRAME · ESRS E5+S3 · contribution</span>
         <span className="text-[13px] font-medium text-emerald group-hover:translate-x-0.5 transition-transform">
           View fund →
         </span>

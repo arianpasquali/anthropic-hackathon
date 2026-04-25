@@ -78,9 +78,9 @@ export default async function CorporateDashboardPage() {
       {/* Tier 1 — disclosure-grade stats, typographic row */}
       <section className="mt-10 grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-line border-y border-line">
         <DashStat
-          label="Avoided this quarter"
+          label="Contribution this quarter"
           value={formatTCO2e(periodTco2e)}
-          hint="ESRS E1-6 · period-locked"
+          hint="ESRS E5 + S3 · period-locked"
           delta={metrics?.period_delta_pct ?? null}
           emphasis
         />

@@ -1,7 +1,8 @@
 import { formatEur } from "@/lib/format"
 import type { ImpactProfile } from "@/lib/types"
 
-// Verified offset benchmarks (EUR / tCO2e)
+// Reference benchmarks (EUR / tCO2e) — voluntary carbon market reference points only,
+// not endorsed as offsets. Klimaatkracht packages are climate contributions.
 const BENCHMARKS = [
   { label: "Voluntary average", value: 12, tone: "oklch(78% 0.08 75)" },
   { label: "Gold Standard", value: 35, tone: "oklch(72% 0.10 110)" },
@@ -47,7 +48,7 @@ export function CostEffectivenessGauge({
         {formatEur(eurPerTco2e)} <span className="text-text-faint text-lg">/ tCO₂e</span>
       </p>
       <p className="text-[12.5px] text-text-muted mt-1">
-        Your fund&apos;s blended price per tonne avoided
+        Your fund&apos;s blended price per tonne of climate contribution
         {profile ? ` · ${profile.replace("_", " ")} profile` : ""}
       </p>
 

@@ -25,7 +25,7 @@ const TIERS: Tier[] = [
     co2e: "~400 tCO₂e / yr",
     pricePerTonne: "€38 / tCO₂e",
     features: [
-      "ESRS E1 + S3 quarterly disclosure",
+      "ESRS E5 + S3 quarterly disclosure",
       "Allocation across top households-served banks",
       "FRAME provenance report",
       "Invoiced via Solvimon",
@@ -43,7 +43,7 @@ const TIERS: Tier[] = [
     features: [
       "Everything in Starter",
       "Allocation across top CO₂e-baseline banks",
-      "Quarterly SSE-streamed CSRD report",
+      "Quarterly SSE-streamed ESRS-aligned report",
       "Priority extraction queue",
       "Named on partner page",
     ],
@@ -79,8 +79,9 @@ export default function PricingPage() {
           Simple, impact-linked pricing.
         </h1>
         <p className="text-text-muted text-[15px] mt-5 max-w-[48ch] mx-auto leading-relaxed">
-          Every tier maps to a Fund in our marketplace. Pay for verified impact,
-          not platform seats. ESRS E1 + S3 disclosure included.
+          Every tier maps to a Fund in our marketplace. Pay for verified climate
+          contribution, not platform seats. ESRS&nbsp;E5&nbsp;+&nbsp;S3 disclosure
+          included. Contribution claim, not offsetting.
         </p>
       </div>
 
