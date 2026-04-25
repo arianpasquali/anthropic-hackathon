@@ -5,7 +5,7 @@ from src.backend.models.foodbank import Foodbank, AnnualReport
 from src.backend.models.frame import FrameResult
 from src.backend.models.marketplace import Package, PackageFoodbank, FundSubscription, CsrReport
 from src.backend.models.user import User
-from src.backend.models.enums import RegionEnum, RoleEnum, StatusEnum, TemplateEnum
+from src.backend.models.enums import RegionEnum, RoleEnum, StatusEnum, TemplateEnum, ImpactProfileEnum
 
 
 def _make_user(session: Session) -> User:
@@ -126,3 +126,28 @@ def test_cluster_package_multiple_banks(session: Session):
     links = session.exec(select(PackageFoodbank).where(PackageFoodbank.package_id == pkg.id)).all()
     assert len(links) == 2
     assert sum(l.weight_pct for l in links) == 1.0
+
+
+def test_package_has_impact_profile(session: Session):
+    pkg = Package(
+        name="CO2 Package",
+        region=RegionEnum.west,
+        price_eur=15000.0,
+        co2e_claim_kg=300000.0,
+        impact_profile=ImpactProfileEnum.co2_focus,
+        top_n=10,
+    )
+    session.add(pkg)
+    session.commit()
+    session.refresh(pkg)
+    assert pkg.impact_profile == ImpactProfileEnum.co2_focus
+    assert pkg.top_n == 10
+
+
+def test_package_impact_profile_defaults_to_balanced(session: Session):
+    pkg = Package(name="Default", region=RegionEnum.west, price_eur=5000.0, co2e_claim_kg=100000.0)
+    session.add(pkg)
+    session.commit()
+    session.refresh(pkg)
+    assert pkg.impact_profile == ImpactProfileEnum.balanced
+    assert pkg.top_n == 50

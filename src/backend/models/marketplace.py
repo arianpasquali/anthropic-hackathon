@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime, timezone
 from sqlmodel import Field, SQLModel
-from src.backend.models.enums import RegionEnum, StatusEnum, TemplateEnum
+from src.backend.models.enums import RegionEnum, StatusEnum, TemplateEnum, ImpactProfileEnum
 
 
 class Package(SQLModel, table=True):
@@ -11,6 +11,8 @@ class Package(SQLModel, table=True):
     region: RegionEnum
     price_eur: float = 25000.0
     co2e_claim_kg: float = 600000.0
+    impact_profile: ImpactProfileEnum = ImpactProfileEnum.balanced
+    top_n: int = 50
     is_active: bool = True
 
 

@@ -41,3 +41,9 @@ class TemplateEnum(str, Enum):
     csrd = "csrd"
     esrs_e1 = "esrs_e1"
     generic = "generic"
+
+
+class ImpactProfileEnum(str, Enum):
+    co2_focus = "co2_focus"
+    social_focus = "social_focus"
+    balanced = "balanced"
