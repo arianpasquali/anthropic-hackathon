@@ -48,3 +48,11 @@ class ImpactProfileEnum(str, Enum):
     co2_focus = "co2_focus"
     social_focus = "social_focus"
     balanced = "balanced"
+
+
+class IngestionStatus(str, Enum):
+    pending = "pending"
+    running = "running"
+    done = "done"
+    failed = "failed"
+    skipped = "skipped"

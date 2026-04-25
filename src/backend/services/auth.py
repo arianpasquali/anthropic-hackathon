@@ -2,7 +2,8 @@ import os
 import uuid
 from typing import Optional
 
-import bcrypt
+from argon2 import PasswordHasher
+from argon2.exceptions import VerifyMismatchError
 from fastapi import Cookie, Depends, HTTPException, status
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from sqlmodel import Session, select
@@ -10,22 +11,20 @@ from sqlmodel import Session, select
 from src.backend.database import get_session
 from src.backend.models.user import User
 
+_ph = PasswordHasher()
 _SECRET = os.getenv("SESSION_SECRET", "dev-secret-change-in-prod")
 _signer = URLSafeTimedSerializer(_SECRET)
 COOKIE_NAME = "session"
 
 
 def hash_password(plain: str) -> str:
-    # bcrypt's max input is 72 bytes; truncate explicitly so long passwords don't blow up.
-    payload = plain.encode("utf-8")[:72]
-    return bcrypt.hashpw(payload, bcrypt.gensalt()).decode("utf-8")
+    return _ph.hash(plain)
 
 
 def verify_password(plain: str, hashed: str) -> bool:
-    payload = plain.encode("utf-8")[:72]
     try:
-        return bcrypt.checkpw(payload, hashed.encode("utf-8"))
-    except ValueError:
+        return _ph.verify(hashed, plain)
+    except VerifyMismatchError:
         return False
 
 

@@ -7,7 +7,7 @@ from src.backend.models.foodbank import Foodbank
 from src.backend.models.user import User
 from src.backend.services.auth import require_admin
 
-router = APIRouter(prefix="/admin")
+router = APIRouter(prefix="/admin", tags=["admin"])
 
 
 class FoodbankResponse(BaseModel):

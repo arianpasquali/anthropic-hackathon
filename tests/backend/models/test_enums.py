@@ -14,7 +14,7 @@ def test_source_enum_values():
 
 def test_role_enum_values():
     assert RoleEnum.corporate == "corporate"
-    assert RoleEnum.foodbank_op == "foodbank_op"
+    assert RoleEnum.foodbank == "foodbank"
     assert RoleEnum.admin == "admin"
 
 

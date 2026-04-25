@@ -11,7 +11,7 @@ from src.backend.models.user import User
 from src.backend.services.allocation import compute_allocations
 from src.backend.services.auth import get_current_user
 
-router = APIRouter()
+router = APIRouter(tags=["checkout"])
 
 
 class SubscriptionResponse(BaseModel):

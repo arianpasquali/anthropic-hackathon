@@ -1,5 +1,6 @@
 from datetime import date, datetime, timezone
 from decimal import Decimal
+from typing import Any
 
 from loguru import logger
 from sqlmodel import Session, select
@@ -38,8 +39,31 @@ def _delete_report_cascade(session: Session, report: AnnualReport) -> None:
     logger.debug(f"Deleted report {report.id} and all children")
 
 
-def _src(method: str | None) -> SourceEnum | None:
-    return SourceEnum.extracted if method is not None else None
+def _src(*markers: object) -> SourceEnum | None:
+    return SourceEnum.extracted if any(marker is not None for marker in markers) else None
+
+
+def _measurement_kwargs(
+    obj: object,
+    field_names: list[str],
+    *,
+    decimal_fields: set[str] | None = None,
+) -> dict[str, Any]:
+    decimal_fields = decimal_fields or set()
+    kwargs: dict[str, Any] = {}
+    for field in field_names:
+        value = getattr(obj, field)
+        if field in decimal_fields and value is not None:
+            value = Decimal(str(value))
+        method = getattr(obj, f"{field}_method", None)
+        evidence = getattr(obj, f"{field}_evidence", None)
+        confidence = getattr(obj, f"{field}_confidence", None)
+        kwargs[field] = value
+        kwargs[f"{field}_source"] = _src(method, evidence, confidence)
+        kwargs[f"{field}_method"] = method
+        kwargs[f"{field}_evidence"] = evidence
+        kwargs[f"{field}_confidence"] = confidence
+    return kwargs
 
 
 def write_report(
@@ -84,128 +108,93 @@ def write_report(
     fv = result.food_volume
     session.add(FoodVolume(
         report_id=report.id,
-        kg_received_total=fv.kg_received_total,
-        kg_received_total_source=_src(fv.kg_received_total_method),
-        kg_received_total_method=fv.kg_received_total_method,
-        kg_via_national_dc=fv.kg_via_national_dc,
-        kg_via_national_dc_source=_src(fv.kg_via_national_dc_method),
-        kg_via_national_dc_method=fv.kg_via_national_dc_method,
-        kg_direct=fv.kg_direct,
-        kg_direct_source=_src(fv.kg_direct_method),
-        kg_direct_method=fv.kg_direct_method,
-        waste_pct=fv.waste_pct,
-        waste_pct_source=_src(fv.waste_pct_method),
-        waste_pct_method=fv.waste_pct_method,
-        parcels_distributed=fv.parcels_distributed,
-        parcels_distributed_source=_src(fv.parcels_distributed_method),
-        parcels_distributed_method=fv.parcels_distributed_method,
-        avg_products_per_parcel=fv.avg_products_per_parcel,
-        avg_products_per_parcel_source=_src(fv.avg_products_per_parcel_method),
-        avg_products_per_parcel_method=fv.avg_products_per_parcel_method,
-        pct_schijf_van_vijf=fv.pct_schijf_van_vijf,
-        pct_schijf_van_vijf_source=_src(fv.pct_schijf_van_vijf_method),
-        pct_schijf_van_vijf_method=fv.pct_schijf_van_vijf_method,
-        food_value_eur=Decimal(str(fv.food_value_eur)) if fv.food_value_eur is not None else None,
-        food_value_eur_source=_src(fv.food_value_eur_method),
-        food_value_eur_method=fv.food_value_eur_method,
+        **_measurement_kwargs(
+            fv,
+            [
+                "kg_received_total",
+                "kg_via_national_dc",
+                "kg_direct",
+                "waste_pct",
+                "parcels_distributed",
+                "avg_products_per_parcel",
+                "pct_schijf_van_vijf",
+                "food_value_eur",
+            ],
+            decimal_fields={"food_value_eur"},
+        ),
     ))
 
     fc = result.food_categories
     session.add(FoodCategories(
         report_id=report.id,
-        kg_produce=fc.kg_produce,
-        kg_produce_source=_src(fc.kg_produce_method),
-        kg_produce_method=fc.kg_produce_method,
-        kg_meat_fish=fc.kg_meat_fish,
-        kg_meat_fish_source=_src(fc.kg_meat_fish_method),
-        kg_meat_fish_method=fc.kg_meat_fish_method,
-        kg_dairy_eggs=fc.kg_dairy_eggs,
-        kg_dairy_eggs_source=_src(fc.kg_dairy_eggs_method),
-        kg_dairy_eggs_method=fc.kg_dairy_eggs_method,
-        kg_dry_goods=fc.kg_dry_goods,
-        kg_dry_goods_source=_src(fc.kg_dry_goods_method),
-        kg_dry_goods_method=fc.kg_dry_goods_method,
-        kg_bread_bakery=fc.kg_bread_bakery,
-        kg_bread_bakery_source=_src(fc.kg_bread_bakery_method),
-        kg_bread_bakery_method=fc.kg_bread_bakery_method,
-        kg_prepared=fc.kg_prepared,
-        kg_prepared_source=_src(fc.kg_prepared_method),
-        kg_prepared_method=fc.kg_prepared_method,
+        **_measurement_kwargs(
+            fc,
+            [
+                "kg_produce",
+                "kg_meat_fish",
+                "kg_dairy_eggs",
+                "kg_dry_goods",
+                "kg_bread_bakery",
+                "kg_prepared",
+            ],
+        ),
     ))
 
     ps = result.people_served
     session.add(PeopleServed(
         report_id=report.id,
-        households_weekly=ps.households_weekly,
-        households_weekly_source=_src(ps.households_weekly_method),
-        households_weekly_method=ps.households_weekly_method,
-        individuals_total=ps.individuals_total,
-        individuals_total_source=_src(ps.individuals_total_method),
-        individuals_total_method=ps.individuals_total_method,
-        children_count=ps.children_count,
-        children_count_source=_src(ps.children_count_method),
-        children_count_method=ps.children_count_method,
-        pct_under_18=ps.pct_under_18,
-        pct_under_18_source=_src(ps.pct_under_18_method),
-        pct_under_18_method=ps.pct_under_18_method,
-        pct_single_adults=ps.pct_single_adults,
-        pct_single_adults_source=_src(ps.pct_single_adults_method),
-        pct_single_adults_method=ps.pct_single_adults_method,
-        pct_single_parent=ps.pct_single_parent,
-        pct_single_parent_source=_src(ps.pct_single_parent_method),
-        pct_single_parent_method=ps.pct_single_parent_method,
-        pct_families=ps.pct_families,
-        pct_families_source=_src(ps.pct_families_method),
-        pct_families_method=ps.pct_families_method,
-        pct_couples=ps.pct_couples,
-        pct_couples_source=_src(ps.pct_couples_method),
-        pct_couples_method=ps.pct_couples_method,
+        **_measurement_kwargs(
+            ps,
+            [
+                "households_weekly",
+                "individuals_total",
+                "children_count",
+                "pct_under_18",
+                "pct_single_adults",
+                "pct_single_parent",
+                "pct_families",
+                "pct_couples",
+            ],
+        ),
     ))
 
     ops = result.operations
     session.add(Operations(
         report_id=report.id,
-        volunteers_count=ops.volunteers_count,
-        volunteers_count_source=_src(ops.volunteers_count_method),
-        volunteers_count_method=ops.volunteers_count_method,
-        distribution_locations=ops.distribution_locations,
-        distribution_locations_source=_src(ops.distribution_locations_method),
-        distribution_locations_method=ops.distribution_locations_method,
-        satellite_banks_served=ops.satellite_banks_served,
-        satellite_banks_served_source=_src(ops.satellite_banks_served_method),
-        satellite_banks_served_method=ops.satellite_banks_served_method,
-        annual_budget_eur=Decimal(str(ops.annual_budget_eur)) if ops.annual_budget_eur is not None else None,
-        annual_budget_eur_source=_src(ops.annual_budget_eur_method),
-        annual_budget_eur_method=ops.annual_budget_eur_method,
-        total_expenditure_eur=Decimal(str(ops.total_expenditure_eur)) if ops.total_expenditure_eur is not None else None,
-        total_expenditure_eur_source=_src(ops.total_expenditure_eur_method),
-        total_expenditure_eur_method=ops.total_expenditure_eur_method,
+        **_measurement_kwargs(
+            ops,
+            [
+                "volunteers_count",
+                "distribution_locations",
+                "satellite_banks_served",
+                "annual_budget_eur",
+                "total_expenditure_eur",
+            ],
+            decimal_fields={"annual_budget_eur", "total_expenditure_eur"},
+        ),
     ))
 
     don = result.donations
     session.add(Donations(
         report_id=report.id,
-        food_supermarket_kg=don.food_supermarket_kg,
-        food_supermarket_kg_source=_src(don.food_supermarket_kg_method),
-        food_supermarket_kg_method=don.food_supermarket_kg_method,
-        food_company_kg=don.food_company_kg,
-        food_company_kg_source=_src(don.food_company_kg_method),
-        food_company_kg_method=don.food_company_kg_method,
-        food_dc_kg=don.food_dc_kg,
-        food_dc_kg_source=_src(don.food_dc_kg_method),
-        food_dc_kg_method=don.food_dc_kg_method,
-        money_individuals_eur=Decimal(str(don.money_individuals_eur)) if don.money_individuals_eur is not None else None,
-        money_individuals_eur_source=_src(don.money_individuals_eur_method),
-        money_individuals_eur_method=don.money_individuals_eur_method,
-        money_companies_eur=Decimal(str(don.money_companies_eur)) if don.money_companies_eur is not None else None,
-        money_companies_eur_source=_src(don.money_companies_eur_method),
-        money_companies_eur_method=don.money_companies_eur_method,
-        money_orgs_eur=Decimal(str(don.money_orgs_eur)) if don.money_orgs_eur is not None else None,
-        money_orgs_eur_source=_src(don.money_orgs_eur_method),
-        money_orgs_eur_method=don.money_orgs_eur_method,
-        money_government_eur=Decimal(str(don.money_government_eur)) if don.money_government_eur is not None else None,
-        money_government_eur_source=_src(don.money_government_eur_method),
-        money_government_eur_method=don.money_government_eur_method,
+        **_measurement_kwargs(
+            don,
+            [
+                "food_supermarket_kg",
+                "food_company_kg",
+                "food_dc_kg",
+                "money_individuals_eur",
+                "money_companies_eur",
+                "money_orgs_eur",
+                "money_government_eur",
+            ],
+            decimal_fields={
+                "money_individuals_eur",
+                "money_companies_eur",
+                "money_orgs_eur",
+                "money_government_eur",
+            },
+        ),
     ))
 
     session.commit()

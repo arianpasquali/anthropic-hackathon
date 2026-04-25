@@ -17,14 +17,14 @@ from src.backend.services.auth import (
     verify_password,
 )
 
-router = APIRouter(prefix="/auth")
+router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 class RegisterRequest(BaseModel):
     email: str
     password: str
     org_name: str
-    role: RoleEnum
+    role: RoleEnum = RoleEnum.corporate
 
 
 class LoginRequest(BaseModel):

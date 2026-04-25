@@ -12,6 +12,7 @@ from src.backend.models.foodbank import AnnualReport, Foodbank
 from src.backend.models.frame import FrameResult
 from src.backend.models.marketplace import Package
 from src.backend.models.measurements import PeopleServed
+from src.backend.models.profile import ImpactProfile
 from src.backend.models.user import User
 from src.backend.services.auth import hash_password
 
@@ -36,6 +37,30 @@ FOODBANKS = [
      "co2e_kg": 310000.0, "households": 820},
     {"name": "Voedselbank Zwolle", "city": "Zwolle", "region": RegionEnum.oost, "is_regional_dc": False,
      "co2e_kg": 270000.0, "households": 700},
+]
+
+IMPACT_PROFILES = [
+    {
+        "key": "co2_focus",
+        "name": "CO₂ Impact",
+        "description": "Allocates entirely based on verified CO₂e savings. Best for Scope 3 reporting.",
+        "co2_weight": 1.0,
+        "social_weight": 0.0,
+    },
+    {
+        "key": "social_focus",
+        "name": "People Impact",
+        "description": "Allocates entirely based on households served. Maximises social reach.",
+        "co2_weight": 0.0,
+        "social_weight": 1.0,
+    },
+    {
+        "key": "balanced",
+        "name": "Balanced",
+        "description": "Equal weighting of CO₂e savings and social reach. Best for ESRS E5/S3 disclosure.",
+        "co2_weight": 0.5,
+        "social_weight": 0.5,
+    },
 ]
 
 PACKAGES = [
@@ -160,6 +185,9 @@ def seed():
                     kg_prepared=est_kg * 0.065, kg_prepared_source=SourceEnum.inferred_calculation, kg_prepared_method="residual category",
                 )
                 session.add(cats)
+
+        for profile_data in IMPACT_PROFILES:
+            session.add(ImpactProfile(**profile_data))
 
         for pkg_data in PACKAGES:
             pkg = Package(**pkg_data)

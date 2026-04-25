@@ -1,7 +1,8 @@
 import uuid
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel
 from sqlmodel import Session, select
 
@@ -13,7 +14,7 @@ from src.backend.models.marketplace import Package
 from src.backend.routers.foodbanks import FoodbankResponse, TimelinePoint, _build_response, _foodbank_timeline
 from src.backend.services.allocation import score_foodbanks
 
-router = APIRouter(prefix="/packages")
+router = APIRouter(prefix="/packages", tags=["packages"])
 
 
 class PackageResponse(BaseModel):
@@ -55,14 +56,35 @@ def _pkg_to_response(pkg: Package) -> PackageResponse:
 
 
 @router.get("", response_model=list[PackageResponse])
-def list_packages(profile: Optional[str] = None, session: Session = Depends(get_session)):
+def list_packages(
+    request: Request,
+    profile: Optional[str] = None,
+    session: Session = Depends(get_session),
+):
     q = select(Package).where(Package.is_active == True)
     if profile:
         try:
             q = q.where(Package.impact_profile == ImpactProfileEnum(profile))
         except ValueError:
             pass
-    return [_pkg_to_response(p) for p in session.exec(q).all()]
+    packages = [_pkg_to_response(p) for p in session.exec(q).all()]
+
+    if "text/markdown" in request.headers.get("accept", ""):
+        lines = ["## Impact Packages\n"]
+        for p in packages:
+            lines.append(f"### {p.name}")
+            lines.append(f"- **Region:** {p.region}")
+            lines.append(f"- **Price:** €{p.price_eur:.0f}")
+            lines.append(f"- **CO₂e claim:** {p.co2e_claim_kg:,.0f} kg")
+            lines.append(f"- **Impact profile:** {p.impact_profile}")
+            lines.append(f"- {p.description if p.description else ''}")
+            lines.append("")
+        return PlainTextResponse(
+            content="\n".join(lines),
+            media_type="text/markdown; charset=utf-8",
+        )
+
+    return packages
 
 
 @router.get("/{package_id}", response_model=PackageDetailResponse)

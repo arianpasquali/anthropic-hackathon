@@ -63,3 +63,26 @@ def test_counterfactual_explicit(session: Session, report: AnnualReport):
     session.commit()
     session.refresh(result)
     assert result.counterfactual_route == CounterfactualEnum.landfill
+
+
+def test_frame_result_has_baseline_leakage_avoided(session: Session, report: AnnualReport):
+    result = FrameResult(
+        report_id=report.id,
+        co2e_total_kg=950.0,
+        co2e_produce_kg=300.0,
+        co2e_meat_fish_kg=200.0,
+        co2e_dairy_eggs_kg=150.0,
+        co2e_dry_goods_kg=200.0,
+        co2e_bread_kg=100.0,
+        baseline_co2e_kg=1000.0,
+        leakage_co2e_kg=50.0,
+        avoided_co2e_kg=950.0,
+        emission_factor_source="GFN FRAME 2024",
+        methodology_version="FRAME-NL-v2.0",
+    )
+    session.add(result)
+    session.commit()
+    session.refresh(result)
+    assert result.baseline_co2e_kg == 1000.0
+    assert result.leakage_co2e_kg == 50.0
+    assert result.avoided_co2e_kg == 950.0

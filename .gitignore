@@ -5,11 +5,12 @@ test_extraction.py
 __pycache__/
 *.pyc
 *.db
+!foodbank.db
 logs/
+logs/extraction.log
 
 # frontend
 src/frontend/node_modules/
 src/frontend/.next/
 src/frontend/.turbo/
 src/frontend/out/
-
