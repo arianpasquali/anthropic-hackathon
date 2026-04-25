@@ -12,4 +12,8 @@ def on_startup():
 
 # Routers registered below as they are implemented
 from src.backend.routers import auth as auth_router  # noqa: E402
+from src.backend.routers import marketplace as marketplace_router  # noqa: E402
+from src.backend.routers import checkout as checkout_router  # noqa: E402
 app.include_router(auth_router.router)
+app.include_router(marketplace_router.router)
+app.include_router(checkout_router.router)

@@ -18,7 +18,7 @@ def client_fixture():
     SQLModel.metadata.create_all(engine)
 
     def override_get_session():
-        with Session(engine) as session:
+        with Session(engine, expire_on_commit=False) as session:
             yield session
 
     app.dependency_overrides[get_session] = override_get_session
