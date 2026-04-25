@@ -10,7 +10,7 @@ const badge = cva(
         default: "bg-surface-3 text-text-muted border border-line",
         emerald: "bg-emerald-soft text-emerald-deep",
         outline: "bg-transparent text-text-muted border border-line",
-        warning: "bg-warning/15 text-warning",
+        warning: "bg-warning-soft text-warning-deep",
       },
     },
     defaultVariants: { variant: "default" },

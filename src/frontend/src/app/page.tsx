@@ -136,7 +136,7 @@ export default async function Home() {
             </Link>
           </div>
           <div>
-            <NLProvinceFoodbankHeatMapDynamic banks={banks} height={520} />
+            <NLProvinceFoodbankHeatMapDynamic banks={banks} />
             <div className="mt-6">
               <ProvinceFoodbankList banks={banks} />
             </div>

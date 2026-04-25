@@ -31,7 +31,7 @@ export default async function FundDetailPage({
 
 
   return (
-    <div className="mx-auto max-w-[1280px] px-6 pt-12 pb-24 grid lg:grid-cols-[1fr_360px] gap-x-12">
+    <div className="mx-auto max-w-[1280px] px-6 pt-12 pb-24 grid lg:grid-cols-[minmax(0,1fr)_clamp(280px,28vw,360px)] gap-x-12">
       <div>
         <p className="eyebrow">{pkg.region.toUpperCase()} · {pkg.impact_profile.replace("_", " ")}</p>
         <h1 className="display text-5xl md:text-6xl mt-4 tracking-[-0.025em] max-w-[20ch]">

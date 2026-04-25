@@ -49,10 +49,13 @@ function pointInFeature(lng: number, lat: number, feature: Feature): boolean {
 
 interface Props {
   banks: Bank[]
-  height?: number
+  height?: number | string
 }
 
-export function NLProvinceFoodbankHeatMap({ banks, height = 480 }: Props) {
+export function NLProvinceFoodbankHeatMap({
+  banks,
+  height = "clamp(360px, 56vh, 560px)",
+}: Props) {
   const [geojson, setGeojson] = useState<FeatureCollection | null>(null)
 
   useEffect(() => {

@@ -10,12 +10,8 @@ export const NLProvinceFoodbankHeatMapDynamic = dynamic(
     ssr: false,
     loading: () => (
       <div
-        style={{
-          height: 460,
-          background: "#0c1929",
-          borderRadius: 14,
-          opacity: 0.6,
-        }}
+        className="border border-line bg-surface-2 rounded-[var(--radius-lg)] animate-pulse"
+        style={{ height: "clamp(360px, 56vh, 560px)" }}
       />
     ),
   },

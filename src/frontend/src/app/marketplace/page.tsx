@@ -63,7 +63,7 @@ export default async function MarketplacePage() {
             </div>
           </dl>
         </div>
-        <NLProvinceFoodbankHeatMapDynamic banks={banks} height={560} />
+        <NLProvinceFoodbankHeatMapDynamic banks={banks} />
         <div className="mt-6">
           <ProvinceFoodbankList banks={banks} />
         </div>
