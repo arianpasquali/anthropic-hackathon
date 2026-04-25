@@ -199,6 +199,21 @@ def ingest_dir(
 
     create_db_and_tables()
 
+    # field_name → (found_count, missing_count) across all files
+    field_stats: dict[str, list[int]] = {}
+    stats_lock = asyncio.Lock()
+
+    def _count_fields(result: "ExtractionResult") -> dict[str, int]:
+        counts: dict[str, int] = {}
+        for section_name in ("food_volume", "food_categories", "people_served", "operations", "donations"):
+            section = getattr(result, section_name)
+            for field in type(section).model_fields:
+                if field.endswith(("_source", "_method")):
+                    continue
+                key = f"{section_name}.{field}"
+                counts[key] = 0 if getattr(section, field) is None else 1
+        return counts
+
     async def _ingest_one(
         sem: asyncio.Semaphore,
         file: Path,
@@ -227,6 +242,12 @@ def ingest_dir(
                     model=model,
                     force=force,
                 )
+            counts = _count_fields(result)
+            async with stats_lock:
+                for key, found in counts.items():
+                    if key not in field_stats:
+                        field_stats[key] = [0, 0]
+                    field_stats[key][found] += 1
 
     async def _run_all() -> None:
         sem = asyncio.Semaphore(max_concurrent)
@@ -238,6 +259,16 @@ def ingest_dir(
 
     asyncio.run(_run_all())
     logger.success("Batch ingest complete")
+
+    total = len(queued)
+    typer.echo(f"\n{'Field':<45} {'Found':>7} {'Missing':>8} {'Fill%':>7}")
+    typer.echo("─" * 72)
+    for key in sorted(field_stats):
+        missing, found = field_stats[key]
+        pct = 100 * found / total if total else 0
+        marker = " ◄" if pct == 0 else ""
+        typer.echo(f"{key:<45} {found:>7} {missing:>8} {pct:>6.0f}%{marker}")
+    typer.echo("─" * 72)
 
 
 @app.command(name="recalculate-frame")
