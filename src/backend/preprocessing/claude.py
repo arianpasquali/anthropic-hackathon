@@ -16,15 +16,14 @@ from src.backend.preprocessing.schemas import (
     TOOL_SCHEMA_MAP,
 )
 
-DEFAULT_MODEL = "claude-haiku-4-5-20251001"
-FALLBACK_MODEL = "claude-sonnet-4-6"
+DEFAULT_MODEL = "claude-sonnet-4-6"
 
 
 def detect_drift(raw: dict[str, Any], schema: type[BaseModel]) -> bool:
-    """Return True if returned keys don't match the target schema (model used wrong field names)."""
+    """Return True if returned keys don't match the target schema (>50% wrong field names)."""
     non_null_keys = {k for k, v in raw.items() if v is not None}
     if not non_null_keys:
-        return False  # empty result — no data found, not drift
+        return False
     schema_fields = set(schema.model_fields)
     overlap = non_null_keys & schema_fields
     return len(overlap) / len(non_null_keys) < 0.5
@@ -53,14 +52,6 @@ def _call_claude(
         f"in={response.usage.input_tokens} out={response.usage.output_tokens}"
     )
     logger.debug(f"[{tool_name}] raw output: {raw}")
-
-    if detect_drift(raw, schema_cls):
-        if model == FALLBACK_MODEL:
-            logger.warning(f"[{tool_name}] drift persists on fallback model — returning as-is")
-            return raw
-        logger.warning(f"[{tool_name}] drift detected with {model}, retrying with {FALLBACK_MODEL}")
-        return _call_claude(client, text, tool_name, FALLBACK_MODEL)
-
     return raw
 
 
