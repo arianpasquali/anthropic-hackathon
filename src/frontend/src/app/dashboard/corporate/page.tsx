@@ -11,6 +11,7 @@ import { Equivalents } from "@/components/dashboard/Equivalents"
 import { PacingBar } from "@/components/dashboard/PacingBar"
 import { MethodologyInline } from "@/components/dashboard/MethodologyInline"
 import { QuarterlyTimelineChart } from "@/components/charts/QuarterlyTimelineChart"
+import { NLProvinceHeatMapDynamic } from "@/components/map/NLProvinceHeatMapDynamic"
 import { formatEur, formatNumber, formatPercent, formatTCO2e } from "@/lib/format"
 
 const REGION_LABEL: Record<string, string> = {
@@ -166,27 +167,26 @@ export default async function CorporateDashboardPage() {
       </section>
 
       {/* Coverage + history */}
-      <section className="mt-16 grid lg:grid-cols-[1fr_1fr] gap-x-12 gap-y-10 items-start">
-        <div>
+      <section className="mt-16 grid lg:grid-cols-[1.4fr_1fr] gap-x-12 gap-y-10 items-start">
+        <div className="min-w-0">
           <p className="eyebrow">Geographic coverage</p>
           <h2 className="display text-2xl mt-3 tracking-[-0.02em]">
-            Where the fund lands.
+            Where the fund lands, by province.
           </h2>
-          <ul className="mt-6 flex flex-col gap-3">
+          <p className="text-text-muted text-[13px] mt-3 max-w-[44ch] leading-relaxed">
+            Province fill scaled to the fund&apos;s allocation weight in that region.
+            Basemap: PDOK BRT (Kadaster).
+          </p>
+          <div className="mt-5">
+            <NLProvinceHeatMapDynamic regions={metrics?.regions ?? []} height={360} />
+          </div>
+          <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2 text-[12.5px]">
             {(metrics?.regions ?? []).map((r) => (
-              <li key={r.region} className="flex flex-col gap-1.5">
-                <div className="flex items-baseline justify-between text-[13.5px]">
-                  <span className="text-text">{REGION_LABEL[r.region] ?? r.region}</span>
-                  <span className="tabular text-text-muted">
-                    {formatPercent(r.weight_pct, 1)} · {r.foodbanks} banks
-                  </span>
-                </div>
-                <div className="h-1.5 bg-surface-3 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-emerald"
-                    style={{ width: `${r.weight_pct * 100}%` }}
-                  />
-                </div>
+              <li key={r.region} className="flex items-center justify-between border-b border-line/60 pb-1.5">
+                <span className="text-text-muted">{REGION_LABEL[r.region] ?? r.region}</span>
+                <span className="tabular text-text">
+                  {formatPercent(r.weight_pct, 1)} · {r.foodbanks} banks
+                </span>
               </li>
             ))}
           </ul>

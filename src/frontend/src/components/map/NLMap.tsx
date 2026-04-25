@@ -39,8 +39,8 @@ export function NLMap({ banks, height = 320, highlightSlug = null, showLinks = t
         attributionControl={false}
       >
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png"
-          subdomains={["a", "b", "c", "d"]}
+          url="https://service.pdok.nl/brt/achtergrondkaart/wmts/v2_0/grijs/EPSG:3857/{z}/{x}/{y}.png"
+          attribution='Kaartgegevens © <a href="https://kadaster.nl">Kadaster</a>'
         />
         {banks
           .filter((b) => b.lat != null && b.lng != null)
