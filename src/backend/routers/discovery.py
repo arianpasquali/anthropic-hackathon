@@ -224,12 +224,12 @@ def health() -> dict:
 
 @router.get("/llms.txt", include_in_schema=False)
 def llms_txt() -> PlainTextResponse:
-    return PlainTextResponse(_LLMS_TXT, media_type="text/plain; charset=utf-8")
+    return PlainTextResponse(_LLMS_TXT)
 
 
 @router.get("/llms-full.txt", include_in_schema=False)
 def llms_full_txt() -> PlainTextResponse:
-    return PlainTextResponse(_LLMS_FULL_TXT, media_type="text/plain; charset=utf-8")
+    return PlainTextResponse(_LLMS_FULL_TXT)
 
 
 @router.get("/robots.txt", include_in_schema=False)

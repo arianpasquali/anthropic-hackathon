@@ -2,43 +2,47 @@ import pytest
 from fastapi.testclient import TestClient
 from src.backend.app import app
 
-client = TestClient(app)
+
+@pytest.fixture
+def client():
+    with TestClient(app) as c:
+        yield c
 
 
-def test_health():
+def test_health(client):
     r = client.get("/health")
     assert r.status_code == 200
     assert r.json() == {"status": "ok"}
 
 
-def test_llms_txt():
+def test_llms_txt(client):
     r = client.get("/llms.txt")
     assert r.status_code == 200
     assert "Klimaatkracht" in r.text
     assert r.headers["content-type"].startswith("text/plain")
 
 
-def test_llms_full_txt():
+def test_llms_full_txt(client):
     r = client.get("/llms-full.txt")
     assert r.status_code == 200
     assert "/packages" in r.text
 
 
-def test_robots_txt():
+def test_robots_txt(client):
     r = client.get("/robots.txt")
     assert r.status_code == 200
     assert "ClaudeBot" in r.text
     assert "Allow: /" in r.text
 
 
-def test_sitemap_xml():
+def test_sitemap_xml(client):
     r = client.get("/sitemap.xml")
     assert r.status_code == 200
     assert r.headers["content-type"].startswith("application/xml")
     assert "/openapi.json" in r.text
 
 
-def test_ai_plugin_json():
+def test_ai_plugin_json(client):
     r = client.get("/.well-known/ai-plugin.json")
     assert r.status_code == 200
     data = r.json()
@@ -46,14 +50,14 @@ def test_ai_plugin_json():
     assert "openapi.json" in data["api"]["url"]
 
 
-def test_agent_json():
+def test_agent_json(client):
     r = client.get("/.well-known/agent.json")
     assert r.status_code == 200
     data = r.json()
     assert "llms_txt" in data
 
 
-def test_link_header_on_packages():
+def test_link_header_on_packages(client):
     """Discovery Link header present on all responses."""
     r = client.get("/packages")
     assert "llms.txt" in r.headers.get("link", "")

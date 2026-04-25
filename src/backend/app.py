@@ -2,6 +2,14 @@ from fastapi import FastAPI, Request, Response
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from src.backend.database import create_db_and_tables
+from src.backend.routers import auth as auth_router
+from src.backend.routers import marketplace as marketplace_router
+from src.backend.routers import checkout as checkout_router
+from src.backend.routers import dashboard as dashboard_router
+from src.backend.routers import admin as admin_router
+from src.backend.routers import report as report_router
+from src.backend.routers import insights as insights_router
+from src.backend.routers import discovery as discovery_router
 
 OPENAPI_TAGS = [
     {"name": "discovery", "description": "Agent/LLM discovery: health, llms.txt, robots.txt, manifests"},
@@ -50,15 +58,6 @@ app.add_middleware(AgentDiscoveryMiddleware)
 def on_startup():
     create_db_and_tables()
 
-
-from src.backend.routers import auth as auth_router  # noqa: E402
-from src.backend.routers import marketplace as marketplace_router  # noqa: E402
-from src.backend.routers import checkout as checkout_router  # noqa: E402
-from src.backend.routers import dashboard as dashboard_router  # noqa: E402
-from src.backend.routers import admin as admin_router  # noqa: E402
-from src.backend.routers import report as report_router  # noqa: E402
-from src.backend.routers import insights as insights_router  # noqa: E402
-from src.backend.routers import discovery as discovery_router  # noqa: E402
 
 app.include_router(discovery_router.router)
 app.include_router(auth_router.router)
