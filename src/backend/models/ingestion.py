@@ -17,3 +17,4 @@ class IngestionRecord(SQLModel, table=True):
     completed_at: datetime | None = None
     error: str | None = Field(default=None, max_length=2000)
     report_id: uuid.UUID | None = Field(default=None, foreign_key="annualreport.id")
+    missing_fields: str | None = Field(default=None)  # JSON list of "section.field" keys

@@ -31,6 +31,15 @@ def test_detect_drift_empty_result():
     assert detect_drift({}, PeopleServedExtraction) is False
 
 
+def test_detect_drift_wrong_schema_all_null_keys():
+    raw = {
+        "food_company_kg": None,
+        "food_supermarket_kg": None,
+        "food_dc_kg": None,
+    }
+    assert detect_drift(raw, PeopleServedExtraction) is True
+
+
 def test_detect_drift_partial_overlap():
     # 1 out of 3 keys matches — below 50% threshold → drift
     raw = {

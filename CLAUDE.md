@@ -74,6 +74,26 @@ Cookie-based sessions using `itsdangerous.URLSafeTimedSerializer` (7-day TTL). `
 
 Tests use an in-memory SQLite engine (via `conftest.py` `session` fixture). All router tests use `httpx.TestClient`. No mocking of the database — integration style against real SQLModel.
 
+## Database migrations (Alembic)
+
+```bash
+# Apply all pending migrations
+uv run alembic upgrade head
+
+# Generate migration after model changes (autogenerate detects schema drift)
+uv run alembic revision --autogenerate -m "describe_change"
+
+# Check current revision
+uv run alembic current
+
+# Downgrade one step
+uv run alembic downgrade -1
+```
+
+Config: `alembic.ini` + `migrations/env.py`. env.py imports all models via `src.backend.models` and reads `DATABASE_URL` from `src.backend.database`. Always use `render_as_batch=True` (required for SQLite column changes).
+
+After adding/changing a model field: run `revision --autogenerate`, review the generated file in `migrations/versions/`, then `upgrade head`.
+
 ## Git
 
 Work directly on `main`. No feature branches.

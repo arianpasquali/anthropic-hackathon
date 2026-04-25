@@ -13,6 +13,14 @@ class Foodbank(SQLModel, table=True):
     vbn_member_id: str | None = None
 
 
+class FoodbankLocation(SQLModel, table=True):
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
+    foodbank_id: uuid.UUID = Field(foreign_key="foodbank.id", unique=True, index=True)
+    lat: float
+    lng: float
+    geocoded_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
 class AnnualReport(SQLModel, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     foodbank_id: uuid.UUID = Field(foreign_key="foodbank.id", index=True)

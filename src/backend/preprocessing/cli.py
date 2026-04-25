@@ -1,4 +1,5 @@
 import asyncio
+import json
 import sys
 from pathlib import Path
 
@@ -216,6 +217,9 @@ def ingest_dir(
                 counts[key] = 0 if getattr(section, field) is None else 1
         return counts
 
+    def _missing_field_list(result: "ExtractionResult") -> list[str]:
+        return [k for k, v in _count_fields(result).items() if v == 0]
+
     async def _ingest_one(
         sem: asyncio.Semaphore,
         file: Path,
@@ -274,6 +278,7 @@ def ingest_dir(
                         force=force,
                     )
                     report_id = report.id
+                missing = _missing_field_list(result)
                 with Session(engine) as session:
                     rec = session.exec(
                         select(IngestionRecord).where(IngestionRecord.file_path == file_path)
@@ -282,6 +287,7 @@ def ingest_dir(
                         rec.status = IngestionStatus.done
                         rec.completed_at = datetime.now(timezone.utc)
                         rec.report_id = report_id
+                        rec.missing_fields = json.dumps(missing)
                         session.commit()
             except Exception as e:
                 logger.error(f"Failed {file.name}: {e}")

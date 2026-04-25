@@ -1,6 +1,7 @@
 """DB inspection commands: `ingest db <subcommand>`"""
 from __future__ import annotations
 
+import json
 import typer
 from rich import box
 from rich.console import Console
@@ -13,6 +14,8 @@ from src.backend.models import (
     AnnualReport, Donations, FoodCategories, Foodbank,
     FoodVolume, Operations, PeopleServed,
 )
+from src.backend.models.foodbank import FoodbankLocation
+from src.backend.models.ingestion import IngestionRecord
 from src.backend.models.frame import FrameResult
 
 app = typer.Typer(name="db", help="Inspect database contents")
@@ -268,6 +271,164 @@ def quality() -> None:
     console.print(t)
 
 
+def _collect_bank_stats(s: Session) -> list[dict]:
+    """Return one dict per report with all dimensions + metrics."""
+    rows = []
+    for fb in s.exec(select(Foodbank)).all():
+        reports = s.exec(
+            select(AnnualReport).where(AnnualReport.foodbank_id == fb.id)
+        ).all()
+        for r in reports:
+            fr = s.exec(select(FrameResult).where(FrameResult.report_id == r.id)).first()
+            fv = s.exec(select(FoodVolume).where(FoodVolume.report_id == r.id)).first()
+            ps = s.exec(select(PeopleServed).where(PeopleServed.report_id == r.id)).first()
+            rows.append({
+                "city": fb.city,
+                "region": fb.region.value,
+                "year": r.year,
+                "model": r.ingestion_model,
+                "tco2e": fr.co2e_total_kg / 1000 if fr else None,
+                "kg": fv.kg_received_total if fv else None,
+                "hh": ps.households_weekly if ps else None,
+                "people": ps.individuals_total if ps else None,
+                "has_frame": fr is not None,
+            })
+    return rows
+
+
+def _aggregate(rows: list[dict]) -> dict:
+    return {
+        "banks": len({r["city"] for r in rows}),
+        "reports": len(rows),
+        "tco2e": sum(r["tco2e"] for r in rows if r["tco2e"] is not None),
+        "kg": sum(r["kg"] for r in rows if r["kg"] is not None),
+        "hh": sum(r["hh"] for r in rows if r["hh"] is not None),
+        "people": sum(r["people"] for r in rows if r["people"] is not None),
+    }
+
+
+@app.command()
+def stats(
+    group_by: str = typer.Option(
+        "none",
+        "--group-by", "-g",
+        help="Dimension to slice by: none | region | year | city | model",
+    ),
+    year: int | None = typer.Option(None, "--year", help="Filter to a specific year"),
+    region: str | None = typer.Option(None, "--region", help="Filter to a specific region"),
+    model: str | None = typer.Option(None, "--model", help="Filter to a specific model (partial match)"),
+    latest_only: bool = typer.Option(
+        True, "--latest-only/--all-years",
+        help="Use only the latest report per bank (default) or sum all years",
+    ),
+) -> None:
+    """Platform-wide aggregate stats with optional groupby slicing.
+
+    Examples:
+      ingest db stats
+      ingest db stats --group-by region
+      ingest db stats --group-by year
+      ingest db stats --group-by model
+      ingest db stats --group-by city --all-years
+      ingest db stats --group-by region --year 2023
+      ingest db stats --model haiku
+    """
+    valid_dims = {"none", "region", "year", "city", "model"}
+    if group_by not in valid_dims:
+        console.print(f"[red]--group-by must be one of: {', '.join(sorted(valid_dims))}[/red]")
+        raise typer.Exit(1)
+
+    with Session(engine) as s:
+        all_rows = _collect_bank_stats(s)
+
+    if latest_only:
+        # keep only latest report per bank
+        latest: dict[str, dict] = {}
+        for r in all_rows:
+            key = r["city"]
+            if key not in latest or r["year"] > latest[key]["year"]:
+                latest[key] = r
+        all_rows = list(latest.values())
+
+    # apply filters
+    if year is not None:
+        all_rows = [r for r in all_rows if r["year"] == year]
+    if region is not None:
+        all_rows = [r for r in all_rows if r["region"].lower() == region.lower()]
+    if model is not None:
+        all_rows = [r for r in all_rows if model.lower() in r["model"].lower()]
+
+    if not all_rows:
+        console.print("[yellow]No data matching filters.[/yellow]")
+        return
+
+    if group_by == "none":
+        agg = _aggregate(all_rows)
+        t = Table(title="Platform Aggregate Stats", box=box.ROUNDED, show_header=False)
+        t.add_column("Metric", style="bold cyan")
+        t.add_column("Value", justify="right")
+        t.add_row("Banks", str(agg["banks"]))
+        t.add_row("Reports", str(agg["reports"]))
+        t.add_row("tCO₂e/yr", f"{agg['tco2e']:,.1f}")
+        t.add_row("kg rescued/yr", f"{agg['kg']:,.0f}")
+        t.add_row("households/wk", f"{agg['hh']:,}")
+        t.add_row("people served", f"{agg['people']:,}" if agg["people"] else "—")
+        console.print(t)
+        return
+
+    # grouped output
+    from collections import defaultdict
+    groups: dict[str, list[dict]] = defaultdict(list)
+    for r in all_rows:
+        groups[str(r[group_by])].append(r)
+
+    title = f"Stats by {group_by}"
+    if year:
+        title += f"  (year={year})"
+    if region:
+        title += f"  (region={region})"
+    if model:
+        title += f"  (model={model})"
+
+    t = Table(title=title, box=box.SIMPLE_HEAD)
+    t.add_column(group_by.capitalize(), style="bold")
+    t.add_column("Banks", justify="right")
+    t.add_column("Reports", justify="right")
+    t.add_column("tCO₂e/yr", justify="right")
+    t.add_column("kg/yr", justify="right")
+    t.add_column("HH/wk", justify="right")
+    t.add_column("People", justify="right")
+
+    _desc_tco2e = lambda x: -(sum(r["tco2e"] or 0 for r in groups[x[0]]))
+    sort_key = {"region": lambda x: x[0], "year": lambda x: x[0], "model": lambda x: x[0], "city": _desc_tco2e}
+    sorted_groups = sorted(groups.items(), key=sort_key.get(group_by, lambda x: x[0]))
+
+    totals = _aggregate(all_rows)
+    for dim_val, rows in sorted_groups:
+        agg = _aggregate(rows)
+        t.add_row(
+            dim_val,
+            str(agg["banks"]),
+            str(agg["reports"]),
+            f"{agg['tco2e']:,.1f}",
+            f"{agg['kg']:,.0f}" if agg["kg"] else "—",
+            f"{agg['hh']:,}" if agg["hh"] else "—",
+            f"{agg['people']:,}" if agg["people"] else "—",
+        )
+
+    t.add_section()
+    t.add_row(
+        "[bold]TOTAL[/bold]",
+        str(totals["banks"]),
+        str(totals["reports"]),
+        f"[bold]{totals['tco2e']:,.1f}[/bold]",
+        f"[bold]{totals['kg']:,.0f}[/bold]" if totals["kg"] else "—",
+        f"[bold]{totals['hh']:,}[/bold]" if totals["hh"] else "—",
+        f"[bold]{totals['people']:,}[/bold]" if totals["people"] else "—",
+    )
+    console.print(t)
+
+
 @app.command()
 def missing() -> None:
     """Show reports with the fewest populated fields (worst completeness first)."""
@@ -306,4 +467,69 @@ def missing() -> None:
         color = "green" if rate >= 0.5 else "yellow" if rate >= 0.25 else "red"
         t.add_row(city, str(year), f"{filled}/{possible}",
                   Text(_pct_bar(filled, possible, 10), style=color))
+    console.print(t)
+
+
+@app.command()
+def locations() -> None:
+    """Show geocoded lat/lng for all banks (highlights missing)."""
+    with Session(engine) as s:
+        banks = s.exec(select(Foodbank)).all()
+        loc_by_bank = {
+            loc.foodbank_id: loc
+            for loc in s.exec(select(FoodbankLocation)).all()
+        }
+
+    t = Table(title=f"Foodbank Locations ({len(loc_by_bank)}/{len(banks)} geocoded)", box=box.SIMPLE_HEAD)
+    t.add_column("City", style="bold")
+    t.add_column("Name")
+    t.add_column("Lat", justify="right")
+    t.add_column("Lng", justify="right")
+    t.add_column("Geocoded at", style="dim")
+
+    for fb in sorted(banks, key=lambda b: b.city):
+        loc = loc_by_bank.get(fb.id)
+        if loc:
+            t.add_row(
+                fb.city, fb.name,
+                f"{loc.lat:.4f}", f"{loc.lng:.4f}",
+                loc.geocoded_at.strftime("%Y-%m-%d"),
+            )
+        else:
+            t.add_row(fb.city, fb.name, "[red]—[/red]", "[red]—[/red]", "[red]missing[/red]")
+
+    console.print(t)
+
+
+@app.command(name="missing-per-file")
+def missing_per_file(
+    bank: str | None = typer.Argument(None, help="Filter by bank name (partial match)"),
+) -> None:
+    """Per-ingestion missing fields from IngestionRecord table."""
+    with Session(engine) as s:
+        recs = s.exec(select(IngestionRecord)).all()
+
+    if bank:
+        recs = [r for r in recs if bank.lower() in r.bank_name.lower()]
+
+    if not recs:
+        console.print("[yellow]No ingestion records found.[/yellow]")
+        return
+
+    t = Table(title="Missing Fields per Ingestion", box=box.SIMPLE_HEAD)
+    t.add_column("Bank", style="bold")
+    t.add_column("Year", justify="right")
+    t.add_column("Missing", justify="right")
+    t.add_column("Fields", style="dim")
+
+    for rec in sorted(recs, key=lambda r: (r.bank_name, r.year)):
+        if rec.missing_fields is None:
+            fields_str = "[dim]not tracked[/dim]"
+            missing_count = "?"
+        else:
+            fields = json.loads(rec.missing_fields)
+            missing_count = str(len(fields))
+            fields_str = ", ".join(fields) if fields else "[green]all present[/green]"
+        t.add_row(rec.bank_name, str(rec.year), missing_count, fields_str)
+
     console.print(t)

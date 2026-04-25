@@ -22,15 +22,22 @@ DEFAULT_MODEL = "claude-sonnet-4-6"
 
 def detect_drift(raw: dict[str, Any], schema: type[BaseModel]) -> bool:
     """Return True if returned keys don't match the target schema (>50% wrong field names)."""
-    non_null_keys = {k for k, v in raw.items() if v is not None}
-    if not non_null_keys:
+    if not raw:
         return False
     schema_fields = set(schema.model_fields)
-    overlap = non_null_keys & schema_fields
-    return len(overlap) / len(non_null_keys) < 0.5
+    response_fields = set(raw)
+    overlap = response_fields & schema_fields
+    return len(overlap) / len(response_fields) < 0.5
 
 
 _RETRY_DELAYS = [1, 2, 5, 10, 20, 30, 60, 120]
+
+
+def _extract_tool_input(response: Any) -> dict[str, Any] | None:
+    for block in response.content:
+        if getattr(block, "type", None) == "tool_use":
+            return block.input
+    return None
 
 
 def _call_claude(
@@ -53,9 +60,11 @@ def _call_claude(
                 model=model,
                 max_tokens=1024,
                 system=system_prompt,
-                tools=[{"name": tool_name, "input_schema": schema_cls.model_json_schema()}],
+                tools=[
+                    {"name": tool_name, "input_schema": schema_cls.model_json_schema()}
+                ],
                 tool_choice={"type": "tool", "name": tool_name},
-                messages=[{"role": "user", "content": text[:20000]}],
+                messages=[{"role": "user", "content": text}],
             )
         except anthropic.RateLimitError as exc:
             if attempt >= len(_RETRY_DELAYS):
@@ -66,15 +75,23 @@ def _call_claude(
             except Exception:
                 pass
             delay = max(_RETRY_DELAYS[attempt], retry_after or 0)
-            logger.warning(f"[{tool_name}] rate limited, retrying in {delay}s (attempt {attempt + 1}/{len(_RETRY_DELAYS)})")
+            logger.warning(
+                f"[{tool_name}] rate limited, retrying in {delay}s (attempt {attempt + 1}/{len(_RETRY_DELAYS)})"
+            )
             time.sleep(delay)
             continue
-        raw = response.content[0].input
+        raw = _extract_tool_input(response)
         logger.debug(
             f"[{tool_name}] {model} → stop={response.stop_reason} "
             f"in={response.usage.input_tokens} out={response.usage.output_tokens}"
         )
         logger.debug(f"[{tool_name}] raw output: {raw}")
+        if raw is None:
+            logger.warning(f"[{tool_name}] no tool_use block returned, retrying")
+            continue
+        if detect_drift(raw, schema_cls):
+            logger.warning(f"[{tool_name}] schema drift detected, retrying")
+            continue
         return raw
 
     raise RuntimeError(f"[{tool_name}] exhausted retries")
@@ -85,7 +102,9 @@ def _parse_section(raw: dict, schema_cls: type[BaseModel]) -> BaseModel:
     try:
         return schema_cls.model_validate(cleaned)
     except Exception as e:
-        logger.warning(f"Validation failed for {schema_cls.__name__}: {e} — returning empty")
+        logger.warning(
+            f"Validation failed for {schema_cls.__name__}: {e} — returning empty"
+        )
         return schema_cls()
 
 
@@ -96,18 +115,26 @@ async def extract_all(text: str, model: str = DEFAULT_MODEL) -> ExtractionResult
     tool_names = list(TOOL_SCHEMA_MAP.keys())
     logger.info(f"Dispatching {len(tool_names)} parallel extractions with {model}")
 
-    results = await asyncio.gather(*[
-        loop.run_in_executor(None, _call_claude, client, text, tool_name, model)
-        for tool_name in tool_names
-    ])
+    results = await asyncio.gather(
+        *[
+            loop.run_in_executor(None, _call_claude, client, text, tool_name, model)
+            for tool_name in tool_names
+        ]
+    )
 
     raw_map = dict(zip(tool_names, results))
     logger.info("All extractions complete")
 
     return ExtractionResult(
-        food_volume=_parse_section(raw_map["extract_food_volume"], FoodVolumeExtraction),
-        food_categories=_parse_section(raw_map["extract_food_categories"], FoodCategoriesExtraction),
-        people_served=_parse_section(raw_map["extract_people_served"], PeopleServedExtraction),
+        food_volume=_parse_section(
+            raw_map["extract_food_volume"], FoodVolumeExtraction
+        ),
+        food_categories=_parse_section(
+            raw_map["extract_food_categories"], FoodCategoriesExtraction
+        ),
+        people_served=_parse_section(
+            raw_map["extract_people_served"], PeopleServedExtraction
+        ),
         operations=_parse_section(raw_map["extract_operations"], OperationsExtraction),
         donations=_parse_section(raw_map["extract_donations"], DonationsExtraction),
     )
