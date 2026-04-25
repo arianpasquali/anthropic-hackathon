@@ -1,0 +1,704 @@
+Stichting Goed Ontmoet
+Abraham de Haanstraat 14
+4624 HX Bergen op Zoom
+FINANCIEEL JAARVERSLAG 2024
+INHOUDSOPGAVE FINANCIEEL JAARVERSLAG
+Blad
+I. ALGEMEEN
+1. Samenstellingsverklaring 1
+2. Bestuur verslag 2
+3. Bericht van de Raad van Toezicht 4
+II. JAARREKENING 2024
+1. Balans per 31 december 2024 5
+2. Staat van baten en lasten over 2024 7
+3. Grondslagen voor waardering en resultaatbepaling 8
+4. Toelichting op de balans per 31 december 2024 12
+5. Toelichting op de staat van baten en lasten over 2024 16
+6. Ondertekening jaarrekening 18
+7. Begroting 2025 19
+Aan het bestuur van Stichting Goed Ontmoet
+Postbus 121
+4600 AC Bergen op Zoom
+Roosendaal, 10 maart 2025
+Kenmerk: 389540
+Behandeld door: W.J.H.M. Goorden AA
+I.1 SAMENSTELLINGSVERKLARING VAN DE ACCOUNTANT
+Aan het bestuur van Stichting Goed Ontmoet,
+Wij hebben u ondersteund bij het samenstellen van het in dit rapport opgenomen
+financieel jaarverslag 2024 van Stichting Goed Ontmoet te Bergen op Zoom op basis van
+de van u verkregen informatie.
+Dit financieel jaarverslag bestaat uit de balans per 31 december 2024, de staat van baten
+en lasten over 2024 met de daarbij behorende toelichting.
+Deze samenstellingsopdracht is door ons uitgevoerd volgens Nederlands recht, waaronder
+de voor accountants geldende Standaard 4410, "Samenstellingsopdrachten". Op grond van
+deze standaard wordt van ons verwacht dat wij u ondersteunen bij het opstellen en
+presenteren van het financieel jaarverslag in overeenstemming met de in Nederland
+algemeen aanvaarde grondslagen voor financiële verslaggeving, in het bijzonder RJk Cl
+kleine organisaties zonder winststreven. Wij hebben daarbij onze deskundigheid op het
+gebied van administratieve verwerking en financiële verslaggeving toegepast.
+Bij een samenstellingsopdracht bent u er verantwoordelijk voor dat de informatie klopt en
+dat u ons alle relevante informatie aanlevert. Wij hebben onze werkzaamheden, in
+overeenstemming met de daarvoor geldende regelgeving, dan ook uitgevoerd vanuit de
+veronderstelling dat u aan deze verantwoordelijkheid heeft voldaan. Als slotstuk van onze
+werkzaamheden zij wij door het lezen van het financieel jaarverslag globaal nagegaan dat
+het beeld van het financieel jaarverslag overeenkwam met onze kennis van Stichting Goed
+Ontmoet. Wij hebben geen controle- of beoordelingswerkzaamheden uitgevoerd die ons
+in staat stellen om een oordeel te geven of een conclusie te trekken met betrekking tot de
+getrouwheid van het financieel jaarverslag.
+Bij het uitvoeren van deze opdracht hebben wij ons gehouden aan de voor ons geldende
+relevante ethische voorschriften in de Verordening Gedrags- en Beroepsregels
+Accountants (VGBA). U en andere gebruikers van het financieel jaarverslag mogen er dan
+ook vanuit gaan dan wij de opdracht professioneel, vakbekwaam en zorgvuldig, integer en
+objectief hebben uitgevoerd en dat wij vertrouwelijk om gaan met de door u verstrekte
+gegevens.
+Met vriendelijke groet,
+W.J.H.M. Goorden AA
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+I.2 Bestuur verslag
+Missie
+Het voorzien in de meest basale behoeften van minderbedeelden in de Nederlandse
+samenleving, in het bijzonder West-Brabant. De stichting beoogt niet het maken van winst.
+Onze visie
+In Nederland leeft bijna een miljoen mensen onder de armoedegrens. De voedselbanken
+helpen de armste door ze, in principe, tijdelijk te voorzien van voedselpakketten. Om onze
+klanten van voldoende eten te kunnen voorzien, werken wij samen met bedrijven, instellingen,
+gemeentes en particulieren. Zo zorgen wij er samen voor dat armoede wordt bestreden,
+voedseloverschotten verminderen en het milieu minder wordt belast. Om de zelfredzaamheid
+van onze klanten te helpen vergroten, werken we samen met lokale organisaties die
+onze klanten helpen weer op eigen benen te staan. Voedselhulp moet immers altijd tijdelijk zijn.
+Bestuur
+Het bestuur van Stichting Goed Ontmoet bestaat uit:
+Voorzitter: A.B. Ringersma
+Penningmeester: L.A.M. Tholhuijsen
+Bestuursleden: J.J. Meeuwsen
+TH. Kanmeijer-Mousawi
+Kernwaarden
+De voedselbanken hanteren de volgende kernwaarden als maatstaf voor hun handelen:
+• We werken uitsluitend met vrijwilligers
+• We zijn neutraal en onafhankelijk (burgers voor burgers)
+• We zijn transparant in onze verantwoording
+• We verstrekken voedsel dat door anderen wordt gedoneerd
+• We verstrekken zoveel mogelijk gezond voedsel
+• We verdelen het voedsel zo eerlijk mogelijk
+De hoofddoelstellingen
+De voedselbanken hebben de volgende hoofddoelstellingen:
+• Het bieden van directe voedselhulp aan de armste mensen
+• Het voorkomen van verspilling van goed voedsel.
+Risico’s en onzekerheden
+Omdat de voedselbanken voedsel afleveren dat zij gratis verkrijgen van de leveranciers, zijn
+wij afhankelijk van de producten die wij krijgen. Onze leveranciers stellen, zeer begrijpelijk,
+als eis dat wij afleveren conform de voorschriften van de NVWA. Wij zijn en blijven voor de
+aanvoer van voedsel volstrekt afhankelijk van onze leveranciers.
+Ook besteedt de stichting ruim aandacht aan de mogelijke persoons-/ARBO risico’s
+voor vrijwilligers en klanten. Risico inventarisaties hebben plaatsgevonden en in
+voorkomende gevallen zijn passende (preventie)maatregelen genomen.
+2
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+Financieel beleid en financiële resultaten
+Het bestuur van de stichting heeft eerder bepaald dat de continuïteitsreserve 1,5 maal
+de exploitatiekosten moet bedragen (hier vallen o.a. de kosten van beheer, kosten vrijwilligers,
+administratie, kosten wagenpark, huisvesting en overige algemene kosten onder). In
+2023 gaan wij een nieuwe risico analyse uitvoeren en, zo nodig, de hoogte van deze reserve
+aanpassen.
+Het jaar 2024 is afgesloten met een positief saldo van € 102.872 ( 2023: € 118.022).De
+opbrengsten bedroegen € 245.846 ( 2023: € 273.203), de kosten kwamen uit op € 137.156
+(2023: € 152.888). Het bestuur heeft besloten om het positief resultaat volledig toe te voegen
+aan de bestemmingsreserves voor aanvulling continuiteitsreserve en voor de nieuwe loods.
+Beschrijving maatregelen ter beheersing van de voornaamste risico’s en onzekerheden.
+Om te blijven voldoen aan de eisen van de NVWA op het gebied van voedselveiligheid
+continueren wij de reeds jaren bestaande inventarisatie- en beheersmaatregelen.
+In 2024 zijn twee vrijwilligers voor voedselvoedselveiligheid aangetrokken.
+De borging van de financiële toestroom van gelden voor acties en structurele investeringen
+heeft ieder jaar de volledige aandacht van het bestuur.
+Voor het verkrijgen van vers voedsel onderhoudt de stichting nauwe contacten met
+producenten, distributeurs, supermarkt ketens en lokale supermarkten.
+Om aan voldoende aanvoer te kunnen komen zijn in 2024 twee vrijwilligers aangetrokken voor
+voedselverwerving.
+Vergoedingen
+Niemand bij de voedselbank wordt betaald. Alleen worden de gemaakte onkosten vergoed
+conform het declaratiereglement.
+Geholpen gezinnen en personen
+Het aantal gezinnen dat geholpen zijn bedragen per gemeente:
+jaar 2024 jaar 2023
+gemiddeld gemiddeld
+Totaal per week Totaal per week
+Uitgiftepunt Bergen Op Zoom 5 .819 112 7 .092 136
+Uitgiftepunt Ossendrecht 1 .702 33 2 .031 39
+Uitgiftepunt Oudenbosch 't Trefpunt 2 .633 51 3 .073 59
+Uitgiftepunt Roosendaal 7 .406 142 7 .499 144
+Uitgiftepunt Sint Maartensdijk 1 .232 24 1 .978 38
+Uitgiftepunt Steenbergen 2 .035 39 2 .915 56
+20.827 401 24.588 473
+In 2024 zijn er ten opzichten van 2023 3.761 gezinnen minder geholpen.
+3
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+De onderverdeling naar personen bedraagt gemiddeld per gemeente:
+jaar 2024 jaar 2023
+gemiddeld gemiddeld
+Totaal per week Totaal per week
+Uitgiftepunt Bergen Op Zoom 14.876 286 16.928 326
+Uitgiftepunt Ossendrecht 4 .241 82 4 .985 96
+Uitgiftepunt Oudenbosch 't Trefpunt 8 .804 169 9 .701 187
+Uitgiftepunt Roosendaal 17.742 341 18.944 364
+Uitgiftepunt Sint Maartensdijk 3 .343 64 4 .441 85
+Uitgiftepunt Steenbergen 5 .758 111 8 .230 158
+54.764 1.053 63.229 1.216
+Het aantal geholpen personen lag in 2024 8.465 lager dan in 2023.
+Het bestuur doet er alles aan om de Stichting in een financieel gezonde situatie te houden,
+waardoor de continuïteit gewaarborgd wordt.
+Namens het bestuur van Stichting Goed Ontmoet
+Bergen op Zoom, 10 maart 2025
+A.B. Ringersma
+Voorzitter
+4
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+I.3. BERICHT VAN DE RAAD VAN TOEZICHT BETREFFENDE DE JAARRREKENING 2024
+De Raad van Toezicht controleert en ondersteunt het Bestuur met betrekking tot de financiële en
+algemene strategie en gang van zaken binnen de Stichting Goed Ontmoet. Deze 2-lagen structuur
+moet garanderen dat er een onafhankelijk functionerende organisatie bestaat, waarin de doelstelling
+van de Stichting optimaal tot zijn recht komt.
+In het verslagjaar heeft de Raad van Toezicht twee keer een vergadering gehouden met het bestuur
+op locatie. Daarnaast heeft Raad van Toezicht diverse gesprekken gevoerd met potentiële
+bestuursleden. Als laatst heeft Raad van Toezicht zelf in het verslagjaar twee keer vergadert.
+Bestuurswisseling
+In 2024 hebben zich geen bestuur mutaties voorgedaan. Het huidige bestuur bestaat uit drie leden.
+De intentie is om het bestuur uit te breiden tot vijf leden. Het vinden van nieuwe bestuursleden is een
+moeilijke opgave. Zowel het bestuur als de raad van toezicht spant zich volledig in naar het vinden van
+geschikte kandidaten.
+Financiën
+Met de huidige solide financiële situatie van de Stichting Goed Ontmoet is de continuïteit voor de
+korte/middellange termijn gewaarborgd. De Stichting Goed Ontmoet heeft voldoende financiële
+reserves om toekomstige investeringen en tegenvallers op te vangen.
+De Raad van Toezicht ondersteunt de door het Bestuur van de stichting gekozen doelen
+die opgenomen zijn in de bestemmingsreserves.
+Tot slot willen wij, als Raad van Toezicht, wederom graag onze bijzondere dank uitspreken aan alle,
+160 vrijwilligers/ medewerkers van Stichting Goed Ontmoet, voor de enorme inzet die zij tonen en
+aandacht die zij geven aan de ruim 1.000 klanten die de Stichting wekelijks probeert te helpen met
+voedselpakketten.
+Ook willen wij de leden van het bestuur complimenteren voor de wijze waarop zij het beleid van het
+afgelopen jaar vorm hebben gegeven en met minimale bezetting van het bestuur onze Stichting Goed
+Ontmoet draaiend gehouden hebben. Wij vertrouwen erop dat zij dat voor de komende jaren
+succesvol kunnen voortzetten.
+Bergen op Zoom, 10 maart 2025
+Raad van Toezicht Stichting Goed Ontmoet
+Voorzitter: Y. Kaplan
+Raadsleden: A. Harijgens
+L. van Halst
+5
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+II. JAAREKENING 2024
+II.1. BALANS PER 31 DECEMBER 2024
+31-12-2024 31-12-2023
+€ € € €
+ACTIVA
+VASTE ACTIVA
+Materiële vaste activa:
+Gebouwen 403.018 433.979
+Inventaris 25.442 35.820
+Vervoermiddelen 91.429 102.710
+519.889 572.509
+VLOTTENDE ACTIVA
+Debiteuren - -
+Overige vorderingen 5.447 2.359
+5 .447 2359
+Liquide middelen 293.668 217.173
+819.004 792.041
+6
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+II.1. BALANS PER 31 DECEMBER 2024
+31-12-2024 31-12-2023
+€ € € €
+PASSIVA
+EIGEN VERMOGEN
+Continuïteitsreserve 205.000 150.000
+Bestemmingsreserve 427.834 427.262
+Overige reserves 582 582
+633.416 577.844
+LANGLOPENDE SCHULDEN
+Hypothecaire lening derden 162.888 198.616
+KORTLOPENDE SCHULDEN
+Crediteuren 4.946 112
+Nog te betalen kosten 17.754 15.469
+22.700 15.581
+819.004 792.041
+7
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+II.2 STAAT VAN BATEN EN LASTEN OVER 2024
+Begroting
+2024 2024 Verschil 2023
+€ € € €
+Baten
+Baten van subsidie van overheden 157.481 146.872 10.609 101.123
+Baten van Voedselbank Nederland 4.874 3.500 1.374 10.229
+Donaties 83.491 61.500 21.991 161.851
+245.846 211.872 33.974 273.203
+Lasten
+Kosten vrijwilligers 7.264 12.815 5.551 19.046
+Huisvestingskosten 56.001 65.821 9.820 67.849
+Autokosten 40.856 47.636 6.780 34.136
+Afschrijvingen vaste activa 11.799 49.532 37.733 5.641
+Overige bedrijfskosten 25.975 26.280 305 26.216
+141.895 202.084 60.189 152.888
+103.951 9.788 94.163 120.315
+Financiële baten en lasten -5.818 -7.732 1.914 -2.293
+Saldo baten en lasten 98.133 2.056 96.077 118.022
+Bestemming saldo van baten en lasten
+- Toevoeging aan de continuïteitsreserve 55.000 - 55.000 -
+- Nieuwbouw loods 43.133 - 43.133 118.022
+98.133 - 98.133 118.022
+8
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+II.3. GRONDSLAGEN VOOR DE WAARDERING EN RESULTAATBEPALING
+ALGEMEEN
+Activiteiten
+De activiteiten van de stichting bestaan in hoofdzaak uit het voorzien in de meeste basale
+behoeften van minderbedeelden in de Nederlandse samenleving, in het bijzonder in West-Brabant.
+Vestigingsadres
+Stichting Goed Ontmoet (geregistreerd onder KvK-nummer 20135355) is feitelijk gevestigd aan
+de Abraham de Haanstraat 14, 4624 HX Bergen op Zoom.
+GRONDSLAGEN VOOR WAARDERING EN RESULTAATBEPALING
+De jaarrekening 2024 is opgesteld volgens de verslaggevingsrichtlijnen die gesteld worden aan
+fondsenwervende instellingen (richtlijn voor de jaarverslaggeving 650). De cijfers uit de jaarrekening
+2022 zijn als vergelijkende cijfers in de jaarrekening opgenomen.
+De waarderingsgrondslagen zijn ten opzichte van het voorgaande boekjaar ongewijzigd gebleven.
+Verdeling bestedingen naar doelstellingen:
+Het volgens de richtlijnen voor de jaarverslaggeving voor fondsenwervende organisaties (RJ 650) op
+te nemen model inzake de verdeling van de bestedingen is niet in de jaarrekening opgenomen.
+Alle bestedingen zijn verricht aan de doelstelling inzake het ondersteunen van de
+Voedselbank zoals hierboven uiteengezet. Er is geen sprake van meerdere doelstellingen. Een
+verdere uitsplitsing naar activiteiten is gezien de aard van deze activiteiten niet verder
+mogelijk.
+Informatieverschaffing over schattingen
+Bij toepassing van de grondslagen en regels voor het opstellen van de jaarrekening vormt het
+bestuur van Stichting Goed Ontmoet zich verschillende oordelen en schattingen die
+essentieel kunnen zijn voor de in de jaarrekening opgenomen bedragen. Indien het voor het
+geven van het in artikel 362 lid 1, Boek 2 BW vereiste inzicht noodzakelijk is, is de aard van deze
+oordelen en schattingen inclusief de bijbehorende veronderstellingen opgenomen bij de
+toelichting op de desbetreffende jaarrekeningposten.
+ALGEMENE GRONDSLAGEN VOOR OPSTELLING VAN DE JAARRREKENING
+De waardering van activa en passiva en de bepaling van het resultaat vinden plaats op basis van
+historische kosten. Tenzij bij de desbetreffende grondslag voor de specifieke balanspost anders
+wordt vermeld.
+Baten en lasten worden toegerekend aan het jaar waarop ze betrekking hebben. Winsten
+worden slechts opgenomen voor zover zij op balansdatum zijn gerealiseerd. Verplichtingen
+en mogelijke verliezen die hun oorsprong vinden voor het einde van het verslagjaar,
+worden in acht genomen indien zij voor het opmaken van de jaarrekening bekend zijn geworden.
+9
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+Financiële instrumenten
+Onder financiële instrumenten worden zowel primaire financiële instrumenten, zoals vorderingen
+en schulden, als financiële derivaten verstaan.
+Voor de grondslagen van primaire financiële instrumenten wordt verwezen naar de behandeling
+per balanspost. De organisatie zet geen afgeleide financiële instrumenten in om risico’s te
+beheersen.
+Grondslagen voor de waardering van activa en passiva
+Materiële vaste activa
+De materiële vaste activa worden gewaardeerd op verkrijgingsprijs, verminderd met de
+cumulatieve afschrijvingen en indien van toepassing met bijzondere waardeverminderingen.
+De afschrijvingen worden gebaseerd op de geschatte economische levensduur en worden
+berekend op basis van een vast percentage van de verkrijgingsprijs, rekening houdend met een
+eventuele residuwaarde. Er wordt afgeschreven vanaf het moment van ingebruikneming.
+Vorderingen en overlopende activa
+De vorderingen worden bij eerste verwerking opgenomen tegen de reële waarde en vervolgens
+gewaardeerd tegen de geamortiseerde kostprijs. De reële waarde en geamortiseerde kostprijs
+zijn gelijk aan de nominale waarde. Noodzakelijk geachte voorzieningen voor het risico
+van oninbaarheid worden in mindering gebracht. Deze voorzieningen worden bepaald op basis
+van individuele beoordeling van de vorderingen.
+Liquide middelen
+Liquide middelen bestaan uit banktegoeden met een looptijd korter dan twaalf maanden.
+Eventuele rekening-courantschulden bij banken worden opgenomen onder schulden aan
+kredietinstellingen onder kortlopende schulden. Liquide middelen worden gewaardeerd
+tegen nominale waarde.
+Bestemmingsfondsen
+Stichting Goed Ontmoet geeft door middel van de benoeming van fondsen en reserves aan op
+welke wijze de haar ter beschikking staande middelen worden aangewend.
+Het gedeelte van het eigen vermogen dat wordt afgezonderd omdat daaraan door derden een
+specifieke bestedingsmogelijkheid is gegeven, wordt aangemerkt als bestemmingsfonds.
+Ontvangen baten met een specifieke bestemming worden toegevoegd aan een bestemmingsfonds.
+Gerelateerde specifieke bestedingen worden op dit bestemmingsfonds in mindering
+gebracht.
+Zowel de ontvangen baten als de bestedingen van de fondsen worden via de staat van baten en
+lasten verwerkt en via bestemming van het saldo van baten en lasten op de fondsen
+gemuteerd.
+Bestemmingsreserves
+Stichting Goed Ontmoet geeft door middel van de benoeming van fondsen en reserves
+aan op welke wijze de haar ter beschikking staande middelen worden aangewend.
+10
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+Het gedeelte van het eigen vermogen dat is afgezonderd omdat daaraan door het bestuur
+van Stichting Goed Ontmoet een bepaalde bestedingsmogelijkheid is gegeven, wordt
+aangemerkt als bestemmingsreserve. Het bestuur van de stichting heeft de bevoegdheid om de
+bestemming weer op te heffen of af te wijzen.
+Continuïteitsreserve
+Deze reserve wordt gevormd ter dekking van de exploitatiekosten en kosten ter besteding aan de
+doelstelling welke een vast karakter hebben met als doel het kunnen voorzien in de
+continuïteit op korte termijn (1,5 jaar).
+Kortlopende schulden
+Kortlopende schulden worden bij de eerste verwerking gewaardeerd tegen reële waarde.
+Kortlopende schulden worden na eerste verwerking gewaardeerd tegen geamortiseerde
+kostprijs, zijnde het ontvangen bedrag rekening houdend met agio of disagio en onder aftrek
+van transactiekosten. Dit is meestal de nominale waarde.
+Grondslagen voor de bepaling van het resultaat
+Ten aanzien van de posten begrepen in de staat van baten en lasten geldt, dat baten slechts
+worden opgenomen indien en voor zover zij in het boekjaar zijn verwezenlijkt. Lasten
+worden toegerekend aan het jaar waarop ze betrekking hebben. Met verliezen en risico's die
+hun oorsprong vinden voor het einde van het boekjaar wordt rekening gehouden, indien zij
+voor het opmaken van de jaarrekening bekend zijn geworden.
+Baten
+Baten waarvoor een bijzondere bestemming is aangewezen worden ten gunste van de staat van
+baten en lasten gebracht in het jaar dat deze baten worden ontvangen. Indien deze baten in
+het verslagjaar nog niet volledig zijn besteed, zijn de nog niet bestede gelden verwerkt in de
+desbetreffende bestemmingsfondsen en bestemmingsreserves. De bestedingen worden als
+last verantwoord in het verslagjaar dat deze bestedingen plaatsvinden. Via bestemming van
+het saldo van baten en lasten worden deze bestedingen in dat verslagjaar ten laste van de
+desbetreffende bestemmingsfondsen en bestemmingsreserves gebracht.
+Donaties worden verantwoord in het jaar waarin zij worden ontvangen.
+Nalatenschappen worden opgenomen in het boekjaar waarin de omvang voldoende betrouwbaar
+kan worden vastgesteld op basis van een omschrijving ontvangen van de executeur-testamentair.
+Lasten
+De bestedingen worden als last verantwoord in het verslagjaar dat deze bestedingen plaatsvinden.
+Via bestemming van het saldo van baten en lasten worden deze bestedingen in dat
+verslagjaar ten laste van de betreffende bestemmingsfondsen en bestemmingsreserves gebracht.
+Wervingskosten
+Onder de wervingskosten zijn begrepen kosten die direct verband houden met de in het verslagjaar
+ontwikkelde fondsverwervingsactiviteiten.
+11
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+Financiële baten en lasten
+Rentebaten en rentelasten worden tijdsevenredig verwerkt, rekening houdend met de effectieve
+rentevoet van de desbetreffende activa en passiva. Bij de verwerking van de rentelasten
+wordt rekening gehouden met de verantwoorde transactiekosten op de ontvangen
+leningen.
+Subsidie en giften
+De subsidies/overige bijdragen zijn opgenomen overeenkomstig de toegezegde subsidies 2023
+door de subsidiënten. De bijdragen zijn in de jaarrekeningen verwerkt.
+Continuïteit
+De gehanteerde grondslagen voor waardering en resultaatbepaling zijn gebaseerd op continuïteits-
+veronderstelling van de stichting.
+12
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+II.4. TOELICHTING OP DE BALANS PER 31 DECEMBER 2024
+ACTIVA
+Materiële vaste activa
+Het verloop van de materiële vaste activa kan als volgt worden weergegeven:
+Onroerende Vervoermidd
+zaken Inventaris elen Totaal
+€ € € €
+Aanschafwaarde 473.500 120.356 184.208 778.064
+Af: cumulatieve afschrijvingen -39.521 -84.536 -81.498 -205.555
+Boekwaarde per 1 januari 2024 433.979 35.820 102.710 572.509
+Mutaties 2024
+Bij: investeringen 9.251 949 - 10.200
+Af: desinvesteringen -8.460 - - -8.460
+Af: afschrijvingen -31.752 -11.327 -11.281 -54.360
+Bij: afschrijving desinvestering - - -
+-30.961 -10.378 -11.281 -52.620
+Aanschaffingswaarde 474.291 121.305 184.208 779.804
+Af: cumulatieve afschrijvingen -71.273 -95.863 -92.779 -259.915
+Boekwaarde per 31 december 2024 403.018 25.442 91.429 519.889
+Afschrijvingspercentage 10% 20% 20%
+De materiële vaste activa wordt aangehouden voor de bedrijfsvoering.
+Overige vorderingen
+31-12-2024 31-12-2023
+€ €
+Praxis bonnen - 614
+Nog te vorderen rente 5.447 1.745
+5.447 2.359
+Liquide middelen
+Rabobank NL 78 RABO 0140 2418 33 25.386 27.494
+Rabobank NL 85 RABO 0336 1959 66 138 278
+Rabobank NL 86 RABO 3166 3870 64 150.000 -
+Rabobank spaarrekening,NL53 RABO 1473 3034 86 118.144 189.401
+293.668 217.173
+De liquide middelen zijn vrij besteedbaar en terstond opeisbaar
+13
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+PASSIVA 2024 2023
+€ €
+Continuïteitsreserve
+Stand per 1 januari 150.000 150.000
+Mutaties boekjaar 55.000 -
+Stand per 31 december 2024 205.000 150.000
+Het bestuur van Goed Ontmoet heeft besloten dat er minimaal aan continuïteitsreserve 1,5 keer de
+jaarlijkse exploitatiekosten aangehouden dient te worden. De hiervoor in aanmerking
+genomen exploitatiekosten bestaan uit de kosten van beheer, kosten vrijwilligers,
+administratie, kosten wagenpark, huisvesting en overige algemene kosten.
+2024 2023
+€ €
+Bestemmingsreserves
+Bestemmingsreserves voor investeringen 402.266 401.694
+Bestemmingsreserves voor voedingspakketten 25.568 25.568
+427.834 427.262
+Bestemmingsreserves voor investeringen
+Het verloop van de reserve kan als volgt worden weergegeven:
+Stand per 1 januari 401.694 318.110
+Vrijval afschrijvingen -42.561 -34.438
+Bij: saldo boekjaar 43.133 118.022
+Stand per 31 december 402.266 401.694
+De bestemmingsreserve investeringen wordt gevoed door geoormerkte giften van
+bedrijven, instellingen en particulieren. De vrijval loopt evenredig met de afschrijvingskosten
+van deze geoormerkte investeringen.
+In 2020 zijn de bestemmingsreserves door het bestuur benoemd naar de gedane en nog uit te
+voeren investeringen.
+2024 2023
+€ €
+Bestemmingsreserves voor voedingspakketten
+Stand per 1 januari 25.568 25.568
+Mutaties boekjaar - -
+Stand per 31 december 25.568 25.568
+Dit betreft een reservering voor was- en schoonmaakpakketten
+14
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+Overige reserves 2024 2023
+€ €
+Stand per 1 januari 582 582
+Overboeking uit resultaatverdeling - -
+Saldo per 31 december 582 582
+De overige reserves zijn vrij beschikbare reserves. Indien nodig kan het bestuur beslissen een
+deel van deze reserves te besteden aan de bestemmingsreserves.
+Langlopende schulden
+Hypothecaire lening derden 2024 2023
+€ €
+Stand per 1 januari 198.616 -
+Mutaties - 200.000
+Aflossingen -35.728 - 1.384
+Stand per 31 december 162.888 198.616
+Deze lening is aangegaan voor de financiering van de nieuw te bouwen loods.
+De lening is aangegaan voor een periode van 20 jaar, eindigt op 30 november 2043, omdat de lening
+later is ingegaan. De rente is voor de gehele periode vastgesteld op 5,5%.
+Als zekerheid voor deze lening is een hypothecair inschrijving verstrekt op het pand
+Abraham de Haanstraat 14, 4624 HX Bergen op Zoom , van € 200.000, vermeerderd met 35% kosten,
+totaal € 270.000. De maandelijks te betalen rente en aflossing is op basis van een
+annuiteïtenlening van € 1.375,77 per maand. De lening kan vervroegd afgelost worden met ontvangen
+gelden van Voedselbank Nederland, Oranje fonds en Rabobank. In 2024 is € 30.000 extra op de lening
+afgelost.
+31-12-2024 31-12-2023
+€ €
+Nog te betalen kosten
+Vooruit ontvangen bijdrage gemeente 15.000 -
+Nog te betalen kosten 2 .754 -
+Nog te betalen bouwkosten - 15.469
+17.754 15.469
+NIET IN DE BALANS OPGENOMEN ACTIVA EN VERPLICHTINGEN
+Huurverplichtingen onroerende zaken
+In Steenbergen wordt ruimte gehuurd in sporthal het Cromwiel. De huur voor 2024 bedroeg€ 1.599.
+De huur kan per direct worden opgezegd. In Ossendrecht wordt in de Remise ruimte
+gehuurd voor € 400 per jaar. Ook deze huur is direct opzegbaar. In Sint Maartensdijk bedraagt
+de huur € 656, ook direct opzegbaar.
+15
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+II.5. TOELICHTING OP DE STAAT VAN BATEN EN LASTEN OVER 2024
+Begroting
+2024 2024 2023
+€ € €
+Baten
+Baten van subsidie van overheden 157.481 146.872 101.123
+Baten van Voedselbank Nederland 4.874 3.500 10.229
+Donaties 83.491 61.500 161.851
+245.846 211.872 273.203
+Baten van subsidie van overheden
+Gemeente Bergen op Zoom 40.000 40.056 30.069
+Gemeente Steenbergen 17.817 17.817 11.930
+Gemeente Roosendaal 45.000 42.736 21.349
+Gemeente Halderberge 20.000 20.269 15.000
+Gemeente Woensdrecht 15.808 10.808 8.839
+Gemeente Tholen 18.856 15.186 13.936
+157.481 146.872 101.123
+Donaties
+Donaties van particulieren 18.564 15.000 30.050
+Donaties via Mollie 6.643 - -
+Opbrengst pallets 593 - -
+Donaties uit bedrijfsleven 11.144 30.000 10.357
+Kerkelijke donaties 15.699 5.500 26.272
+Donaties van service clubs 7.158 2.500 7.500
+Donaties voor brandstoffen 7.500 8.500 5.172
+Donaties voor investeringen 16.190 - 82.500
+83.491 61.500 161.851
+Kosten vrijwilligers
+Bijeenkomst- en kerstkosten 3.146 5.000 1.909
+Reiskosten vergoeding vrijwilligers 2.542 4.815 4.258
+Bloementje vrijwilligers 346 - 3.917
+Rijopleiding - - 1.742
+Diverse kosten vrijwilligers 1.230 3.000 7.220
+7.264 12.815 19.046
+Huisvestingskosten
+Huur loods en uitgifte punten 2.655 2.670 4.405
+Distributie Centrum Tilburg bijdrage 16.280 12.685 15.373
+Onderhoud en kleine aanschaffingen 16.917 12.200 11.521
+Riool en Ozb kosten 2.223 1.500 1.491
+Transporteren 38.075 29.055 32.790
+16
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+2024 2024 2023
+€ € €
+Huisvestingskosten ( vervolg)
+Transport 38.075 29.055 32.790
+Beveiligingskosten 1.044 850 1.774
+Vuilafvoer 8.459 13.000 8.363
+Verzekering pand 803 - 432
+Energie 6.942 22.805 23.796
+Overige huisvestingskosten 678 111 694
+56.001 65.821 67.849
+Autokosten
+Onderhoud 15.087 12.350 8.472
+Brandstof 10.784 18.500 12.158
+Verzekeringen 8.387 9.044 8.867
+Schade, eigenrisico 2.270 - 245
+Motorrijtuigenbelasting 4.328 3.992 3.884
+Overige kosten - 3.750 510
+40.856 47.636 34.136
+Afschrijvingen vaste activa
+Gebouwen 31.752 27.468 16.359
+Inventaris 11.327 10.783 12.439
+Vervoermiddelen 11.281 11.281 11.281
+54.360 49.532 40.079
+Vrijval vanuit bestemmingsreserves -42.561 - -34.438
+11.799 49.532 5.641
+Overige bedrijfskosten
+Computerkosten 15.520 14.000 13.408
+Telefoonkosten 3.189 2.750 3.178
+Ongediertebestrijding 3.161 2.400 3.837
+Contributies en abonnementen 1.735 1.500 1.096
+Kosten kartonpers 441 300 618
+Opbrengst karton -314 - -
+Reclame- en drukwerkkosten 274 - 277
+Algemene verzekeringen 1.471 2.900 1.379
+Algemeen onderhoud - 405 -
+Kleine aanschaffingen 137 1.200 242
+Kosten opening nieuwe loods - - 646
+Overige kantoorkosten 361 825 1.535
+25.975 26.280 26.216
+Financiële baten en lasten
+Bankkosten en -rente -4.978 500 -1.303
+Kosten Mollie 16 - -
+Afsluitkosten hypotheek - - 581
+Rente hypotheek 10.780 7.232 3.015
+5.818 7.732 2.293
+17
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+II.6. ONDERTEKENING JAARREKENING
+Bergen op Zoom, 10 maart 2025
+Bestuur Stichting Goed Ontmoet:
+Voorzitter: A.B. Ringersma
+Penningmeester: L.A.M. Tholhuijsen
+Bestuursleden: J.J. Meeuwsen
+TH. Kanmeijer-Mousawi
+Raad van Toezicht:
+Voorzitter: Y. Kaplan
+Raadsleden: L. van Halst
+A. Harijgers
+18
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+II.7. BEGROTING 2025
+2025
+€
+Baten 214.932
+Lasten
+Kosten vrijwilligers 14.900
+Huisvestingskosten 70.450
+Autokosten 44.380
+Afschrijvingen vaste activa 52.300
+Overige bedrijfskosten 27.000
+Financiële lasten 3.285
+212.315
+Saldo baten en lasten 2.617
+TOELICHTING OP DE BEGROTING 2025
+Baten
+Baten van subsidie van overheden 155.432
+Baten van Voedselbank Nederland 5.000
+Donaties 54.500
+214.932
+Baten van subsidie van overheden
+Gemeente Bergen op Zoom 40.815
+Gemeente Steenbergen 18.154
+Gemeente Roosendaal 45.990
+Gemeente Halderberge 20.000
+Gemeente Woensdrecht 15.000
+Gemeente Tholen 15.473
+155.432
+Donaties
+Donaties van particulieren 18.000
+Donaties via Mollie 7.000
+Opbrengst pallets 500
+Donaties uit bedrijfsleven 14.000
+Kerkelijke donaties 12.000
+Donaties van service clubs 3.000
+Donaties voor brandstoffen -
+Donaties voor investeringen -
+54.500
+19
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+Lasten 2025
+€
+Kosten vrijwilligers
+Bijeenkomst- en kerstkosten 7.800
+Reiskosten vergoeding vrijwilligers 4.200
+Bloementje vrijwilligers 1.100
+Diverse kosten vrijwilligers 1.800
+14.900
+Huisvestingskosten
+Huur loods en uitgifte punten 2.900
+Distributie Centrum Tilburg bijdrage 18.000
+Onderhoud en kleine aanschaffingen 17.000
+Riool en Ozb kosten 2.500
+Beveiligingskosten 1.200
+Vuilafvoer 9.500
+Verzekering pand 850
+Energie 18.000
+Overige huisvestingskosten 500
+70.450
+Autokosten
+Onderhoud 15.000
+Brandstof 12.000
+Verzekeringen 8.500
+Schade, eigenrisico 1.500
+Motorrijtuigenbelasting 4.500
+Overige kosten 2.880
+44.380
+Afschrijvingen vaste activa
+Gebouwen 32.000
+Inventaris 9.000
+Vervoermiddelen 11.300
+52.300
+Overige bedrijfskosten
+Computerkosten 16.000
+Telefoonkosten 3.300
+Ongediertebestrijding 3.200
+Contributies en abonnementen 1.800
+Kosten kartonpers 500
+Opbrengst karton -300
+Reclame- en drukwerkkosten 285
+Algemene verzekeringen 1.500
+Kleine aanschaffingen 250
+Overige kantoorkosten 465
+27.000
+20
+Stichting Goed Ontmoet
+BERGEN OP ZOOM
+2025
+€
+Financiële lasten
+Bankkosten en -rente -5.500
+Kosten Mollie 20
+Rente hypotheek 8.765
+3.285
+21
