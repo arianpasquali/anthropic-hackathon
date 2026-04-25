@@ -41,6 +41,10 @@ def _call_claude(
 ) -> dict[str, Any]:
     schema_cls = TOOL_SCHEMA_MAP[tool_name]
     system_prompt = SECTION_PROMPTS[tool_name]
+    if not text.strip():
+        logger.warning(f"[{tool_name}] empty text — skipping API call")
+        return {}
+
     logger.debug(f"[{tool_name}] calling {model} ({len(text)} chars)")
 
     for attempt, delay in enumerate([0] + _RETRY_DELAYS):

@@ -11,8 +11,11 @@ from src.backend.database import create_db_and_tables, engine
 from src.backend.models.enums import RegionEnum
 from src.backend.preprocessing.claude import DEFAULT_MODEL, extract_all
 from src.backend.preprocessing.extractor import ExtractionError, extract_text
+from src.backend.models.foodbank import AnnualReport, Foodbank
+from src.backend.models.frame import FrameResult
 from src.backend.preprocessing.db_inspect import app as db_app
 from src.backend.preprocessing.writer import write_report
+from src.backend.services.frame import compute_frame
 
 load_dotenv()
 
@@ -235,6 +238,65 @@ def ingest_dir(
 
     asyncio.run(_run_all())
     logger.success("Batch ingest complete")
+
+
+@app.command(name="recalculate-frame")
+def recalculate_frame(
+    city: str | None = typer.Option(None, "--city", help="Limit to one bank (partial match)"),
+    year: int | None = typer.Option(None, "--year", help="Limit to one year"),
+    force: bool = typer.Option(False, "--force", help="Overwrite existing FrameResult rows"),
+) -> None:
+    """Recalculate FRAME CO2e table from FoodCategories / FoodVolume source data."""
+    from sqlmodel import select as sql_select
+
+    create_db_and_tables()
+    with Session(engine) as session:
+        banks = session.exec(sql_select(Foodbank)).all()
+        if city:
+            city_lower = city.lower()
+            banks = [b for b in banks if city_lower in b.city.lower()]
+            if not banks:
+                logger.error(f"No bank matching '{city}'")
+                raise typer.Exit(1)
+
+        reports = session.exec(sql_select(AnnualReport)).all()
+        if city:
+            bank_ids = {b.id for b in banks}
+            reports = [r for r in reports if r.foodbank_id in bank_ids]
+        if year:
+            reports = [r for r in reports if r.year == year]
+
+        bank_by_id = {b.id: b for b in session.exec(sql_select(Foodbank)).all()}
+        ok = skipped = errors = 0
+
+        for report in reports:
+            fb = bank_by_id.get(report.foodbank_id)
+            label = f"{fb.city if fb else '?'} {report.year}"
+
+            existing = session.exec(
+                sql_select(FrameResult).where(FrameResult.report_id == report.id)
+            ).first()
+            if existing and not force:
+                logger.debug(f"Skip {label} — already computed (--force to redo)")
+                skipped += 1
+                continue
+            if existing:
+                session.delete(existing)
+                session.flush()
+
+            try:
+                frame = compute_frame(session, report)
+                session.add(frame)
+                session.flush()
+                logger.info(f"{label}: {frame.co2e_total_kg:,.0f} kg CO2e")
+                ok += 1
+            except ValueError as e:
+                logger.warning(f"{label}: skipped — {e}")
+                errors += 1
+
+        session.commit()
+
+    logger.success(f"Done — {ok} computed, {skipped} skipped, {errors} no data")
 
 
 if __name__ == "__main__":
