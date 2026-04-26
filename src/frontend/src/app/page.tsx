@@ -3,6 +3,7 @@ import Link from "next/link"
 import { api } from "@/lib/api"
 import { NLProvinceFoodbankHeatMapDynamic } from "@/components/map/NLProvinceFoodbankHeatMapDynamic"
 import { ProvinceFoodbankList } from "@/components/map/ProvinceFoodbankList"
+import { HeroParallax } from "@/components/marketing/HeroParallax"
 import { PlatformSpread } from "@/components/marketing/PlatformSpread"
 import { Badge } from "@/components/ui/Badge"
 import { formatNumber, formatTCO2e } from "@/lib/format"
@@ -17,16 +18,22 @@ export default async function Home() {
     <div className="overflow-hidden">
       {/* Hero */}
       <section className="relative isolate">
-        <div aria-hidden className="kk-photo-hero kk-parallax-hero absolute inset-0 -z-10">
+        <HeroParallax
+          range={720}
+          maxTranslateY={160}
+          maxScaleBoost={0.1}
+          className="kk-photo-hero absolute inset-0 -z-10"
+        >
           <Image
             src="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&w=2400&q=80"
             alt=""
+            aria-hidden
             fill
             sizes="100vw"
             priority
             className="object-cover"
           />
-        </div>
+        </HeroParallax>
         <p
           aria-hidden
           className="absolute right-4 top-4 text-[10px] tracking-[0.08em] uppercase text-text-faint italic z-10"
