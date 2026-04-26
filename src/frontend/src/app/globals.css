@@ -283,14 +283,16 @@ body {
   opacity: 0.18;
 }
 
-/* Full-bleed hero background — readable text overlay, deep scrim. */
+/* Full-bleed hero background — phased horizontal alpha.
+   Left half: heavy scrim so headline + body copy stay readable.
+   Right half: minimal scrim so the photograph reads naturally. */
 .kk-photo-hero {
   background: var(--surface);
-  filter: grayscale(1) contrast(0.95);
+  filter: grayscale(0.55) contrast(1.02);
 }
 .kk-photo-hero img {
   mix-blend-mode: multiply;
-  opacity: 0.5;
+  opacity: 0.85;
 }
 .kk-photo-hero::after {
   content: "";
@@ -299,17 +301,17 @@ body {
   background:
     linear-gradient(
       90deg,
-      color-mix(in oklch, var(--surface) 88%, transparent) 0%,
-      color-mix(in oklch, var(--surface) 72%, transparent) 35%,
-      color-mix(in oklch, var(--surface) 45%, transparent) 70%,
-      color-mix(in oklch, var(--surface) 25%, transparent) 100%
+      color-mix(in oklch, var(--surface) 96%, transparent) 0%,
+      color-mix(in oklch, var(--surface) 88%, transparent) 28%,
+      color-mix(in oklch, var(--surface) 50%, transparent) 55%,
+      color-mix(in oklch, var(--surface) 12%, transparent) 80%,
+      transparent 100%
     ),
     linear-gradient(
       180deg,
-      color-mix(in oklch, var(--surface) 25%, transparent) 0%,
-      transparent 35%,
-      transparent 70%,
-      color-mix(in oklch, var(--emerald-deep) 18%, transparent) 100%
+      transparent 0%,
+      transparent 65%,
+      color-mix(in oklch, var(--emerald-deep) 14%, transparent) 100%
     );
   pointer-events: none;
 }
