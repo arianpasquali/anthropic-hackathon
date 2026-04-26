@@ -1,9 +1,10 @@
-import Image from "next/image"
 import Link from "next/link"
 import { api } from "@/lib/api"
 import { Badge } from "@/components/ui/Badge"
 import { formatNumber } from "@/lib/format"
 import { AdoptionSlider } from "@/components/marketing/AdoptionSlider"
+import { NLProvinceFoodbankHeatMapDynamic } from "@/components/map/NLProvinceFoodbankHeatMapDynamic"
+import { ProvinceFoodbankList } from "@/components/map/ProvinceFoodbankList"
 import { loadImpact } from "@/lib/impact"
 
 export const metadata = {
@@ -59,18 +60,8 @@ export default async function ForFoodbanksPage() {
 
   return (
     <div>
-      <section className="relative isolate border-b border-line">
-        <div aria-hidden className="kk-photo-hero absolute inset-0 -z-10">
-          <Image
-            src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=2400&q=80"
-            alt=""
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover"
-          />
-        </div>
-        <header className="mx-auto max-w-[1280px] px-6 pt-12 md:pt-20 pb-16 md:pb-20 grid md:grid-cols-[1.4fr_1fr] gap-12 items-end">
+      <section className="relative isolate">
+        <header className="mx-auto max-w-[1280px] px-6 pt-12 md:pt-20 pb-16 md:pb-20 grid lg:grid-cols-[1.1fr_1fr] gap-x-12 gap-y-10 items-start">
           <div>
             <p className="eyebrow">For food bank operators · FRAME-aligned</p>
             <h1 className="display text-5xl md:text-7xl mt-4 tracking-[-0.025em] leading-[1.02] max-w-[18ch]">
@@ -100,7 +91,21 @@ export default async function ForFoodbanksPage() {
               </Link>
             </div>
           </div>
-          <dl className="grid grid-cols-2 gap-x-8 gap-y-6 lg:pl-8 lg:border-l lg:border-line">
+
+          {/* Province map — fills the empty right column with a piece of
+              the operator network instead of a stock photograph. */}
+          <div className="flex flex-col gap-4 lg:pl-6 lg:border-l lg:border-line">
+            <p className="eyebrow">NL operator network · live</p>
+            <NLProvinceFoodbankHeatMapDynamic banks={banks} />
+            <ProvinceFoodbankList banks={banks} />
+          </div>
+        </header>
+      </section>
+
+      {/* Stats — sit below the hero on solid surface so they read clean. */}
+      <section className="border-y border-line bg-surface">
+        <div className="mx-auto max-w-[1280px] px-6 py-10">
+          <dl className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-line">
             <Stat label="Operators ingested" value={formatNumber(banks.length)} />
             <Stat label="NL network total" value="~181" />
             <Stat
@@ -109,7 +114,7 @@ export default async function ForFoodbanksPage() {
             />
             <Stat label="Cost to onboard" value="€0" />
           </dl>
-        </header>
+        </div>
       </section>
 
       <section className="border-b border-line">
@@ -286,7 +291,7 @@ export default async function ForFoodbanksPage() {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-1.5 px-5 py-3 md:py-1 first:pl-0 md:[&:not(:first-child)]:pl-6">
       <span className="eyebrow">{label}</span>
       <span className="display tabular text-[28px] md:text-[32px]">{value}</span>
     </div>

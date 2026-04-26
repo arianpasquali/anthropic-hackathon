@@ -222,7 +222,7 @@ export function AssistantSidebar() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        aria-label="Open Kavel assistant"
+        aria-label="Check eligibility — open the Kavel assistant"
         className={cn(
           "fixed bottom-6 right-6 z-[1100] group",
           "h-12 pl-4 pr-5 inline-flex items-center gap-2.5",
@@ -238,7 +238,7 @@ export function AssistantSidebar() {
           aria-hidden
           className="block w-2 h-2 rounded-[1px] bg-text-on-emerald"
         />
-        Ask the assistant
+        Check eligibility
       </button>
 
       {/* Backdrop */}

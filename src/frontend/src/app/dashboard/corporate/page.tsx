@@ -9,7 +9,6 @@ import { CostEffectivenessGauge } from "@/components/dashboard/CostEffectiveness
 import { Equivalents } from "@/components/dashboard/Equivalents"
 import { PacingBar } from "@/components/dashboard/PacingBar"
 import { MethodologyInline } from "@/components/dashboard/MethodologyInline"
-import { QuarterlyTimelineChart } from "@/components/charts/QuarterlyTimelineChart"
 import { NLProvinceHeatMapDynamic } from "@/components/map/NLProvinceHeatMapDynamic"
 import { formatEur, formatNumber, formatPercent, formatTCO2e } from "@/lib/format"
 
@@ -35,17 +34,14 @@ export default async function CorporateDashboardPage() {
   if (!subscriptions.length) return <EmptyState />
 
   const primary = subscriptions[0]
-  const [detail, timeline, metrics, pacing, allBanks] = await Promise.all([
+  const [detail, metrics, pacing, allBanks] = await Promise.all([
     api.getSubscriptionDetail(primary.id),
-    api.getDashboardTimeline(primary.id, 8).catch(() => []),
     api.getDashboardMetrics(primary.id).catch(() => null),
     api.getDashboardPacing(primary.id).catch(() => null),
     api.listFoodbanks().catch(() => []),
   ])
 
   const banksByName = new Map(allBanks.map((b) => [b.name, b]))
-
-  const realisedTotalT = timeline.filter((p) => p.realised).reduce((s, p) => s + p.co2e_kg, 0) / 1000
 
   const periodTco2e = (metrics?.period_co2e_kg ?? 0) / 1000
   const cumulativeTco2e = (metrics?.cumulative_co2e_kg ?? 0) / 1000
@@ -105,42 +101,10 @@ export default async function CorporateDashboardPage() {
       </section>
 
       {/* Pacing + Equivalents */}
-      <section className="mt-6 grid lg:grid-cols-[1fr_2fr] gap-6 items-start">
+      <section className="mt-6 grid lg:grid-cols-[1fr_2fr] gap-6 items-stretch">
         {pacing ? <PacingBar pacing={pacing} /> : null}
         {metrics ? <Equivalents metrics={metrics} /> : null}
       </section>
-
-      {/* Subscription runway — option C, no fictional past */}
-      {timeline.length > 0 ? (
-        <section className="mt-16 min-w-0">
-          <div className="flex items-end justify-between flex-wrap gap-3">
-            <div>
-              <p className="eyebrow">Subscription runway</p>
-              <h2 className="display text-3xl mt-3 tracking-[-0.02em] max-w-[28ch]">
-                From your purchase date,{" "}
-                <span className="display-italic text-emerald-deep">forward only.</span>
-              </h2>
-            </div>
-            <div className="text-right">
-              <p className="eyebrow">Realised</p>
-              <p className="display tabular text-2xl mt-1">{formatTCO2e(realisedTotalT)}</p>
-            </div>
-          </div>
-          <p className="text-text-muted text-[14px] mt-4 max-w-[68ch] leading-relaxed">
-            Realised quarters cover the period since your subscription was paid; no
-            retroactive attribution. Forecast extends the linear fit through your
-            allocation&apos;s historical bank trajectories — useful for budgeting next
-            year&apos;s disclosure. For the fund&apos;s pre-purchase track record, see the{" "}
-            <Link href={`/funds/${primary.package_id}`} className="text-emerald hover:underline">
-              fund page
-            </Link>
-            .
-          </p>
-          <div className="mt-6">
-            <QuarterlyTimelineChart data={timeline} height={340} />
-          </div>
-        </section>
-      ) : null}
 
       {/* Trust + cost row */}
       <section className="mt-16 grid lg:grid-cols-2 gap-6 items-start">
@@ -155,7 +119,7 @@ export default async function CorporateDashboardPage() {
         ) : null}
       </section>
 
-      {/* Coverage + history */}
+      {/* Coverage + right rail */}
       <section className="mt-16 grid lg:grid-cols-[1.4fr_1fr] gap-x-12 gap-y-10 items-start">
         <div className="min-w-0">
           <p className="eyebrow">Geographic coverage</p>
@@ -179,23 +143,98 @@ export default async function CorporateDashboardPage() {
               </li>
             ))}
           </ul>
+        </div>
 
-          <div className="mt-8 border-t border-line pt-6">
+        {/* Right rail — at-a-glance, top foodbanks, subscription history */}
+        <aside className="lg:sticky lg:top-20 flex flex-col gap-8 min-w-0">
+          {/* Panel 1: at-a-glance numerics */}
+          <div className="border border-line rounded-[var(--radius-lg)] bg-surface p-5">
+            <p className="eyebrow mb-3">At a glance</p>
+            <dl className="grid grid-cols-2 gap-x-4 gap-y-4 text-[12.5px]">
+              <div>
+                <dt className="text-text-faint">Foodbanks funded</dt>
+                <dd className="display tabular text-2xl mt-0.5">{detail.allocations.length}</dd>
+              </div>
+              <div>
+                <dt className="text-text-faint">Provinces covered</dt>
+                <dd className="display tabular text-2xl mt-0.5">{(metrics?.regions ?? []).length}</dd>
+              </div>
+              <div>
+                <dt className="text-text-faint">Annual contribution</dt>
+                <dd className="display tabular text-2xl mt-0.5">{formatEur(detail.amount_eur * 4)}</dd>
+              </div>
+              <div>
+                <dt className="text-text-faint">Cumulative tCO₂e</dt>
+                <dd className="display tabular text-2xl mt-0.5">{formatTCO2e(cumulativeTco2e)}</dd>
+              </div>
+            </dl>
+          </div>
+
+          {/* Panel 2: top foodbanks by allocation weight */}
+          <div className="border border-line rounded-[var(--radius-lg)] bg-surface p-5">
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="eyebrow">Top foodbanks</p>
+              <a
+                href="#allocation-breakdown"
+                className="text-[11.5px] text-text-faint hover:text-text"
+              >
+                See all →
+              </a>
+            </div>
+            <ol className="mt-4 flex flex-col">
+              {[...detail.allocations]
+                .sort((a, b) => b.weight_pct - a.weight_pct)
+                .slice(0, 5)
+                .map((a, i) => {
+                  const slug = banksByName.get(a.foodbank_name)?.slug
+                  const NameEl = slug ? (
+                    <Link
+                      href={`/foodbanks/${slug}`}
+                      className="text-[13px] text-text hover:text-emerald transition-colors truncate"
+                    >
+                      {a.foodbank_name}
+                    </Link>
+                  ) : (
+                    <span className="text-[13px] text-text truncate">{a.foodbank_name}</span>
+                  )
+                  return (
+                    <li
+                      key={a.foodbank_id}
+                      className="flex items-baseline justify-between gap-3 py-2 border-b border-line/60 last:border-b-0"
+                    >
+                      <span className="flex items-baseline gap-2 min-w-0">
+                        <span className="tabular text-text-faint text-[11px] w-4 shrink-0">{i + 1}</span>
+                        {NameEl}
+                      </span>
+                      <span className="tabular text-[12.5px] text-text-muted shrink-0">
+                        {formatPercent(a.weight_pct, 1)}
+                      </span>
+                    </li>
+                  )
+                })}
+            </ol>
+          </div>
+
+          {/* Panel 3: subscription history (lifted from below map) */}
+          <div className="border border-line rounded-[var(--radius-lg)] bg-surface p-5">
             <p className="eyebrow mb-3">Subscription history</p>
-            <ul className="flex flex-col gap-3 text-[13.5px]">
+            <ul className="flex flex-col text-[13px]">
               {subscriptions.map((s) => (
-                <li key={s.id} className="flex items-center justify-between border-b border-line/60 pb-2 last:border-b-0 last:pb-0">
-                  <span className="text-text">{s.package_name}</span>
-                  <span className="tabular text-text-muted">{formatEur(s.amount_eur)}</span>
+                <li
+                  key={s.id}
+                  className="flex items-center justify-between gap-3 py-2 border-b border-line/60 last:border-b-0"
+                >
+                  <span className="text-text truncate">{s.package_name}</span>
+                  <span className="tabular text-text-muted shrink-0">{formatEur(s.amount_eur)}</span>
                 </li>
               ))}
             </ul>
           </div>
-        </div>
+        </aside>
       </section>
 
       {/* Allocation breakdown */}
-      <section className="mt-16">
+      <section id="allocation-breakdown" className="mt-16 scroll-mt-20">
         <p className="eyebrow">Allocation breakdown</p>
         <h2 className="display text-3xl mt-3 tracking-[-0.02em]">
           Per food bank in your fund.

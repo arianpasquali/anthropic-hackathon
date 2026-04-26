@@ -3,7 +3,7 @@ import { formatPercent } from "@/lib/format"
 
 export function PacingBar({ pacing }: { pacing: SubscriptionPacing }) {
   return (
-    <div className="border border-line rounded-[var(--radius-lg)] bg-surface p-6">
+    <div className="h-full flex flex-col border border-line rounded-[var(--radius-lg)] bg-surface p-6">
       <div className="flex items-baseline justify-between gap-3 flex-wrap">
         <p className="eyebrow">Subscription pacing</p>
         <span className="text-[12.5px] text-text-faint tabular">
@@ -22,7 +22,7 @@ export function PacingBar({ pacing }: { pacing: SubscriptionPacing }) {
         Annual cycle: {formatPercent(pacing.cycle_pct, 0)} complete
       </p>
 
-      <div className="mt-5 grid grid-cols-4 gap-2">
+      <div className="mt-auto pt-5 grid grid-cols-4 gap-2">
         {Array.from({ length: pacing.quarters_contracted }, (_, i) => {
           const realised = i < pacing.quarters_realised
           return (

@@ -22,18 +22,22 @@ export default async function ReportPage({
   const t = d.texts as Record<string, string>
 
   return (
-    <div className="report-root mx-auto max-w-[860px] px-6 pt-10 pb-32">
+    <div className="report-root bg-surface-2 min-h-screen pb-24">
+      <div className="mx-auto max-w-[920px] px-6 pt-8">
 
-      {/* nav bar — hidden on print */}
-      <div className="no-print flex items-center justify-between mb-10">
-        <Link href="/dashboard/corporate" className="text-[13px] text-text-muted hover:text-text">
-          ← Back to dashboard
-        </Link>
-        <div className="flex items-center gap-4">
-          <LangToggle lang={lang} subId={subId} />
-          <PrintButton />
+        {/* nav bar — hidden on print, sits on the desk above the sheet */}
+        <div className="no-print flex items-center justify-between mb-6">
+          <Link href="/dashboard/corporate" className="text-[13px] text-text-muted hover:text-text">
+            ← Back to dashboard
+          </Link>
+          <div className="flex items-center gap-4">
+            <LangToggle lang={lang} subId={subId} />
+            <PrintButton />
+          </div>
         </div>
-      </div>
+
+        {/* Paper sheet — printed-document treatment, civic register. */}
+        <article className="kk-paper-sheet">
 
       {/* header */}
       <header className="pb-8 border-b border-line">
@@ -235,6 +239,8 @@ export default async function ReportPage({
       <footer className="mt-16 pt-6 border-t border-line">
         <p className="text-[11.5px] text-text-faint">{t.footer}</p>
       </footer>
+        </article>
+      </div>
     </div>
   )
 }
