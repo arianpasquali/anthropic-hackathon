@@ -18,12 +18,12 @@ const CTA_LABELS: Record<string, string> = {
   "/pricing": "See pricing",
 }
 
-function isInternalCH(href: string): { path: string; label: string } | null {
+function isInternalKavel(href: string): { path: string; label: string } | null {
   if (!href) return null
-  // Match relative `/...` or any climateharvest.eu URL
+  // Match relative `/...` or any kavel.tech URL
   const rel = href.startsWith("/")
     ? href
-    : href.match(/^https?:\/\/(?:www\.)?climateharvest\.eu(\/[^\s]*)?$/i)?.[1] ?? null
+    : href.match(/^https?:\/\/(?:www\.)?kavel\.tech(\/[^\s]*)?$/i)?.[1] ?? null
   if (!rel) return null
   const path = rel.replace(/[).,;:!?]+$/, "") // strip trailing punctuation
   const cleanPath = path.split("?")[0].split("#")[0] || "/"
@@ -31,7 +31,7 @@ function isInternalCH(href: string): { path: string; label: string } | null {
   return { path: cleanPath, label }
 }
 
-// Linkify bare climateharvest.eu/... URLs and bare /<path> references the
+// Linkify bare kavel.tech/... URLs and bare /<path> references the
 // model emits as **bold** so they become real anchors that the markdown
 // renderer can upgrade to CTAs.
 function linkifyAssistantText(input: string): string {
@@ -39,7 +39,7 @@ function linkifyAssistantText(input: string): string {
 
   // 1. Bare URLs (with or without protocol)
   out = out.replace(
-    /(https?:\/\/)?(?:www\.)?climateharvest\.eu(\/[a-z0-9/_-]*)?/gi,
+    /(https?:\/\/)?(?:www\.)?kavel\.tech(\/[a-z0-9/_-]*)?/gi,
     (match) => {
       const url = match.startsWith("http") ? match : `https://${match.replace(/^www\./, "")}`
       return `[${match}](${url})`
@@ -410,7 +410,7 @@ function MessageBubble({ message }: { message: Message }) {
 // Renderer overrides — promote internal Kavel links to CTA buttons
 const MARKDOWN_COMPONENTS: Components = {
   a({ href, children }) {
-    const internal = href ? isInternalCH(href) : null
+    const internal = href ? isInternalKavel(href) : null
     if (internal) {
       return <CTALink href={internal.path} label={internal.label} />
     }

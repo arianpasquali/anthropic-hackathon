@@ -1,4 +1,4 @@
-# Climate Harvest — API Design Spec
+# Kavel — API Design Spec
 
 **Date:** 2026-04-25
 **Stack:** FastAPI + HTMX + Jinja2 + SQLModel + SQLite
@@ -8,7 +8,7 @@
 
 ## Context
 
-Climate Harvest is a marketplace where Dutch corporates fund food banks and receive CSRD-aligned CO2e impact reports. Corporates choose a "Climate-Action Package" (CO2-focused, social-focused, or balanced), the platform dynamically allocates their contribution across the top N food banks matching that profile, and Claude generates a CSRD-ready PDF report.
+Kavel is a marketplace where Dutch corporates fund food banks and receive CSRD-aligned CO2e impact reports. Corporates choose a "Climate-Action Package" (CO2-focused, social-focused, or balanced), the platform dynamically allocates their contribution across the top N food banks matching that profile, and Claude generates a CSRD-ready PDF report.
 
 ---
 

@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Make Climate Harvest discoverable and usable by AI agents per isitagentready.com criteria — llms.txt, robots.txt, sitemap, ai-plugin manifest, agent.json, Link headers, OpenAPI improvements, and markdown content negotiation.
+**Goal:** Make Kavel discoverable and usable by AI agents per isitagentready.com criteria — llms.txt, robots.txt, sitemap, ai-plugin manifest, agent.json, Link headers, OpenAPI improvements, and markdown content negotiation.
 
 **Architecture:** Discovery endpoints live in a dedicated router (`routers/discovery.py`, already created). App metadata improvements go in `app.py`. Existing routers get tags/summaries. Middleware adds `Link` headers for agent discoverability. Key public GET endpoints gain markdown content negotiation.
 
@@ -54,7 +54,7 @@ def test_health():
 def test_llms_txt():
     r = client.get("/llms.txt")
     assert r.status_code == 200
-    assert "Climate Harvest" in r.text
+    assert "Kavel" in r.text
     assert r.headers["content-type"].startswith("text/plain")
 
 
@@ -129,7 +129,7 @@ OPENAPI_TAGS = [
 ]
 
 app = FastAPI(
-    title="Climate Harvest",
+    title="Kavel",
     version="1.0.0",
     summary="Dutch platform connecting corporates to foodbank climate impact funds.",
     description=(
@@ -142,7 +142,7 @@ app = FastAPI(
         "**Agent discovery:** [`/llms.txt`](/llms.txt) · "
         "[`/.well-known/ai-plugin.json`](/.well-known/ai-plugin.json)"
     ),
-    contact={"name": "Climate Harvest", "email": "contact@klimaatkracht.nl"},
+    contact={"name": "Kavel", "email": "contact@klimaatkracht.nl"},
     license_info={"name": "Proprietary"},
     openapi_tags=OPENAPI_TAGS,
 )
@@ -428,7 +428,7 @@ def aggregate_stats(request: Request, session: Session = Depends(get_session)) -
 
     if "text/markdown" in request.headers.get("accept", ""):
         md = (
-            "## Climate Harvest Platform Stats\n\n"
+            "## Kavel Platform Stats\n\n"
             f"- **Foodbanks tracked:** {stats.banks_count}\n"
             f"- **Total CO₂e avoided:** {stats.total_tco2e_yr:,.1f} tCO₂e/year\n"
             f"- **Food rescued:** {stats.total_kg_rescued_yr:,.0f} kg/year\n"
@@ -477,7 +477,7 @@ curl -s http://localhost:8000/health
 ```
 
 Expected outputs:
-- `llms.txt`: starts with `# Climate Harvest`
+- `llms.txt`: starts with `# Kavel`
 - `robots.txt`: contains `User-agent: ClaudeBot` and `Allow: /`
 - `ai-plugin.json`: valid JSON with `name_for_model: klimaatkracht`
 - Link header: `</llms.txt>; rel="describedby"`

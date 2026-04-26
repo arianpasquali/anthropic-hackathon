@@ -1,4 +1,4 @@
-# Climate Harvest — Wireframe Spec
+# Kavel — Wireframe Spec
 
 **Date:** 2026-04-25 (updated)
 **File:** `docs/wireframes/index.html`
@@ -29,7 +29,7 @@ Top sticky bar (`#1a1a1a`), 7 tabs:
 
 ### Sections (top → bottom)
 
-1. **Navbar** — KK logo · "Climate Harvest" · links: Investment funds / Methodology / For Food Banks (muted)
+1. **Navbar** — KK logo · "Kavel" · links: Investment funds / Methodology / For Food Banks (muted)
 
 2. **Hero** — full-width emerald gradient (`#064e3b → #065f46 → #047857`), decorative circle overlays
    - Eyebrow: `CSRD-READY · ESRS E1 + S3 · FRAME ALIGNED · 180 FOODBANKS`

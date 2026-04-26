@@ -1,8 +1,8 @@
-# Climate Harvest — Frontend Design Spec
+# Kavel — Frontend Design Spec
 
 **Date:** 2026-04-25  
 **Project:** Anthropic x Whale Hackathon  
-**Scope:** Landing page + full frontend for the Climate Harvest sponsored-impact marketplace
+**Scope:** Landing page + full frontend for the Kavel sponsored-impact marketplace
 
 ---
 
@@ -98,7 +98,7 @@ interface FrameResult { id: string; report_id: string; co2e_total_kg: number; co
 ### 1. Landing (`/`)
 
 Top → bottom:
-1. **Navbar** — "Climate Harvest" + leaf icon, links: Marketplace | For Food Banks | For Corporates
+1. **Navbar** — "Kavel" + leaf icon, links: Marketplace | For Food Banks | For Corporates
 2. **HeroSplit** — dark `emerald-800` gradient bg, white text, two columns:
    - Left: "Turn climate action into CSR proof" → "Browse packages →"
    - Right: "Unlock funding for your food rescue" → "Join as food bank →"

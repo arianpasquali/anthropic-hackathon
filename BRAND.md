@@ -1,4 +1,4 @@
-# Climate Harvest — Brand voice
+# Kavel — Brand voice
 
 Single source of truth for tone, register, and copy discipline. Lives next
 to `CLAUDE.md`; copy edits and new pages must conform.

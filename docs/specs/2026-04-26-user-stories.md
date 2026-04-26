@@ -187,7 +187,7 @@ The marketplace footer always offers this escape hatch. Corporates with a pre-ex
 ### B — An auditor verifies a published claim
 
 ```
-Corporate's CSRD report cites: "412 tCO₂e avoided via Climate Harvest
+Corporate's CSRD report cites: "412 tCO₂e avoided via Kavel
 CSRD Complete Fund, Q2 2026, €25,000"
    ↓ Auditor clicks the platform footnote
 /reports/<subId>           Read the full Claude-generated disclosure

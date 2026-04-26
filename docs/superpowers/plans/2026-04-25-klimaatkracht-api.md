@@ -1,8 +1,8 @@
-# Climate Harvest API Implementation Plan
+# Kavel API Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build the full Climate Harvest web app — corporate marketplace where companies buy Climate-Action Packages, a dynamic allocation engine distributes funds across Dutch food banks, and Claude generates CSRD-aligned impact reports delivered via SSE streaming.
+**Goal:** Build the full Kavel web app — corporate marketplace where companies buy Climate-Action Packages, a dynamic allocation engine distributes funds across Dutch food banks, and Claude generates CSRD-aligned impact reports delivered via SSE streaming.
 
 **Architecture:** FastAPI serves Jinja2-rendered HTML pages and HTMX partials. SQLite via SQLModel. Auth uses signed session cookies (itsdangerous). Claude streams report text via Server-Sent Events. Allocation engine ranks food banks by impact profile at checkout time and writes weight_pct rows.
 
@@ -851,7 +851,7 @@ from src.backend.database import create_db_and_tables
 TEMPLATES_DIR = Path(__file__).parent.parent / "frontend" / "templates"
 STATIC_DIR = Path(__file__).parent.parent / "frontend" / "static"
 
-app = FastAPI(title="Climate Harvest")
+app = FastAPI(title="Kavel")
 templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
@@ -889,7 +889,7 @@ mkdir -p src/frontend/static/css
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Climate Harvest{% endblock %}</title>
+  <title>{% block title %}Kavel{% endblock %}</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/htmx.org@1.9.12"></script>
   <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/sse.js"></script>
@@ -897,7 +897,7 @@ mkdir -p src/frontend/static/css
 </head>
 <body class="bg-gray-50 text-gray-900 min-h-screen">
   <nav class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-    <a href="/" class="text-xl font-bold text-green-700">🌱 Climate Harvest</a>
+    <a href="/" class="text-xl font-bold text-green-700">🌱 Kavel</a>
     <div class="flex gap-4 text-sm">
       <a href="/packages" class="hover:text-green-700">Packages</a>
       {% if user %}
@@ -929,7 +929,7 @@ mkdir -p src/frontend/static/css
 - [ ] **Step 5: Create main.css**
 
 ```css
-/* Climate Harvest — minimal overrides on top of Tailwind */
+/* Kavel — minimal overrides on top of Tailwind */
 .htmx-indicator { opacity: 0; transition: opacity 200ms ease-in; }
 .htmx-request .htmx-indicator { opacity: 1; }
 .htmx-request.htmx-indicator { opacity: 1; }
@@ -1146,7 +1146,7 @@ app.include_router(auth_router.router)
 
 ```html
 {% extends "base.html" %}
-{% block title %}Login — Climate Harvest{% endblock %}
+{% block title %}Login — Kavel{% endblock %}
 {% block content %}
 <div class="max-w-md mx-auto mt-16">
   <h1 class="text-2xl font-bold mb-6">Login</h1>
@@ -1173,7 +1173,7 @@ app.include_router(auth_router.router)
 
 ```html
 {% extends "base.html" %}
-{% block title %}Register — Climate Harvest{% endblock %}
+{% block title %}Register — Kavel{% endblock %}
 {% block content %}
 <div class="max-w-md mx-auto mt-16">
   <h1 class="text-2xl font-bold mb-6">Create account</h1>
@@ -1268,7 +1268,7 @@ def _login(client: TestClient):
 def test_packages_page_returns_200(client: TestClient):
     resp = client.get("/packages")
     assert resp.status_code == 200
-    assert b"Climate Harvest" in resp.content
+    assert b"Kavel" in resp.content
 
 
 def test_packages_page_shows_packages(client: TestClient):
@@ -1366,7 +1366,7 @@ app.include_router(marketplace_router.router)
 
 ```html
 {% extends "base.html" %}
-{% block title %}Climate-Action Packages — Climate Harvest{% endblock %}
+{% block title %}Climate-Action Packages — Kavel{% endblock %}
 {% block content %}
 <div class="mb-8">
   <h1 class="text-3xl font-bold mb-2">Climate-Action Packages</h1>
@@ -1429,7 +1429,7 @@ app.include_router(marketplace_router.router)
 
 ```html
 {% extends "base.html" %}
-{% block title %}{{ package.name }} — Climate Harvest{% endblock %}
+{% block title %}{{ package.name }} — Kavel{% endblock %}
 {% block content %}
 <div class="max-w-2xl">
   <a href="/packages" class="text-sm text-gray-500 hover:text-green-700 mb-4 inline-block">← All packages</a>
@@ -1702,7 +1702,7 @@ app.include_router(checkout_router.router)
 
 ```html
 {% extends "base.html" %}
-{% block title %}Confirm purchase — Climate Harvest{% endblock %}
+{% block title %}Confirm purchase — Kavel{% endblock %}
 {% block content %}
 <div class="max-w-xl">
   <h1 class="text-2xl font-bold mb-6">Confirm your contribution</h1>
@@ -1744,7 +1744,7 @@ app.include_router(checkout_router.router)
 
 ```html
 {% extends "base.html" %}
-{% block title %}Thank you — Climate Harvest{% endblock %}
+{% block title %}Thank you — Kavel{% endblock %}
 {% block content %}
 <div class="max-w-xl text-center">
   <div class="text-6xl mb-4">🌱</div>
@@ -1882,7 +1882,7 @@ app.include_router(dashboard_router.router)
 
 ```html
 {% extends "base.html" %}
-{% block title %}Dashboard — Climate Harvest{% endblock %}
+{% block title %}Dashboard — Kavel{% endblock %}
 {% block content %}
 <h1 class="text-2xl font-bold mb-6">{{ user.org_name }} — Impact Dashboard</h1>
 
@@ -1917,7 +1917,7 @@ app.include_router(dashboard_router.router)
 
 ```html
 {% extends "base.html" %}
-{% block title %}Impact Detail — Climate Harvest{% endblock %}
+{% block title %}Impact Detail — Kavel{% endblock %}
 {% block content %}
 <a href="/dashboard" class="text-sm text-gray-500 hover:text-green-700 mb-4 inline-block">← Dashboard</a>
 <h1 class="text-2xl font-bold mb-2">{{ package.name }}</h1>
@@ -2358,5 +2358,5 @@ Manual checks:
 
 ```bash
 git add -A
-git commit -m "feat: full Climate Harvest MVP — marketplace, checkout, dashboard, Claude CSRD reports"
+git commit -m "feat: full Kavel MVP — marketplace, checkout, dashboard, Claude CSRD reports"
 ```

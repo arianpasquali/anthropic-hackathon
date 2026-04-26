@@ -17,7 +17,7 @@ _REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 _SYSTEM = """\
 You are a sustainability reporting specialist drafting an ESRS-aligned climate-contribution
 disclosure (NOT a CSRD/ESRS E1 offset claim) for a Dutch corporate funding Dutch foodbank
-operations via Climate Harvest.
+operations via Kavel.
 
 Framing rules — STRICTLY ENFORCED:
 - Frame the disclosure under ESRS E5 (Resource use & circular economy / voedselverspilling)

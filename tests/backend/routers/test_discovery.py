@@ -18,7 +18,7 @@ def test_health(client):
 def test_llms_txt(client):
     r = client.get("/llms.txt")
     assert r.status_code == 200
-    assert "Climate Harvest" in r.text
+    assert "Kavel" in r.text
     assert r.headers["content-type"].startswith("text/plain")
 
 
@@ -46,7 +46,7 @@ def test_ai_plugin_json(client):
     r = client.get("/.well-known/ai-plugin.json")
     assert r.status_code == 200
     data = r.json()
-    assert data["name_for_model"] == "climate-harvest"
+    assert data["name_for_model"] == "kavel"
     assert "openapi.json" in data["api"]["url"]
 
 
