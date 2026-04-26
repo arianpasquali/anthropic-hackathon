@@ -22,6 +22,8 @@ export function Footer() {
           links={[
             { href: "/marketplace", label: "Marketplace" },
             { href: "/methodology", label: "Methodology" },
+            { href: "/why", label: "Why · public data" },
+            { href: "/faq", label: "FAQ" },
             { href: "/dashboard/corporate", label: "Corporate dashboard" },
           ]}
         />

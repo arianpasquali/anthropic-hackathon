@@ -11,6 +11,8 @@ const STATIC_ENTRIES: Array<Pick<Entry, "url" | "changeFrequency" | "priority">>
   { url: "/", changeFrequency: "weekly", priority: 1.0 },
   { url: "/marketplace", changeFrequency: "daily", priority: 0.9 },
   { url: "/methodology", changeFrequency: "monthly", priority: 0.8 },
+  { url: "/why", changeFrequency: "monthly", priority: 0.8 },
+  { url: "/faq", changeFrequency: "monthly", priority: 0.7 },
   { url: "/pricing", changeFrequency: "monthly", priority: 0.8 },
   { url: "/foodbanks", changeFrequency: "weekly", priority: 0.7 },
   { url: "/for-foodbanks", changeFrequency: "monthly", priority: 0.7 },

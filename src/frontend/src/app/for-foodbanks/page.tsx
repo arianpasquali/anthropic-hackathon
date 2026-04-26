@@ -3,6 +3,8 @@ import Link from "next/link"
 import { api } from "@/lib/api"
 import { Badge } from "@/components/ui/Badge"
 import { formatNumber } from "@/lib/format"
+import { AdoptionSlider } from "@/components/marketing/AdoptionSlider"
+import { loadImpact } from "@/lib/impact"
 
 export const metadata = {
   title: "For food banks · Climate Harvest",
@@ -48,8 +50,12 @@ const KEEPS_PRIVATE = [
 ] as const
 
 export default async function ForFoodbanksPage() {
-  const banks = await api.listFoodbanks().catch(() => [])
+  const [banks, impact] = await Promise.all([
+    api.listFoodbanks().catch(() => []),
+    loadImpact(),
+  ])
   const totalKg = banks.reduce((s, b) => s + (b.annual_kg_rescued ?? 0), 0)
+  const adoption = impact.adoption_scenarios
 
   return (
     <div>
@@ -131,6 +137,37 @@ export default async function ForFoodbanksPage() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      <section className="border-b border-line">
+        <div className="mx-auto max-w-[1280px] px-6 py-20">
+          <div className="grid md:grid-cols-[1fr_1.4fr] gap-x-12 gap-y-8 items-end mb-12">
+            <div>
+              <p className="eyebrow">Capacity &amp; growth path</p>
+              <h2 className="display text-4xl md:text-5xl mt-3 tracking-[-0.025em] leading-[1.05] max-w-[20ch]">
+                Demand is bounded by your{" "}
+                <span className="display-italic text-emerald-deep">
+                  network capacity.
+                </span>
+              </h2>
+            </div>
+            <p className="text-text-muted text-[14.5px] leading-relaxed max-w-[58ch]">
+              Climate Harvest is supply-constrained, not demand-constrained.
+              Even modest CSRD-mandated corporate adoption fully books the NL
+              foodbank network. The platform locks unit price and caps
+              attribution per bank — your operation will not be over-sold.
+            </p>
+          </div>
+          <AdoptionSlider
+            supplyCap={adoption.supply_cap}
+            packageEur={adoption.package_eur}
+            packageTco2e={adoption.package_tco2e}
+            totalCorporates={adoption.total_csrd_corporates_nl}
+            vbnBudget={adoption.vbn_annual_budget_eur}
+            vbnBudgetSourceLabel={adoption.vbn_budget_source_label}
+            vbnBudgetSourceUrl={adoption.vbn_budget_source_url}
+          />
         </div>
       </section>
 

@@ -31,8 +31,8 @@ export function Header() {
           <Link href="/for-foodbanks" className="text-text-muted hover:text-text transition-colors">
             For food banks
           </Link>
-          <Link href="/faq" className="text-text-muted hover:text-text transition-colors">
-            FAQ
+          <Link href="/why" className="text-text-muted hover:text-text transition-colors">
+            Why
           </Link>
           <Link
             href="/login"
