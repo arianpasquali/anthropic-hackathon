@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-**Climate Harvest** — a platform connecting Dutch corporates to foodbank climate-contribution funds. Corporates buy contribution packages; money is allocated to foodbanks weighted by CO₂e avoided and/or households served. Claude generates ESRS E5 + S3-aligned climate-contribution disclosures streamed via SSE.
+**Kavel** — a platform connecting Dutch corporates to foodbank climate-contribution funds. Corporates buy contribution packages; money is allocated to foodbanks weighted by CO₂e avoided and/or households served. Claude generates ESRS E5 + S3-aligned climate-contribution disclosures streamed via SSE.
 
 Positioning: **climate contribution, not offsetting.** FRAME-aligned, NL-specific counterfactual (CF=0.93), defensible to Big-4 auditor under ESRS E5.
 
@@ -127,5 +127,8 @@ Built. CLI lives in `src/backend/preprocessing/`. Original plan in `docs/superpo
 ```bash
 uv run python -m src.backend.preprocessing.cli ingest <pdf>      # single
 uv run python -m src.backend.preprocessing.cli ingest-dir data/  # batch
-uv run python -m src.backend.preprocessing.cli db overview       # inspect
+uv run python -m src.backend.preprocessing.cli db overview       # counts: banks / reports / tables
+uv run python -m src.backend.preprocessing.cli db users          # list all registered users
+uv run python -m src.backend.preprocessing.cli db banks          # per-bank completeness table
+uv run python -m src.backend.preprocessing.cli db stats          # aggregate CO₂e / kg / HH stats
 ```
