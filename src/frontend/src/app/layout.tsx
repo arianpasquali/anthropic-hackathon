@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { Header } from "@/components/nav/Header"
 import { Footer } from "@/components/nav/Footer"
+import { AssistantSidebar } from "@/components/chat/AssistantSidebar"
 
 export const metadata: Metadata = {
   title: "Climate Harvest — verified climate contribution, disclosure-ready",
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <AssistantSidebar />
       </body>
     </html>
   )
