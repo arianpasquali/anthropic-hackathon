@@ -335,32 +335,36 @@ body {
    Right half: minimal scrim so the photograph reads naturally. */
 .kk-photo-hero {
   background: var(--surface);
-  filter: grayscale(0.45) contrast(1.0) brightness(1.04);
+  filter: saturate(0.9) contrast(1.02);
 }
 .kk-photo-hero img {
-  mix-blend-mode: multiply;
-  opacity: 0.78;
+  /* Normal blend + near-full opacity so photographs read as photographs.
+     The legibility work happens in the ::after wash, not by dimming
+     the image itself. */
+  opacity: 0.95;
 }
 .kk-photo-hero::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    /* Left wash for headline legibility, right side stays photographic. */
+    /* Left wash carries headline + body legibility on its own. Solid
+       surface through the text column, then ramps into the photo on
+       the right. */
     linear-gradient(
       90deg,
-      color-mix(in oklch, var(--surface) 96%, transparent) 0%,
-      color-mix(in oklch, var(--surface) 88%, transparent) 22%,
-      color-mix(in oklch, var(--surface) 50%, transparent) 50%,
-      color-mix(in oklch, var(--surface) 12%, transparent) 78%,
-      color-mix(in oklch, var(--surface) 0%, transparent) 100%
+      var(--surface) 0%,
+      color-mix(in oklch, var(--surface) 96%, transparent) 32%,
+      color-mix(in oklch, var(--surface) 70%, transparent) 56%,
+      color-mix(in oklch, var(--surface) 22%, transparent) 80%,
+      transparent 100%
     ),
     /* Soft emerald floor anchors the photo without flattening it. */
     linear-gradient(
       180deg,
       transparent 0%,
-      transparent 55%,
-      color-mix(in oklch, var(--emerald-deep) 12%, transparent) 100%
+      transparent 60%,
+      color-mix(in oklch, var(--emerald-deep) 10%, transparent) 100%
     );
   pointer-events: none;
 }
