@@ -39,10 +39,10 @@ const STARTER: BuyTier = {
   blurb:
     "Entry tier for first-time disclosers. Funds the social-reach allocation track — top households-served foodbanks across the Netherlands.",
   features: [
-    "ESRS E5 + S3 quarterly disclosure (markdown + PDF)",
-    "Allocation across top households-served banks",
+    "ESRS E5 + S3 annual disclosure (markdown + PDF)",
+    "Allocation across top households-served food banks",
     "FRAME provenance ledger per allocation",
-    "Cancel any quarter, no lock-in",
+    "Cancel any time, no lock-in",
   ],
   cta: "Buy Social Reach Fund →",
   profile: "social_focus",
@@ -131,7 +131,7 @@ export default function PricingPage() {
         <div className="mx-auto max-w-[1280px] px-6 py-12 flex flex-wrap items-center justify-between gap-x-10 gap-y-3 text-[12.5px] text-text-faint tabular">
           <span>Invoiced via Solvimon · NL VAT 21%</span>
           <span aria-hidden>·</span>
-          <span>Cancel any quarter</span>
+          <span>Cancel any time</span>
           <span aria-hidden>·</span>
           <span>Annual ESRS disclosure included</span>
           <span aria-hidden>·</span>

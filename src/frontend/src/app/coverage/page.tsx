@@ -345,7 +345,7 @@ function Stats({
   return (
     <div className="border border-line bg-surface rounded-[var(--radius-lg)] p-5 flex flex-col gap-3 text-[13px]">
       <Row
-        label="Demo banks"
+        label="Demo food banks"
         value={`${demoBanks.length} of 181`}
       />
       <Row
@@ -391,7 +391,7 @@ function SourceBlock({ scale }: { scale: CoverageData["scale"] }) {
           Bank coordinates:
         </span>{" "}
         hand-curated for the 6 demo foodbanks (HQ / regional DC). Other 175 NL
-        banks not yet plotted.
+        food banks not yet plotted.
       </p>
     </div>
   )

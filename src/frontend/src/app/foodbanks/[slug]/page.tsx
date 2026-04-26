@@ -58,7 +58,7 @@ export default async function FoodbankProfilePage({
           </div>
           <p className="mt-5 max-w-[58ch] text-text-muted text-[15px] leading-relaxed">
             Operator profile derived from {bank.name}&apos;s most recent annual report, processed through
-            Claude and the FRAME methodology. Every metric below carries its source and method —
+            AI and the FRAME methodology. Every metric below carries its source and method —
             cite this page directly in your audit trail.
           </p>
         </div>

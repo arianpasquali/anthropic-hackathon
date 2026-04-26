@@ -13,10 +13,10 @@ export const metadata = {
 
 const PIPELINE = [
   { kicker: "01", title: "Annual report", body: "Foodbank submits its annual report PDF (Dutch)." },
-  { kicker: "02", title: "Claude extraction", body: "Five parallel section-specific prompts extract typed measurements with provenance." },
+  { kicker: "02", title: "AI extraction", body: "Five parallel section-specific prompts extract typed measurements with provenance." },
   { kicker: "03", title: "Provenance ledger", body: "Every field is tagged: extracted, inferred (national avg / category split / calculation), or manual." },
   { kicker: "04", title: "FRAME compute", body: "kg × emission factor × NL counterfactual (0.93). Per-category and total CO₂e baseline persisted." },
-  { kicker: "05", title: "Contribution disclosure", body: "On corporate purchase, allocation engine ranks banks; Claude composes ESRS E5 + S3 climate-contribution disclosure, streamed back via SSE." },
+  { kicker: "05", title: "Contribution disclosure", body: "On corporate purchase, allocation engine ranks food banks; AI composes ESRS E5 + S3 climate-contribution disclosure, streamed back via SSE." },
 ] as const
 
 const FACTOR_KEYS = ["produce", "bakery", "dry_goods", "prepared", "dairy", "eggs", "meat"] as const

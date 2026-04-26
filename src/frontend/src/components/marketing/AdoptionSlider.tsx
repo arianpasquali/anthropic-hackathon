@@ -170,7 +170,7 @@ export function AdoptionSlider({
               climate contribution per year.
             </p>
             <p className="mt-2.5 text-[13.5px] text-warning-deep leading-relaxed">
-              Growth requires expansion: onboarding additional banks from
+              Growth requires expansion: onboarding additional food banks from
               VBN&apos;s 181-bank network, regional cluster sponsorships, or
               extending the platform to other EU countries with FRAME-aligned
               foodbanking infrastructure.

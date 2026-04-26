@@ -55,7 +55,7 @@ function BuyForm({ fundId }: { fundId: string }) {
       </Link>
       <p className="eyebrow mt-6">Mock checkout · Solvimon sandbox</p>
       <h1 className="display text-5xl mt-4 tracking-[-0.025em] max-w-[16ch]">
-        Confirm your quarterly subscription.
+        Confirm your annual subscription.
       </h1>
       <p className="text-text-muted text-[14.5px] mt-5 max-w-[52ch] leading-relaxed">
         This is a sandbox checkout. No card is charged; submitting the form marks the

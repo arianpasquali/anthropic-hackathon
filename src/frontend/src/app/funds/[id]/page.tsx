@@ -48,7 +48,7 @@ export default async function FundDetailPage({
         <div className="grid grid-cols-3 gap-6 mt-10 pt-8 border-t border-line">
           <Stat label="Climate contribution" value={formatTCO2e(pkg.co2e_claim_kg / 1000)} />
           <Stat label="Allocated to" value={`${totals.banks} food banks`} />
-          <Stat label="Per-bank avg" value={formatEur(pkg.price_eur / Math.max(1, totals.banks))} />
+          <Stat label="Per food bank avg" value={formatEur(pkg.price_eur / Math.max(1, totals.banks))} />
         </div>
 
         <section className="mt-14">
@@ -83,7 +83,7 @@ export default async function FundDetailPage({
                 </h2>
               </div>
               <p className="text-[12.5px] text-text-faint tabular">
-                aggregated across top {pkg.top_n} banks
+                aggregated across top {pkg.top_n} food banks
               </p>
             </div>
             <p className="text-text-muted text-[14px] mt-4 max-w-[58ch] leading-relaxed">
@@ -118,7 +118,7 @@ export default async function FundDetailPage({
           <div className="grid md:grid-cols-2 gap-x-12 gap-y-6 mt-4 max-w-[68ch]">
             <p className="text-[14px] text-text-muted leading-relaxed">
               All figures derive from extracted Dutch food bank annual reports, processed
-              through Claude with section-specific prompts and validated against the
+              through AI with section-specific prompts and validated against the
               FRAME methodology used by Global FoodBanking Network.
             </p>
             <p className="text-[14px] text-text-muted leading-relaxed">

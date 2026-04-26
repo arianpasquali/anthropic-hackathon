@@ -52,7 +52,7 @@ export default async function ReportPage({
       <section className="grid grid-cols-2 md:grid-cols-4 border-b border-line">
         {[
           { label: t.kpi_co2e,      value: formatTCO2e(d.kpis.total_co2e_t),       hint: "attributed" },
-          { label: t.kpi_investment, value: formatEur(d.kpis.investment_eur),         hint: "quarterly" },
+          { label: t.kpi_investment, value: formatEur(d.kpis.investment_eur),         hint: "annual" },
           { label: t.kpi_economics,  value: `€${d.kpis.eur_per_tco2e.toFixed(2)}`,   hint: "per tCO₂e" },
           { label: t.kpi_households, value: formatNumber(d.kpis.households_per_week), hint: "per week" },
         ].map((k, i) => (

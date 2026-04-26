@@ -81,7 +81,7 @@ export default async function MarketplacePage() {
             </h1>
             <p className="mt-7 text-text-muted text-[15.5px] leading-relaxed max-w-[52ch]">
               Each fund spreads a single corporate purchase across the top food banks
-              in the Netherlands. The allocation engine ranks banks by their FRAME-computed
+              in the Netherlands. The allocation engine ranks food banks by their FRAME-computed
               CO₂e baseline, household reach, or both — depending on the impact profile
               you choose.
             </p>

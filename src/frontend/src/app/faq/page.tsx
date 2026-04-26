@@ -168,7 +168,7 @@ const SECTIONS: Section[] = [
             <p>
               Hard cap per bank. The marketplace shows real-time remaining
               capacity. When a bank's annual baseline is sold through, packages
-              route to other banks or to a regional cluster.
+              route to other food banks or to a regional cluster.
             </p>
             <p className="text-text-muted">
               The locked unit price prevents a race to the bottom; the cap

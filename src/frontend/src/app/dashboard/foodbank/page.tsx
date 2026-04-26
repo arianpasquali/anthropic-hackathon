@@ -38,12 +38,12 @@ export default function FoodbankDashboardPage() {
       </header>
 
       <section className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
-        <StatCard label="Funding received" value="€0" hint="this quarter" />
-        <StatCard label="Active sponsors" value="0" hint="quarterly subscriptions" />
+        <StatCard label="Funding received" value="€0" hint="this year" />
+        <StatCard label="Active sponsors" value="0" hint="annual subscriptions" />
         <StatCard
           label="Annual data"
           value={revealed ? "Uploaded" : "Not uploaded"}
-          hint={revealed ? "extracted by Claude" : "drop a PDF below"}
+          hint={revealed ? "extracted" : "drop a PDF below"}
           emphasis={revealed}
         />
       </section>
@@ -56,7 +56,7 @@ export default function FoodbankDashboardPage() {
           <ol className="mt-3 flex flex-col gap-3 text-[13.5px]">
             {[
               "Drop your annual report PDF (one per year).",
-              "Claude extracts food volumes, categories, and people served.",
+              "AI extracts food volumes, categories, and people served.",
               "Each field is tagged with its source — extracted, inferred, or computed.",
               "FRAME computes your CO₂e baseline and weighted emission factor.",
               "You appear in the marketplace; corporates can sponsor your operations.",

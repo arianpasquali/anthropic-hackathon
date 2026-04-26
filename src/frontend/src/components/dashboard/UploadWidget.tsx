@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/Badge"
 
 const STAGES = [
   { label: "Uploading PDF", duration: 1000 },
-  { label: "Parsing with Claude", duration: 2200 },
+  { label: "Parsing report", duration: 2200 },
   { label: "Computing FRAME", duration: 1100 },
   { label: "Persisting provenance", duration: 700 },
 ] as const
@@ -52,7 +52,7 @@ export function UploadWidget({ onComplete }: { onComplete: () => void }) {
         <div>
           <p className="eyebrow">Upload annual report</p>
           <h2 className="display text-2xl mt-2 tracking-[-0.02em]">
-            Drop a PDF, watch Claude work.
+            Drop a PDF, we handle the rest.
           </h2>
         </div>
         <label className="inline-flex items-center gap-2 text-[13px] text-text-muted">

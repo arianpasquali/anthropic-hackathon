@@ -58,7 +58,7 @@ export default async function CorporateDashboardPage() {
           <p className="text-text-muted mt-3 text-[14.5px]">
             <Badge variant="default" className="mr-2">{detail.package_name}</Badge>
             <Badge variant={detail.status === "paid" ? "emerald" : "warning"}>{detail.status}</Badge>
-            <span className="ml-3 tabular">{formatEur(detail.amount_eur)} · quarterly</span>
+            <span className="ml-3 tabular">{formatEur(detail.amount_eur)} · annual</span>
           </p>
         </div>
         <Link
@@ -81,7 +81,7 @@ export default async function CorporateDashboardPage() {
         <DashStat
           label="Cumulative since inception"
           value={formatTCO2e(cumulativeTco2e)}
-          hint={`${detail.allocations.length} banks · multi-year carryover`}
+          hint={`${detail.allocations.length} food banks · multi-year carryover`}
         />
         <DashStat
           label="€ / tCO₂e"
@@ -138,7 +138,7 @@ export default async function CorporateDashboardPage() {
               <li key={r.region} className="flex items-center justify-between border-b border-line/60 pb-1.5">
                 <span className="text-text-muted">{REGION_LABEL[r.region] ?? r.region}</span>
                 <span className="tabular text-text">
-                  {formatPercent(r.weight_pct, 1)} · {r.foodbanks} banks
+                  {formatPercent(r.weight_pct, 1)} · {r.foodbanks} food banks
                 </span>
               </li>
             ))}
@@ -303,7 +303,7 @@ function EmptyState() {
       </h1>
       <p className="text-text-muted text-[14.5px] mt-6 max-w-[44ch] mx-auto leading-relaxed">
         Once you subscribe, this dashboard shows your live allocation, CO₂e attribution,
-        and CSR report — generated on demand by Claude.
+        and CSR report — generated on demand.
       </p>
       <div className="mt-8">
         <Link

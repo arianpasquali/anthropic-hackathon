@@ -366,7 +366,7 @@ export function AssistantSidebar() {
             </button>
           </div>
           <p className="mt-2 text-[10.5px] text-text-faint leading-snug">
-            Powered by Claude via orq.ai. Answers are guidance only — confirm
+            Answers are guidance only — confirm
             eligibility with your auditor.
           </p>
         </form>

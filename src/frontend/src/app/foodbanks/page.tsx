@@ -102,7 +102,7 @@ export default async function FoodbanksIndexPage() {
             <p>
               The marketplace funds wrap top-N foodbanks per allocation profile —
               CO₂e impact, social reach, or a balance. Choose a fund and your
-              quarterly contribution is split across the operators that move the
+              annual contribution is split across the operators that move the
               biggest needle.
             </p>
             <Link

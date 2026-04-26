@@ -91,7 +91,7 @@ export function PlatformSpread() {
           <DocumentPanel
             kicker="Foodbank · annual report"
             title="Voedselbank Rotterdam"
-            subtitle="2024 annual report — extracted by Claude"
+            subtitle="2024 annual report — AI-extracted"
             rows={FOODBANK_ROWS}
             footer="Page 14 of 22 · FRAME (soon Gold-Certified)"
             corner="A"

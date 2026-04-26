@@ -254,7 +254,7 @@ function BankTip({ b }: { b: Bank }) {
           {b.is_rdc && b.rdc_satellite_count ? (
             <Row
               label="RDC satellites"
-              value={`${b.rdc_satellite_count} banks`}
+              value={`${b.rdc_satellite_count} food banks`}
             />
           ) : null}
         </dl>

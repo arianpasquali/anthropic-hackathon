@@ -10,18 +10,18 @@ import { loadImpact } from "@/lib/impact"
 export const metadata = {
   title: "For food banks · Kavel",
   description:
-    "Upload your annual report. Claude extracts food volumes, categories, and households served — FRAME does the climate math. Once your data is in, corporates can fund your operations through verified climate-contribution packages.",
+    "Upload your annual report. AI extracts food volumes, categories, and households served — FRAME does the climate math. Once your data is in, corporates can fund your operations through verified climate-contribution packages.",
 }
 
 const PIPELINE = [
   {
     kicker: "01",
     title: "Upload your annual report",
-    body: "PDF in Dutch is fine. We accept any format the report was originally published in. The bigger and messier, the better — Claude handles long-form unstructured documents better than spreadsheet templates.",
+    body: "PDF in Dutch is fine. We accept any format the report was originally published in. The bigger and messier, the better — unstructured long-form documents are handled better than spreadsheet templates.",
   },
   {
     kicker: "02",
-    title: "Claude extracts your data",
+    title: "AI extracts your data",
     body: "Five parallel section-specific prompts pull food volumes, categories, household reach, demographics, and operations into typed measurements. Every field is tagged with its source: extracted, inferred from a Dutch national average, or computed.",
   },
   {
@@ -32,14 +32,14 @@ const PIPELINE = [
   {
     kicker: "04",
     title: "Corporates fund your operations",
-    body: "Once you appear in the marketplace, corporates buying a Kavel package allocate a verified climate contribution share to your operation. Quarterly. Auditable. Disclosed under ESRS E5 + S3, never offset.",
+    body: "Once you appear in the marketplace, corporates buying a Kavel package allocate a verified climate contribution share to your operation. Annual. Auditable. Disclosed under ESRS E5 + S3, never offset.",
   },
 ] as const
 
 const RECEIVES = [
   "Public transparency profile auto-generated from your report",
   "Provenance ledger — every number traceable to its source",
-  "Quarterly disbursement when funds allocate to your operation",
+  "Annual disbursement when funds allocate to your operation",
   "Year-over-year delta tracking once you upload report #2",
   "Sponsor activity feed listing committed corporates",
 ] as const
