@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Klimaatkracht — Sitemap</title>
+  <style>
+    :root {
+      --bg: #0b0f0d;
+      --panel: #11171428;
+      --panel-solid: #0f1513;
+      --border: #1f2a25;
+      --text: #e8efe9;
+      --muted: #8a9890;
+      --emerald: #34d399;
+      --emerald-dim: #1f6b50;
+      --amber: #f5b84a;
+      --rose: #f87171;
+      --violet: #a78bfa;
+      --slate: #64748b;
+      --cyan: #67e8f9;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--text);
+      font-family: ui-sans-serif, -apple-system, "Inter", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased; }
+    body { min-height: 100vh; padding: 32px 36px 80px; }
+    header { display: flex; align-items: baseline; justify-content: space-between;
+      padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+    h1 { font-size: 22px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+    h1 span { color: var(--emerald); }
+    .sub { color: var(--muted); font-size: 13px; }
+    .meta { color: var(--muted); font-size: 12px; font-family: ui-monospace, "JetBrains Mono", monospace; }
+
+    .grid { display: grid; grid-template-columns: 360px 1fr; gap: 28px; align-items: start; }
+    @media (max-width: 1100px) { .grid { grid-template-columns: 1fr; } }
+
+    .panel { background: var(--panel-solid); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px 22px; }
+    .panel h2 { font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+
+    /* Tree (URL hierarchy) */
+    .tree { font-family: ui-monospace, "JetBrains Mono", monospace; font-size: 13px; line-height: 1.85; }
+    .tree ul { list-style: none; padding-left: 18px; margin: 0;
+      border-left: 1px dashed var(--border); }
+    .tree > ul { padding-left: 0; border-left: none; }
+    .tree li { position: relative; padding-left: 14px; }
+    .tree li::before { content: ""; position: absolute; left: 0; top: 0.85em;
+      width: 10px; height: 1px; background: var(--border); }
+    .tree > ul > li::before { display: none; }
+    .url { color: var(--text); }
+    .url.dyn { color: var(--cyan); }
+    .badge { display: inline-block; font-size: 10px; padding: 1px 7px; margin-left: 8px;
+      border-radius: 999px; vertical-align: middle; letter-spacing: 0.04em;
+      font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 500; }
+    .b-pub { background: rgba(52,211,153,.10); color: var(--emerald); border: 1px solid rgba(52,211,153,.25); }
+    .b-auth { background: rgba(245,184,74,.10); color: var(--amber); border: 1px solid rgba(245,184,74,.25); }
+    .b-app { background: rgba(167,139,250,.10); color: var(--violet); border: 1px solid rgba(167,139,250,.25); }
+    .b-flow { background: rgba(103,232,249,.08); color: var(--cyan); border: 1px solid rgba(103,232,249,.22); }
+
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+
+    /* Mermaid container */
+    .diagram { overflow-x: auto; }
+    .mermaid { font-family: ui-sans-serif, system-ui, sans-serif !important; min-height: 600px; }
+
+    /* Notes + dynamic routes */
+    .notes { margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr;
+      gap: 28px; }
+    @media (max-width: 1100px) { .notes { grid-template-columns: 1fr; } }
+    .notes p { color: var(--muted); font-size: 13px; line-height: 1.65; margin: 0 0 10px; }
+    .notes code { background: #1a2520; color: var(--emerald); padding: 1px 6px;
+      border-radius: 4px; font-size: 12px; }
+    .notes ul { padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 1.7; margin: 0; }
+    .kv { display: grid; grid-template-columns: 130px 1fr; gap: 6px 16px; font-size: 12px; }
+    .kv dt { color: var(--muted); font-family: ui-monospace, monospace; }
+    .kv dd { margin: 0; color: var(--text); }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Klimaatkracht <span>// sitemap</span></h1>
+      <div class="sub">Generated from <code style="font-family:ui-monospace,monospace">src/frontend/src/app/sitemap.ts</code> + traced navigation</div>
+    </div>
+    <div class="meta">klimaatkracht.nl</div>
+  </header>
+
+  <div class="grid">
+    <!-- Left: URL hierarchy -->
+    <section class="panel">
+      <h2>URL hierarchy</h2>
+      <div class="tree">
+        <ul>
+          <li><span class="url">/</span> <span class="badge b-pub">landing</span>
+            <ul>
+              <li><span class="url">/marketplace</span> <span class="badge b-pub">public</span></li>
+              <li><span class="url">/methodology</span> <span class="badge b-pub">public</span></li>
+              <li><span class="url">/pricing</span> <span class="badge b-pub">public</span></li>
+              <li><span class="url">/foodbanks</span> <span class="badge b-pub">public</span>
+                <ul>
+                  <li><span class="url dyn">/foodbanks/[slug]</span> <span class="badge b-flow">dynamic</span></li>
+                </ul>
+              </li>
+              <li><span class="url">/funds</span> <span class="badge b-pub">public</span>
+                <ul>
+                  <li><span class="url dyn">/funds/[id]</span> <span class="badge b-flow">dynamic</span>
+                    <ul>
+                      <li><span class="url dyn">/funds/[id]/buy</span> <span class="badge b-flow">dynamic</span>
+                        <ul>
+                          <li><span class="url dyn">/funds/[id]/buy/confirmed</span> <span class="badge b-flow">dynamic</span></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><span class="url">/login</span> <span class="badge b-auth">auth</span></li>
+              <li><span class="url">/register</span> <span class="badge b-auth">auth</span></li>
+              <li><span class="url">/dashboard/corporate</span> <span class="badge b-app">app</span></li>
+              <li><span class="url">/dashboard/foodbank</span> <span class="badge b-app">app</span></li>
+              <li><span class="url dyn">/reports/[subId]</span> <span class="badge b-flow">dynamic</span></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="legend">
+        <span class="badge b-pub">public</span>
+        <span class="badge b-auth">auth</span>
+        <span class="badge b-app">app (gated)</span>
+        <span class="badge b-flow">dynamic</span>
+      </div>
+
+      <h2 style="margin-top:24px">Sitemap.ts entries</h2>
+      <dl class="kv">
+        <dt>priority 1.0</dt><dd>/</dd>
+        <dt>priority 0.9</dt><dd>/marketplace</dd>
+        <dt>priority 0.8</dt><dd>/methodology · /pricing · /funds/[id]</dd>
+        <dt>priority 0.7</dt><dd>/foodbanks · /foodbanks/[slug]</dd>
+        <dt>priority 0.6</dt><dd>/funds</dd>
+        <dt>priority 0.3</dt><dd>/login · /register</dd>
+      </dl>
+    </section>
+
+    <!-- Right: Navigation graph -->
+    <section class="panel diagram">
+      <h2>Navigation flow</h2>
+      <div class="mermaid">
+flowchart LR
+  classDef pub fill:#0d1d17,stroke:#1f6b50,color:#e8efe9,stroke-width:1px;
+  classDef auth fill:#1f1808,stroke:#7a5a1d,color:#f5b84a,stroke-width:1px;
+  classDef app fill:#161229,stroke:#5a489a,color:#cfc1f7,stroke-width:1px;
+  classDef flow fill:#0d1d22,stroke:#2c6a78,color:#cdeff5,stroke-width:1px;
+  classDef ext fill:#11171a,stroke:#3a4a52,color:#9fb1b8,stroke-width:1px,stroke-dasharray:3 3;
+
+  Home([&quot;/  &middot; Landing&quot;]):::pub
+
+  subgraph Public[&quot;Public &middot; marketing&quot;]
+    Marketplace[&quot;/marketplace&quot;]:::pub
+    Methodology[&quot;/methodology&quot;]:::pub
+    Pricing[&quot;/pricing&quot;]:::pub
+    FoodbanksList[&quot;/foodbanks&quot;]:::pub
+    FundsList[&quot;/funds&quot;]:::pub
+  end
+
+  subgraph Detail[&quot;Detail &middot; dynamic&quot;]
+    FoodbankSlug[&quot;/foodbanks/[slug]&quot;]:::flow
+    FundDetail[&quot;/funds/[id]&quot;]:::flow
+  end
+
+  subgraph Purchase[&quot;Purchase flow&quot;]
+    FundBuy[&quot;/funds/[id]/buy&quot;]:::flow
+    FundConfirmed[&quot;/funds/[id]/buy/confirmed&quot;]:::flow
+  end
+
+  subgraph Auth[&quot;Auth&quot;]
+    Login[&quot;/login&quot;]:::auth
+    Register[&quot;/register&quot;]:::auth
+  end
+
+  subgraph App[&quot;App &middot; gated&quot;]
+    DashCorp[&quot;/dashboard/corporate&quot;]:::app
+    DashFB[&quot;/dashboard/foodbank&quot;]:::app
+    Report[&quot;/reports/[subId]&quot;]:::app
+    ReportSample[&quot;/reports/sample&quot;]:::flow
+    ReportDownload[&quot;/api/report/[id]/download&quot;]:::ext
+  end
+
+  %% Header (global nav) — shown once from Home for clarity
+  Home -->|hero CTA| Marketplace
+  Home -->|hero CTA| DashFB
+  Home -->|sample report| ReportSample
+  Home -->|nav| Methodology
+  Home -->|nav| Login
+  Home -->|footer| Register
+  Home -->|footer| DashCorp
+
+  %% Discovery
+  Marketplace -->|FundCard| FundDetail
+  Marketplace -->|foodbank list| FoodbankSlug
+  FoodbanksList -.->|list page| FoodbankSlug
+
+  %% Fund purchase
+  FundDetail -->|Buy panel| FundBuy
+  FundDetail -->|tier compare| Pricing
+  FundBuy -->|on success| FundConfirmed
+  FundBuy -.->|401| Login
+  FundConfirmed -->|primary CTA| DashCorp
+  FundConfirmed -->|back| FundDetail
+  Pricing -->|Buy tier| Marketplace
+  Pricing -.->|tier 401| Login
+
+  %% Auth ↔ Auth
+  Login --> Register
+  Register --> Login
+  Register -->|role=corporate| DashCorp
+  Register -->|role=foodbank| DashFB
+  Login -.->|next param| DashCorp
+  Login -.->|next param| DashFB
+
+  %% Dashboards
+  DashCorp -->|empty state| Marketplace
+  DashCorp -->|allocation| FundDetail
+  DashCorp -->|view report| Report
+  DashFB -->|own bank profile| FoodbankSlug
+  Report -->|back| DashCorp
+  Report -.->|PDF/MD| ReportDownload
+
+  %% Auth gates
+  DashCorp -.->|401 redirect| Login
+      </div>
+
+      <div class="notes">
+        <div>
+          <p><strong style="color:var(--text)">Reading the diagram</strong></p>
+          <ul>
+            <li>Solid arrows = explicit <code>&lt;Link&gt;</code> / <code>router.push</code> in source.</li>
+            <li>Dashed arrows = conditional redirects (auth gates, <code>?next=</code> handoff, downloads).</li>
+            <li>Dynamic routes wrap their param in <code>[…]</code>; the sitemap fans these out per row in <code>listFoodbanks()</code> / <code>listPackages()</code>.</li>
+          </ul>
+        </div>
+        <div>
+          <p><strong style="color:var(--text)">Auth gating</strong></p>
+          <ul>
+            <li><code>/dashboard/*</code> and <code>/reports/[subId]</code> redirect to <code>/login?next=…</code> on 401.</li>
+            <li><code>/funds/[id]/buy</code> redirects to <code>/login?next=/funds/[id]</code> if the session is missing when submitting.</li>
+            <li>Header shows <code>/dashboard/foodbank</code> link unconditionally — actual access is enforced server-side.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      themeVariables: {
+        background: "#0f1513",
+        primaryColor: "#0d1d17",
+        primaryTextColor: "#e8efe9",
+        primaryBorderColor: "#1f6b50",
+        lineColor: "#3a4a52",
+        secondaryColor: "#161229",
+        tertiaryColor: "#1f1808",
+        clusterBkg: "#0b110f",
+        clusterBorder: "#1f2a25",
+        fontFamily: "ui-sans-serif, system-ui, sans-serif",
+        fontSize: "13px"
+      },
+      flowchart: { curve: "basis", padding: 14, nodeSpacing: 36, rankSpacing: 60 }
+    });
+  </script>
+</body>
+</html>
