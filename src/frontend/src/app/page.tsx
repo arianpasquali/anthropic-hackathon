@@ -6,7 +6,7 @@ import { ProvinceFoodbankList } from "@/components/map/ProvinceFoodbankList"
 import { LogoCarousel, type CarouselLogo } from "@/components/marketing/LogoCarousel"
 import { PlatformSpread } from "@/components/marketing/PlatformSpread"
 import { Badge } from "@/components/ui/Badge"
-import { formatNumber, formatTCO2e } from "@/lib/format"
+import { formatNumber } from "@/lib/format"
 
 const CORPORATE_LOGOS: CarouselLogo[] = [
   { name: "Heineken",      src: "/SVGBrand.com_heineken_nv.svg",  w: 120 },
@@ -27,9 +27,6 @@ const COATOFARMS_LOGOS: CarouselLogo[] = [
 
 export default async function Home() {
   const banks = await api.listFoodbanks().catch(() => [])
-  const totalKg = banks.reduce((s, b) => s + (b.annual_kg_rescued ?? 0), 0)
-  const totalTco2e = banks.reduce((s, b) => s + (b.annual_tco2e ?? 0), 0)
-  const totalHouseholds = banks.reduce((s, b) => s + (b.households_weekly ?? 0), 0)
 
   return (
     <div className="overflow-hidden">
@@ -78,23 +75,6 @@ export default async function Home() {
                 Join as a food bank
               </Link>
             </div>
-            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] text-text-faint">
-              <span>FRAME aligned</span>
-              <span aria-hidden>·</span>
-              <span>ESRS E5 + S3</span>
-              <span aria-hidden>·</span>
-              <span>Contribution claim</span>
-              <span aria-hidden>·</span>
-              <span>NL counterfactual</span>
-            </div>
-
-            {/* Stats — typographic strip under the text column, photo stays clean */}
-            <dl className="mt-10 pt-7 border-t border-line grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-6">
-              <Stat label="Contribution / yr" value={formatTCO2e(totalTco2e)} />
-              <Stat label="Rescued / yr" value={`${formatNumber(totalKg / 1_000_000, { maximumFractionDigits: 1 })}M kg`} />
-              <Stat label="Households / wk" value={formatNumber(totalHouseholds)} />
-              <Stat label="Food banks" value={formatNumber(banks.length)} />
-            </dl>
           </div>
         </div>
       </section>
@@ -377,15 +357,6 @@ function TractionStat({
       {delta ? (
         <span className="text-[11.5px] text-text-muted mt-1 tabular">{delta}</span>
       ) : null}
-    </div>
-  )
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex flex-col gap-1">
-      <dt className="eyebrow">{label}</dt>
-      <dd className="display tabular text-[34px] md:text-[42px] leading-none mt-1">{value}</dd>
     </div>
   )
 }
