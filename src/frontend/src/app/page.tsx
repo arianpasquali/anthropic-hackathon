@@ -51,7 +51,7 @@ export default async function Home() {
               Kavel · ESRS-aligned
             </Badge>
             <h1 className="display text-[44px] md:text-[64px] leading-[1.02] tracking-[-0.03em] max-w-[16ch]">
-              Translating Food Banks{" "}
+              Transforming Food Banks{" "}
               <span className="display-italic text-emerald-deep">into Climate Action.</span>
             </h1>
             <p className="mt-7 text-[15.5px] text-text-muted leading-[1.55] max-w-[54ch]">
