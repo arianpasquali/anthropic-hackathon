@@ -71,7 +71,7 @@ export default function LoginPage() {
           <span className="display-italic text-emerald-deep">Pick up where you left off.</span>
         </h1>
         <p className="mt-5 text-text-muted text-[14.5px] max-w-[44ch] leading-relaxed">
-          Climate Harvest uses a single account for both corporate buyers and food bank
+          Kavel uses a single account for both corporate buyers and food bank
           operators. Your role determines which dashboard you land on.
         </p>
         <p className="mt-8 text-[13.5px] text-text">

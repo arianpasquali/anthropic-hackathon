@@ -2,7 +2,7 @@ import Link from "next/link"
 import { BuyTierButton } from "@/components/marketing/BuyTierButton"
 import type { ImpactProfile } from "@/lib/types"
 
-export const metadata = { title: "Pricing — Climate Harvest" }
+export const metadata = { title: "Pricing — Kavel" }
 
 type TierLike = {
   name: string

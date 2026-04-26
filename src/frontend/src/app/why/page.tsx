@@ -3,9 +3,9 @@ import Link from "next/link"
 import { loadImpact, fmtInt, type Stat } from "@/lib/impact"
 
 export const metadata = {
-  title: "Why · Climate Harvest",
+  title: "Why · Kavel",
   description:
-    "The size of the gap, the urgency of the regulatory clock, and the contribution capacity Climate Harvest funds. Six citable arguments.",
+    "The size of the gap, the urgency of the regulatory clock, and the contribution capacity Kavel unlocks. Six citable arguments.",
 }
 
 export default async function WhyPage() {
@@ -94,7 +94,7 @@ export default async function WhyPage() {
           auditor-defensible infrastructure to disclose ESRS&nbsp;E5 + S3 climate
           contribution does not yet exist in non-energy sectors. CSR teams
           reach for half-defensible carbon credits and offset narratives;
-          auditors push back. Climate Harvest fills that gap with measured,
+          auditors push back. Kavel fills that gap with measured,
           attributable climate-contribution disclosures.
         </p>
         <SourceLine label={csrd.source_label} url={csrd.source_url} />

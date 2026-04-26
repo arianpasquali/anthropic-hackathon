@@ -5,9 +5,9 @@ import Link from "next/link"
 import { CoverageMap } from "@/components/marketing/CoverageMap"
 
 export const metadata = {
-  title: "Coverage · Climate Harvest",
+  title: "Coverage · Kavel",
   description:
-    "Where Dutch poverty is concentrated, where Climate Harvest's foodbanks reach, and where the gap is widest. Gemeente-level CBS poverty data overlaid with the demo cohort.",
+    "Where Dutch poverty is concentrated, where Kavel's foodbanks reach, and where the gap is widest. Gemeente-level CBS poverty data overlaid with the demo cohort.",
 }
 
 interface Gemeente {

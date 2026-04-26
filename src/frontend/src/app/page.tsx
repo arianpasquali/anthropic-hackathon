@@ -51,14 +51,14 @@ export default async function Home() {
         <div className="mx-auto max-w-[1280px] px-6 pt-10 md:pt-14 pb-12 grid lg:grid-cols-2 gap-x-12 items-end">
           <div>
             <Badge variant="default" className="mb-6">
-              Climate Harvest · ESRS-aligned
+              Kavel · ESRS-aligned
             </Badge>
             <h1 className="display text-[44px] md:text-[64px] leading-[1.02] tracking-[-0.03em] max-w-[16ch]">
               Translating Food Banks{" "}
               <span className="display-italic text-emerald-deep">into Climate Action.</span>
             </h1>
             <p className="mt-7 text-[15.5px] text-text-muted leading-[1.55] max-w-[54ch]">
-              Climate Harvest turns Dutch food rescue into ESRS&nbsp;E5 + S3 contribution
+              Kavel turns Dutch food rescue into ESRS&nbsp;E5 + S3 contribution
               disclosures. Fund a package, and your contribution is allocated across
               a portfolio of the top food banks in the Netherlands.
               Sources cited; provenance tagged; counterfactual disclosed. Climate
@@ -154,7 +154,7 @@ export default async function Home() {
               The disclosure your CFO drops into the annual report.
             </h2>
             <p className="text-text-muted text-[14.5px] mt-5 max-w-[44ch] leading-relaxed">
-              Every Climate Harvest subscription generates an ESRS-aligned
+              Every Kavel subscription generates an ESRS-aligned
               contribution disclosure — composed by Claude, streamed live, every
               figure cited back to a source PDF. Below: a real Q1 2026 paragraph
               from the Heineken pilot.
@@ -312,7 +312,7 @@ export default async function Home() {
             </h2>
             <p className="mt-5 text-text-muted text-[14.5px] leading-relaxed max-w-[58ch]">
               Browse the funds open this quarter, or onboard your foodbank in
-              under ten minutes. Climate Harvest is live, supply-constrained,
+              under ten minutes. Kavel is live, supply-constrained,
               and accepting Q2 commitments now.
             </p>
           </div>

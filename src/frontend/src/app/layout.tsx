@@ -5,9 +5,9 @@ import { Footer } from "@/components/nav/Footer"
 import { AssistantSidebar } from "@/components/chat/AssistantSidebar"
 
 export const metadata: Metadata = {
-  title: "Climate Harvest —  disclosure-ready",
+  title: "Kavel — verified climate contribution, disclosure-ready",
   description:
-    "Climate Harvest turns Dutch food rescue into ESRS-aligned climate contribution disclosures. Fund a verified climate-contribution package and receive an ESRS E5+S3 disclosure draft — built on extracted annual reports, computed with the FRAME methodology. Climate contribution, not offsetting.",
+    "Kavel turns Dutch food rescue into ESRS-aligned climate contribution disclosures. Fund a verified climate-contribution package and receive an ESRS E5+S3 disclosure draft — built on extracted annual reports, computed with the FRAME methodology. Climate contribution, not offsetting.",
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

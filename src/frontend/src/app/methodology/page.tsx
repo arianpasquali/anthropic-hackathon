@@ -6,9 +6,9 @@ import { PovertyBars } from "@/components/marketing/PovertyBars"
 import { loadImpact } from "@/lib/impact"
 
 export const metadata = {
-  title: "Methodology · Climate Harvest",
+  title: "Methodology · Kavel",
   description:
-    "How Climate Harvest computes climate-contribution CO₂e from Dutch food rescue. FRAME methodology, NL counterfactual, emission factors, and provenance ledger. Contribution claim, not offsetting.",
+    "How Kavel computes climate-contribution CO₂e from Dutch food rescue. FRAME methodology, NL counterfactual, emission factors, and provenance ledger. Contribution claim, not offsetting.",
 }
 
 const PIPELINE = [
@@ -44,7 +44,7 @@ export default async function MethodologyPage() {
           <span className="display-italic text-emerald-deep">climate contribution.</span>
         </h1>
         <p className="mt-7 text-text-muted text-[16px] max-w-[64ch] leading-relaxed">
-          Climate Harvest aligns with FRAME — the Food Recovery Avoided Methane Emissions
+          Kavel aligns with FRAME — the Food Recovery Avoided Methane Emissions
           methodology used by Global FoodBanking Network — and applies a Dutch-specific
           counterfactual based on RIVM Afvalmonitor 2024 + CBS Waste Statistics. Every
           number on this site can be traced back to the field it was extracted from,
@@ -159,7 +159,7 @@ export default async function MethodologyPage() {
           </p>
           <p className="mt-4">
             We apply <span className="text-text tabular">CF<sub>NL</sub> = 0.93</span> per RIVM Afvalmonitor 2024
-            and CBS Waste Statistics. This makes Climate Harvest conservative compared to
+            and CBS Waste Statistics. This makes Kavel conservative compared to
             FRAME defaults — by design.
           </p>
         </div>
@@ -177,7 +177,7 @@ export default async function MethodologyPage() {
           </h2>
           <p className="mt-5 text-text-muted text-[14.5px] max-w-[64ch] leading-relaxed">
             Foodbanks recover {impact.food_paradox.rescue_share_pct.value}% of
-            NL food waste. Climate Harvest funds the network to rescue more —
+            NL food waste. Kavel funds the network to rescue more —
             paying foodbanks for verified contribution capacity, instead of
             asking corporates to pay landfill avoidance fees that never reach
             the social side.
@@ -240,7 +240,7 @@ export default async function MethodologyPage() {
         </h2>
         <div className="mt-8 grid md:grid-cols-2 gap-x-10 gap-y-4 text-text-muted text-[14px] leading-relaxed max-w-[80ch]">
           <p>
-            Climate Harvest packages fund verified climate impact at Dutch foodbanks.
+            Kavel packages fund verified climate impact at Dutch foodbanks.
             Corporates disclose this as a <span className="text-text">climate contribution</span>{" "}
             under ESRS&nbsp;E5 (resource use &amp; circular economy) and ESRS&nbsp;S3
             (affected communities) — not as Scope&nbsp;1/2/3 reduction or offset under

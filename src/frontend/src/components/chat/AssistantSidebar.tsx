@@ -6,7 +6,7 @@ import ReactMarkdown, { type Components } from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { cn } from "@/lib/cn"
 
-// CTA labels for Climate Harvest internal paths — used by the link renderer
+// CTA labels for Kavel internal paths — used by the link renderer
 // to upgrade bare links into call-to-action buttons.
 const CTA_LABELS: Record<string, string> = {
   "/marketplace": "Browse the marketplace",
@@ -81,7 +81,7 @@ const GREETING: Message = {
   id: "greet",
   role: "assistant",
   content:
-    "Hi — I'm the Climate Harvest assistant. I can answer questions about the methodology, marketplace, and ESRS E5 disclosures, and check whether your company is eligible to buy a contribution package. Where would you like to start?",
+    "Hi — I'm the Kavel assistant. I can answer questions about the methodology, marketplace, and ESRS E5 disclosures, and check whether your company is eligible to buy a contribution package. Where would you like to start?",
 }
 
 function uid() {
@@ -222,7 +222,7 @@ export function AssistantSidebar() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        aria-label="Open Climate Harvest assistant"
+        aria-label="Open Kavel assistant"
         className={cn(
           "fixed bottom-6 right-6 z-40 group",
           "h-12 pl-4 pr-5 inline-flex items-center gap-2.5",
@@ -251,7 +251,7 @@ export function AssistantSidebar() {
       {/* Slide-over panel */}
       <aside
         role="dialog"
-        aria-label="Climate Harvest assistant"
+        aria-label="Kavel assistant"
         aria-modal="true"
         className={cn(
           "fixed top-0 right-0 z-50 h-dvh w-full sm:w-[420px] flex flex-col",
@@ -266,7 +266,7 @@ export function AssistantSidebar() {
             <span aria-hidden className="block w-2.5 h-2.5 bg-emerald rounded-[1px]" />
             <div className="leading-tight">
               <p className="text-[13.5px] font-semibold tracking-[-0.01em]">
-                Climate Harvest assistant
+                Kavel assistant
               </p>
               <p className="text-[11px] text-text-faint">
                 FAQ · eligibility · marketplace
@@ -407,7 +407,7 @@ function MessageBubble({ message }: { message: Message }) {
   )
 }
 
-// Renderer overrides — promote internal Climate Harvest links to CTA buttons
+// Renderer overrides — promote internal Kavel links to CTA buttons
 const MARKDOWN_COMPONENTS: Components = {
   a({ href, children }) {
     const internal = href ? isInternalCH(href) : null

@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server"
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
 
-const AGENT_KEY = "climate-harvest-assistant"
+const AGENT_KEY = "kavel-assistant"
 
 type ChatBody = {
   message: string

@@ -82,7 +82,7 @@ export function PlatformSpread() {
         <p className="mt-5 text-text-muted text-[15px] max-w-[66ch] leading-relaxed">
           Foodbanks publish operational data — kg, categories, households —
           which the FRAME methodology turns into a verified CO₂e baseline.
-          Corporates funding a Climate Harvest package receive a portion of that
+          Corporates funding a Kavel package receive a portion of that
           impact, attributed once and disclosed under ESRS&nbsp;E5 + S3 — never
           recounted, never offset against own footprint.
         </p>
@@ -103,7 +103,7 @@ export function PlatformSpread() {
           <DocumentPanel
             kicker="Corporate · ESRS disclosure draft"
             title="Heineken N.V."
-            subtitle="Q1 2026 — composed by Climate Harvest"
+            subtitle="Q1 2026 — composed by Kavel"
             rows={CORPORATE_ROWS}
             footer="ESRS E5-5 · S3 · contribution claim, not offset"
             corner="B"
@@ -113,7 +113,7 @@ export function PlatformSpread() {
         </div>
 
         <p className="mt-10 text-[12.5px] text-text-faint italic max-w-[68ch] leading-relaxed">
-          Climate Harvest sits between: FRAME compute · NL counterfactual ·
+          Kavel sits between: FRAME compute · NL counterfactual ·
           attribution registry · ESRS draft generation. Same number, two sides
           of one ledger.
         </p>

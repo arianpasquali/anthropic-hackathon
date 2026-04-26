@@ -7,7 +7,7 @@ import { AdoptionSlider } from "@/components/marketing/AdoptionSlider"
 import { loadImpact } from "@/lib/impact"
 
 export const metadata = {
-  title: "For food banks · Climate Harvest",
+  title: "For food banks · Kavel",
   description:
     "Upload your annual report. Claude extracts food volumes, categories, and households served — FRAME does the climate math. Once your data is in, corporates can fund your operations through verified climate-contribution packages.",
 }
@@ -31,7 +31,7 @@ const PIPELINE = [
   {
     kicker: "04",
     title: "Corporates fund your operations",
-    body: "Once you appear in the marketplace, corporates buying a Climate Harvest package allocate a verified climate contribution share to your operation. Quarterly. Auditable. Disclosed under ESRS E5 + S3, never offset.",
+    body: "Once you appear in the marketplace, corporates buying a Kavel package allocate a verified climate contribution share to your operation. Quarterly. Auditable. Disclosed under ESRS E5 + S3, never offset.",
   },
 ] as const
 
@@ -80,7 +80,7 @@ export default async function ForFoodbanksPage() {
               </span>
             </h1>
             <p className="mt-6 text-text-muted text-[15.5px] leading-relaxed max-w-[58ch]">
-              Climate Harvest turns the operational data already in your annual
+              Kavel turns the operational data already in your annual
               report into a verified CO₂e baseline that Dutch corporates can
               fund. No new templates to fill out. No new spreadsheets. No new
               auditors knocking on the door.
@@ -153,7 +153,7 @@ export default async function ForFoodbanksPage() {
               </h2>
             </div>
             <p className="text-text-muted text-[14.5px] leading-relaxed max-w-[58ch]">
-              Climate Harvest is supply-constrained, not demand-constrained.
+              Kavel is supply-constrained, not demand-constrained.
               Even modest CSRD-mandated corporate adoption fully books the NL
               foodbank network. The platform locks unit price and caps
               attribution per bank — your operation will not be over-sold.
@@ -275,7 +275,7 @@ export default async function ForFoodbanksPage() {
             </Link>
           </div>
           <p className="mt-2 text-[12px] text-text-faint italic">
-            Free. No credit card. No lock-in. Climate Harvest earns from the
+            Free. No credit card. No lock-in. Kavel earns from the
             corporate side, never from operators.
           </p>
         </div>

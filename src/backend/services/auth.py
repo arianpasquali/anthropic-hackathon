@@ -44,17 +44,17 @@ def get_current_user(
     session_cookie: Optional[str] = Cookie(default=None, alias=COOKIE_NAME),
 ) -> User:
     if not session_cookie:
-        raise HTTPException(status_code=status.HTTP_303_SEE_OTHER, headers={"Location": "/login"})
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
     user_id = decode_session_cookie(session_cookie)
     if not user_id:
-        raise HTTPException(status_code=status.HTTP_303_SEE_OTHER, headers={"Location": "/login"})
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
     try:
         user_uuid = uuid.UUID(user_id)
     except (ValueError, AttributeError):
-        raise HTTPException(status_code=status.HTTP_303_SEE_OTHER, headers={"Location": "/login"})
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
     user = session.get(User, user_uuid)
     if not user:
-        raise HTTPException(status_code=status.HTTP_303_SEE_OTHER, headers={"Location": "/login"})
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
     return user
 
 

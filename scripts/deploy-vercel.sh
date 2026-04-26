@@ -4,7 +4,7 @@
 # Usage: ./scripts/deploy-vercel.sh [--preview]
 set -euo pipefail
 
-BACKEND_URL="${BACKEND_URL:-https://klimaatkracht.boxd.sh}"
+BACKEND_URL="${BACKEND_URL:-https://api.kavel.tech}"
 PROD_FLAG="--prod"
 for arg in "$@"; do
   [[ "$arg" == "--preview" ]] && PROD_FLAG=""

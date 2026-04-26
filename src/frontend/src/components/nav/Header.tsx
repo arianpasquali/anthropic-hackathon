@@ -10,14 +10,14 @@ export function Header() {
         <Link
           href="/"
           className="flex items-baseline gap-2 group"
-          aria-label="Climate Harvest — home"
+          aria-label="Kavel — home"
         >
           <span
             aria-hidden
             className="block w-2.5 h-2.5 bg-emerald rounded-[1px] translate-y-[1px] group-hover:bg-emerald-deep transition-colors"
           />
           <span className="text-[17px] font-semibold tracking-[-0.02em]">
-            Climate Harvest
+            Kavel
           </span>
         </Link>
 
