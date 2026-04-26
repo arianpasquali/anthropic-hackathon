@@ -415,6 +415,21 @@ body {
   }
 }
 
+@keyframes logo-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-logo-scroll {
+  animation: logo-scroll 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-logo-scroll {
+    animation: none;
+  }
+}
+
 /* Anti-AI-slop guards (informational; enforced by code review) */
 /* NEVER use border-left/right > 1px as a colored stripe */
 /* NEVER use background-clip: text with a gradient */

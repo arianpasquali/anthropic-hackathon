@@ -1,0 +1,691 @@
+/*-- scss:defaults --*/
+
+// Klimaatkracht pitch theme — civic, audit-grade, calm.
+// Mirrors src/frontend/src/app/globals.css tokens.
+// Fonts are loaded via include-in-header in pitch.qmd (Fontshare CDN).
+
+// Hex approximations of the OKLCH tokens — only used at the SCSS defaults
+// layer because reveal.js's legacy theme calls lighten()/darken() on them.
+// OKLCH versions are applied directly inside the rules block below.
+$surface-hex:       #f7faf8;
+$surface-2-hex:     #f1f5f2;
+$surface-3-hex:     #e6ebe7;
+$line-hex:          #d6dcd7;
+$line-strong-hex:   #aeb6b0;
+$text-hex:          #1d2521;
+$text-muted-hex:    #5d6661;
+$text-faint-hex:    #8b9390;
+$emerald-hex:       #3d6a55;
+$emerald-deep-hex:  #2a4d3d;
+$emerald-soft-hex:  #d6e7dd;
+
+$font-display:  "Gambarino", "Times New Roman", Georgia, serif;
+$font-sans:     "Switzer", system-ui, -apple-system, sans-serif;
+$font-mono:     "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+// reveal.js variable overrides — must be plain hex/rgb for legacy color fns
+$body-bg: $surface-hex;
+$body-color: $text-hex;
+$main-font: $font-sans;
+$main-font-size: 28px;
+$main-color: $text-hex;
+$heading-font: $font-display;
+$heading-color: $text-hex;
+$heading-line-height: 1.05;
+$heading-letter-spacing: -0.025em;
+$heading-text-transform: none;
+$heading-font-weight: 500;
+$link-color: $emerald-hex;
+$link-color-hover: $emerald-deep-hex;
+$selection-bg: $emerald-soft-hex;
+$selection-color: $text-hex;
+$presentation-heading-font: $font-display;
+$presentation-heading-color: $text-hex;
+$presentation-font-size-root: 36px;
+
+/*-- scss:rules --*/
+
+// OKLCH neutrals tinted toward emerald (hue 155, low chroma)
+// Used directly in CSS — kept out of defaults so legacy lighten()/darken() works.
+$surface:       oklch(98.5% 0.005 155);
+$surface-2:     oklch(96.5% 0.008 155);
+$surface-3:     oklch(93%   0.012 155);
+$line:          oklch(86%   0.015 155);
+$line-strong:   oklch(72%   0.018 155);
+
+$text:          oklch(22%   0.012 155);
+$text-muted:    oklch(46%   0.014 155);
+$text-faint:    oklch(64%   0.010 155);
+
+$emerald:       oklch(45%   0.10  155);
+$emerald-deep:  oklch(32%   0.08  158);
+$emerald-soft:  oklch(88%   0.04  155);
+
+.reveal {
+  font-family: var(--font-sans, #{$font-sans});
+  font-size: 22px;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+  color: $text;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides > section,
+.reveal .slides > section > section {
+  text-align: left;
+  padding: 64px 72px 80px 72px;
+  min-height: 900px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+// Slides whose first child is .center get vertical centering
+.reveal .slides > section.has-light-bg { background: $surface; }
+
+// Headings — Gambarino, tight tracking, no transform
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  font-family: $font-display;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+  text-transform: none;
+  color: $text;
+  margin: 0;
+}
+
+.reveal h1 { font-size: clamp(56px, 7vw, 96px); max-width: 18ch; }
+.reveal h2 { font-size: clamp(40px, 5vw, 64px); max-width: 22ch; margin-bottom: 0.4em; }
+.reveal h3 { font-size: clamp(28px, 3vw, 38px); margin-bottom: 0.35em; }
+.reveal h4 { font-size: 22px; font-family: $font-sans; font-weight: 600; letter-spacing: 0; }
+
+.reveal p {
+  font-size: 22px;
+  line-height: 1.55;
+  color: $text;
+  max-width: 62ch;
+  margin: 0 0 0.65em 0;
+}
+
+.reveal p.lede {
+  font-size: 26px;
+  color: $text;
+  max-width: 56ch;
+  line-height: 1.45;
+}
+
+.reveal p.muted, .reveal .muted {
+  color: $text-muted;
+}
+
+.reveal p.faint, .reveal .faint {
+  color: $text-faint;
+  font-size: 14px;
+}
+
+.reveal em {
+  font-family: $font-display;
+  font-style: italic;
+  font-weight: 400;
+  color: $emerald-deep;
+  letter-spacing: -0.02em;
+}
+
+.reveal strong { font-weight: 600; }
+
+// Eyebrow — small caps label
+.reveal .eyebrow {
+  font-family: $font-sans;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $text-muted;
+  display: block;
+  margin-bottom: 18px;
+}
+
+// Section index (top-left): "01 / 14"
+.reveal .slide-num {
+  position: absolute;
+  top: 28px;
+  left: 64px;
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: $text-faint;
+  font-feature-settings: "tnum" 1;
+}
+
+// Footer — methodology / citation
+.reveal .slide-foot {
+  position: absolute;
+  bottom: 24px;
+  left: 72px;
+  right: 72px;
+  font-family: $font-sans;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: $text-faint;
+  text-transform: uppercase;
+  border-top: 1px solid $line;
+  padding-top: 12px;
+}
+
+.reveal .slide-foot p,
+.reveal .slide-foot {
+  margin: 0;
+}
+
+.reveal .slide-foot p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 11px;
+  color: $text-faint;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.reveal .slide-foot .brand {
+  font-family: $font-display;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  font-size: 14px;
+  color: $text-muted;
+}
+
+// Display utility
+.reveal .display {
+  font-family: $font-display;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+}
+
+.reveal .display-italic {
+  font-family: $font-display;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+  color: $emerald-deep;
+}
+
+.reveal .tabular { font-variant-numeric: tabular-nums; }
+
+// Big number — for ratio / metric slides
+.reveal .figure-xl {
+  font-family: $font-display;
+  font-weight: 500;
+  font-size: clamp(140px, 18vw, 260px);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  color: $text;
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+
+.reveal .figure-xl em {
+  font-style: italic;
+  color: $emerald-deep;
+  font-weight: 400;
+}
+
+.reveal .figure-lg {
+  font-family: $font-display;
+  font-weight: 500;
+  font-size: clamp(72px, 9vw, 130px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: $text;
+  font-variant-numeric: tabular-nums;
+}
+
+// Stat block (label above, big number below)
+.reveal .stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reveal .stat .stat-label {
+  font-family: $font-sans;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $text-muted;
+}
+
+.reveal .stat .stat-value {
+  font-family: $font-display;
+  font-weight: 500;
+  font-size: clamp(40px, 5vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: $text;
+  font-variant-numeric: tabular-nums;
+}
+
+.reveal .stat .stat-foot {
+  font-size: 13px;
+  color: $text-muted;
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 400;
+  margin-top: 4px;
+}
+
+// Layout helpers
+.reveal .grid-2 {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: end;
+}
+
+.reveal .grid-2-even {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.reveal .grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  align-items: start;
+}
+
+.reveal .grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.reveal .stack-end {
+  align-items: end;
+}
+
+// Rule, civic. Single hairline.
+.reveal hr,
+.reveal .rule {
+  border: 0;
+  border-top: 1px solid $line;
+  margin: 24px 0;
+  width: 100%;
+}
+
+.reveal .rule-strong {
+  border-top: 1px solid $line-strong;
+}
+
+// Lists — civic, no bullets shown by default
+.reveal ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reveal ul li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 12px;
+  font-size: 20px;
+  line-height: 1.5;
+  color: $text;
+}
+
+.reveal ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 14px;
+  height: 1px;
+  background: $line-strong;
+}
+
+// Numbered list with display-serif index
+.reveal ol.steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  counter-reset: step;
+}
+
+.reveal ol.steps > li {
+  counter-increment: step;
+  border-top: 1px solid $line-strong;
+  padding-top: 18px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: $text-muted;
+  position: relative;
+}
+
+.reveal ol.steps > li::before {
+  content: counter(step, decimal-leading-zero);
+  display: block;
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: $text-faint;
+  margin-bottom: 12px;
+  font-feature-settings: "tnum" 1;
+}
+
+.reveal ol.steps > li strong {
+  display: block;
+  font-family: $font-display;
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  color: $text;
+  margin-bottom: 8px;
+}
+
+// Comparison cells — side-by-side ratio reveal
+.reveal .compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  border-top: 1px solid $line-strong;
+  border-bottom: 1px solid $line;
+}
+
+.reveal .compare > div {
+  padding: 32px 32px 28px 0;
+}
+
+.reveal .compare > div + div {
+  border-left: 1px solid $line;
+  padding-left: 32px;
+}
+
+.reveal .compare .compare-label {
+  font-family: $font-sans;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $text-muted;
+  margin-bottom: 14px;
+}
+
+.reveal .compare .compare-value {
+  font-family: $font-display;
+  font-weight: 500;
+  font-size: clamp(72px, 9vw, 120px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: $text;
+}
+
+.reveal .compare .compare-value.highlight {
+  font-style: italic;
+  color: $emerald-deep;
+  font-weight: 400;
+}
+
+.reveal .compare .compare-note {
+  font-size: 13px;
+  color: $text-faint;
+  margin-top: 10px;
+  letter-spacing: 0;
+}
+
+// Tag / chip — civic pill, not rounded
+.reveal .tag {
+  display: inline-block;
+  font-family: $font-sans;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $text-muted;
+  border: 1px solid $line-strong;
+  padding: 6px 10px;
+  border-radius: 2px;
+}
+
+.reveal .tag.tag-emerald {
+  color: $emerald-deep;
+  border-color: $emerald-deep;
+}
+
+// Live pulse dot — civic register, no neon
+.reveal .live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: $emerald;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+// Receipt block — like the disclosure receipt on the landing
+.reveal .receipt {
+  border: 1px solid $line-strong;
+  border-radius: 4px;
+  background: $surface;
+  overflow: hidden;
+  max-width: 520px;
+}
+
+.reveal .receipt-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid $line;
+  background: $surface-2;
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: $text-faint;
+}
+
+.reveal .receipt-body {
+  padding: 22px 24px 20px 24px;
+}
+
+.reveal .receipt-body p {
+  font-family: $font-display;
+  font-size: 17px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.reveal .receipt-body p + p {
+  margin-top: 10px;
+  color: $text-muted;
+  font-size: 15px;
+}
+
+.reveal .receipt-foot {
+  border-top: 1px solid $line;
+  padding: 10px 16px;
+  font-family: $font-mono;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: $text-faint;
+  display: flex;
+  gap: 12px;
+}
+
+// Two-sided platform diagram — typographic only
+.reveal .platform {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 24px;
+  align-items: stretch;
+  border-top: 1px solid $line-strong;
+  border-bottom: 1px solid $line-strong;
+  padding: 32px 0;
+}
+
+.reveal .platform .side {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.reveal .platform .side .side-label {
+  font-family: $font-sans;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $text-muted;
+}
+
+.reveal .platform .side .side-title {
+  font-family: $font-display;
+  font-size: 32px;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: $text;
+  font-weight: 500;
+}
+
+.reveal .platform .side .side-list {
+  font-size: 16px;
+  line-height: 1.65;
+  color: $text-muted;
+}
+
+.reveal .platform .midline {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reveal .platform .midline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: $line-strong;
+}
+
+.reveal .platform .midline span {
+  background: $surface;
+  font-family: $font-display;
+  font-style: italic;
+  font-size: 22px;
+  color: $emerald-deep;
+  padding: 6px 0;
+  z-index: 1;
+}
+
+// Win-row — four wins
+.reveal .wins {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  border-top: 1px solid $line-strong;
+  padding-top: 24px;
+}
+
+.reveal .wins .win {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reveal .wins .win-label {
+  font-family: $font-sans;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $text-faint;
+}
+
+.reveal .wins .win-title {
+  font-family: $font-display;
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: $text;
+  font-weight: 500;
+}
+
+.reveal .wins .win-body {
+  font-size: 14px;
+  line-height: 1.5;
+  color: $text-muted;
+}
+
+// Reveal navigation — minimize, civic
+.reveal .controls {
+  color: $text-faint;
+}
+
+.reveal .progress {
+  color: $emerald-deep;
+  height: 2px;
+}
+
+.reveal .slide-number {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-faint;
+  background: transparent;
+  letter-spacing: 0.08em;
+}
+
+// Hide reveal logo if any default chrome
+.reveal-viewport { background: $surface; }
+
+// Page background
+.reveal { background: $surface; }
+
+// Title slide override
+.reveal .title-slide h1 {
+  font-size: clamp(96px, 12vw, 200px);
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+  margin-bottom: 24px;
+}
+
+.reveal .title-slide .subtitle {
+  font-family: $font-display;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(28px, 3.4vw, 44px);
+  letter-spacing: -0.02em;
+  color: $emerald-deep;
+  line-height: 1.15;
+  max-width: 24ch;
+  margin: 0;
+}
+
+// Spacer utility
+.reveal .mt-1 { margin-top: 8px; }
+.reveal .mt-2 { margin-top: 16px; }
+.reveal .mt-3 { margin-top: 24px; }
+.reveal .mt-4 { margin-top: 36px; }
+.reveal .mt-5 { margin-top: 48px; }
+.reveal .mt-6 { margin-top: 64px; }

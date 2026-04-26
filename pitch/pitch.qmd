@@ -1,0 +1,507 @@
+---
+pagetitle: "Klimaatkracht — pitch"
+format:
+  revealjs:
+    theme: theme.scss
+    slide-level: 0
+    slide-number: c/t
+    progress: true
+    controls: false
+    transition: none
+    background-transition: none
+    history: true
+    width: 1440
+    height: 900
+    margin: 0
+    center: false
+    chalkboard: false
+    menu: false
+    hash: true
+    embed-resources: true
+    include-in-header:
+      - fonts.html
+---
+
+::: {.title-slide}
+
+<div class="slide-num">00 / 14</div>
+
+<div style="margin-top: auto; margin-bottom: auto; padding-top: 8vh;">
+
+<span class="eyebrow"><span class="live-dot"></span> Pitch · April 2026</span>
+
+# Klimaatkracht.
+
+<p class="subtitle">Verified climate contribution from Dutch food rescue.</p>
+
+<div class="mt-6" style="display:flex; gap:14px; flex-wrap:wrap;">
+<span class="tag tag-emerald">FRAME-aligned</span>
+<span class="tag">ESRS E5 + S3</span>
+<span class="tag">BVCM-compliant</span>
+<span class="tag">Voedselbanken Nederland</span>
+</div>
+
+</div>
+
+<div class="slide-foot">
+<span>Klimaatkracht · pitch deck</span>
+<span class="brand">Civic. Audit-grade. Calm.</span>
+</div>
+:::
+
+---
+
+<div class="slide-num">01 / 14 · The market</div>
+
+<span class="eyebrow">The Netherlands, today</span>
+
+<h2>180 food banks. <em>155,000 lives.</em></h2>
+
+<div class="grid-2 mt-5">
+
+<div>
+<p class="lede">Across the Netherlands, ~180 food banks redistribute surplus food to households who can't afford their weekly groceries.</p>
+<p class="muted">In 2025 they served roughly 155,000 individuals. Quietly, they are also one of society's most efficient climate operators — and almost nobody is counting.</p>
+</div>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:36px;">
+
+<div class="stat">
+<span class="stat-label">Food banks (NL)</span>
+<span class="stat-value tabular">~180</span>
+<span class="stat-foot">federated under Voedselbanken Nederland</span>
+</div>
+
+<div class="stat">
+<span class="stat-label">Individuals served · 2025</span>
+<span class="stat-value tabular">155,000</span>
+<span class="stat-foot">across 11 provinces</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="slide-foot">
+<span>Source · Voedselbanken Nederland · jaarverslag 2025</span>
+<span class="brand">Klimaatkracht</span>
+</div>
+
+---
+
+<div class="slide-num">02 / 14 · The ratio</div>
+
+<span class="eyebrow">Climate leverage · food rescue</span>
+
+<div class="grid-2 stack-end">
+
+<div>
+<p class="figure-xl tabular"><em>32:1</em></p>
+<p class="muted mt-3" style="max-width:38ch;">For every <strong>1 tonne</strong> of CO₂ emitted in transport and refrigeration, food banks prevent <strong>32 tonnes</strong> from reaching landfill, where rotting food generates methane.</p>
+</div>
+
+<div>
+<h2 style="font-size: 56px; max-width: 14ch;">The most efficient climate operator nobody is counting.</h2>
+<p class="faint mt-3">Carbon ratio observed in the Spanish food bank network, 2024 — the closest comparable European pilot to the Dutch operational profile.</p>
+</div>
+
+</div>
+
+<div class="slide-foot">
+<span>Source · FESBAL Spain · climate impact study 2024</span>
+<span class="brand">Klimaatkracht</span>
+</div>
+
+---
+
+<div class="slide-num">03 / 14 · The comparison</div>
+
+<span class="eyebrow">Versus the rest of the offset market</span>
+
+<h2>More climate work per euro than <em>forestry offsets.</em></h2>
+
+<div class="compare mt-5">
+
+<div>
+<div class="compare-label">Forestry offsets · market leader</div>
+<div class="compare-value tabular">5:1</div>
+<div class="compare-note">Best-case: 1 tonne emitted in monitoring &amp; operations prevents up to 5 tonnes via reforestation. Often closer to 1:1 in practice; permanence and double-counting risks remain disputed.</div>
+</div>
+
+<div>
+<div class="compare-label">Food rescue · Spanish pilot</div>
+<div class="compare-value tabular highlight"><em>32:1</em></div>
+<div class="compare-note">1 tonne emitted in transport &amp; storage prevents 32 tonnes of methane-equivalent emissions from landfilled food. Immediate, additional, measurable.</div>
+</div>
+
+</div>
+
+<p class="faint mt-3" style="max-width: 70ch;">Forestry-based offsets dominate the corporate compliance market. Food rescue out-leverages them by ~6× and ships in weeks, not decades.</p>
+
+<div class="slide-foot">
+<span>Sources · FESBAL 2024 · Verra ratings · ICVCM Core Carbon Principles</span>
+<span class="brand">Klimaatkracht</span>
+</div>
+
+---
+
+<div class="slide-num">04 / 14 · The catch (i)</div>
+
+<span class="eyebrow">But there is a catch</span>
+
+<div class="grid-2 stack-end">
+
+<div>
+<p class="figure-xl tabular">15<em>%</em></p>
+<p class="muted mt-3" style="max-width:42ch;">The 155,000 individuals served represent only <strong>15% of the population eligible for nutritional support</strong> in the Netherlands.</p>
+</div>
+
+<div>
+<h2 style="font-size: 56px; max-width: 14ch;">155k served. <em>~1M eligible.</em></h2>
+<p class="muted mt-3" style="max-width:46ch;">The other 85% — roughly <strong>880,000 people</strong> — are blocked by chronic understaffing and chronic underfunding. Demand is rising; capacity is not.</p>
+</div>
+
+</div>
+
+<div class="slide-foot">
+<span>Source · CBS armoede &amp; voedselonzekerheid 2025 · VBN intake data</span>
+<span class="brand">Klimaatkracht</span>
+</div>
+
+---
+
+<div class="slide-num">05 / 14 · The catch (ii)</div>
+
+<span class="eyebrow">And there is a second catch</span>
+
+<h2><em>Zero of 180.</em></h2>
+
+<div class="grid-2 mt-4">
+
+<div>
+<p class="lede">None of the 180 food banks in the Netherlands currently has the infrastructure or the software to report on the sustainability impact of the food they redistribute.</p>
+<p class="muted mt-3">Not Voedselbank Rotterdam. Not the federation. Not anyone. The data is sitting in spreadsheets, intake logs, and PDF annual reports — never quantified, never disclosed.</p>
+</div>
+
+<div>
+<ul style="font-size:18px;">
+<li>No standardized kg-tracking</li>
+<li>No category-level emission factors</li>
+<li>No counterfactual baseline</li>
+<li>No disclosure-ready output</li>
+<li>No reporting software</li>
+<li>No funding to build any of it</li>
+</ul>
+</div>
+
+</div>
+
+<div class="slide-foot">
+<span>Source · Klimaatkracht network audit, Q1 2026 · 6 regional operators interviewed</span>
+<span class="brand">Klimaatkracht</span>
+</div>
+
+---
+
+<div class="slide-num">06 / 14 · The thesis</div>
+
+<span class="eyebrow">So we built a platform</span>
+
+<h1 style="font-size: clamp(64px, 8vw, 112px); max-width: 22ch;">Measure the climate impact of Dutch food banks. Turn it into <em>corporate funding.</em></h1>
+
+<p class="muted mt-5" style="max-width:60ch; font-size:22px;">A two-sided platform. Foodbank operations on one side. CSRD-regulated corporates on the other. We are the audit trail in between.</p>
+
+<div class="slide-foot">
+<span>Klimaatkracht · two-sided platform</span>
+<span class="brand">Civic. Audit-grade. Calm.</span>
+</div>
+
+---
+
+<div class="slide-num">07 / 14 · The platform</div>
+
+<span class="eyebrow">How it fits together</span>
+
+<div class="platform mt-3">
+
+<div class="side">
+<span class="side-label">Side A · supply</span>
+<span class="side-title">~180 Dutch food banks</span>
+<div class="side-list">
+Operational data: kg / week, food categories, households served, families assisted. Uploaded as annual reports. Extracted into typed measurements with provenance.
+</div>
+<div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
+<span class="tag">kg</span>
+<span class="tag">categories</span>
+<span class="tag">households</span>
+<span class="tag">demographics</span>
+</div>
+</div>
+
+<div class="midline"><span>↔</span></div>
+
+<div class="side">
+<span class="side-label">Side B · demand</span>
+<span class="side-title">~50,000 EU corporates</span>
+<div class="side-list">
+Required by law to file CSRD / ESRS sustainability reports. Need credible, audit-grade <em>contribution</em> claims for emissions beyond their value chain. Score into ESG rating.
+</div>
+<div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
+<span class="tag">CSRD</span>
+<span class="tag">ESRS E5</span>
+<span class="tag">BVCM</span>
+<span class="tag">ESG score</span>
+</div>
+</div>
+
+</div>
+
+<p class="faint mt-3">Klimaatkracht is the FRAME-grade measurement layer and the disclosure pipeline that turns one side into funding for the other.</p>
+
+<div class="slide-foot">
+<span>Two-sided platform · supply &amp; demand</span>
+<span class="brand">Klimaatkracht</span>
+</div>
+
+---
+
+<div class="slide-num">08 / 14 · Side A — food banks</div>
+
+<span class="eyebrow">For food banks</span>
+
+<h2>Operational data <em>becomes climate data.</em></h2>
+
+<div class="grid-2 mt-5">
+
+<div>
+<p class="lede">We collect what every food bank already records — kg per week, food categories, households served — and turn it into auditable CO₂-equivalent estimates.</p>
+<p class="muted mt-3">Annual report PDFs in. Structured measurements with provenance out. Each figure tagged extracted, inferred, or computed. No new software for the foodbank to learn.</p>
+</div>
+
+<ol class="steps" style="grid-template-columns: 1fr;">
+<li><strong>Ingest</strong>The food bank uploads its annual report. Claude reads it section by section.</li>
+<li><strong>Structure</strong>Volumes, categories, demographics extracted into typed measurements with citations.</li>
+<li><strong>Compute</strong>FRAME multiplies each kg by its category emission factor and the NL counterfactual.</li>
+</ol>
+
+</div>
+
+<div class="slide-foot">
+<span>Pipeline · src/backend/preprocessing</span>
+<span class="brand">Klimaatkracht</span>
+</div>
+
+---
+
+<div class="slide-num">09 / 14 · FRAME</div>
+
+<span class="eyebrow">Methodology · soon Gold-Certified</span>
+
+<div class="grid-2 stack-end">
+
+<div>
+<p class="figure-lg">FRAME.</p>
+<p class="display-italic mt-2" style="font-size:34px; max-width:20ch;">Food Recovery to Avoid Methane Emissions.</p>
+</div>
+
+<div>
+<h3 style="max-width:18ch;">Built by the Global FoodBanking Network. The closest thing food rescue has to a standard.</h3>
+<p class="muted mt-3" style="max-width:44ch;">FRAME is the methodology accredited Gold-tier by the standards bodies reviewing food-rescue carbon claims. It is what makes a contribution disclosure defensible to a Big-4 auditor.</p>
+<div class="mt-4" style="display:flex; gap:8px; flex-wrap:wrap;">
+<span class="tag tag-emerald">Global FoodBanking Network</span>
+<span class="tag">Gold-Certified · pending</span>
+<span class="tag">Peer-reviewed</span>
+</div>
+</div>
+
+</div>
+
+<div class="slide-foot">
+<span>Source · Global FoodBanking Network · FRAME methodology v2.1 (2024)</span>
+<span class="brand">Klimaatkracht</span>
+</div>
+
+---
+
+<div class="slide-num">10 / 14 · Side B — corporates</div>
+
+<span class="eyebrow">For corporations</span>
+
+<h2>The CSRD says: <em>report your contribution.</em></h2>
+
+<div class="grid-2 mt-5">
+
+<div>
+<p class="lede">~50,000 large EU corporates are required by law to file annual sustainability reports under the European Sustainability Reporting Standards.</p>
+<p class="muted mt-3">Two halves to every report. One: the company's effort to reduce its own footprint inside its value chain. Two: its contribution to a net-zero world <em>beyond</em> its value chain — the half nobody knows how to fill.</p>
+</div>
+
+<div>
+<ul>
+<li><strong>Internal reductions</strong> — scope 1, 2, 3 across the value chain</li>
+<li><strong>External contributions</strong> — BVCM-aligned claims beyond the value chain</li>
+<li><strong>Both</strong> feed into the company's annual ESG score</li>
+</ul>
+<p class="faint mt-4" style="max-width:42ch;">CSRD: Corporate Sustainability Reporting Directive. ESRS: European Sustainability Reporting Standards. BVCM: Beyond Value Chain Mitigation.</p>
+</div>
+
+</div>
+
+<div class="slide-foot">
+<span>Source · EFRAG · ESRS E5 · EU Code of Conduct on Climate Contribution Claims (May 2025)</span>
+<span class="brand">Klimaatkracht</span>
+</div>
+
+---
+
+<div class="slide-num">11 / 14 · Why ESG matters</div>
+
+<span class="eyebrow">ESG = real money</span>
+
+<h2>The score moves <em>three levers</em> at once.</h2>
+
+<div class="grid-3 mt-5">
+
+<div class="stat">
+<span class="stat-label">01 · Investors</span>
+<span class="stat-value">Capital access</span>
+<span class="stat-foot">ESG-linked funds and pension capital allocate by score. Better score, lower cost of equity.</span>
+</div>
+
+<div class="stat">
+<span class="stat-label">02 · Banks</span>
+<span class="stat-value">Credit rates</span>
+<span class="stat-foot">Sustainability-linked loans tie interest rates directly to ESG performance. Bps off the spread, every year.</span>
+</div>
+
+<div class="stat">
+<span class="stat-label">03 · Brand</span>
+<span class="stat-value">Trust premium</span>
+<span class="stat-foot">Audit-grade contribution claims are now scrutinized by regulators and journalists. Receipts beat slogans.</span>
+</div>
+
+</div>
+
+<p class="faint mt-5">Sustainability reporting stopped being a CSR exercise. It is now a finance lever. Klimaatkracht ships the receipts.</p>
+
+<div class="slide-foot">
+<span>Source · MSCI ESG Ratings methodology · ECB sustainability-linked loan study 2024</span>
+<span class="brand">Klimaatkracht</span>
+</div>
+
+---
+
+<div class="slide-num">12 / 14 · The product</div>
+
+<span class="eyebrow">The artifact corporates buy</span>
+
+<div class="grid-2-even" style="grid-template-columns: 1fr 1.1fr;">
+
+<div>
+<h2>Recurring contribution. <em>Disclosure-ready report.</em></h2>
+<p class="lede mt-4">A simple pipeline: corporates commit a quarterly sum into the Dutch food bank network. The allocation engine weights the contribution across top-N banks by FRAME-computed CO₂e. Claude composes the ESRS E5 + S3 disclosure.</p>
+<p class="muted mt-3">Every figure cites a public source. Provenance ledger included. Cleared for the annual report.</p>
+</div>
+
+<div class="receipt">
+<div class="receipt-head">
+<span>HEINEKEN N.V. · Q1 2026 · CONTRIBUTION DISCLOSURE</span>
+<span>P. 14 / 22</span>
+</div>
+<div class="receipt-body">
+<span class="eyebrow" style="font-size:11px; margin-bottom:8px;">ESRS E5-5 · §3</span>
+<p>During Q1 2026, Heineken N.V. contributed to the avoidance of <strong>412 tCO₂e</strong> through allocated food-rescue operations across <strong>8 Dutch food banks</strong>.</p>
+<p>Methodology · FRAME (GFN). Counterfactual · incineration with energy recovery, RIVM Afvalmonitor 2024. Provenance · 87% extracted, 9% inferred, 4% computed.</p>
+</div>
+<div class="receipt-foot">
+<span>Generated by Claude · 2026-04-22 14:18 CET</span>
+<span>SHA-256 · 9f2a…b1c4</span>
+</div>
+</div>
+
+</div>
+
+<div class="slide-foot">
+<span>Sample artifact · BVCM-compliant contribution disclosure</span>
+<span class="brand">Klimaatkracht</span>
+</div>
+
+---
+
+<div class="slide-num">13 / 14 · The win-win</div>
+
+<span class="eyebrow">Everybody wins</span>
+
+<h2>Four ledgers. <em>One transaction.</em></h2>
+
+<div class="wins mt-5">
+
+<div class="win">
+<span class="win-label">For corporates</span>
+<span class="win-title">Better rates, audit-grade receipts.</span>
+<span class="win-body">A CSRD-aligned BVCM claim corporates can defend. Lower cost of capital. Stronger ESG score. Files into the annual report on day one.</span>
+</div>
+
+<div class="win">
+<span class="win-label">For food banks</span>
+<span class="win-title">A new revenue stream.</span>
+<span class="win-body">Predictable, recurring quarterly funding. No new tools to learn. The federation gets infrastructure it has never had the budget to build.</span>
+</div>
+
+<div class="win">
+<span class="win-label">For people</span>
+<span class="win-title">More food, more often.</span>
+<span class="win-body">Funding flows into capacity — drivers, refrigeration, shifts. The 85% gap closes. More of the eligible population actually gets fed.</span>
+</div>
+
+<div class="win">
+<span class="win-label">For us</span>
+<span class="win-title">A percentage on every transaction.</span>
+<span class="win-body">A small platform fee on each contribution. Aligned incentives: we earn when food banks get funded and corporates get reports they can defend.</span>
+</div>
+
+</div>
+
+<div class="slide-foot">
+<span>Aligned incentives across all four sides of the table</span>
+<span class="brand">Klimaatkracht</span>
+</div>
+
+---
+
+::: {.title-slide}
+
+<div class="slide-num">14 / 14</div>
+
+<div style="margin-top: auto; margin-bottom: auto; padding-top: 6vh;">
+
+<span class="eyebrow"><span class="live-dot"></span> Thank you</span>
+
+<h1 style="font-size: clamp(120px, 14vw, 220px);">Klimaatkracht.</h1>
+
+<p class="subtitle">Climate contribution, not offsetting. Civic, audit-grade, calm.</p>
+
+<div class="mt-6" style="display:flex; gap:48px; flex-wrap:wrap; align-items:flex-end;">
+
+<div class="stat">
+<span class="stat-label">Pilot banks</span>
+<span class="stat-value tabular">12</span>
+</div>
+<div class="stat">
+<span class="stat-label">Climate contribution / yr</span>
+<span class="stat-value tabular">7,718 tCO₂e</span>
+</div>
+<div class="stat">
+<span class="stat-label">Pre-launch committed</span>
+<span class="stat-value tabular">€425k</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="slide-foot">
+<span>klimaatkracht.nl · ronkremer8@gmail.com</span>
+<span class="brand">Built on FRAME · aligned to ESRS</span>
+</div>
+:::

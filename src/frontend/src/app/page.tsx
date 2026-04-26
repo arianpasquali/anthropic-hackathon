@@ -4,6 +4,7 @@ import { api } from "@/lib/api"
 import { NLProvinceFoodbankHeatMapDynamic } from "@/components/map/NLProvinceFoodbankHeatMapDynamic"
 import { ProvinceFoodbankList } from "@/components/map/ProvinceFoodbankList"
 import { HeroParallax } from "@/components/marketing/HeroParallax"
+import { LogoCarousel } from "@/components/marketing/LogoCarousel"
 import { PlatformSpread } from "@/components/marketing/PlatformSpread"
 import { Badge } from "@/components/ui/Badge"
 import { formatNumber, formatTCO2e } from "@/lib/format"
@@ -143,17 +144,8 @@ export default async function Home() {
                   </li>
                 ))}
               </ul>
-              <p className="eyebrow text-text-faint mb-3">Corporate commitments</p>
-              <ul className="flex flex-wrap gap-x-7 gap-y-3">
-                {["Heineken", "Philips", "ASML", "Albert Heijn", "DSM-Firmenich"].map((name) => (
-                  <li
-                    key={name}
-                    className="display text-[15px] text-text-muted tracking-tight"
-                  >
-                    {name}
-                  </li>
-                ))}
-              </ul>
+              <p className="eyebrow text-text-faint mb-4">Corporate commitments</p>
+              <LogoCarousel />
               <p className="text-[11px] text-text-faint mt-5 italic">
                 Letters of intent · contracts pending Sunday demo
               </p>
