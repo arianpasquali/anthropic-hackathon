@@ -128,7 +128,7 @@ export default async function Home() {
       <PlatformSpread />
 
       {/* Audience split — narrative trust */}
-      <section className="border-y border-line bg-surface-2">
+      <section className="border-y border-line">
         <div className="mx-auto max-w-[1280px] px-6 py-20 grid md:grid-cols-2 gap-x-12 gap-y-10">
           <Pitch
             kicker="For corporates"
@@ -150,7 +150,7 @@ export default async function Home() {
       </section>
 
       {/* Disclosure receipt — show, don't tell */}
-      <section className="border-b border-line">
+      <section className="border-b border-line bg-surface-2">
         <div className="mx-auto max-w-[1280px] px-6 py-20 grid lg:grid-cols-[1fr_1.4fr] gap-x-12 gap-y-10 items-start">
           <div>
             <p className="eyebrow">The artifact</p>
@@ -208,33 +208,6 @@ export default async function Home() {
             </div>
           </figure>
         </div>
-      </section>
-
-      {/* How it works */}
-      <section className="mx-auto max-w-[1280px] px-6 py-24">
-        <p className="eyebrow">Pipeline</p>
-        <h2 className="display text-4xl md:text-5xl mt-3 tracking-[-0.025em] max-w-[18ch]">
-          From annual report{" "}
-          <span className="display-italic text-emerald-deep">to audit trail.</span>
-        </h2>
-
-        <ol className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-10">
-          <Step
-            n="01"
-            title="Extract"
-            body="Claude reads each food bank's annual report PDF section-by-section, structuring food volumes, categories, demographics, and operations into typed measurements with provenance."
-          />
-          <Step
-            n="02"
-            title="Compute"
-            body="FRAME multiplies each kg by its category emission factor and the NL counterfactual (0.93, incineration with energy recovery — RIVM Afvalmonitor 2024)."
-          />
-          <Step
-            n="03"
-            title="Disclose"
-            body="On purchase, the allocation engine assigns weights across the top-N banks. Claude composes the ESRS E5 + S3 contribution disclosure, streamed back to the buyer in real time."
-          />
-        </ol>
       </section>
 
       {/* Map */}
@@ -456,12 +429,3 @@ function Pitch({
   )
 }
 
-function Step({ n, title, body }: { n: string; title: string; body: string }) {
-  return (
-    <li className="flex flex-col gap-3 border-t border-line pt-6">
-      <span className="eyebrow tabular">{n}</span>
-      <h3 className="display text-2xl tracking-[-0.02em]">{title}</h3>
-      <p className="text-text-muted text-[14px] leading-relaxed">{body}</p>
-    </li>
-  )
-}

@@ -94,36 +94,8 @@ export default async function MarketplacePage() {
         <MarketplaceFilters packages={packages} />
       </section>
 
-      <section className="mt-24">
-        <div className="flex flex-col md:flex-row md:items-end gap-6 mb-10">
-          <div className="flex-1">
-            <p className="eyebrow">Fund coverage</p>
-            <h2 className="display text-4xl mt-3 tracking-[-0.02em] max-w-[26ch]">
-              Where the funds land.{" "}
-              <span className="display-italic text-emerald-deep">
-                Where the need is.
-              </span>
-            </h2>
-            <p className="mt-4 text-text-muted text-[14px] leading-relaxed max-w-[58ch]">
-              Gemeenten shaded by share of population on a low income for ≥1
-              year (CBS&nbsp;2023). Demo cohort foodbanks overlaid as emerald
-              circles, sized by annual climate-contribution capacity.
-            </p>
-          </div>
-          <dl className="flex gap-10 pb-1 shrink-0">
-            <div>
-              <dt className="eyebrow">Annual baseline</dt>
-              <dd className="display tabular text-3xl mt-1">{formatTCO2e(totalCo2)}</dd>
-            </div>
-            <div>
-              <dt className="eyebrow">Rescued / yr</dt>
-              <dd className="display tabular text-3xl mt-1">
-                {formatNumber(totalKg / 1_000_000, { maximumFractionDigits: 1 })}M kg
-              </dd>
-            </div>
-          </dl>
-        </div>
-        <div className="border border-line bg-surface rounded-[var(--radius-lg)] p-4">
+      <section className="mt-24 grid lg:grid-cols-[1.6fr_1fr] gap-x-10 gap-y-8 items-start">
+        <div className="border border-line bg-surface rounded-[var(--radius-lg)] p-3 order-2 lg:order-1">
           <CoverageMap
             width={coverage.svg.width}
             height={coverage.svg.height}
@@ -131,13 +103,54 @@ export default async function MarketplacePage() {
             banks={coverage.banks}
           />
         </div>
-        <p className="mt-6 text-[13px] text-text-faint leading-relaxed">
-          Detailed gemeente-level analysis + insight columns + Heerlen
-          expansion narrative on{" "}
-          <Link href="/coverage" className="text-emerald hover:underline">
-            /coverage →
-          </Link>
-        </p>
+        <aside className="order-1 lg:order-2 lg:sticky lg:top-20 flex flex-col gap-6">
+          <div>
+            <p className="eyebrow">Fund coverage</p>
+            <h2 className="display text-3xl md:text-4xl mt-3 tracking-[-0.02em]">
+              Where the funds land.{" "}
+              <span className="display-italic text-emerald-deep">
+                Where the need is.
+              </span>
+            </h2>
+            <p className="mt-4 text-text-muted text-[14px] leading-relaxed">
+              Gemeenten shaded by share of population on a low income for ≥1
+              year (CBS&nbsp;2023). Demo cohort foodbanks overlaid as emerald
+              circles, sized by annual climate-contribution capacity.
+            </p>
+          </div>
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line pt-5">
+            <div>
+              <dt className="eyebrow">Annual baseline</dt>
+              <dd className="display tabular text-2xl mt-1">{formatTCO2e(totalCo2)}</dd>
+            </div>
+            <div>
+              <dt className="eyebrow">Rescued / yr</dt>
+              <dd className="display tabular text-2xl mt-1">
+                {formatNumber(totalKg / 1_000_000, { maximumFractionDigits: 1 })}M kg
+              </dd>
+            </div>
+            <div>
+              <dt className="eyebrow">Foodbanks</dt>
+              <dd className="display tabular text-2xl mt-1">{coverage.banks.length}</dd>
+            </div>
+            <div>
+              <dt className="eyebrow">Gemeenten covered</dt>
+              <dd className="display tabular text-2xl mt-1">{coverage.gemeenten.length}</dd>
+            </div>
+          </dl>
+          <div className="border-t border-line pt-5">
+            <p className="text-[13px] text-text-muted leading-relaxed">
+              Detailed gemeente-level analysis + insight columns + Heerlen
+              expansion narrative on the full coverage page.
+            </p>
+            <Link
+              href="/coverage"
+              className="mt-4 inline-flex items-center gap-2 text-[13.5px] font-medium text-emerald hover:underline"
+            >
+              Open full coverage →
+            </Link>
+          </div>
+        </aside>
       </section>
 
       <section className="mt-24 grid md:grid-cols-2 gap-x-12 gap-y-6 border-t border-line pt-10">
