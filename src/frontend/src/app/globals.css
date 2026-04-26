@@ -426,3 +426,62 @@ body {
 /* Anti-AI-slop guards (informational; enforced by code review) */
 /* NEVER use border-left/right > 1px as a colored stripe */
 /* NEVER use background-clip: text with a gradient */
+
+/* ── Print / PDF ──────────────────────────────────────────────────────── */
+@media print {
+  .no-print { display: none !important; }
+
+  nav, header nav, footer nav { display: none !important; }
+
+  .report-root {
+    max-width: 100% !important;
+    padding: 0 !important;
+    font-size: 11pt;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  a { color: inherit !important; text-decoration: none !important; }
+
+  table { page-break-inside: avoid; }
+  section { page-break-inside: avoid; }
+
+  pre {
+    white-space: pre-wrap;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+
+  h1, h2 { page-break-after: avoid; }
+
+  .display {
+    font-family: Georgia, "Times New Roman", serif;
+  }
+
+  /* Hide interactive controls */
+  button, [role="button"] { display: none !important; }
+
+  /* Ensure borders print */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* KPI strip — stack on print */
+  .grid { break-inside: avoid; }
+
+  /* Allocation table */
+  thead { display: table-header-group; }
+  tfoot { display: table-footer-group; }
+
+  tr { page-break-inside: avoid; }
+
+  /* Report header */
+  header.pb-8 { padding-bottom: 1.5rem !important; }
+
+  /* Margins */
+  @page {
+    margin: 2cm 2.5cm;
+    size: A4;
+  }
+}

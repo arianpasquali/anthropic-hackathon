@@ -141,7 +141,7 @@ const SECTIONS: Section[] = [
   },
   {
     kicker: "03",
-    title: "Marketplace mechanics",
+    title: "Fund mechanics",
     intro: "How packages are priced, capped, and routed.",
     items: [
       {

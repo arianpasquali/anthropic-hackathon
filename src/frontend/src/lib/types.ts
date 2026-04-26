@@ -1,3 +1,29 @@
+export interface ReportCatRow {
+  category: string; kg_attr: number; tco2e_attr: number; ef: number; source: string
+}
+export interface ReportAllocation {
+  name: string; city: string; slug: string; year: number | string
+  weight_pct: number; amount_eur: number; bank_co2e_t: number
+  attributed_co2e_t: number; attribution_share_pct: number
+  households: number | null; individuals: number | null
+  kg_rescued_attr: number | null; cat_rows: ReportCatRow[]; methodology: string
+}
+export interface ReportData {
+  lang: "nl" | "en"
+  meta: { org: string; package_name: string; impact_profile: string; amount_eur: number; sub_id: string; period: number; generated: string }
+  kpis: { total_co2e_t: number; investment_eur: number; eur_per_tco2e: number; households_per_week: number; individuals: number }
+  summary: { body_html: string; disclaimer_html: string }
+  methodology: { body1_html: string; body2_html: string }
+  allocations: ReportAllocation[]
+  data_gaps: string[]
+  calc_trail: string
+  emission_factors: { category: string; ef: number; source: string }[]
+  nl_cf: number
+  disclaimers: { title: string; body: string }[]
+  recommendations: { title: string; body: string }[]
+  texts: Record<string, string | string[]>
+}
+
 export type ImpactProfile = "co2_focus" | "social_focus" | "balanced"
 export type SubscriptionStatus = "pending" | "paid" | "failed" | "refunded"
 export type Source =

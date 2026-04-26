@@ -17,6 +17,7 @@ from src.backend.models import (
 from src.backend.models.foodbank import FoodbankLocation
 from src.backend.models.ingestion import IngestionRecord
 from src.backend.models.frame import FrameResult
+from src.backend.models.user import User
 
 app = typer.Typer(name="db", help="Inspect database contents")
 console = Console()
@@ -498,6 +499,29 @@ def locations() -> None:
         else:
             t.add_row(fb.city, fb.name, "[red]—[/red]", "[red]—[/red]", "[red]missing[/red]")
 
+    console.print(t)
+
+
+@app.command()
+def users() -> None:
+    """List all registered users (email, role, org, created_at)."""
+    with Session(engine) as s:
+        all_users = s.exec(select(User)).all()
+
+    t = Table(title=f"Users ({len(all_users)})", box=box.SIMPLE_HEAD)
+    t.add_column("Email", style="bold")
+    t.add_column("Role")
+    t.add_column("Org")
+    t.add_column("Created", style="dim")
+
+    for u in sorted(all_users, key=lambda x: x.created_at):
+        role_color = "cyan" if u.role.value == "admin" else "white"
+        t.add_row(
+            u.email,
+            Text(u.role.value, style=role_color),
+            u.org_name or "—",
+            u.created_at.strftime("%Y-%m-%d %H:%M"),
+        )
     console.print(t)
 
 

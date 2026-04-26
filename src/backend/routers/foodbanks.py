@@ -18,7 +18,7 @@ from sqlmodel import Session, select
 from src.backend.database import get_session
 from src.backend.models.foodbank import AnnualReport, Foodbank
 from src.backend.models.frame import FrameResult
-from src.backend.models.measurements import FoodCategories, PeopleServed
+from src.backend.models.measurements import FoodCategories, FoodVolume, PeopleServed
 
 router = APIRouter(prefix="/foodbanks", tags=["foodbanks"])
 
@@ -169,12 +169,14 @@ def _build_response(fb: Foodbank, session: Session) -> FoodbankResponse:
 
     frame: Optional[FrameResult] = None
     cats: Optional[FoodCategories] = None
+    fv: Optional[FoodVolume] = None
     people: Optional[PeopleServed] = None
     annual_kg = None
 
     if report:
         frame = session.exec(select(FrameResult).where(FrameResult.report_id == report.id)).first()
         cats = session.exec(select(FoodCategories).where(FoodCategories.report_id == report.id)).first()
+        fv = session.exec(select(FoodVolume).where(FoodVolume.report_id == report.id)).first()
         people = session.exec(select(PeopleServed).where(PeopleServed.report_id == report.id)).first()
         if cats:
             annual_kg = sum(
@@ -183,6 +185,8 @@ def _build_response(fb: Foodbank, session: Session) -> FoodbankResponse:
                     cats.kg_bread_bakery, cats.kg_meat_fish, cats.kg_prepared,
                 ) if v
             ) or None
+        if not annual_kg and fv:
+            annual_kg = fv.kg_received_total or None
 
     weighted_ef = None
     if frame and annual_kg:

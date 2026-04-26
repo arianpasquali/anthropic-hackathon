@@ -45,9 +45,7 @@ export default async function CorporateDashboardPage() {
 
   const banksByName = new Map(allBanks.map((b) => [b.name, b]))
 
-  // Quarterly forecast totals (for the timeline header)
   const realisedTotalT = timeline.filter((p) => p.realised).reduce((s, p) => s + p.co2e_kg, 0) / 1000
-  const forecastTotalT = timeline.filter((p) => !p.realised).reduce((s, p) => s + p.co2e_kg, 0) / 1000
 
   const periodTco2e = (metrics?.period_co2e_kg ?? 0) / 1000
   const cumulativeTco2e = (metrics?.cumulative_co2e_kg ?? 0) / 1000
@@ -123,17 +121,9 @@ export default async function CorporateDashboardPage() {
                 <span className="display-italic text-emerald-deep">forward only.</span>
               </h2>
             </div>
-            <div className="grid grid-cols-2 gap-x-8 text-right">
-              <div>
-                <p className="eyebrow">Realised</p>
-                <p className="display tabular text-2xl mt-1">{formatTCO2e(realisedTotalT)}</p>
-              </div>
-              <div>
-                <p className="eyebrow">Forecast (8q)</p>
-                <p className="display-italic tabular text-2xl text-emerald-deep mt-1">
-                  +{formatTCO2e(forecastTotalT)}
-                </p>
-              </div>
+            <div className="text-right">
+              <p className="eyebrow">Realised</p>
+              <p className="display tabular text-2xl mt-1">{formatTCO2e(realisedTotalT)}</p>
             </div>
           </div>
           <p className="text-text-muted text-[14px] mt-4 max-w-[68ch] leading-relaxed">

@@ -1,7 +1,8 @@
 import uuid
 from datetime import date
+from typing import Literal
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import FileResponse, HTMLResponse, StreamingResponse
 from sqlalchemy import func
 from sqlmodel import Session, select
@@ -17,6 +18,127 @@ from src.backend.services.auth import get_current_user
 from src.backend.services.report import get_report_path, stream_report
 
 router = APIRouter(prefix="/report", tags=["report"])
+
+_T: dict[str, dict] = {
+    "nl": {
+        "kpi_co2e": "CO₂e vermeden",
+        "kpi_investment": "Investering",
+        "kpi_economics": "Kostenefficiëntie",
+        "kpi_households": "Huishoudens",
+        "alloc_h2": "Allocatie",
+        "alloc_sub": "Gewogen op basis van {profile}-profiel · FRAME-NL v2.0",
+        "cat_h2": "Categorieën",
+        "cat_sub": "CO₂e-attributie per voedselcategorie",
+        "appendix_h2": "Bijlage",
+        "trail_h3": "Berekeningstabel",
+        "ef_h3": "Emissiefactoren",
+        "cf_h3": "Counterfactual",
+        "cf_body": "NL verbrandingsroute met energieterugwinning (CF={cf}, RIVM Afvalmonitor 2024 + CBS Waste Statistics)",
+        "disc_h2": "Disclaimers",
+        "rec_h2": "Aanbevelingen",
+        "rec_sub": "Stappen om dit rapport te versterken voor formele CSRD-opname",
+        "col_bank": "Voedselbank",
+        "col_alloc": "Allocatie",
+        "col_amount": "Bedrag",
+        "col_bank_co2e": "CO₂e bank",
+        "col_attr_co2e": "CO₂e attr.",
+        "col_share": "Aandeel",
+        "col_households": "Huish./week",
+        "col_kg": "Kg gered",
+        "col_total": "Totaal",
+        "col_cat": "Categorie",
+        "col_kg_attr": "Kg (attr.)",
+        "col_tco2e_attr": "tCO₂e (attr.)",
+        "col_ef": "EF",
+        "col_source": "Bron",
+        "footer": "Gegenereerd door Climate Harvest B.V. — {date} — FRAME-NL v2.0 · ESRS E5+S3",
+        "data_gap": "{name}: categoriedata wordt verzameld.",
+        "trail_header": "Organisatie: {org}\nFonds: {pkg}\nInvestering: €{amount}\nKostenefficiëntie: €{econ}/tCO₂e",
+        "trail_footer": "Totaal toerekenbare CO₂e: {co2e} tCO₂e\nTotaal huishoudens/week: {households}\nTotaal personen: {individuals}",
+        "trail_template": "• {name} ({city}): bank={bank_co2e} tCO₂e/jr · allocatie={pct}% (€{amount}) · {pct_frac}×{bank_co2e} = {attr_co2e} tCO₂e · {households} huish/wk · {methodology}",
+        "summary_body": "<strong>{org}</strong> heeft in {year} via het Climate Harvest-platform geïnvesteerd in het <strong>{pkg}</strong>-fonds (€{amount}). De gewogen allocatie aan {n_banks} voedselbanken levert een toerekenbare CO₂e-besparing van <strong>{co2e} tCO₂e</strong>.",
+        "summary_disclaimer": "<strong>Verantwoordingsbasis:</strong> Dit betreft een klimaatbijdrage conform ESRS E5 (circulaire economie / voedselverspilling) en ESRS S3 (getroffen gemeenschappen). De vermeden emissies worden apart gerapporteerd per EFRAG E1-4 §AR-58 en worden <em>niet</em> verrekend met de eigen Scope 1/2/3-voetafdruk van {org}.",
+        "methodology_body1": "De FRAME-NL v2.0 methodologie berekent vermeden emissies per voedselcategorie door de geredde massa te vermenigvuldigen met de emissiefactor (kg CO₂e/kg) en de Nederlandse counterfactuele route. Kostenefficiëntie: €{eur_per_tco2e}/tCO₂e.",
+        "methodology_body2": "Counterfactual: NL verbrandingsroute met energieterugwinning (CF={cf}, RIVM Afvalmonitor 2024). Alle meetwaarden zijn voorzien van broncitaties en provenanceregistratie.",
+        "source_ops": "FRAME-NL v2.0 — Global FoodBanking Network / Carbon Trust (2024)",
+        "source_ef": "FAO Food Wastage Footprint (2013); Poore & Nemecek (2018); WRAP Courtauld 2030",
+        "source_cf": "RIVM Afvalmonitor 2024 + CBS Waste Statistics (CF=0.93, incineration with energy recovery)",
+        "source_frame": "EFRAG ESRS E5 (Resource use & circular economy), EFRAG E1-4 §AR-58",
+        "source_esrs": "VCMI Claims Code of Practice; Oxford Principles for Net Zero (contribution-claim track)",
+        "disc": [
+            ("Klimaatbijdrage, geen compensatie", "De vermeden CO₂e-emissies vormen een klimaatbijdrage en worden niet afgetrokken van de eigen Scope 1-, 2- of 3-emissies van de koper."),
+            ("Geen gecertificeerde credits", "Dit rapport is geen VCS-, Gold Standard- of vergelijkbaar gecertificeerd offset-certificaat."),
+            ("Methodologische beperkingen", "Emissiebesparingen zijn berekend conform FRAME-NL v2.0. Externe verificatie door een onafhankelijke auditor is aanbevolen voor formeel CSRD-gebruik."),
+        ],
+        "recs": [
+            ("Externe verificatie", "Laat de FRAME-berekeningen valideren door een onafhankelijke auditor voor gebruik in een formeel CSRD-verslag."),
+            ("Categoriedata verbeteren", "{n} van de {total} partnerbanken rapporteren geen categorieopsplitsing. Vraag uitgesplitste voedselstromen op voor jaar {year}."),
+            ("Sociale impact uitbreiden", "Voeg % kinderen en postcodedata toe voor ESRS S3-rapportage (getroffen gemeenschappen)."),
+            ("Jaar-op-jaar vergelijking", "Stel {year} als basisjaar in. Volg CO₂e-besparing jaarlijks om E5-doelstellingen aan te tonen."),
+            ("Scope-classificatie vastleggen", "Bepaal of vermeden emissies als Scope 3 cat. 1 of cat. 15 worden gerapporteerd — vereist consistente methodologie."),
+            ("Climate Harvest-certificering", "Climate Harvest B.V. kan een ondertekende datakwaliteitsverklaring afgeven per voedselbank."),
+        ],
+    },
+    "en": {
+        "kpi_co2e": "CO₂e avoided",
+        "kpi_investment": "Investment",
+        "kpi_economics": "Cost efficiency",
+        "kpi_households": "Households",
+        "alloc_h2": "Allocation",
+        "alloc_sub": "Weighted by {profile} profile · FRAME-NL v2.0",
+        "cat_h2": "Categories",
+        "cat_sub": "CO₂e attribution by food category",
+        "appendix_h2": "Appendix",
+        "trail_h3": "Calculation trail",
+        "ef_h3": "Emission factors",
+        "cf_h3": "Counterfactual",
+        "cf_body": "NL incineration with energy recovery (CF={cf}, RIVM Afvalmonitor 2024 + CBS Waste Statistics)",
+        "disc_h2": "Disclaimers",
+        "rec_h2": "Recommendations",
+        "rec_sub": "Steps to strengthen this report for formal CSRD inclusion",
+        "col_bank": "Food bank",
+        "col_alloc": "Allocation",
+        "col_amount": "Amount",
+        "col_bank_co2e": "CO₂e bank",
+        "col_attr_co2e": "CO₂e attr.",
+        "col_share": "Share",
+        "col_households": "Households/wk",
+        "col_kg": "Kg rescued",
+        "col_total": "Total",
+        "col_cat": "Category",
+        "col_kg_attr": "Kg (attr.)",
+        "col_tco2e_attr": "tCO₂e (attr.)",
+        "col_ef": "EF",
+        "col_source": "Source",
+        "footer": "Generated by Climate Harvest B.V. — {date} — FRAME-NL v2.0 · ESRS E5+S3",
+        "data_gap": "{name}: category data being collected.",
+        "trail_header": "Organisation: {org}\nFund: {pkg}\nInvestment: €{amount}\nCost efficiency: €{econ}/tCO₂e",
+        "trail_footer": "Total attributed CO₂e: {co2e} tCO₂e\nTotal households/week: {households}\nTotal individuals: {individuals}",
+        "trail_template": "• {name} ({city}): bank={bank_co2e} tCO₂e/yr · allocation={pct}% (€{amount}) · {pct_frac}×{bank_co2e} = {attr_co2e} tCO₂e · {households} hh/wk · {methodology}",
+        "summary_body": "<strong>{org}</strong> invested in {year} via the Climate Harvest platform in the <strong>{pkg}</strong> fund (€{amount}). The weighted allocation to {n_banks} food banks yields an attributed CO₂e saving of <strong>{co2e} tCO₂e</strong>.",
+        "summary_disclaimer": "<strong>Disclosure basis:</strong> This is a climate contribution under ESRS E5 (circular economy / food waste) and ESRS S3 (affected communities). Avoided emissions are reported separately per EFRAG E1-4 §AR-58 and are <em>not</em> netted against {org}'s own Scope 1/2/3 footprint.",
+        "methodology_body1": "The FRAME-NL v2.0 methodology calculates avoided emissions per food category by multiplying rescued mass by the emission factor (kg CO₂e/kg) and the Dutch counterfactual route. Cost efficiency: €{eur_per_tco2e}/tCO₂e.",
+        "methodology_body2": "Counterfactual: NL incineration with energy recovery (CF={cf}, RIVM Afvalmonitor 2024). All measurements carry source citations and provenance records.",
+        "source_ops": "FRAME-NL v2.0 — Global FoodBanking Network / Carbon Trust (2024)",
+        "source_ef": "FAO Food Wastage Footprint (2013); Poore & Nemecek (2018); WRAP Courtauld 2030",
+        "source_cf": "RIVM Afvalmonitor 2024 + CBS Waste Statistics (CF=0.93, incineration with energy recovery)",
+        "source_frame": "EFRAG ESRS E5 (Resource use & circular economy), EFRAG E1-4 §AR-58",
+        "source_esrs": "VCMI Claims Code of Practice; Oxford Principles for Net Zero (contribution-claim track)",
+        "disc": [
+            ("Climate contribution, not an offset", "The avoided CO₂e emissions constitute a climate contribution and are not deducted from the buyer's own Scope 1, 2, or 3 emissions."),
+            ("No certified credits", "This report is not a VCS, Gold Standard, or equivalent certified offset certificate."),
+            ("Methodological limitations", "Emission savings are calculated per FRAME-NL v2.0. Independent third-party verification is recommended for formal CSRD use."),
+        ],
+        "recs": [
+            ("Third-party verification", "Have the FRAME calculations validated by an independent auditor before using this report in a formal CSRD filing."),
+            ("Improve category data", "{n} of {total} partner banks do not report a category breakdown. Request itemised food streams for year {year}."),
+            ("Expand social impact", "Add % children and postcode data for ESRS S3 (affected communities) reporting."),
+            ("Year-on-year comparison", "Set {year} as baseline year. Track CO₂e savings per quarter to demonstrate E5 targets."),
+            ("Scope classification", "Determine whether avoided emissions are reported as Scope 3 cat. 1 or cat. 15 — both are defensible but require consistent methodology."),
+            ("Climate Harvest certification", "Climate Harvest B.V. can issue a signed data quality declaration per food bank."),
+        ],
+    },
+}
 
 
 def _get_owned_sub(sub_id: uuid.UUID, session: Session, user: User) -> FundSubscription:
@@ -48,6 +170,208 @@ async def stream_report_sse(
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
+
+
+@router.get("/{sub_id}/data")
+async def get_report_data(
+    sub_id: uuid.UUID,
+    lang: Literal["nl", "en"] = Query("nl"),
+    session: Session = Depends(get_session),
+    user: User = Depends(get_current_user),
+):
+    t = _T[lang]
+    sub = _get_owned_sub(sub_id, session, user)
+    pkg = session.get(Package, sub.package_id)
+    allocs = session.exec(select(Allocation).where(Allocation.subscription_id == sub_id)).all()
+
+    EF = {"produce": 1.0, "meat_fish": 8.5, "dairy_eggs": 3.2, "dry_goods": 2.0, "bread_bakery": 1.5, "prepared": 3.0}
+    EF_SOURCE = {
+        "produce": "FAO Food Wastage Footprint (2013) Table 4.2",
+        "meat_fish": "FAO FWF gewogen NL vleesmix" if lang == "nl" else "FAO FWF weighted NL meat mix",
+        "dairy_eggs": "FAO FWF + RIVM Dutch dairy LCA",
+        "dry_goods": "FAO FWF + Poore & Nemecek (2018)",
+        "bread_bakery": "WRAP Courtauld Commitment 2030",
+        "prepared": "Poore & Nemecek (2018)",
+    }
+    NL_CF = 0.93
+
+    rows_data = []
+    data_gaps: list[str] = []
+
+    for alloc in sorted(allocs, key=lambda a: a.weight_pct, reverse=True):
+        fb = session.get(Foodbank, alloc.foodbank_id)
+        latest_year = session.exec(
+            select(func.max(AnnualReport.year))
+            .join(FrameResult, FrameResult.report_id == AnnualReport.id)
+            .where(AnnualReport.foodbank_id == alloc.foodbank_id)
+        ).first()
+        annual = session.exec(
+            select(AnnualReport)
+            .where(AnnualReport.foodbank_id == alloc.foodbank_id, AnnualReport.year == latest_year)
+        ).first() if latest_year else None
+        frame = session.exec(select(FrameResult).where(FrameResult.report_id == annual.id)).first() if annual else None
+        people = session.exec(select(PeopleServed).where(PeopleServed.report_id == annual.id)).first() if annual else None
+        cats = session.exec(select(FoodCategories).where(FoodCategories.report_id == annual.id)).first() if annual else None
+
+        fb_name = fb.name if fb else "Unknown"
+        attributed_co2e = (frame.co2e_total_kg if frame else 0.0) * alloc.weight_pct
+        total_kg = (
+            (cats.kg_produce or 0) + (cats.kg_meat_fish or 0) + (cats.kg_dairy_eggs or 0)
+            + (cats.kg_dry_goods or 0) + (cats.kg_bread_bakery or 0) + (cats.kg_prepared or 0)
+        ) if cats else None
+
+        cat_fallback = (
+            frame is not None and cats is not None
+            and (cats.kg_meat_fish is None or cats.kg_meat_fish == 0)
+            and (cats.kg_dairy_eggs is None or cats.kg_dairy_eggs == 0)
+        )
+        if cat_fallback:
+            data_gaps.append(t["data_gap"].format(name=fb_name))
+
+        cat_rows = []
+        if cats and frame:
+            for cat, ef in EF.items():
+                kg_bank = getattr(cats, f"kg_{cat}", None) or 0.0
+                co2e_attr = (getattr(frame, f"co2e_{cat}_kg", 0.0) or 0.0) * alloc.weight_pct
+                if kg_bank > 0:
+                    cat_rows.append({
+                        "category": cat.replace("_", " "),
+                        "kg_attr": round(kg_bank * alloc.weight_pct, 1),
+                        "tco2e_attr": round(co2e_attr / 1000, 3),
+                        "ef": ef,
+                        "source": EF_SOURCE[cat],
+                    })
+
+        city = fb.city if fb else ""
+        slug = city.lower().replace(" ", "-") if city else ""
+        rows_data.append({
+            "name": fb_name,
+            "city": city,
+            "slug": slug,
+            "year": latest_year or "—",
+            "weight_pct": round(alloc.weight_pct * 100, 2),
+            "amount_eur": round(sub.amount_eur * alloc.weight_pct, 2),
+            "bank_co2e_t": round((frame.co2e_total_kg if frame else 0.0) / 1000, 2),
+            "attributed_co2e_t": round(attributed_co2e / 1000, 3),
+            "attribution_share_pct": round(alloc.weight_pct * 100, 2),
+            "households": people.households_weekly if people else None,
+            "individuals": people.individuals_total if people else None,
+            "kg_rescued_attr": round(total_kg * alloc.weight_pct) if total_kg else None,
+            "cat_rows": cat_rows,
+            "methodology": frame.methodology_version if frame else "FRAME-NL v2.0",
+        })
+
+    total_co2e_t = sum(r["attributed_co2e_t"] for r in rows_data)
+    total_households = sum(r["households"] for r in rows_data if r["households"])
+    total_individuals = sum(r["individuals"] for r in rows_data if r["individuals"])
+    eur_per_tco2e = sub.amount_eur / total_co2e_t if total_co2e_t > 0 else 0.0
+    today = date.today()
+    reporting_year = today.year - 1
+
+    trail_lines = []
+    for r in rows_data:
+        trail_lines.append(t["trail_template"].format(
+            name=r["name"], city=r["city"],
+            bank_co2e=f"{r['bank_co2e_t']:,.1f}",
+            pct=f"{r['weight_pct']:.2f}",
+            amount=f"{r['amount_eur']:,.0f}",
+            pct_frac=f"{r['weight_pct'] / 100:.4f}",
+            attr_co2e=f"{r['attributed_co2e_t']:.3f}",
+            households=r["households"] or "—",
+            methodology=r["methodology"],
+        ))
+    trail_header = t["trail_header"].format(
+        org=user.org_name, pkg=pkg.name if pkg else "—",
+        amount=f"{sub.amount_eur:,.0f}", econ=f"{eur_per_tco2e:,.2f}",
+    )
+    trail_footer = t["trail_footer"].format(
+        co2e=f"{total_co2e_t:,.3f}",
+        households=f"{total_households:,}",
+        individuals=f"{total_individuals:,}",
+    )
+
+    recs = [
+        {"title": title, "body": body.format(year=reporting_year, n=0, total=len(rows_data))}
+        for title, body in t["recs"]
+    ]
+
+    return {
+        "lang": lang,
+        "meta": {
+            "org": user.org_name,
+            "package_name": pkg.name if pkg else "—",
+            "impact_profile": pkg.impact_profile.value if pkg else "—",
+            "amount_eur": sub.amount_eur,
+            "sub_id": str(sub_id),
+            "period": reporting_year,
+            "generated": today.strftime("%-d %B %Y"),
+        },
+        "kpis": {
+            "total_co2e_t": round(total_co2e_t, 2),
+            "investment_eur": sub.amount_eur,
+            "eur_per_tco2e": round(eur_per_tco2e, 2),
+            "households_per_week": total_households,
+            "individuals": total_individuals,
+        },
+        "summary": {
+            "body_html": t["summary_body"].format(
+                org=user.org_name, year=reporting_year,
+                amount=f"{sub.amount_eur:,.0f}",
+                pkg=pkg.name if pkg else "—",
+                co2e=f"{total_co2e_t:,.2f}",
+                n_banks=len(rows_data),
+            ),
+            "disclaimer_html": t["summary_disclaimer"].format(org=user.org_name),
+        },
+        "methodology": {
+            "body1_html": t["methodology_body1"].format(eur_per_tco2e=f"{eur_per_tco2e:,.2f}"),
+            "body2_html": t["methodology_body2"].format(cf=NL_CF),
+        },
+        "allocations": rows_data,
+        "data_gaps": data_gaps,
+        "calc_trail": f"{trail_header}\n\n{chr(10).join(trail_lines)}\n{trail_footer}",
+        "emission_factors": [
+            {"category": cat.replace("_", " "), "ef": ef, "source": EF_SOURCE[cat]}
+            for cat, ef in EF.items()
+        ],
+        "nl_cf": NL_CF,
+        "disclaimers": [{"title": title, "body": body} for title, body in t["disc"]],
+        "recommendations": recs,
+        "texts": {
+            "alloc_h2": t["alloc_h2"],
+            "alloc_sub": t["alloc_sub"].format(profile=pkg.impact_profile.value if pkg else "—"),
+            "cat_h2": t["cat_h2"],
+            "cat_sub": t["cat_sub"],
+            "appendix_h2": t["appendix_h2"],
+            "trail_h3": t["trail_h3"],
+            "ef_h3": t["ef_h3"],
+            "cf_h3": t["cf_h3"],
+            "cf_body": t["cf_body"].format(cf=NL_CF),
+            "disc_h2": t["disc_h2"],
+            "rec_h2": t["rec_h2"],
+            "rec_sub": t["rec_sub"],
+            "col_bank": t["col_bank"],
+            "col_alloc": t["col_alloc"],
+            "col_amount": t["col_amount"],
+            "col_bank_co2e": t["col_bank_co2e"],
+            "col_attr_co2e": t["col_attr_co2e"],
+            "col_share": t["col_share"],
+            "col_households": t["col_households"],
+            "col_kg": t["col_kg"],
+            "col_total": t["col_total"],
+            "col_cat": t["col_cat"],
+            "col_kg_attr": t["col_kg_attr"],
+            "col_tco2e_attr": t["col_tco2e_attr"],
+            "col_ef": t["col_ef"],
+            "col_source": t["col_source"],
+            "footer": t["footer"].format(date=today.strftime("%-d %B %Y")),
+            "kpi_co2e": t["kpi_co2e"],
+            "kpi_investment": t["kpi_investment"],
+            "kpi_economics": t["kpi_economics"],
+            "kpi_households": t["kpi_households"],
+            "sources": [t["source_ops"], t["source_ef"], t["source_cf"], t["source_frame"], t["source_esrs"]],
+        },
+    }
 
 
 @router.get("/{sub_id}/mock", response_class=HTMLResponse)
