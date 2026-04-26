@@ -23,7 +23,7 @@ export default async function FoodbanksIndexPage() {
       <section className="relative isolate border-b border-line">
         <div aria-hidden className="kk-photo-hero absolute inset-0 -z-10">
           <Image
-            src="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&w=2400&q=80"
+            src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=2400&q=80"
             alt=""
             fill
             sizes="100vw"
