@@ -14,6 +14,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en-NL">
       <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link
           rel="preconnect"
           href="https://api.fontshare.com"

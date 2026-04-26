@@ -44,7 +44,7 @@ async function loadCoverage(): Promise<CoverageData> {
 }
 
 export const metadata = {
-  title: "Marketplace · Kavel",
+  title: "Funds · Kavel",
   description:
     "Browse verified climate-contribution funds. Each fund spreads a single corporate contribution across the top Dutch food banks weighted by CO₂e or social reach. Contribution claim, not offsetting.",
 }

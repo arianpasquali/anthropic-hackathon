@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="6" fill="#FBF8F1"/>
+  <text x="5" y="27"
+        font-family="Boska, ui-serif, Georgia, serif"
+        font-size="26" font-weight="400" letter-spacing="-1"
+        fill="#181613">k</text>
+  <line x1="10" y1="14" x2="10" y2="9"
+        stroke="#0E5132" stroke-width="1.4" stroke-linecap="round"/>
+  <ellipse cx="14" cy="7" rx="5" ry="2.2"
+           fill="#0E5132" transform="rotate(-30 14 7)"/>
+  <ellipse cx="7" cy="5.5" rx="3.5" ry="1.6"
+           fill="#0E5132" transform="rotate(-55 7 5.5)" opacity="0.7"/>
+</svg>

@@ -12,13 +12,7 @@ export function Header() {
           className="flex items-baseline gap-2 group"
           aria-label="Kavel — home"
         >
-          <span
-            aria-hidden
-            className="block w-2.5 h-2.5 bg-emerald rounded-[1px] translate-y-[1px] group-hover:bg-emerald-deep transition-colors"
-          />
-          <span className="text-[17px] font-semibold tracking-[-0.02em]">
-            Kavel
-          </span>
+          <img src="/logo.svg" alt="Kavel" height={22} className="block" />
         </Link>
 
         <nav className="flex items-center gap-7 text-[13px] tracking-wide">

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="200 45 430 120" width="430" height="120">
+  <text x="200" y="156"
+        font-family="Boska, ui-serif, Charter, Georgia, 'Times New Roman', serif"
+        font-size="116" font-weight="400" letter-spacing="-3"
+        fill="#181613">kavel</text>
+
+  <line x1="226" y1="80" x2="226" y2="68"
+        stroke="#0E5132" stroke-width="1.8" stroke-linecap="round"/>
+  <ellipse cx="234" cy="62" rx="11" ry="4.6"
+           fill="#0E5132" transform="rotate(-30 234 62)"/>
+  <ellipse cx="220" cy="58" rx="7" ry="3"
+           fill="#0E5132" transform="rotate(-55 220 58)" opacity="0.7"/>
+</svg>

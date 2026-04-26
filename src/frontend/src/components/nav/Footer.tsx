@@ -6,10 +6,7 @@ export function Footer() {
       <div className="mx-auto max-w-[1280px] px-6 py-16 grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-12">
         <div>
           <div className="flex items-baseline gap-2 mb-4">
-            <span aria-hidden className="block w-2.5 h-2.5 bg-emerald rounded-[1px] translate-y-[1px]" />
-            <span className="text-[17px] font-semibold tracking-[-0.02em]">
-              Kavel
-            </span>
+            <img src="/logo.svg" alt="Kavel" height={22} className="block" />
           </div>
           <p className="text-[13px] text-text-muted leading-relaxed max-w-[36ch]">
             Verified climate contribution from Dutch food rescue. Built on FRAME with
