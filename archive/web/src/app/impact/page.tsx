@@ -30,7 +30,7 @@ export default async function ImpactPage() {
           <BigStat stat={data.poverty.reach_rate_pct} accent="emerald" />
         </div>
         <p className="mt-8 text-stone-700 leading-relaxed max-w-2xl">
-          73% of Dutch people in poverty are not reached by a foodbank.
+          86% of Dutch people in poverty are not reached by a foodbank.
           The gap is invisible in any official report.
         </p>
       </Section>

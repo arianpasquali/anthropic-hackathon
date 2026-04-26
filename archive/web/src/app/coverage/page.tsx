@@ -177,7 +177,7 @@ export default async function CoveragePage() {
             </ul>
             <p className="mt-3 text-xs text-stone-500">
               The 6 demo banks cluster in the Randstad and major regional centres,
-              where poverty counts are highest. The other 174 NL foodbanks (small
+              where poverty counts are highest. The other 175 NL foodbanks (small
               dots) extend the network into smaller gemeenten.
             </p>
           </Insight>
@@ -288,7 +288,7 @@ function Stats({
       <div className="flex justify-between gap-3">
         <span className="text-stone-600">Demo banks</span>
         <span className="font-medium tabular-nums text-stone-900">
-          {demoBanks.length} of 180
+          {demoBanks.length} of 181
         </span>
       </div>
       <div className="flex justify-between gap-3">
