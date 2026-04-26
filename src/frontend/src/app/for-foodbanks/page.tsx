@@ -60,7 +60,7 @@ export default async function ForFoodbanksPage() {
   return (
     <div>
       <section className="relative isolate border-b border-line">
-        <div aria-hidden className="kk-photo-hero kk-parallax-hero absolute inset-0 -z-10">
+        <div aria-hidden className="kk-photo-hero absolute inset-0 -z-10">
           <Image
             src="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&w=2400&q=80"
             alt=""

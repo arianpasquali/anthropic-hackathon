@@ -316,34 +316,10 @@ body {
   pointer-events: none;
 }
 
-/* Scroll-driven parallax — landing only.
-   GPU-only properties (transform, opacity). No JS. Falls back to static
-   when scroll-driven animations are unsupported or motion is reduced. */
-@keyframes kk-parallax-hero-shift {
-  from { transform: translateY(-60px) scale(1.15); }
-  to   { transform: translateY(180px) scale(1.22); }
-}
+/* Scroll-driven viewport-entry rise (used outside the hero). */
 @keyframes kk-rise-in {
   from { transform: translateY(56px); opacity: 0.25; }
   to   { transform: translateY(0); opacity: 1; }
-}
-
-/* Hero parallax uses the parent section's view-timeline so it animates
-   only while the hero is on screen — deterministic across page heights. */
-.kk-parallax-hero {
-  view-timeline-name: --kk-hero;
-  view-timeline-axis: block;
-}
-
-@supports (animation-timeline: scroll()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .kk-parallax-hero img {
-      animation: kk-parallax-hero-shift linear both;
-      animation-timeline: --kk-hero;
-      animation-range: cover 0% cover 100%;
-      will-change: transform;
-    }
-  }
 }
 
 @supports (animation-timeline: view()) {
