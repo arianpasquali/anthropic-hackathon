@@ -82,6 +82,13 @@ export default async function FoodbanksIndexPage() {
           <div className="mt-6">
             <ProvinceFoodbankList banks={banks} />
           </div>
+          <p className="mt-8 text-[13px] text-text-faint leading-relaxed max-w-[64ch]">
+            Want to compare bank coverage to where Dutch poverty is actually
+            concentrated?{" "}
+            <Link href="/coverage" className="text-emerald hover:underline">
+              See the gemeente-level coverage map →
+            </Link>
+          </p>
         </section>
 
         <section className="mt-24 grid md:grid-cols-2 gap-x-12 gap-y-8 items-start border-t border-line pt-12">

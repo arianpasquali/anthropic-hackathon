@@ -59,7 +59,10 @@ export default async function WhyPage() {
         </div>
         <p className="mt-10 text-text-muted text-[14.5px] leading-relaxed max-w-[64ch]">
           73% of Dutch people in poverty are not reached by a foodbank. The gap
-          is invisible in any official report.
+          is invisible in any official report.{" "}
+          <Link href="/coverage" className="text-emerald hover:underline">
+            See the gemeente-level map →
+          </Link>
         </p>
       </Section>
 

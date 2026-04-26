@@ -23,6 +23,7 @@ export function Footer() {
             { href: "/marketplace", label: "Marketplace" },
             { href: "/methodology", label: "Methodology" },
             { href: "/why", label: "Why · public data" },
+            { href: "/coverage", label: "Coverage map" },
             { href: "/faq", label: "FAQ" },
             { href: "/dashboard/corporate", label: "Corporate dashboard" },
           ]}

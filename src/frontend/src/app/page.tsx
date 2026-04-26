@@ -37,7 +37,7 @@ export default async function Home() {
       <section className="relative isolate">
         <div aria-hidden className="kk-photo-hero absolute inset-0 -z-10">
           <Image
-            src="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&w=2400&q=80"
+            src="https://images.unsplash.com/photo-1506617564039-2f3b650b7010?auto=format&fit=crop&w=2400&q=80"
             alt=""
             fill
             sizes="100vw"
