@@ -212,7 +212,7 @@ export default async function CoveragePage() {
               </ul>
               <p className="mt-4 text-[12px] text-text-faint leading-relaxed">
                 The 6 demo banks cluster in the Randstad and major regional
-                centres, where poverty counts are highest. The other 174 NL
+                centres, where poverty counts are highest. The other 175 NL
                 foodbanks (small dots) extend the network into smaller
                 gemeenten.
               </p>
@@ -346,7 +346,7 @@ function Stats({
     <div className="border border-line bg-surface rounded-[var(--radius-lg)] p-5 flex flex-col gap-3 text-[13px]">
       <Row
         label="Demo banks"
-        value={`${demoBanks.length} of 180`}
+        value={`${demoBanks.length} of 181`}
       />
       <Row
         label="Annual climate contribution"
