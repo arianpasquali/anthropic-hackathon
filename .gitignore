@@ -15,3 +15,4 @@ src/frontend/.next/
 src/frontend/.turbo/
 src/frontend/out/
 .playwright-mcp/
+videos/video_v2/node_modules/
