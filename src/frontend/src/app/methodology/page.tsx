@@ -1,6 +1,9 @@
 import Image from "next/image"
+import Link from "next/link"
 import { Badge } from "@/components/ui/Badge"
 import { CF_NL, EMISSION_FACTORS, EMISSION_FACTOR_SOURCES, CATEGORY_LABELS } from "@/lib/methodology"
+import { PovertyBars } from "@/components/marketing/PovertyBars"
+import { loadImpact } from "@/lib/impact"
 
 export const metadata = {
   title: "Methodology · Climate Harvest",
@@ -19,7 +22,8 @@ const PIPELINE = [
 const FACTOR_KEYS = ["produce", "bakery", "dry_goods", "prepared", "dairy", "eggs", "meat"] as const
 const MAX_FACTOR = Math.max(...Object.values(EMISSION_FACTORS))
 
-export default function MethodologyPage() {
+export default async function MethodologyPage() {
+  const impact = await loadImpact()
   return (
     <div className="overflow-hidden">
       <section className="relative isolate">
@@ -161,7 +165,41 @@ export default function MethodologyPage() {
         </div>
       </section>
 
-      <section id="provenance" className="border-y border-line bg-surface-2">
+      <section id="paradox" className="border-y border-line bg-surface-2">
+        <div className="mx-auto max-w-[1100px] px-6 py-20">
+          <p className="eyebrow">Why the math compounds</p>
+          <h2 className="display text-4xl mt-3 tracking-[-0.025em] max-w-[24ch]">
+            The Netherlands wastes{" "}
+            <span className="display-italic text-emerald-deep">
+              70× more food
+            </span>{" "}
+            than its foodbanks rescue.
+          </h2>
+          <p className="mt-5 text-text-muted text-[14.5px] max-w-[64ch] leading-relaxed">
+            Foodbanks recover {impact.food_paradox.rescue_share_pct.value}% of
+            NL food waste. Climate Harvest funds the network to rescue more —
+            paying foodbanks for verified contribution capacity, instead of
+            asking corporates to pay landfill avoidance fees that never reach
+            the social side.
+          </p>
+          <div className="mt-10">
+            <PovertyBars
+              waste={impact.food_paradox.nl_food_waste_kg}
+              rescued={impact.food_paradox.foodbanks_rescued_kg}
+            />
+          </div>
+          <p className="mt-6 text-[12.5px] text-text-faint">
+            See the full data narrative on{" "}
+            <Link href="/why" className="underline hover:text-text-muted">
+              /why
+            </Link>{" "}
+            — poverty gap, decade of pressure, CSRD wave, contribution-capacity
+            gap.
+          </p>
+        </div>
+      </section>
+
+      <section id="provenance" className="border-y border-line">
         <div className="mx-auto max-w-[1100px] px-6 py-20">
           <p className="eyebrow">Provenance ledger</p>
           <h2 className="display text-4xl mt-3 tracking-[-0.025em] max-w-[22ch]">

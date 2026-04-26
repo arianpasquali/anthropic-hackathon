@@ -37,6 +37,7 @@ export default function RootLayout({
             </Link>
             <nav className="hidden sm:flex gap-6 text-sm text-stone-600">
               <Link href="/" className="hover:text-stone-900">Marketplace</Link>
+              <Link href="/coverage" className="hover:text-stone-900">Coverage</Link>
               <Link href="/impact" className="hover:text-stone-900">Impact</Link>
               <Link href="/methodology" className="hover:text-stone-900">Methodology</Link>
               <a
