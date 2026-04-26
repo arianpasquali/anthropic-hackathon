@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="800" height="240">
+  <rect width="800" height="240" fill="#FBF8F1"/>
+
+  <g transform="translate(60,40)">
+    <ellipse cx="48"  cy="60" rx="32" ry="26" fill="#0E5132"/>
+    <ellipse cx="86"  cy="48" rx="38" ry="32" fill="#0E5132"/>
+    <ellipse cx="124" cy="62" rx="32" ry="26" fill="#0E5132"/>
+    <ellipse cx="86"  cy="74" rx="50" ry="28" fill="#0E5132"/>
+
+    <circle cx="48"  cy="60" r="6"  fill="#1B6B45" opacity="0.55"/>
+    <circle cx="86"  cy="48" r="7"  fill="#1B6B45" opacity="0.55"/>
+    <circle cx="124" cy="62" r="6"  fill="#1B6B45" opacity="0.55"/>
+    <circle cx="68"  cy="68" r="5"  fill="#1B6B45" opacity="0.55"/>
+    <circle cx="104" cy="68" r="5"  fill="#1B6B45" opacity="0.55"/>
+    <circle cx="86"  cy="80" r="6"  fill="#1B6B45" opacity="0.55"/>
+
+    <path d="M 72 96 Q 70 124 78 144 L 94 144 Q 102 124 100 96 Z"
+          fill="#2A3D2E"/>
+  </g>
+
+  <text x="260" y="148"
+        font-family="Boska, ui-serif, Charter, Georgia, 'Times New Roman', serif"
+        font-size="92" font-weight="400" letter-spacing="-2"
+        fill="#181613">kavel</text>
+</svg>

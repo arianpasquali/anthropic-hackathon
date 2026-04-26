@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="800" height="240">
+  <rect width="800" height="240" fill="#FBF8F1"/>
+
+  <g transform="translate(0,22)">
+    <g fill="#0E5132">
+      <circle cx="118" cy="60"  r="4.5"/>
+      <circle cx="150" cy="58"  r="4.5"/>
+      <circle cx="164" cy="63"  r="4"/>
+
+      <circle cx="104" cy="72"  r="5"/>
+      <circle cx="120" cy="70"  r="6"/>
+      <circle cx="136" cy="71"  r="6.5"/>
+      <circle cx="168" cy="73"  r="5"/>
+      <circle cx="180" cy="78"  r="4"/>
+
+      <circle cx="92"  cy="86"  r="4.5"/>
+      <circle cx="124" cy="86"  r="6.5"/>
+      <circle cx="140" cy="86"  r="7"/>
+      <circle cx="156" cy="86"  r="6.5"/>
+      <circle cx="186" cy="88"  r="4.5"/>
+
+      <circle cx="98"  cy="102" r="5"/>
+      <circle cx="114" cy="102" r="6"/>
+      <circle cx="146" cy="102" r="6.5"/>
+      <circle cx="162" cy="102" r="6"/>
+      <circle cx="178" cy="102" r="5"/>
+
+      <circle cx="108" cy="116" r="5"/>
+      <circle cx="140" cy="120" r="6"/>
+      <circle cx="172" cy="116" r="5"/>
+
+      <circle cx="124" cy="132" r="4.5"/>
+      <circle cx="140" cy="134" r="5"/>
+    </g>
+
+    <g fill="none" stroke="#0E5132" stroke-width="1.6">
+      <circle cx="134" cy="55"  r="5.5"/>
+      <circle cx="152" cy="70"  r="6"/>
+      <circle cx="108" cy="86"  r="6"/>
+      <circle cx="172" cy="86"  r="6"/>
+      <circle cx="130" cy="102" r="6.5"/>
+      <circle cx="124" cy="118" r="6"/>
+      <circle cx="156" cy="132" r="4.5"/>
+      <circle cx="156" cy="118" r="6"/>
+    </g>
+  </g>
+
+  <text x="240" y="148"
+        font-family="Boska, ui-serif, Charter, Georgia, 'Times New Roman', serif"
+        font-size="92" font-weight="400" letter-spacing="-2"
+        fill="#181613">kavel</text>
+</svg>
