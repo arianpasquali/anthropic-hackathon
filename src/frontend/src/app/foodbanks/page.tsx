@@ -56,7 +56,7 @@ export default async function FoodbanksIndexPage() {
         <section className="mt-24">
           <div className="flex flex-col md:flex-row md:items-end gap-6 mb-10">
             <div className="flex-1">
-              <p className="eyebrow">Bank density</p>
+              <p className="eyebrow">Foodbank density</p>
               <h2 className="display text-4xl mt-3 tracking-[-0.02em] max-w-[24ch]">
                 {formatNumber(banks.length)} food banks across the Netherlands.
               </h2>
@@ -83,7 +83,7 @@ export default async function FoodbanksIndexPage() {
             <ProvinceFoodbankList banks={banks} />
           </div>
           <p className="mt-8 text-[13px] text-text-faint leading-relaxed max-w-[64ch]">
-            Want to compare bank coverage to where Dutch poverty is actually
+            Want to compare foodbank coverage to where Dutch poverty is actually
             concentrated?{" "}
             <Link href="/coverage" className="text-emerald hover:underline">
               See the gemeente-level coverage map →

@@ -211,7 +211,7 @@ export default async function CoveragePage() {
                 ))}
               </ul>
               <p className="mt-4 text-[12px] text-text-faint leading-relaxed">
-                The 6 demo banks cluster in the Randstad and major regional
+                The 6 demo foodbanks cluster in the Randstad and major regional
                 centres, where poverty counts are highest. The other 175 NL
                 foodbanks (small dots) extend the network into smaller
                 gemeenten.
@@ -234,7 +234,7 @@ export default async function CoveragePage() {
           </div>
           <div className="flex flex-col gap-5 text-text-muted text-[14.5px] leading-relaxed max-w-[64ch]">
             <p>
-              The 6 demo banks already cover the{" "}
+              The 6 demo foodbanks already cover the{" "}
               <strong className="text-text">
                 top 3 NL gemeenten on both poverty measures
               </strong>{" "}
@@ -390,7 +390,7 @@ function SourceBlock({ scale }: { scale: CoverageData["scale"] }) {
         <span className="font-semibold text-text-muted">
           Bank coordinates:
         </span>{" "}
-        hand-curated for the 6 demo banks (HQ / regional DC). Other 175 NL
+        hand-curated for the 6 demo foodbanks (HQ / regional DC). Other 175 NL
         banks not yet plotted.
       </p>
     </div>

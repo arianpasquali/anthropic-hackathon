@@ -33,7 +33,7 @@ export function FundCard({ pkg, featured = false }: { pkg: Package; featured?: b
         <div className="grid grid-cols-2 gap-y-3 gap-x-6 mt-2 pt-5 border-t border-line/60">
           <Stat label="Price" value={formatEur(pkg.price_eur)} />
           <Stat label="Avoided" value={formatTCO2e(pkg.co2e_claim_kg / 1000)} />
-          <Stat label="Top banks" value={`${formatNumber(pkg.top_n)}`} />
+          <Stat label="Top foodbanks" value={`${formatNumber(pkg.top_n)}`} />
           <Stat label="Region" value={pkg.region.toUpperCase()} />
         </div>
       </div>

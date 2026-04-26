@@ -194,7 +194,7 @@ def aggregate_stats(request: Request, session: Session = Depends(get_session)) -
 
 @router.get("/banks", response_model=list[BankSummary])
 def list_banks(session: Session = Depends(get_session)) -> list[BankSummary]:
-    """All banks with latest FRAME data, coordinates, and category mix."""
+    """All foodbanks with latest FRAME data, coordinates, and category mix."""
     banks = session.exec(select(Foodbank)).all()
     results = [_build_bank_summary(session, fb) for fb in banks]
     return sorted(results, key=lambda b: b.annual_tco2e or 0, reverse=True)
@@ -202,8 +202,8 @@ def list_banks(session: Session = Depends(get_session)) -> list[BankSummary]:
 
 @router.get("/banks/{bank_id}", response_model=BankSummary)
 def get_bank(bank_id: uuid.UUID, session: Session = Depends(get_session)) -> BankSummary:
-    """Single bank with latest FRAME data, coordinates, and category mix."""
+    """Single foodbank with latest FRAME data, coordinates, and category mix."""
     fb = session.get(Foodbank, bank_id)
     if not fb:
-        raise HTTPException(status_code=404, detail="Bank not found")
+        raise HTTPException(status_code=404, detail="Foodbank not found")
     return _build_bank_summary(session, fb)

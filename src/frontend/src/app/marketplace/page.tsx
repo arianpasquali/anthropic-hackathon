@@ -155,7 +155,7 @@ export default async function MarketplacePage() {
 
       <section className="mt-24 grid md:grid-cols-2 gap-x-12 gap-y-6 border-t border-line pt-10">
         <h2 className="display text-3xl max-w-[20ch]">
-          Want a transparency profile for one specific bank?
+          Want a transparency profile for one specific foodbank?
         </h2>
         <div>
           <p className="text-text-muted text-[14.5px] leading-relaxed max-w-[48ch]">

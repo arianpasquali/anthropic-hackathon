@@ -49,7 +49,7 @@ export function BuyPanel({ pkg }: { pkg: PackageDetail }) {
       <dl className="p-6 grid grid-cols-2 gap-y-3 gap-x-6 border-b border-line/60 text-[13.5px]">
         <dt className="text-text-muted">Climate contribution</dt>
         <dd className="tabular text-right">{formatTCO2e(pkg.co2e_claim_kg / 1000)} / yr</dd>
-        <dt className="text-text-muted">Top banks</dt>
+        <dt className="text-text-muted">Top foodbanks</dt>
         <dd className="tabular text-right">{pkg.top_n}</dd>
         <dt className="text-text-muted">Profile</dt>
         <dd className="text-right capitalize">{pkg.impact_profile.replace("_", " ")}</dd>
