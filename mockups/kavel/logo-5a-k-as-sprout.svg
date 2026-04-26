@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="800" height="240">
+  <rect width="800" height="240" fill="#FBF8F1"/>
+
+  <g fill="#0E5132">
+    <rect x="118" y="62" width="10" height="98" rx="2"/>
+
+    <ellipse cx="156" cy="92" rx="32" ry="9"
+             transform="rotate(-30 156 92)"/>
+    <ellipse cx="156" cy="132" rx="30" ry="8"
+             transform="rotate(32 156 132)"/>
+  </g>
+
+  <text x="190" y="160"
+        font-family="Boska, ui-serif, Charter, Georgia, 'Times New Roman', serif"
+        font-size="100" font-weight="400" letter-spacing="-2"
+        fill="#181613">avel</text>
+</svg>

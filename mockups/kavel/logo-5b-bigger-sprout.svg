@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="800" height="240">
+  <rect width="800" height="240" fill="#FBF8F1"/>
+
+  <text x="180" y="208"
+        font-family="Boska, ui-serif, Charter, Georgia, 'Times New Roman', serif"
+        font-size="100" font-weight="400" letter-spacing="-3"
+        fill="#181613">kavel</text>
+
+  <g fill="#0E5132" stroke="#0E5132">
+    <path d="M 220 130 Q 215 90 220 28"
+          stroke-width="2.4" fill="none" stroke-linecap="round"/>
+
+    <ellipse cx="200" cy="118" rx="14" ry="5" stroke="none"
+             transform="rotate(-35 200 118)"/>
+
+    <ellipse cx="245" cy="92" rx="22" ry="7" stroke="none"
+             transform="rotate(30 245 92)"/>
+
+    <ellipse cx="195" cy="62" rx="28" ry="9" stroke="none"
+             transform="rotate(-38 195 62)"/>
+
+    <ellipse cx="240" cy="40" rx="20" ry="6.5" stroke="none"
+             transform="rotate(34 240 40)"/>
+
+    <circle cx="220" cy="24" r="4" stroke="none"/>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="800" height="240">
+  <rect width="800" height="240" fill="#FBF8F1"/>
+
+  <g fill="none" stroke="#0E5132">
+    <ellipse cx="130" cy="100" rx="56" ry="9"  stroke-width="0.8" opacity="0.45"/>
+    <ellipse cx="130" cy="120" rx="64" ry="14" stroke-width="0.8" opacity="0.45"/>
+    <ellipse cx="130" cy="140" rx="56" ry="9"  stroke-width="0.8" opacity="0.45"/>
+    <ellipse cx="130" cy="120" rx="14" ry="64" stroke-width="0.8" opacity="0.45"/>
+    <ellipse cx="130" cy="120" rx="36" ry="64" stroke-width="0.8" opacity="0.30"/>
+
+    <circle cx="130" cy="120" r="64" stroke-width="2"/>
+  </g>
+
+  <circle cx="158" cy="100" r="6"  fill="#0E5132"/>
+  <circle cx="158" cy="100" r="13" fill="none" stroke="#0E5132" stroke-width="1.4" opacity="0.55"/>
+
+  <text x="248" y="148"
+        font-family="Boska, ui-serif, Charter, Georgia, 'Times New Roman', serif"
+        font-size="92" font-weight="400" letter-spacing="-2"
+        fill="#181613">kavel</text>
+</svg>
