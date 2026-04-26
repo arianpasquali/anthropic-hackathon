@@ -33,15 +33,22 @@ export function BuyPanel({ pkg }: { pkg: PackageDetail }) {
     <aside className="lg:sticky lg:top-20 self-start border border-line rounded-[var(--radius-lg)] bg-surface overflow-hidden">
       <div className="p-6 border-b border-line/60">
         <Badge variant="emerald" className="mb-4">
-          Quarterly subscription
+          Annual subscription
         </Badge>
-        <p className="display tabular text-4xl">{formatEur(pkg.price_eur)}</p>
-        <p className="text-[13px] text-text-muted mt-1">per quarter · invoiced via Solvimon</p>
+        <div className="flex items-baseline gap-2">
+          <span className="display tabular tracking-[-0.03em] leading-[0.95] text-[44px]">
+            {formatEur(pkg.price_eur * 4)}
+          </span>
+          <span className="text-text-muted text-[13px]">/ year</span>
+        </div>
+        <p className="text-[12.5px] text-text-faint mt-1.5 tabular">
+          {formatEur(pkg.price_eur)} per quarter · invoiced via Solvimon
+        </p>
       </div>
 
       <dl className="p-6 grid grid-cols-2 gap-y-3 gap-x-6 border-b border-line/60 text-[13.5px]">
-        <dt className="text-text-muted">Avoided</dt>
-        <dd className="tabular text-right">{formatTCO2e(pkg.co2e_claim_kg / 1000)}</dd>
+        <dt className="text-text-muted">Climate contribution</dt>
+        <dd className="tabular text-right">{formatTCO2e(pkg.co2e_claim_kg / 1000)} / yr</dd>
         <dt className="text-text-muted">Top banks</dt>
         <dd className="tabular text-right">{pkg.top_n}</dd>
         <dt className="text-text-muted">Profile</dt>

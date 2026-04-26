@@ -135,18 +135,30 @@ export default async function FundDetailPage({
         </section>
       </div>
 
-      <aside className="self-start lg:sticky lg:top-24 flex flex-col gap-4 p-6 bg-emerald-soft/60 border border-emerald/30 rounded-[var(--radius-lg)]">
-        <div className="eyebrow text-emerald-deep">From €10k / year</div>
-        <p className="display tabular text-3xl">{formatEur(pkg.price_eur)}</p>
-        <p className="text-[12.5px] text-text-muted -mt-2">per quarter · invoiced via Solvimon</p>
+      <aside className="self-start lg:sticky lg:top-24 flex flex-col gap-5 p-7 bg-emerald-soft/60 border border-emerald/30 rounded-[var(--radius-lg)]">
+        <p className="eyebrow text-emerald-deep">Annual climate contribution</p>
+        <div className="flex items-baseline gap-2">
+          <span className="display tabular tracking-[-0.03em] leading-[0.95] text-[56px]">
+            {formatEur(pkg.price_eur * 4)}
+          </span>
+          <span className="text-text-muted text-[14px]">/ year</span>
+        </div>
+        <div className="flex flex-col gap-0.5 -mt-2">
+          <p className="text-[13px] text-emerald-deep tabular font-medium">
+            {formatTCO2e(pkg.co2e_claim_kg / 1000)} / yr
+          </p>
+          <p className="text-[12px] text-text-faint tabular">
+            {formatEur(pkg.price_eur)} per quarter · invoiced via Solvimon
+          </p>
+        </div>
         <Link
           href="/pricing"
-          className="block w-full text-center px-5 h-11 leading-[44px] bg-emerald text-text-on-emerald rounded-[var(--radius)] text-[14px] font-medium hover:bg-emerald-deep transition-colors"
+          className="mt-1 block w-full text-center px-5 h-11 leading-[44px] bg-emerald text-text-on-emerald rounded-[var(--radius)] text-[14px] font-medium hover:bg-emerald-deep transition-colors"
         >
           Invest in this fund →
         </Link>
         <p className="text-[12px] text-text-faint leading-relaxed">
-          No lock-in · ESRS E5+S3 contribution report included.
+          No lock-in · ESRS&nbsp;E5+S3 contribution report included.
         </p>
       </aside>
     </div>
