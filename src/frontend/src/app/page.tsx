@@ -4,10 +4,27 @@ import { api } from "@/lib/api"
 import { NLProvinceFoodbankHeatMapDynamic } from "@/components/map/NLProvinceFoodbankHeatMapDynamic"
 import { ProvinceFoodbankList } from "@/components/map/ProvinceFoodbankList"
 import { HeroParallax } from "@/components/marketing/HeroParallax"
-import { LogoCarousel } from "@/components/marketing/LogoCarousel"
+import { LogoCarousel, type CarouselLogo } from "@/components/marketing/LogoCarousel"
 import { PlatformSpread } from "@/components/marketing/PlatformSpread"
 import { Badge } from "@/components/ui/Badge"
 import { formatNumber, formatTCO2e } from "@/lib/format"
+
+const CORPORATE_LOGOS: CarouselLogo[] = [
+  { name: "Heineken",      src: "/SVGBrand.com_heineken_nv.svg"  },
+  { name: "Philips",       src: "/philips.svg"                   },
+  { name: "ASML",          src: "/ASML_Holding_N.V._logo.svg"    },
+  { name: "Albert Heijn",  src: "/Albert_Heijn_Logo.svg"         },
+  { name: "DSM-Firmenich", src: "/DSM-Firmenich_Logo_2023.svg"   },
+]
+
+const COATOFARMS_LOGOS: CarouselLogo[] = [
+  { name: "Rotterdam",  src: "/Rotterdam_wapen.svg"              },
+  { name: "Den Haag",   src: "/Den_Haag_wapen.svg"               },
+  { name: "Amsterdam",  src: "/Coat_of_arms_of_Amsterdam.svg"    },
+  { name: "Breda",      src: "/Breda_wapen.svg"                  },
+  { name: "Groningen",  src: "/Groningen_provincie_wapen.svg"    },
+  { name: "Eindhoven",  src: "/Eindhoven_wapen.svg"              },
+]
 
 export default async function Home() {
   const banks = await api.listFoodbanks().catch(() => [])
@@ -114,43 +131,20 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Pilot partners — wordmarks, monochrome, civic register */}
+      {/* Pilot partners — full-width trust bars */}
       <section className="border-t border-line">
         <div className="mx-auto max-w-[1280px] px-6 py-14">
-          <div className="grid lg:grid-cols-[auto_1fr] gap-x-14 gap-y-6 items-start">
-            <div>
-              <p className="eyebrow">Pilot partners</p>
-              <p className="text-[12.5px] text-text-faint mt-2 max-w-[28ch] leading-relaxed">
-                In conversation with Voedselbanken Nederland; live extractions
-                across six regional operators.
-              </p>
-            </div>
-            <div>
-              <p className="eyebrow text-text-faint mb-3">Foodbank operators</p>
-              <ul className="flex flex-wrap gap-x-7 gap-y-3 mb-8">
-                {[
-                  "Voedselbank Rotterdam",
-                  "Voedselbank Den Haag",
-                  "Voedselbank Amsterdam",
-                  "Voedselbank Breda",
-                  "Voedselbank Groningen",
-                  "Voedselbank Eindhoven",
-                ].map((name) => (
-                  <li
-                    key={name}
-                    className="display text-[15px] text-text-muted tracking-tight"
-                  >
-                    {name}
-                  </li>
-                ))}
-              </ul>
-              <p className="eyebrow text-text-faint mb-4">Corporate commitments</p>
-              <LogoCarousel />
-              <p className="text-[11px] text-text-faint mt-5 italic">
-                Letters of intent · contracts pending Sunday demo
-              </p>
-            </div>
-          </div>
+          <p className="eyebrow mb-8">Pilot partners</p>
+
+          <p className="eyebrow text-text-faint mb-4">Foodbank operators</p>
+          <LogoCarousel logos={COATOFARMS_LOGOS} itemHeight="h-12" speed={32} />
+
+          <p className="eyebrow text-text-faint mt-10 mb-4">Corporate commitments</p>
+          <LogoCarousel logos={CORPORATE_LOGOS} />
+
+          <p className="text-[11px] text-text-faint mt-5 italic">
+            Letters of intent · contracts pending Sunday demo
+          </p>
         </div>
       </section>
 
