@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-25T14:36:05.879495+00:00",
+  "generated_at": "2026-04-25T21:48:34.374595+00:00",
   "package": {
     "price_eur": 25000.0,
     "tco2e": 600.0,
@@ -198,7 +198,7 @@
         "prepared": 0.06,
         "eggs": 0.01
       },
-      "source_url": "https://voedselbankhaaglanden.nl/feiten-en-cijfers-2/",
+      "source_url": "https://voedselbankhaaglanden.nl/jaarrekeningen",
       "provenance": "Households (2,904) and parcel composition (25 articles: 9 DKW, 8 G&F, 2-3 zuivel, ~5 other) cited directly in Voedselbank Haaglanden Jaarverslag 2024. Annual kg estimated using 0.6 kg/unit conversion. Serves Den Haag, Rijswijk, Zoetermeer via 21 distribution points.",
       "standard_package": {
         "amount_eur": 25000,
