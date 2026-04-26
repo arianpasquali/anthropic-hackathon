@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Klimaatkracht — Frontend
 
-## Getting Started
+Next.js 16 marketing site + corporate dashboard for Klimaatkracht. Renders the marketplace, foodbank network, methodology, FAQ, and the sample ESRS E5 contribution disclosure.
 
-First, run the development server:
+> ⚠️ **Not the Next.js you know.** Version 16 has breaking changes — APIs, conventions, and file structure may differ from training data. Read `node_modules/next/dist/docs/` before writing new code. See `AGENTS.md`.
+
+## Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev          # http://localhost:3000
+pnpm build        # production build
+pnpm lint         # eslint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Layer | Tech |
+|-------|------|
+| Framework | Next.js 16 · React 19 · App Router |
+| Styling | Tailwind v4 · CSS variables |
+| Type | Boska (display serif) · Switzer (sans) · JetBrains Mono — Fontshare CDN |
+| Icons | Lucide React |
+| Maps | NL province heat-map (custom SVG) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Routes
 
-## Learn More
+| Path | Purpose |
+|------|---------|
+| `/` | Landing — pitch, traction strip, FRAME explainer, contribution callout, sample report |
+| `/marketplace` | Package list with filters |
+| `/foodbanks` | Foodbank network grid + map |
+| `/foodbanks/[slug]` | Foodbank detail (CO₂e, food categories, demographics) |
+| `/methodology` | Pipeline, formula, factor table, provenance ledger |
+| `/faq` | 6 sections, 17 jury Q&A |
+| `/for-foodbanks` | Foodbank operator onboarding pitch |
+| `/pricing` | Tier comparison |
+| `/reports/sample` | Full ESRS E5 + S3 disclosure (Heineken Q1 2026) |
+| `/dashboard/corporate` | Sponsor view (subscriptions, allocations) |
+| `/login` · `/register` | Auth |
 
-To learn more about Next.js, take a look at the following resources:
+## Design tokens
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Defined in `src/app/globals.css`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `--font-display` — Boska (editorial serif, contemporary not luxury)
+- `--font-sans` — Switzer (Swiss grotesk, audit-grade)
+- `--color-emerald` / `--color-emerald-deep` / `--color-emerald-soft` — primary palette
+- `--radius-lg`, `--radius-md` — surface radii
+- `border-line`, `bg-surface`, `bg-surface-2` — neutral system
 
-## Deploy on Vercel
+Utility classes:
+- `.eyebrow` — kicker labels (uppercase, tabular)
+- `.display` — display serif
+- `.display-italic` — italic accent (emerald highlights, "Not offsetting.", "climate contribution.")
+- `.tabular` — tabular-nums for figures
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Component organization
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/components/
+├── nav/          # Header, Footer
+├── marketing/    # landing sections, editorial photos, platform spread
+├── foodbanks/    # category mix bars, foodbank cards
+├── dashboard/    # corporate dashboard widgets
+├── charts/       # bars, sparklines
+├── map/          # NL province heat-map
+├── funds/        # package tier UI
+├── report/       # report layout components
+└── ui/           # Badge, primitives
+```
+
+## Methodology constants
+
+`src/lib/methodology.ts` mirrors backend FRAME constants — emission factors, NL counterfactual (0.93), category labels, source citations. Keep in sync with `src/backend/services/factors.py`.
+
+## API integration
+
+Frontend calls FastAPI backend via fetch in server components or route handlers. SSE streams (report generation) handled with EventSource on the client.
+
+## Conventions
+
+- Server components by default; client only when interactivity required (`"use client"`)
+- Keep page files thin — extract sections to `src/components/`
+- Tailwind utility-first, no CSS modules unless absolutely required
+- All copy in English currently; ESRS sections retain Dutch terminology where appropriate

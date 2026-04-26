@@ -4,9 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-**Klimaatkracht** — a platform connecting Dutch corporates to foodbank climate impact funds. Corporates buy impact packages; money is allocated to foodbanks weighted by CO₂e savings and/or households served. Claude generates CSRD/ESRS E5-compliant reports streamed via SSE.
+**Klimaatkracht** — a platform connecting Dutch corporates to foodbank climate-contribution funds. Corporates buy contribution packages; money is allocated to foodbanks weighted by CO₂e avoided and/or households served. Claude generates ESRS E5 + S3-aligned climate-contribution disclosures streamed via SSE.
 
-Stack: FastAPI + SQLModel + SQLite (`foodbank.db`) + Anthropic SDK + Typer CLI (preprocessing). Frontend (HTMX + Jinja2 + Tailwind) is not yet built.
+Positioning: **climate contribution, not offsetting.** FRAME-aligned, NL-specific counterfactual (CF=0.93), defensible to Big-4 auditor under ESRS E5.
+
+Stack: FastAPI + SQLModel + SQLite (`foodbank.db`) + Anthropic SDK + Typer CLI (ingestion). Frontend: Next.js 16 + React 19 + Tailwind v4 in `src/frontend/`.
 
 ## Commands
 
@@ -108,7 +110,22 @@ Work directly on `main`. No feature branches.
 - **Never run `ingest-dir --force` without explicit user confirmation.** It overwrites all existing DB extractions (including higher-quality model runs) with whatever model is passed.
 - Ask before any force-refresh or batch re-ingest operation.
 
-## What's not built yet
+## Frontend (Next.js 16)
 
-- `src/frontend/` — all Jinja2 templates (see `PROGRESS.md` Task 14)
-- `src/backend/preprocessing/` — ingestion CLI (plan in `docs/superpowers/plans/2026-04-25-ingestion-pipeline.md`)
+Lives in `src/frontend/`. Routes: `/`, `/marketplace`, `/foodbanks` (+ `[slug]`), `/methodology`, `/faq`, `/for-foodbanks`, `/pricing`, `/reports/sample`, `/dashboard/corporate`, `/login`, `/register`.
+
+Type system: Boska (display serif) + Switzer (sans) via Fontshare CDN. Design tokens in `src/frontend/src/app/globals.css`. See `src/frontend/README.md` for setup and `src/frontend/AGENTS.md` for the Next.js 16 caveat (breaking changes vs. training data — read `node_modules/next/dist/docs/` before writing new code).
+
+```bash
+cd src/frontend && pnpm install && pnpm dev   # http://localhost:3000
+```
+
+## Ingestion pipeline
+
+Built. CLI lives in `src/backend/preprocessing/`. Original plan in `docs/superpowers/plans/2026-04-25-ingestion-pipeline.md`. Quick reference:
+
+```bash
+uv run python -m src.backend.preprocessing.cli ingest <pdf>      # single
+uv run python -m src.backend.preprocessing.cli ingest-dir data/  # batch
+uv run python -m src.backend.preprocessing.cli db overview       # inspect
+```
