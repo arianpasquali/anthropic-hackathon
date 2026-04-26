@@ -1,43 +1,13 @@
-import {AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate} from 'remotion';
+import {AbsoluteFill, Audio, Video, staticFile} from 'remotion';
 
 export const KavelPitch: React.FC = () => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
-
-  const opacity = interpolate(frame, [0, fps], [0, 1], {extrapolateRight: 'clamp'});
-
   return (
-    <AbsoluteFill
-      style={{
-        background: '#0c1420',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        gap: 24,
-      }}
-    >
-      <div
-        style={{
-          opacity,
-          color: '#ffffff',
-          fontSize: 72,
-          fontFamily: 'sans-serif',
-          fontWeight: 700,
-        }}
-      >
-        Kavel
-      </div>
-      <div
-        style={{
-          opacity,
-          color: '#6ee7b7',
-          fontSize: 28,
-          fontFamily: 'sans-serif',
-        }}
-      >
-        Climate contribution for Dutch corporates
-      </div>
+    <AbsoluteFill>
+      <Video
+        src={staticFile('4k_recording.mov')}
+        style={{width: '100%', height: '100%', objectFit: 'cover'}}
+      />
+      <Audio src={staticFile('Kavel-demo.m4a')} />
     </AbsoluteFill>
   );
 };

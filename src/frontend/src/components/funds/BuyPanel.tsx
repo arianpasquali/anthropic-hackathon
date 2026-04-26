@@ -60,7 +60,7 @@ export function BuyPanel({ pkg }: { pkg: PackageDetail }) {
           {busy ? "Preparing checkout…" : "Purchase →"}
         </Button>
         <p className="text-[12px] text-text-faint leading-relaxed">
-          You will receive a quarterly ESRS E5 + S3 contribution disclosure with full
+          You will receive an annual ESRS E5 + S3 contribution disclosure with full
           FRAME workings and source citations. Climate contribution, not offsetting.
         </p>
         {error ? (

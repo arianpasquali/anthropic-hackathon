@@ -7,10 +7,10 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="KavelPitch"
         component={KavelPitch}
-        durationInFrames={150 * 30}
-        fps={30}
-        width={1920}
-        height={1080}
+        durationInFrames={5134}
+        fps={60}
+        width={1640}
+        height={1118}
         defaultProps={{}}
       />
     </>
