@@ -137,6 +137,19 @@ body {
   text-decoration-thickness: 1px;
 }
 .prose-chat a:hover { color: var(--emerald-deep); }
+
+/* CTA links opt out of the inline anchor underline; color comes from
+   the Tailwind class on the link itself (text-text-on-emerald). */
+.prose-chat .not-prose,
+.prose-chat .not-prose:hover {
+  text-decoration: none;
+}
+.prose-chat a.not-prose { color: var(--text-on-emerald); }
+.prose-chat a.not-prose:hover { color: var(--text-on-emerald); }
+/* Force CTA pill onto its own line so it reads as a button, not inline text. */
+.prose-chat p:has(> .not-prose:only-child) {
+  margin-top: 0.4em;
+}
 .prose-chat code {
   font-family: var(--font-mono);
   font-size: 0.92em;
