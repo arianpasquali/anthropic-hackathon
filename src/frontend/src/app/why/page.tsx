@@ -69,7 +69,7 @@ export default async function WhyPage() {
       <Section
         kicker="02"
         title="A decade of pressure."
-        italic="The 2024 numbers fell 20%. The need didn’t."
+        italic="The 2024 numbers fell 20%. The need did not."
         tone="muted"
       >
         <HistoryTimeline series={data.history.series} maxPeople={maxPeople} />
