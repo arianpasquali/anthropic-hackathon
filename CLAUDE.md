@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-**Klimaatkracht** — a platform connecting Dutch corporates to foodbank climate-contribution funds. Corporates buy contribution packages; money is allocated to foodbanks weighted by CO₂e avoided and/or households served. Claude generates ESRS E5 + S3-aligned climate-contribution disclosures streamed via SSE.
+**Climate Harvest** — a platform connecting Dutch corporates to foodbank climate-contribution funds. Corporates buy contribution packages; money is allocated to foodbanks weighted by CO₂e avoided and/or households served. Claude generates ESRS E5 + S3-aligned climate-contribution disclosures streamed via SSE.
 
 Positioning: **climate contribution, not offsetting.** FRAME-aligned, NL-specific counterfactual (CF=0.93), defensible to Big-4 auditor under ESRS E5.
 

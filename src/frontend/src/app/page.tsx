@@ -43,14 +43,14 @@ export default async function Home() {
         <div className="mx-auto max-w-[1280px] px-6 pt-12 md:pt-20 pb-20 grid lg:grid-cols-[1.4fr_1fr] gap-x-12 gap-y-10 items-end">
         <div>
           <Badge variant="default" className="mb-6">
-            Klimaatkracht · ESRS-aligned
+            Climate Harvest · ESRS-aligned
           </Badge>
           <h1 className="display text-[52px] md:text-[78px] leading-[1.02] tracking-[-0.03em] max-w-[16ch]">
             Verified climate contribution,{" "}
             <span className="display-italic text-emerald-deep">disclosure-ready.</span>
           </h1>
           <p className="mt-7 text-[16px] text-text-muted leading-[1.55] max-w-[58ch]">
-            Klimaatkracht turns Dutch food rescue into ESRS&nbsp;E5 + S3 contribution
+            Climate Harvest turns Dutch food rescue into ESRS&nbsp;E5 + S3 contribution
             disclosures. Fund a package, and a single quarterly contribution is
             allocated across the top food banks in the Netherlands — weighted by the
             FRAME-computed CO₂e baseline we extract from each bank&apos;s annual report.
@@ -194,7 +194,7 @@ export default async function Home() {
               The disclosure your CFO drops into the annual report.
             </h2>
             <p className="text-text-muted text-[14.5px] mt-5 max-w-[44ch] leading-relaxed">
-              Every Klimaatkracht subscription generates an ESRS-aligned
+              Every Climate Harvest subscription generates an ESRS-aligned
               contribution disclosure — composed by Claude, streamed live, every
               figure cited back to a source PDF. Below: a real Q1 2026 paragraph
               from the Heineken pilot.

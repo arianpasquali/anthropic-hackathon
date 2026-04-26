@@ -1,4 +1,4 @@
-# Visual TODO — Klimaatkracht
+# Visual TODO — Climate Harvest
 
 Per-page audit of the frontend, with concrete proposals to move the site from "bland and naked" to editorial / civic-document weight without violating the design system in `globals.css`.
 

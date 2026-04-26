@@ -8,7 +8,7 @@ SCREEN 1 — LANDING  /
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
  ┌────────────────────────────────────────────────────────────────────┐
- │  [KK]  Klimaatkracht       Marketplace  Methodology  For Food Banks│
+ │  [KK]  Climate Harvest       Marketplace  Methodology  For Food Banks│
  ├──────────────────────────────────┬─────────────────────────────────┤
  │  FOR CORPORATES                  │  FOR FOOD BANKS                 │
  │                                  │                                 │
@@ -64,7 +64,7 @@ SCREEN 2 — MARKETPLACE  /marketplace
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
  ┌────────────────────────────────────────────────────────────────────┐
- │  [KK]  Klimaatkracht       Marketplace  Methodology  For Food Banks│
+ │  [KK]  Climate Harvest       Marketplace  Methodology  For Food Banks│
  ├────────────────────────────────────────────────────────────────────┤
  │  VERIFIED AVOIDED EMISSIONS · CSRD-READY                          │
  │  ██████████████████████████████████████████████████               │
@@ -105,7 +105,7 @@ SCREEN 3 — PACKAGE DETAIL  /packages/{id}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
  ┌────────────────────────────────────────────────────────────────────┐
- │  [KK]  Klimaatkracht       Marketplace  Methodology  For Food Banks│
+ │  [KK]  Climate Harvest       Marketplace  Methodology  For Food Banks│
  ├────────────────────────────────────────────┬───────────────────────┤
  │                                            │  ┌─────────────────┐  │
  │  ██████████████████████████████████        │  │ Rotterdam Q pkg │  │
@@ -146,7 +146,7 @@ SCREEN 4 — CORPORATE DASHBOARD  /dashboard/corporate
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
  ┌────────────────────────────────────────────────────────────────────┐
- │  [KK]  Klimaatkracht       Marketplace  Methodology  For Food Banks│
+ │  [KK]  Climate Harvest       Marketplace  Methodology  For Food Banks│
  ├────────────────────────────────────────────────────────────────────┤
  │  [Heineken N.V.] [Corporate sponsor]  Q2 2026   [View CSR report →]│
  ├────────────────────────────────────────────────────────────────────┤
@@ -199,7 +199,7 @@ SCREEN 5 — FOOD BANK DASHBOARD  /dashboard/foodbank
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
  ┌────────────────────────────────────────────────────────────────────┐
- │  [KK]  Klimaatkracht       Marketplace  Methodology  For Food Banks│
+ │  [KK]  Climate Harvest       Marketplace  Methodology  For Food Banks│
  ├────────────────────────────────────────────────────────────────────┤
  │  [Voedselbank Amsterdam] [Food bank operator]  Noord-Holland       │
  ├────────────────────────────────────────────────────────────────────┤
@@ -260,7 +260,7 @@ SCREEN 6 — METHODOLOGY  /methodology
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
  ┌────────────────────────────────────────────────────────────────────┐
- │  [KK]  Klimaatkracht       Marketplace  Methodology  For Food Banks│
+ │  [KK]  Climate Harvest       Marketplace  Methodology  For Food Banks│
  ├────────────────────────────────────────────────────────────────────┤
  │                                                                    │
  │  METHODOLOGY                                            ● live     │

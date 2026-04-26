@@ -8,7 +8,7 @@ export function Footer() {
           <div className="flex items-baseline gap-2 mb-4">
             <span aria-hidden className="block w-2.5 h-2.5 bg-emerald rounded-[1px] translate-y-[1px]" />
             <span className="text-[17px] font-semibold tracking-[-0.02em]">
-              Klimaatkracht
+              Climate Harvest
             </span>
           </div>
           <p className="text-[13px] text-text-muted leading-relaxed max-w-[36ch]">
@@ -45,7 +45,7 @@ export function Footer() {
       <div className="border-t border-line/60">
         <div className="mx-auto max-w-[1280px] px-6 py-6 flex flex-col gap-3">
           <p className="text-[11.5px] text-text-faint leading-relaxed max-w-[88ch]">
-            <span className="text-text-muted">Disclaimer.</span> Klimaatkracht packages
+            <span className="text-text-muted">Disclaimer.</span> Climate Harvest packages
             fund a verified climate contribution and are disclosed under ESRS&nbsp;E5
             (resource use &amp; circular economy) and S3 (affected communities).
             They are not carbon offsets, do not reduce the buyer&apos;s
@@ -57,7 +57,7 @@ export function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-2 text-[12px] text-text-faint tabular">
             <span>Built on FRAME · Aligned with Global FoodBanking Network</span>
             <span>
-              © {new Date().getFullYear()} Klimaatkracht · Sources: FAO · WRAP · RIVM · CBS
+              © {new Date().getFullYear()} Climate Harvest · Sources: FAO · WRAP · RIVM · CBS
             </span>
           </div>
         </div>

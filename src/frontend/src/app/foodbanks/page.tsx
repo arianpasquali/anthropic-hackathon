@@ -7,7 +7,7 @@ import { ProvinceFoodbankList } from "@/components/map/ProvinceFoodbankList"
 import { formatNumber, formatTCO2e } from "@/lib/format"
 
 export const metadata = {
-  title: "Foodbanks · Klimaatkracht",
+  title: "Foodbanks · Climate Harvest",
   description:
     "Every Dutch foodbank we have ingested. Browse FRAME-computed CO₂e baselines, food rescued, and households served — open any operator's transparency profile to cite it directly in your audit trail.",
 }

@@ -2,7 +2,7 @@ import { formatEur } from "@/lib/format"
 import type { ImpactProfile } from "@/lib/types"
 
 // Reference benchmarks (EUR / tCO2e) — voluntary carbon market reference points only,
-// not endorsed as offsets. Klimaatkracht packages are climate contributions.
+// not endorsed as offsets. Climate Harvest packages are climate contributions.
 const BENCHMARKS = [
   { label: "Voluntary average", value: 12, tone: "oklch(78% 0.08 75)" },
   { label: "Gold Standard", value: 35, tone: "oklch(72% 0.10 110)" },

@@ -1,4 +1,4 @@
-# Klimaatkracht — Frontend Consolidated Spec
+# Climate Harvest — Frontend Consolidated Spec
 
 **Date:** 2026-04-25  
 **Supersedes:** `docs/superpowers/specs/2026-04-25-klimaatkracht-frontend-design.md` (Vite draft)  
@@ -206,7 +206,7 @@ export const mockFoodbank = {
 
 Sections top → bottom:
 
-1. **Navbar** — "Klimaatkracht" logo, links: Marketplace / Methodology / For Food Banks
+1. **Navbar** — "Climate Harvest" logo, links: Marketplace / Methodology / For Food Banks
 2. **HeroSplit** — `emerald-900` gradient, 2-col:
    - Left: "Turn food rescue into audit-ready CSR proof" → `[Browse packages →]` → `/marketplace`
    - Right: "Unlock corporate funding for your rescue operations" → `[Join as food bank →]` → `/dashboard/foodbank`

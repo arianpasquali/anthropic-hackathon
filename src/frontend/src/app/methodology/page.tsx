@@ -3,9 +3,9 @@ import { Badge } from "@/components/ui/Badge"
 import { CF_NL, EMISSION_FACTORS, EMISSION_FACTOR_SOURCES, CATEGORY_LABELS } from "@/lib/methodology"
 
 export const metadata = {
-  title: "Methodology · Klimaatkracht",
+  title: "Methodology · Climate Harvest",
   description:
-    "How Klimaatkracht computes climate-contribution CO₂e from Dutch food rescue. FRAME methodology, NL counterfactual, emission factors, and provenance ledger. Contribution claim, not offsetting.",
+    "How Climate Harvest computes climate-contribution CO₂e from Dutch food rescue. FRAME methodology, NL counterfactual, emission factors, and provenance ledger. Contribution claim, not offsetting.",
 }
 
 const PIPELINE = [
@@ -40,7 +40,7 @@ export default function MethodologyPage() {
           <span className="display-italic text-emerald-deep">climate contribution.</span>
         </h1>
         <p className="mt-7 text-text-muted text-[16px] max-w-[64ch] leading-relaxed">
-          Klimaatkracht aligns with FRAME — the Food Recovery Avoided Methane Emissions
+          Climate Harvest aligns with FRAME — the Food Recovery Avoided Methane Emissions
           methodology used by Global FoodBanking Network — and applies a Dutch-specific
           counterfactual based on RIVM Afvalmonitor 2024 + CBS Waste Statistics. Every
           number on this site can be traced back to the field it was extracted from,
@@ -155,7 +155,7 @@ export default function MethodologyPage() {
           </p>
           <p className="mt-4">
             We apply <span className="text-text tabular">CF<sub>NL</sub> = 0.93</span> per RIVM Afvalmonitor 2024
-            and CBS Waste Statistics. This makes Klimaatkracht conservative compared to
+            and CBS Waste Statistics. This makes Climate Harvest conservative compared to
             FRAME defaults — by design.
           </p>
         </div>
@@ -202,7 +202,7 @@ export default function MethodologyPage() {
         </h2>
         <div className="mt-8 grid md:grid-cols-2 gap-x-10 gap-y-4 text-text-muted text-[14px] leading-relaxed max-w-[80ch]">
           <p>
-            Klimaatkracht packages fund verified climate impact at Dutch foodbanks.
+            Climate Harvest packages fund verified climate impact at Dutch foodbanks.
             Corporates disclose this as a <span className="text-text">climate contribution</span>{" "}
             under ESRS&nbsp;E5 (resource use &amp; circular economy) and ESRS&nbsp;S3
             (affected communities) — not as Scope&nbsp;1/2/3 reduction or offset under

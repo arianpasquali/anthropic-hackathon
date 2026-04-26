@@ -18,7 +18,7 @@ def test_health(client):
 def test_llms_txt(client):
     r = client.get("/llms.txt")
     assert r.status_code == 200
-    assert "Klimaatkracht" in r.text
+    assert "Climate Harvest" in r.text
     assert r.headers["content-type"].startswith("text/plain")
 
 

@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse, PlainTextResponse, Response
 router = APIRouter(tags=["discovery"])
 
 _LLMS_TXT = """\
-# Klimaatkracht
+# Climate Harvest
 
 > Dutch platform connecting corporates to foodbank climate impact funds. Corporates buy impact \
 packages; money is allocated to foodbanks weighted by CO₂e savings and households served. \
@@ -34,7 +34,7 @@ CSRD/ESRS E5-compliant reports generated via Claude.
 """
 
 _LLMS_FULL_TXT = """\
-# Klimaatkracht — Full API Reference
+# Climate Harvest — Full API Reference
 
 > Dutch impact investment platform. Corporates subscribe to packages that fund Dutch foodbanks \
 proportionally to their verified CO₂e savings (FRAME methodology) and/or households served. \
@@ -173,14 +173,14 @@ _SITEMAP_XML = """\
 
 _AI_PLUGIN = {
     "schema_version": "v1",
-    "name_for_human": "Klimaatkracht",
-    "name_for_model": "klimaatkracht",
+    "name_for_human": "Climate Harvest",
+    "name_for_model": "climate-harvest",
     "description_for_human": (
         "Invest in Dutch foodbank climate impact. Browse packages, subscribe, "
         "track CO₂e attribution across foodbanks, and generate CSRD reports."
     ),
     "description_for_model": (
-        "Klimaatkracht REST API. Dutch corporates subscribe to impact packages that fund "
+        "Climate Harvest REST API. Dutch corporates subscribe to impact packages that fund "
         "foodbanks proportionally to their verified CO₂e savings (FRAME methodology) and "
         "households served. Public endpoints: GET /packages, GET /insights/aggregate, "
         "GET /insights/banks. Authenticated (cookie session): POST /auth/register, "
@@ -196,7 +196,7 @@ _AI_PLUGIN = {
 }
 
 _AGENT_JSON = {
-    "name": "Klimaatkracht",
+    "name": "Climate Harvest",
     "version": "1.0.0",
     "description": (
         "Platform connecting Dutch corporates to foodbank climate impact funds. "

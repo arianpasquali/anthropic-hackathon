@@ -27,7 +27,7 @@ OPENAPI_TAGS = [
 ]
 
 app = FastAPI(
-    title="Klimaatkracht",
+    title="Climate Harvest",
     version="1.0.0",
     summary="Dutch platform connecting corporates to foodbank climate impact funds.",
     description=(
@@ -40,7 +40,7 @@ app = FastAPI(
         "**Agent discovery:** [`/llms.txt`](/llms.txt) · "
         "[`/.well-known/ai-plugin.json`](/.well-known/ai-plugin.json)"
     ),
-    contact={"name": "Klimaatkracht", "email": "contact@klimaatkracht.nl"},
+    contact={"name": "Climate Harvest", "email": "contact@klimaatkracht.nl"},
     license_info={"name": "Proprietary"},
     openapi_tags=OPENAPI_TAGS,
 )

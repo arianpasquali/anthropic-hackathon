@@ -153,7 +153,7 @@ def mock_report(
         ("Sociale impact uitbreiden", "Voeg % kinderen, huishoudsamenstelling en postcodedata toe voor ESRS S3-rapportage (getroffen gemeenschappen)."),
         ("Jaar-op-jaar vergelijking", f"Stel {reporting_year} als basisjaar in. Volg CO₂e-besparing en bereik per kwartaal om E5-2-doelstellingen aan te tonen."),
         ("Scope-classificatie vastleggen", "Bepaal of de vermeden emissies als Scope 3 categorie 1 (ingekochte goederen) of categorie 15 (investeringen) worden gerapporteerd — beide zijn verdedigbaar maar vereisen consistente methodologie."),
-        ("Klimaatkracht-certificering", "Klimaatkracht B.V. kan een ondertekende datakwaliteitsverklaring afgeven per voedselbank. Neem contact op voor auditondersteuning."),
+        ("Climate Harvest-certificering", "Climate Harvest B.V. kan een ondertekende datakwaliteitsverklaring afgeven per voedselbank. Neem contact op voor auditondersteuning."),
     ]
 
     rec_items = "\n".join(
@@ -184,7 +184,7 @@ def mock_report(
 
 <!-- Top bar -->
 <div class="bg-green-700 text-white py-3 px-8 flex justify-between items-center no-print">
-  <span class="font-semibold tracking-wide">Klimaatkracht</span>
+  <span class="font-semibold tracking-wide">Climate Harvest</span>
   <button onclick="window.print()" class="text-sm bg-white text-green-700 px-4 py-1.5 rounded-full font-medium hover:bg-green-50 transition">
     Afdrukken / PDF
   </button>
@@ -241,7 +241,7 @@ def mock_report(
     </div>
     <div class="px-6 py-5 space-y-4 text-sm text-gray-700 leading-relaxed">
       <p>
-        {user.org_name} heeft in {reporting_year} via het Klimaatkracht-platform deelgenomen aan het
+        {user.org_name} heeft in {reporting_year} via het Climate Harvest-platform deelgenomen aan het
         <strong>{pkg.name if pkg else "klimaatimpactfonds"}</strong>. De investering van
         <strong>€{sub.amount_eur:,.0f}</strong> is gealloceerd aan {len(rows_data)} Nederlandse voedselbanken
         op basis van geverifieerde CO₂e-besparingen conform de FRAME-NL v1.0 methodologie.
@@ -258,7 +258,7 @@ def mock_report(
           Emissiebesparingen zijn berekend op basis van de counterfactuele verwerkingsroute per
           voedselcategorie (stortplaats / vergisting / compostering), vermenigvuldigd met de
           emissiefactoren uit de nationale CO₂e-database. Methodologie: FRAME-NL v1.0.
-          Alle onderliggende data zijn beschikbaar bij Klimaatkracht B.V.
+          Alle onderliggende data zijn beschikbaar bij Climate Harvest B.V.
         </p>
       </div>
     </div>
@@ -319,9 +319,9 @@ def mock_report(
 
   <!-- Disclaimer -->
   <p class="text-xs text-gray-400 text-center leading-relaxed">
-    Dit rapport is gegenereerd door Klimaatkracht B.V. als ondersteuning voor CSRD/ESRS E5-rapportage.
+    Dit rapport is gegenereerd door Climate Harvest B.V. als ondersteuning voor CSRD/ESRS E5-rapportage.
     De vermelde CO₂e-besparingen zijn berekend conform FRAME-NL v1.0 en zijn niet gecertificeerd door een externe auditor.
-    Klimaatkracht B.V. aanvaardt geen aansprakelijkheid voor het gebruik van dit document in formele
+    Climate Harvest B.V. aanvaardt geen aansprakelijkheid voor het gebruik van dit document in formele
     duurzaamheidsverslagen zonder aanvullende verificatie.
   </p>
 

@@ -181,7 +181,7 @@ def aggregate_stats(request: Request, session: Session = Depends(get_session)) -
 
     if "text/markdown" in request.headers.get("accept", ""):
         md = (
-            "## Klimaatkracht Platform Stats\n\n"
+            "## Climate Harvest Platform Stats\n\n"
             f"- **Foodbanks tracked:** {stats.banks_count}\n"
             f"- **Total CO₂e avoided:** {stats.total_tco2e_yr:,.1f} tCO₂e/year\n"
             f"- **Food rescued:** {stats.total_kg_rescued_yr:,.0f} kg/year\n"

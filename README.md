@@ -1,4 +1,4 @@
-# Klimaatkracht
+# Climate Harvest
 
 Platform connecting Dutch corporates to foodbank climate-contribution funds. Corporates buy contribution packages; money is allocated to foodbanks weighted by CO₂e avoided and/or households served. Claude generates ESRS E5 + S3-aligned climate-contribution disclosures, streamed live via SSE.
 

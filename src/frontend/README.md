@@ -1,6 +1,6 @@
-# Klimaatkracht — Frontend
+# Climate Harvest — Frontend
 
-Next.js 16 marketing site + corporate dashboard for Klimaatkracht. Renders the marketplace, foodbank network, methodology, FAQ, and the sample ESRS E5 contribution disclosure.
+Next.js 16 marketing site + corporate dashboard for Climate Harvest. Renders the marketplace, foodbank network, methodology, FAQ, and the sample ESRS E5 contribution disclosure.
 
 > ⚠️ **Not the Next.js you know.** Version 16 has breaking changes — APIs, conventions, and file structure may differ from training data. Read `node_modules/next/dist/docs/` before writing new code. See `AGENTS.md`.
 

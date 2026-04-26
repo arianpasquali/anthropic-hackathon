@@ -3,9 +3,9 @@ import Link from "next/link"
 import { Badge } from "@/components/ui/Badge"
 
 export const metadata = {
-  title: "FAQ · Klimaatkracht",
+  title: "FAQ · Climate Harvest",
   description:
-    "Hard questions about Klimaatkracht — positioning, methodology, marketplace mechanics, partnerships, and business model. Climate contribution, not offsetting.",
+    "Hard questions about Climate Harvest — positioning, methodology, marketplace mechanics, partnerships, and business model. Climate contribution, not offsetting.",
 }
 
 type Q = { q: string; a: React.ReactNode }
@@ -19,12 +19,12 @@ const SECTIONS: Section[] = [
       "The first question every auditor and every skeptic asks. Answered cleanly so the rest of the page can move faster.",
     items: [
       {
-        q: "Is Klimaatkracht a carbon credit?",
+        q: "Is Climate Harvest a carbon credit?",
         a: (
           <>
             <p>
               <strong>No.</strong> Not Verra-certified, not Gold Standard, not a
-              voluntary offset retirement. Klimaatkracht does not issue, retire,
+              voluntary offset retirement. Climate Harvest does not issue, retire,
               or trade credits.
             </p>
             <p className="text-text-muted">
@@ -68,7 +68,7 @@ const SECTIONS: Section[] = [
               footprint.
             </p>
             <p className="text-text-muted">
-              Klimaatkracht sits in the contribution lane. The corporate still
+              Climate Harvest sits in the contribution lane. The corporate still
               has to reduce its own scope 1/2/3 emissions. ESRS E5 disclosures
               describe resource flows — not net-zero math.
             </p>
@@ -130,7 +130,7 @@ const SECTIONS: Section[] = [
               Afvalmonitor 2024 + CBS waste statistics.
             </p>
             <p className="text-text-muted">
-              This makes Klimaatkracht more conservative than naïve FRAME
+              This makes Climate Harvest more conservative than naïve FRAME
               applications and more defensible to auditors familiar with NL
               waste infrastructure.
             </p>
@@ -241,7 +241,7 @@ const SECTIONS: Section[] = [
               Disclosures cite cohorts, not individuals.
             </p>
             <p className="text-text-muted">
-              GDPR posture: Klimaatkracht is the data controller for corporate
+              GDPR posture: Climate Harvest is the data controller for corporate
               sponsor data only. Foodbank operational data flows through a
               data-processing agreement with Voedselbanken Nederland.
             </p>
@@ -381,7 +381,7 @@ export default function FaqPage() {
             <span className="display-italic text-emerald-deep">Answered cleanly.</span>
           </h1>
           <p className="mt-7 text-text-muted text-[16px] max-w-[64ch] leading-relaxed">
-            Klimaatkracht is a contribution claim, not an offset. ESRS E5-aligned,
+            Climate Harvest is a contribution claim, not an offset. ESRS E5-aligned,
             FRAME-grounded, NL-specific. Below: positioning, methodology rigor,
             marketplace mechanics, partnerships, business model, and risk —
             every answer first-sentence-is-the-answer.

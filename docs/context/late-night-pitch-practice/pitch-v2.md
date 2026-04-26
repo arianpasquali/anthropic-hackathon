@@ -1,4 +1,4 @@
-# Klimaatkracht — Pitch v2
+# Climate Harvest — Pitch v2
 
 Source: late-night transcription (Apr 26). Latest canonical idea iteration.
 Format: 5 chapters. ~90 seconds spoken. Each chapter = hook → substance → punchline.
@@ -47,7 +47,7 @@ Format: 5 chapters. ~90 seconds spoken. Each chapter = hook → substance → pu
 ## Chapter 4 — The Platform
 
 **Hook (5s)**
-> "Klimaatkracht. Two-sided marketplace. Live."
+> "Climate Harvest. Two-sided marketplace. Live."
 
 **Substance — show, don't tell (25s)**
 
