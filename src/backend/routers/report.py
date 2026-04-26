@@ -1,7 +1,8 @@
 import uuid
 from datetime import date
+from typing import Literal
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import FileResponse, HTMLResponse, StreamingResponse
 from sqlalchemy import func
 from sqlmodel import Session, select
@@ -48,6 +49,208 @@ async def stream_report_sse(
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
+
+
+@router.get("/{sub_id}/data")
+async def get_report_data(
+    sub_id: uuid.UUID,
+    lang: Literal["nl", "en"] = Query("nl"),
+    session: Session = Depends(get_session),
+    user: User = Depends(get_current_user),
+):
+    t = _T[lang]
+    sub = _get_owned_sub(sub_id, session, user)
+    pkg = session.get(Package, sub.package_id)
+    allocs = session.exec(select(Allocation).where(Allocation.subscription_id == sub_id)).all()
+
+    EF = {"produce": 1.0, "meat_fish": 8.5, "dairy_eggs": 3.2, "dry_goods": 2.0, "bread_bakery": 1.5, "prepared": 3.0}
+    EF_SOURCE = {
+        "produce": "FAO Food Wastage Footprint (2013) Table 4.2",
+        "meat_fish": "FAO FWF gewogen NL vleesmix" if lang == "nl" else "FAO FWF weighted NL meat mix",
+        "dairy_eggs": "FAO FWF + RIVM Dutch dairy LCA",
+        "dry_goods": "FAO FWF + Poore & Nemecek (2018)",
+        "bread_bakery": "WRAP Courtauld Commitment 2030",
+        "prepared": "Poore & Nemecek (2018)",
+    }
+    NL_CF = 0.93
+
+    rows_data = []
+    data_gaps: list[str] = []
+
+    for alloc in sorted(allocs, key=lambda a: a.weight_pct, reverse=True):
+        fb = session.get(Foodbank, alloc.foodbank_id)
+        latest_year = session.exec(
+            select(func.max(AnnualReport.year))
+            .join(FrameResult, FrameResult.report_id == AnnualReport.id)
+            .where(AnnualReport.foodbank_id == alloc.foodbank_id)
+        ).first()
+        annual = session.exec(
+            select(AnnualReport)
+            .where(AnnualReport.foodbank_id == alloc.foodbank_id, AnnualReport.year == latest_year)
+        ).first() if latest_year else None
+        frame = session.exec(select(FrameResult).where(FrameResult.report_id == annual.id)).first() if annual else None
+        people = session.exec(select(PeopleServed).where(PeopleServed.report_id == annual.id)).first() if annual else None
+        cats = session.exec(select(FoodCategories).where(FoodCategories.report_id == annual.id)).first() if annual else None
+
+        fb_name = fb.name if fb else "Unknown"
+        attributed_co2e = (frame.co2e_total_kg if frame else 0.0) * alloc.weight_pct
+        total_kg = (
+            (cats.kg_produce or 0) + (cats.kg_meat_fish or 0) + (cats.kg_dairy_eggs or 0)
+            + (cats.kg_dry_goods or 0) + (cats.kg_bread_bakery or 0) + (cats.kg_prepared or 0)
+        ) if cats else None
+
+        cat_fallback = (
+            frame is not None and cats is not None
+            and (cats.kg_meat_fish is None or cats.kg_meat_fish == 0)
+            and (cats.kg_dairy_eggs is None or cats.kg_dairy_eggs == 0)
+        )
+        if cat_fallback:
+            data_gaps.append(t["data_gap"].format(name=fb_name))
+
+        cat_rows = []
+        if cats and frame:
+            for cat, ef in EF.items():
+                kg_bank = getattr(cats, f"kg_{cat}", None) or 0.0
+                co2e_attr = (getattr(frame, f"co2e_{cat}_kg", 0.0) or 0.0) * alloc.weight_pct
+                if kg_bank > 0:
+                    cat_rows.append({
+                        "category": cat.replace("_", " "),
+                        "kg_attr": round(kg_bank * alloc.weight_pct, 1),
+                        "tco2e_attr": round(co2e_attr / 1000, 3),
+                        "ef": ef,
+                        "source": EF_SOURCE[cat],
+                    })
+
+        city = fb.city if fb else ""
+        slug = city.lower().replace(" ", "-") if city else ""
+        rows_data.append({
+            "name": fb_name,
+            "city": city,
+            "slug": slug,
+            "year": latest_year or "—",
+            "weight_pct": round(alloc.weight_pct * 100, 2),
+            "amount_eur": round(sub.amount_eur * alloc.weight_pct, 2),
+            "bank_co2e_t": round((frame.co2e_total_kg if frame else 0.0) / 1000, 2),
+            "attributed_co2e_t": round(attributed_co2e / 1000, 3),
+            "attribution_share_pct": round(alloc.weight_pct * 100, 2),
+            "households": people.households_weekly if people else None,
+            "individuals": people.individuals_total if people else None,
+            "kg_rescued_attr": round(total_kg * alloc.weight_pct) if total_kg else None,
+            "cat_rows": cat_rows,
+            "methodology": frame.methodology_version if frame else "FRAME-NL v2.0",
+        })
+
+    total_co2e_t = sum(r["attributed_co2e_t"] for r in rows_data)
+    total_households = sum(r["households"] for r in rows_data if r["households"])
+    total_individuals = sum(r["individuals"] for r in rows_data if r["individuals"])
+    eur_per_tco2e = sub.amount_eur / total_co2e_t if total_co2e_t > 0 else 0.0
+    today = date.today()
+    reporting_year = today.year - 1
+
+    trail_lines = []
+    for r in rows_data:
+        trail_lines.append(t["trail_template"].format(
+            name=r["name"], city=r["city"],
+            bank_co2e=f"{r['bank_co2e_t']:,.1f}",
+            pct=f"{r['weight_pct']:.2f}",
+            amount=f"{r['amount_eur']:,.0f}",
+            pct_frac=f"{r['weight_pct'] / 100:.4f}",
+            attr_co2e=f"{r['attributed_co2e_t']:.3f}",
+            households=r["households"] or "—",
+            methodology=r["methodology"],
+        ))
+    trail_header = t["trail_header"].format(
+        org=user.org_name, pkg=pkg.name if pkg else "—",
+        amount=f"{sub.amount_eur:,.0f}", econ=f"{eur_per_tco2e:,.2f}",
+    )
+    trail_footer = t["trail_footer"].format(
+        co2e=f"{total_co2e_t:,.3f}",
+        households=f"{total_households:,}",
+        individuals=f"{total_individuals:,}",
+    )
+
+    recs = [
+        {"title": title, "body": body.format(year=reporting_year, n=0, total=len(rows_data))}
+        for title, body in t["recs"]
+    ]
+
+    return {
+        "lang": lang,
+        "meta": {
+            "org": user.org_name,
+            "package_name": pkg.name if pkg else "—",
+            "impact_profile": pkg.impact_profile.value if pkg else "—",
+            "amount_eur": sub.amount_eur,
+            "sub_id": str(sub_id),
+            "period": reporting_year,
+            "generated": today.strftime("%-d %B %Y"),
+        },
+        "kpis": {
+            "total_co2e_t": round(total_co2e_t, 2),
+            "investment_eur": sub.amount_eur,
+            "eur_per_tco2e": round(eur_per_tco2e, 2),
+            "households_per_week": total_households,
+            "individuals": total_individuals,
+        },
+        "summary": {
+            "body_html": t["summary_body"].format(
+                org=user.org_name, year=reporting_year,
+                amount=f"{sub.amount_eur:,.0f}",
+                pkg=pkg.name if pkg else "—",
+                co2e=f"{total_co2e_t:,.2f}",
+                n_banks=len(rows_data),
+            ),
+            "disclaimer_html": t["summary_disclaimer"].format(org=user.org_name),
+        },
+        "methodology": {
+            "body1_html": t["methodology_body1"].format(eur_per_tco2e=f"{eur_per_tco2e:,.2f}"),
+            "body2_html": t["methodology_body2"].format(cf=NL_CF),
+        },
+        "allocations": rows_data,
+        "data_gaps": data_gaps,
+        "calc_trail": f"{trail_header}\n\n{chr(10).join(trail_lines)}\n{trail_footer}",
+        "emission_factors": [
+            {"category": cat.replace("_", " "), "ef": ef, "source": EF_SOURCE[cat]}
+            for cat, ef in EF.items()
+        ],
+        "nl_cf": NL_CF,
+        "disclaimers": [{"title": title, "body": body} for title, body in t["disc"]],
+        "recommendations": recs,
+        "texts": {
+            "alloc_h2": t["alloc_h2"],
+            "alloc_sub": t["alloc_sub"].format(profile=pkg.impact_profile.value if pkg else "—"),
+            "cat_h2": t["cat_h2"],
+            "cat_sub": t["cat_sub"],
+            "appendix_h2": t["appendix_h2"],
+            "trail_h3": t["trail_h3"],
+            "ef_h3": t["ef_h3"],
+            "cf_h3": t["cf_h3"],
+            "cf_body": t["cf_body"].format(cf=NL_CF),
+            "disc_h2": t["disc_h2"],
+            "rec_h2": t["rec_h2"],
+            "rec_sub": t["rec_sub"],
+            "col_bank": t["col_bank"],
+            "col_alloc": t["col_alloc"],
+            "col_amount": t["col_amount"],
+            "col_bank_co2e": t["col_bank_co2e"],
+            "col_attr_co2e": t["col_attr_co2e"],
+            "col_share": t["col_share"],
+            "col_households": t["col_households"],
+            "col_kg": t["col_kg"],
+            "col_total": t["col_total"],
+            "col_cat": t["col_cat"],
+            "col_kg_attr": t["col_kg_attr"],
+            "col_tco2e_attr": t["col_tco2e_attr"],
+            "col_ef": t["col_ef"],
+            "col_source": t["col_source"],
+            "footer": t["footer"].format(date=today.strftime("%-d %B %Y")),
+            "kpi_co2e": t["kpi_co2e"],
+            "kpi_investment": t["kpi_investment"],
+            "kpi_economics": t["kpi_economics"],
+            "kpi_households": t["kpi_households"],
+            "sources": [t["source_ops"], t["source_ef"], t["source_cf"], t["source_frame"], t["source_esrs"]],
+        },
+    }
 
 
 @router.get("/{sub_id}/mock", response_class=HTMLResponse)
