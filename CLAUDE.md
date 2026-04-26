@@ -96,6 +96,22 @@ Config: `alembic.ini` + `migrations/env.py`. env.py imports all models via `src.
 
 After adding/changing a model field: run `revision --autogenerate`, review the generated file in `migrations/versions/`, then `upgrade head`.
 
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `./scripts/dev.sh` | Start backend (`:8002`) + frontend (`:3000`) concurrently; kills existing processes on those ports first |
+| `./scripts/deploy.sh` | rsync to `klimaatkracht.boxd.sh`, run migrations; add `--restart` to also restart the server |
+| `./scripts/deploy-vercel.sh` | Deploy frontend to Vercel; `BACKEND_URL` defaults to `https://klimaatkracht.boxd.sh`; remove `--prod` flag for preview deployments |
+
+## Known gotcha: frontend ↔ backend connection
+
+`next.config.ts` reads `BACKEND_URL` **at build time** and bakes it into the Next.js rewrite rules (`/api/*` → backend). If `BACKEND_URL` is wrong or empty when Vercel builds, all API calls 404/fail silently after deploy.
+
+- Backend lives at `https://klimaatkracht.boxd.sh` (boxd VM). `api.kavel.tech` is a separate DNS alias that is **not currently active** — never use it as `BACKEND_URL`.
+- `deploy-vercel.sh` sets `BACKEND_URL` on Vercel before each deploy. Verify with `vercel env ls` that it shows `Encrypted` for Production after the script runs.
+- Symptom: frontend loads but login/data calls return network errors immediately after a frontend redeploy.
+
 ## Git
 
 Work directly on `main`. No feature branches.

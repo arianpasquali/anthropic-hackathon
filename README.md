@@ -103,14 +103,26 @@ uv run pytest tests/backend/routers/   # routers only
 
 In-memory SQLite via `conftest.py` fixture; integration-style, no DB mocks.
 
-## Deploy
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `./scripts/dev.sh` | Start backend (`:8002`) + frontend (`:3000`) concurrently |
+| `./scripts/deploy.sh` | rsync + migrate to `klimaatkracht.boxd.sh` |
+| `./scripts/deploy.sh --restart` | Same + restart the server process |
+| `./scripts/deploy-vercel.sh` | Deploy frontend to Vercel (uses `BACKEND_URL` env var, defaults to `https://klimaatkracht.boxd.sh`) |
 
 ```bash
-./scripts/deploy.sh            # sync + migrate (skip restart if running)
-./scripts/deploy.sh --restart  # sync + migrate + restart server
-```
+# Local dev (both services)
+./scripts/dev.sh
 
-Deploys to `klimaatkracht.boxd.sh` via rsync + SSH.
+# Deploy backend to boxd VM
+./scripts/deploy.sh
+./scripts/deploy.sh --restart
+
+# Deploy frontend to Vercel
+./scripts/deploy-vercel.sh
+```
 
 ## Environment variables
 
