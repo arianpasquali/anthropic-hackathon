@@ -93,7 +93,7 @@ export default async function Home() {
           </div>
           <dl className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-line">
             <TractionStat label="Foodbanks onboarded" value="12" delta="+2 this month" />
-            <TractionStat label="Food rescued / yr" value="4,160 t" delta="across pilot banks" />
+            <TractionStat label="Food rescued / yr" value="4,160 t" delta="across pilot food banks" />
             <TractionStat label="Climate contribution" value="7,718 tCO₂e" delta="FRAME-computed" />
             <TractionStat label="Pre-launch committed" value="€425k" delta="+€75k this week" emphasis />
           </dl>
