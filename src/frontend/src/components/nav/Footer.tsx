@@ -6,7 +6,12 @@ export function Footer() {
       <div className="mx-auto max-w-[1280px] px-6 py-16 grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-12">
         <div>
           <div className="flex items-baseline gap-2 mb-4">
-            <img src="/logo.svg" alt="Kavel" height={22} className="block" />
+            <svg viewBox="200 45 430 120" height={33} aria-label="Kavel" xmlns="http://www.w3.org/2000/svg" style={{display:"block"}}>
+              <text x="200" y="156" fontFamily="Boska, ui-serif, Georgia, serif" fontSize="116" fontWeight="400" letterSpacing="-3" fill="#181613">kavel</text>
+              <line x1="226" y1="80" x2="226" y2="68" stroke="#0E5132" strokeWidth="1.8" strokeLinecap="round"/>
+              <ellipse cx="234" cy="62" rx="11" ry="4.6" fill="#0E5132" transform="rotate(-30 234 62)"/>
+              <ellipse cx="220" cy="58" rx="7" ry="3" fill="#0E5132" transform="rotate(-55 220 58)" opacity="0.7"/>
+            </svg>
           </div>
           <p className="text-[13px] text-text-muted leading-relaxed max-w-[36ch]">
             Verified climate contribution from Dutch food rescue. Built on FRAME with
