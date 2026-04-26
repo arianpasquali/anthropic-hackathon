@@ -6,6 +6,7 @@ import type {
   Package,
   PackageDetail,
   QuarterlyPoint,
+  ReportData,
   Subscription,
   SubscriptionDetail,
   SubscriptionPacing,
@@ -113,6 +114,8 @@ export const api = {
     req<{ sub_id: string; stream_url: string }>(`/report/${subId}/generate`, {
       method: "POST",
     }),
+  getReportData: (subId: string, lang: "nl" | "en" = "nl") =>
+    req<ReportData>(`/report/${subId}/data?lang=${lang}`),
   reportStreamUrl: (subId: string) => `${BASE}/report/${subId}/stream`,
   reportDownloadUrl: (subId: string) => `${BASE}/report/${subId}/download`,
 }
