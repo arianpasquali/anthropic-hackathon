@@ -48,54 +48,54 @@ export default async function Home() {
             className="object-cover"
           />
         </div>
-        <div className="mx-auto max-w-[1280px] px-6 pt-10 md:pt-14 pb-14 grid lg:grid-cols-[1.4fr_1fr] gap-x-12 gap-y-8 items-end">
-        <div>
-          <Badge variant="default" className="mb-6">
-            Climate Harvest · ESRS-aligned
-          </Badge>
-          <h1 className="display text-[44px] md:text-[64px] leading-[1.02] tracking-[-0.03em] max-w-[16ch]">
-            Translating Food Banks{" "}
-            <span className="display-italic text-emerald-deep">into Climate Action.</span>
-          </h1>
-          <p className="mt-7 text-[16px] text-text-muted leading-[1.55] max-w-[58ch]">
-            Climate Harvest turns Dutch food rescue into ESRS&nbsp;E5 + S3 contribution
-            disclosures. Fund a package, and your contribution is allocated across 
-            a portfolio of the top food banks in the Netherlands. 
-            Sources cited; provenance tagged; counterfactual disclosed. Climate
-            contribution, not offsetting.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link
-              href="/marketplace"
-              className="bg-emerald text-text-on-emerald h-12 px-6 inline-flex items-center text-[14.5px] font-medium hover:bg-emerald-deep transition-colors"
-            >
-              Browse funds →
-            </Link>
-            <Link
-              href="/for-foodbanks"
-              className="border border-line h-12 px-6 inline-flex items-center text-[14.5px] hover:bg-surface-2 transition-colors"
-            >
-              Join as a food bank
-            </Link>
-          </div>
-          <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] text-text-faint">
-            <span>FRAME aligned</span>
-            <span aria-hidden>·</span>
-            <span>ESRS E5 + S3</span>
-            <span aria-hidden>·</span>
-            <span>Contribution claim</span>
-            <span aria-hidden>·</span>
-            <span>NL counterfactual</span>
-          </div>
-        </div>
+        <div className="mx-auto max-w-[1280px] px-6 pt-10 md:pt-14 pb-12 grid lg:grid-cols-2 gap-x-12 items-end">
+          <div>
+            <Badge variant="default" className="mb-6">
+              Climate Harvest · ESRS-aligned
+            </Badge>
+            <h1 className="display text-[44px] md:text-[64px] leading-[1.02] tracking-[-0.03em] max-w-[16ch]">
+              Translating Food Banks{" "}
+              <span className="display-italic text-emerald-deep">into Climate Action.</span>
+            </h1>
+            <p className="mt-7 text-[15.5px] text-text-muted leading-[1.55] max-w-[54ch]">
+              Climate Harvest turns Dutch food rescue into ESRS&nbsp;E5 + S3 contribution
+              disclosures. Fund a package, and your contribution is allocated across
+              a portfolio of the top food banks in the Netherlands.
+              Sources cited; provenance tagged; counterfactual disclosed. Climate
+              contribution, not offsetting.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/marketplace"
+                className="bg-emerald text-text-on-emerald h-12 px-6 inline-flex items-center text-[14.5px] font-medium hover:bg-emerald-deep transition-colors"
+              >
+                Browse funds →
+              </Link>
+              <Link
+                href="/for-foodbanks"
+                className="border border-line h-12 px-6 inline-flex items-center text-[14.5px] hover:bg-surface-2 transition-colors"
+              >
+                Join as a food bank
+              </Link>
+            </div>
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] text-text-faint">
+              <span>FRAME aligned</span>
+              <span aria-hidden>·</span>
+              <span>ESRS E5 + S3</span>
+              <span aria-hidden>·</span>
+              <span>Contribution claim</span>
+              <span aria-hidden>·</span>
+              <span>NL counterfactual</span>
+            </div>
 
-        {/* Stats stack — typographic, no card chrome */}
-        <dl className="grid grid-cols-2 gap-x-8 gap-y-8 lg:pl-8 lg:border-l lg:border-line">
-          <Stat label="Contribution / yr" value={formatTCO2e(totalTco2e)} />
-          <Stat label="Rescued / yr" value={`${formatNumber(totalKg / 1_000_000, { maximumFractionDigits: 1 })}M kg`} />
-          <Stat label="Households / wk" value={formatNumber(totalHouseholds)} />
-          <Stat label="Food banks" value={formatNumber(banks.length)} />
-        </dl>
+            {/* Stats — typographic strip under the text column, photo stays clean */}
+            <dl className="mt-10 pt-7 border-t border-line grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-6">
+              <Stat label="Contribution / yr" value={formatTCO2e(totalTco2e)} />
+              <Stat label="Rescued / yr" value={`${formatNumber(totalKg / 1_000_000, { maximumFractionDigits: 1 })}M kg`} />
+              <Stat label="Households / wk" value={formatNumber(totalHouseholds)} />
+              <Stat label="Food banks" value={formatNumber(banks.length)} />
+            </dl>
+          </div>
         </div>
       </section>
 
