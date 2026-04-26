@@ -346,7 +346,7 @@ const SECTIONS: Section[] = [
             <p>
               Voluntary carbon platforms (Klima, Patch) do not touch food rescue.
               Food-rescue operators (Too Good To Go, OLIO) do not generate
-              audit-grade ESRS disclosures. The intersection — FRAME-aligned
+              auditor-defensible ESRS disclosures. The intersection — FRAME-aligned
               contribution disclosures sold as a CSRD-grade artifact — is open.
             </p>
             <p className="text-text-muted">

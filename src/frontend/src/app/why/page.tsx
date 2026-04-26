@@ -5,7 +5,7 @@ import { loadImpact, fmtInt, type Stat } from "@/lib/impact"
 export const metadata = {
   title: "Why · Climate Harvest",
   description:
-    "The size of the gap, the urgency of the regulatory clock, and the contribution capacity Climate Harvest unlocks. Six citable arguments.",
+    "The size of the gap, the urgency of the regulatory clock, and the contribution capacity Climate Harvest funds. Six citable arguments.",
 }
 
 export default async function WhyPage() {
@@ -36,7 +36,7 @@ export default async function WhyPage() {
           <p className="mt-7 text-text-muted text-[16px] max-w-[64ch] leading-relaxed">
             Four sections, four citable arguments. The size of the gap, the
             urgency of the regulatory clock, and the contribution capacity this
-            platform unlocks. Every figure derived from publicly published
+            platform funds. Every figure derived from publicly published
             Voedselbanken Nederland reports, EU regulatory schedules, and the
             FRAME-aligned methodology documented in{" "}
             <Link href="/methodology" className="text-emerald hover:underline">
@@ -91,7 +91,7 @@ export default async function WhyPage() {
         <p className="mt-10 text-text-muted text-[14.5px] leading-relaxed max-w-[64ch]">
           Wave-2 timing was delayed by the EU&apos;s February 2025 Omnibus
           proposal, but the obligation is in scope and assurance is coming. The
-          audit-grade infrastructure to disclose ESRS&nbsp;E5 + S3 climate
+          auditor-defensible infrastructure to disclose ESRS&nbsp;E5 + S3 climate
           contribution does not yet exist in non-energy sectors. CSR teams
           reach for half-defensible carbon credits and offset narratives;
           auditors push back. Climate Harvest fills that gap with measured,

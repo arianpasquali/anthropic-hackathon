@@ -112,7 +112,7 @@ export default function PricingPage() {
             Annual climate-contribution packages, allocated across the top Dutch
             foodbanks and disclosed under ESRS&nbsp;E5&nbsp;+&nbsp;S3. Pay for
             verified contribution, never platform seats. Same FRAME methodology,
-            same provenance ledger, same audit-grade output at every tier.
+            same provenance ledger, same auditor-defensible output at every tier.
           </p>
         </div>
       </section>

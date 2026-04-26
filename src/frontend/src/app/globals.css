@@ -283,6 +283,53 @@ body {
   opacity: 0.18;
 }
 
+/* Hero hard-split treatment — photo lives on the right half on lg+,
+   left edge feathers softly into the surface so the type column reads
+   as a solid editorial panel. Mobile: photo full-bleed with overall haze. */
+.kk-photo-split {
+  background: var(--surface);
+}
+.kk-photo-split img {
+  filter: grayscale(0.35) contrast(1.0) brightness(1.02);
+}
+@media (max-width: 1023px) {
+  /* Mobile: image is ambient — pull it back so text wins */
+  .kk-photo-split img { opacity: 0.35; }
+}
+@media (min-width: 1024px) {
+  /* Desktop: only the right half holds the photo. Feather left edge
+     into the surface so it reads editorial, not as a hard slice. */
+  .kk-photo-split img { opacity: 0.95; }
+  .kk-photo-split {
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.4) 6%,
+      #000 14%,
+      #000 100%
+    );
+            mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.4) 6%,
+      #000 14%,
+      #000 100%
+    );
+  }
+}
+.kk-photo-split::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 60%,
+    color-mix(in oklch, var(--emerald-deep) 10%, transparent) 100%
+  );
+  pointer-events: none;
+}
+
 /* Full-bleed hero background — phased horizontal alpha.
    Left half: heavy scrim so headline + body copy stay readable.
    Right half: minimal scrim so the photograph reads naturally. */

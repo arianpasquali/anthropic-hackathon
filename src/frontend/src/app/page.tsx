@@ -33,24 +33,21 @@ export default async function Home() {
 
   return (
     <div className="overflow-hidden">
-      {/* Hero */}
-      <section className="relative isolate">
-        <div aria-hidden className="kk-photo-hero absolute inset-0 -z-10">
+      {/* Hero — hard split: solid surface left, photo right (desktop) */}
+      <section className="relative isolate bg-surface overflow-hidden">
+        <div
+          aria-hidden
+          className="kk-photo-split absolute inset-0 lg:left-1/2 lg:right-0 -z-10"
+        >
           <Image
             src="https://images.unsplash.com/photo-1506617564039-2f3b650b7010?auto=format&fit=crop&w=2400&q=80"
             alt=""
             fill
-            sizes="100vw"
+            sizes="(min-width: 1024px) 50vw, 100vw"
             priority
             className="object-cover"
           />
         </div>
-        <p
-          aria-hidden
-          className="absolute right-4 top-4 text-[10px] tracking-[0.08em] uppercase text-text-faint italic z-10"
-        >
-          Stock placeholder · imagery to be commissioned
-        </p>
         <div className="mx-auto max-w-[1280px] px-6 pt-10 md:pt-14 pb-14 grid lg:grid-cols-[1.4fr_1fr] gap-x-12 gap-y-8 items-end">
         <div>
           <Badge variant="default" className="mb-6">
