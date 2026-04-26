@@ -171,7 +171,7 @@ export function AdoptionSlider({
             </p>
             <p className="mt-2.5 text-[13.5px] text-warning-deep leading-relaxed">
               Growth requires expansion: onboarding additional banks from
-              VBN&apos;s 180-bank network, regional cluster sponsorships, or
+              VBN&apos;s 181-bank network, regional cluster sponsorships, or
               extending the platform to other EU countries with FRAME-aligned
               foodbanking infrastructure.
             </p>
@@ -179,7 +179,7 @@ export function AdoptionSlider({
         ) : pct < 1 ? (
           <p className="text-[13.5px] text-text-muted leading-relaxed">
             <strong className="text-text">For context:</strong> a 1% adoption
-            rate brings €1.75M to Dutch foodbanks each year — comparable to{" "}
+            rate brings €1.75M to Dutch foodbanks each year — approaching half of{" "}
             <a
               href={vbnBudgetSourceUrl}
               target="_blank"

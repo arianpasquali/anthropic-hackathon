@@ -119,7 +119,7 @@
     "nl_food_waste_tco2e": 7000000,
     "currently_disclosed_tco2e": 0,
     "current_mitigation_share_pct": 1.07,
-    "source_label": "Derived: 40M kg \u00d7 1.85 kg CO2e/kg (NL-counterfactual-adjusted FRAME weighted average \u2014 see /methodology)",
+    "source_label": "Derived: 40M kg \u00d7 1.875 kg CO2e/kg (NL-counterfactual-adjusted FRAME weighted average \u2014 see /methodology)",
     "source_url": "/methodology"
   },
   "adoption_scenarios": {
@@ -156,8 +156,8 @@
       {
         "adoption_pct": 5,
         "companies": 350,
-        "funds_eur": 3125000,
-        "tco2e": 75000
+        "funds_eur": 8750000,
+        "tco2e": 210000
       }
     ],
     "vbn_budget_source_label": "VBN Feiten en Cijfers 2024",
