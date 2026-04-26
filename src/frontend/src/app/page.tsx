@@ -1,8 +1,9 @@
+import Image from "next/image"
 import Link from "next/link"
 import { api } from "@/lib/api"
 import { NLProvinceFoodbankHeatMapDynamic } from "@/components/map/NLProvinceFoodbankHeatMapDynamic"
 import { ProvinceFoodbankList } from "@/components/map/ProvinceFoodbankList"
-
+import { PlatformSpread } from "@/components/marketing/PlatformSpread"
 import { Badge } from "@/components/ui/Badge"
 import { formatNumber, formatTCO2e } from "@/lib/format"
 
@@ -15,7 +16,24 @@ export default async function Home() {
   return (
     <div className="overflow-hidden">
       {/* Hero */}
-      <section className="mx-auto max-w-[1280px] px-6 pt-12 md:pt-20 pb-20 grid lg:grid-cols-[1.4fr_1fr] gap-x-12 gap-y-10 items-end">
+      <section className="relative isolate">
+        <div aria-hidden className="kk-photo-hero kk-parallax-hero absolute inset-0 -z-10">
+          <Image
+            src="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&w=2400&q=80"
+            alt=""
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover"
+          />
+        </div>
+        <p
+          aria-hidden
+          className="absolute right-4 top-4 text-[10px] tracking-[0.08em] uppercase text-text-faint italic z-10"
+        >
+          Stock placeholder · imagery to be commissioned
+        </p>
+        <div className="mx-auto max-w-[1280px] px-6 pt-12 md:pt-20 pb-20 grid lg:grid-cols-[1.4fr_1fr] gap-x-12 gap-y-10 items-end">
         <div>
           <Badge variant="default" className="mb-6">
             Klimaatkracht · ESRS-aligned
@@ -40,7 +58,7 @@ export default async function Home() {
               Browse funds →
             </Link>
             <Link
-              href="/dashboard/foodbank"
+              href="/for-foodbanks"
               className="border border-line h-12 px-6 inline-flex items-center text-[14.5px] hover:bg-surface-2 transition-colors"
             >
               Join as a food bank
@@ -64,6 +82,7 @@ export default async function Home() {
           <Stat label="Households / wk" value={formatNumber(totalHouseholds)} />
           <Stat label="Food banks" value={formatNumber(banks.length)} />
         </dl>
+        </div>
       </section>
 
       {/* Traction strip — quantified momentum */}
@@ -136,37 +155,26 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Climate contribution, not offsetting — pre-empt the #1 objection */}
+      {/* Climate contribution, not offsetting — landing callout, full version on /faq */}
       <section className="border-t border-line bg-emerald-soft/30">
-        <div className="mx-auto max-w-[1280px] px-6 py-14 grid md:grid-cols-[1fr_2fr] gap-x-12 gap-y-6 items-start">
-          <div>
+        <div className="mx-auto max-w-[1280px] px-6 py-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div className="max-w-[58ch]">
             <p className="eyebrow">What this is not</p>
             <h2 className="display text-3xl mt-3 tracking-[-0.02em] leading-[1.1]">
               Climate contribution.{" "}
               <span className="display-italic text-emerald-deep">Not offsetting.</span>
             </h2>
-          </div>
-          <div className="text-[14.5px] leading-relaxed flex flex-col gap-4 max-w-[58ch]">
-            <p>
-              Klimaatkracht is <strong className="font-semibold">not</strong> a
-              carbon credit. It is not Verra-certified, not Gold Standard, not a
-              voluntary offset retirement.
-            </p>
-            <p className="text-text-muted">
-              It is an <em className="display-italic text-text">attributed
-              climate-contribution disclosure</em> — aligned with the EU
-              Code of Conduct on Climate Contribution Claims (May 2025), and
-              defensible to a Big-4 auditor under ESRS E5. Cleaner positioning,
-              faster to market, no double-counting risk.
-            </p>
-            <p className="text-text-muted">
-              The foodbanks publish operational data — kg, households,
-              demographics. <strong className="font-semibold text-text">None of
-              the six in our network currently quantify avoided emissions in
-              their own reports.</strong> Sponsors receive the only formal
-              climate-contribution disclosure derived from those operations.
+            <p className="mt-4 text-[14.5px] text-text-muted leading-relaxed">
+              ESRS E5-aligned, FRAME-grounded, defensible to a Big-4 auditor —
+              not a Verra credit, not a voluntary offset.
             </p>
           </div>
+          <Link
+            href="/faq"
+            className="text-[14px] font-medium text-emerald hover:underline whitespace-nowrap"
+          >
+            Read the FAQ →
+          </Link>
         </div>
       </section>
 
@@ -247,11 +255,14 @@ export default async function Home() {
             title="Upload your annual report."
             italic="Unlock corporate funding."
             body="Drop your annual report PDF. Claude extracts food volumes, categories, and people served — every measurement tagged with extracted, inferred, or computed. FRAME does the rest. Once your data is in, you appear in the marketplace and corporates can sponsor your operations."
-            href="/dashboard/foodbank"
+            href="/for-foodbanks"
             cta="Join as a food bank →"
           />
         </div>
       </section>
+
+      {/* Two-sided ledger spread */}
+      <PlatformSpread />
 
       {/* How it works */}
       <section className="mx-auto max-w-[1280px] px-6 py-24">

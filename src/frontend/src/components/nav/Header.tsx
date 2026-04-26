@@ -25,8 +25,11 @@ export function Header() {
           <Link href="/methodology" className="text-text-muted hover:text-text transition-colors">
             Methodology
           </Link>
-          <Link href="/dashboard/foodbank" className="text-text-muted hover:text-text transition-colors">
+          <Link href="/for-foodbanks" className="text-text-muted hover:text-text transition-colors">
             For food banks
+          </Link>
+          <Link href="/faq" className="text-text-muted hover:text-text transition-colors">
+            FAQ
           </Link>
           <Link
             href="/login"
