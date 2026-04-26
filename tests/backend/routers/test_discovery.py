@@ -46,7 +46,7 @@ def test_ai_plugin_json(client):
     r = client.get("/.well-known/ai-plugin.json")
     assert r.status_code == 200
     data = r.json()
-    assert data["name_for_model"] == "klimaatkracht"
+    assert data["name_for_model"] == "climate-harvest"
     assert "openapi.json" in data["api"]["url"]
 
 
