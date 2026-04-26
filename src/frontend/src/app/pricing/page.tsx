@@ -34,8 +34,8 @@ const STARTER: BuyTier = {
   name: "Starter",
   price: "€10k",
   period: "/ year",
-  co2e: "~320 tCO₂e / yr",
-  pricePerTonne: "€31 / tCO₂e",
+  co2e: "~240 tCO₂e / yr",
+  pricePerTonne: "€41.67 / tCO₂e",
   blurb:
     "Entry tier for first-time disclosers. Funds the social-reach allocation track — top households-served foodbanks across the Netherlands.",
   features: [
@@ -55,8 +55,8 @@ const PARTNER: BuyTier = {
   name: "Partner",
   price: "€100k",
   period: "/ year",
-  co2e: "~3,200 tCO₂e / yr",
-  pricePerTonne: "€31 / tCO₂e",
+  co2e: "~2,400 tCO₂e / yr",
+  pricePerTonne: "€41.67 / tCO₂e",
   blurb:
     "The disclosure-grade tier for CSRD-mandated reporters. Allocation is weighted by FRAME-computed CO₂e baseline across the top operators in the network.",
   features: [

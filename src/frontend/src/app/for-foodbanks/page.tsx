@@ -102,7 +102,7 @@ export default async function ForFoodbanksPage() {
           </div>
           <dl className="grid grid-cols-2 gap-x-8 gap-y-6 lg:pl-8 lg:border-l lg:border-line">
             <Stat label="Operators ingested" value={formatNumber(banks.length)} />
-            <Stat label="NL network total" value="~170" />
+            <Stat label="NL network total" value="~181" />
             <Stat
               label="Annual rescue (network)"
               value={`${formatNumber(totalKg / 1_000_000, { maximumFractionDigits: 1 })}M kg`}

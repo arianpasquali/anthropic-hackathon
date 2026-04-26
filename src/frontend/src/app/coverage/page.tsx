@@ -390,7 +390,7 @@ function SourceBlock({ scale }: { scale: CoverageData["scale"] }) {
         <span className="font-semibold text-text-muted">
           Bank coordinates:
         </span>{" "}
-        hand-curated for the 6 demo banks (HQ / regional DC). Other 174 NL
+        hand-curated for the 6 demo banks (HQ / regional DC). Other 175 NL
         banks not yet plotted.
       </p>
     </div>

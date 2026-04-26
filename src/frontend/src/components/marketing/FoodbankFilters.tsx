@@ -62,7 +62,7 @@ export function FoodbankFilters({ banks }: { banks: Bank[] }) {
             {banks.length} foodbanks ingested
           </span>
           <span aria-hidden className="text-text-faint">·</span>
-          <span className="tabular text-text-faint">170-bank network on roadmap</span>
+          <span className="tabular text-text-faint">181-bank network on roadmap</span>
         </div>
         <label className="flex items-center gap-2 text-[12.5px] text-text-muted">
           <span>Sort</span>

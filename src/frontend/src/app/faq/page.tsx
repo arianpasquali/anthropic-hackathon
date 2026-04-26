@@ -45,8 +45,8 @@ const SECTIONS: Section[] = [
           <>
             <p>
               <strong>No.</strong> Foodbanks publish operational data — kilograms,
-              households, demographics. None of the six in our network currently
-              quantify avoided emissions in their own reports.
+              households, demographics. None of the operators in our network
+              currently quantify avoided emissions in their own reports.
             </p>
             <p className="text-text-muted">
               Sponsors receive the only formal climate-contribution disclosure
@@ -296,7 +296,7 @@ const SECTIONS: Section[] = [
             <p>
               CSRD applies EU-wide, but ESRS E5 disclosure quality and FRAME
               applicability vary by country waste infrastructure. NL is a
-              tractable wedge: ~180 foodbanks, one umbrella organisation
+              tractable wedge: ~181 foodbanks, one umbrella organisation
               (Voedselbanken Nederland), homogeneous waste system, English-
               and Dutch-fluent corporates.
             </p>

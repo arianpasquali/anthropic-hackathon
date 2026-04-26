@@ -41,7 +41,7 @@ export default async function FoodbanksIndexPage() {
           </div>
           <p className="text-text-muted text-[15px] leading-relaxed max-w-[42ch]">
             {formatNumber(banks.length)} Dutch foodbanks ingested so far. The
-            Voedselbanken Nederland network counts ~170 operators in total — the
+            Voedselbanken Nederland network counts ~181 operators in total — the
             extraction queue keeps moving each week. Open any operator&apos;s
             transparency profile to cite their FRAME workings directly.
           </p>
