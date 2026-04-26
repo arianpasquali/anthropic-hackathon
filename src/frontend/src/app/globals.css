@@ -288,30 +288,32 @@ body {
    Right half: minimal scrim so the photograph reads naturally. */
 .kk-photo-hero {
   background: var(--surface);
-  filter: grayscale(0.55) contrast(1.02);
+  filter: grayscale(0.45) contrast(1.0) brightness(1.05);
 }
 .kk-photo-hero img {
   mix-blend-mode: multiply;
-  opacity: 0.85;
+  opacity: 0.7;
 }
 .kk-photo-hero::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
+    /* Stronger left wash so headline + body copy are unambiguous */
     linear-gradient(
       90deg,
-      color-mix(in oklch, var(--surface) 96%, transparent) 0%,
-      color-mix(in oklch, var(--surface) 88%, transparent) 28%,
-      color-mix(in oklch, var(--surface) 50%, transparent) 55%,
-      color-mix(in oklch, var(--surface) 12%, transparent) 80%,
-      transparent 100%
+      color-mix(in oklch, var(--surface) 99%, transparent) 0%,
+      color-mix(in oklch, var(--surface) 96%, transparent) 35%,
+      color-mix(in oklch, var(--surface) 65%, transparent) 60%,
+      color-mix(in oklch, var(--surface) 25%, transparent) 85%,
+      color-mix(in oklch, var(--surface) 10%, transparent) 100%
     ),
+    /* Light global haze keeps right side from competing with text */
     linear-gradient(
       180deg,
-      transparent 0%,
-      transparent 65%,
-      color-mix(in oklch, var(--emerald-deep) 14%, transparent) 100%
+      color-mix(in oklch, var(--surface) 30%, transparent) 0%,
+      color-mix(in oklch, var(--surface) 18%, transparent) 50%,
+      color-mix(in oklch, var(--emerald-deep) 12%, transparent) 100%
     );
   pointer-events: none;
 }

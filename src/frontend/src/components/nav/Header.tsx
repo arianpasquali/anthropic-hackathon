@@ -23,16 +23,13 @@ export function Header() {
             Start here
           </Link>
           <Link href="/marketplace" className="text-text-muted hover:text-text transition-colors">
-            Marketplace
-          </Link>
-          <Link href="/methodology" className="text-text-muted hover:text-text transition-colors">
-            Methodology
-          </Link>
-          <Link href="/for-foodbanks" className="text-text-muted hover:text-text transition-colors">
-            For food banks
+            Funds
           </Link>
           <Link href="/why" className="text-text-muted hover:text-text transition-colors">
             Why
+          </Link>
+          <Link href="/methodology" className="text-text-muted hover:text-text transition-colors">
+            How
           </Link>
           <Link
             href="/login"

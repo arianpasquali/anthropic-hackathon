@@ -51,12 +51,12 @@ export default async function Home() {
         >
           Stock placeholder · imagery to be commissioned
         </p>
-        <div className="mx-auto max-w-[1280px] px-6 pt-12 md:pt-20 pb-20 grid lg:grid-cols-[1.4fr_1fr] gap-x-12 gap-y-10 items-end">
+        <div className="mx-auto max-w-[1280px] px-6 pt-10 md:pt-14 pb-14 grid lg:grid-cols-[1.4fr_1fr] gap-x-12 gap-y-8 items-end">
         <div>
           <Badge variant="default" className="mb-6">
             Climate Harvest · ESRS-aligned
           </Badge>
-          <h1 className="display text-[52px] md:text-[78px] leading-[1.02] tracking-[-0.03em] max-w-[16ch]">
+          <h1 className="display text-[44px] md:text-[64px] leading-[1.02] tracking-[-0.03em] max-w-[16ch]">
             Verified climate contribution,{" "}
             <span className="display-italic text-emerald-deep">disclosure-ready.</span>
           </h1>
@@ -124,49 +124,33 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Pilot partners — full-width trust bars */}
-      <section className="border-t border-line overflow-hidden">
-        <div className="mx-auto max-w-[1280px] px-6 pt-14 pb-4">
-          <p className="eyebrow mb-8">Pilot partners</p>
-          <p className="eyebrow text-text-faint mb-4">Foodbank operators</p>
-        </div>
-        <LogoCarousel logos={COATOFARMS_LOGOS} itemHeight="h-12" speed={32} copies={6} />
-        <div className="mx-auto max-w-[1280px] px-6 pt-8 pb-4">
-          <p className="eyebrow text-text-faint mb-4">Corporate commitments</p>
-        </div>
-        <LogoCarousel logos={CORPORATE_LOGOS} copies={4} />
-        <div className="mx-auto max-w-[1280px] px-6 pb-14">
-          <p className="text-[11px] text-text-faint mt-3 italic">
-            Letters of intent · contracts pending Sunday demo
-          </p>
-        </div>
-      </section>
+      {/* Two-sided ledger spread */}
+      <PlatformSpread />
 
-      {/* Climate contribution, not offsetting — landing callout, full version on /faq */}
-      <section className="border-t border-line bg-emerald-soft/30">
-        <div className="mx-auto max-w-[1280px] px-6 py-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-          <div className="max-w-[58ch]">
-            <p className="eyebrow">What this is not</p>
-            <h2 className="display text-3xl mt-3 tracking-[-0.02em] leading-[1.1]">
-              Climate contribution.{" "}
-              <span className="display-italic text-emerald-deep">Not offsetting.</span>
-            </h2>
-            <p className="mt-4 text-[14.5px] text-text-muted leading-relaxed">
-              ESRS E5-aligned, FRAME-grounded, defensible to a Big-4 auditor —
-              not a Verra credit, not a voluntary offset.
-            </p>
-          </div>
-          <Link
-            href="/faq"
-            className="text-[14px] font-medium text-emerald hover:underline whitespace-nowrap"
-          >
-            Read the FAQ →
-          </Link>
+      {/* Audience split — narrative trust */}
+      <section className="border-y border-line bg-surface-2">
+        <div className="mx-auto max-w-[1280px] px-6 py-20 grid md:grid-cols-2 gap-x-12 gap-y-10">
+          <Pitch
+            kicker="For corporates"
+            title="Buy a fund."
+            italic="Receive a disclosure-ready report."
+            body="The fund subscribes you to a quarterly contribution stream. The allocation engine ranks Dutch food banks by FRAME-computed CO₂e baseline or social reach — and weights your contribution accordingly. Every quarter, Claude composes an ESRS E5 + S3 contribution disclosure with full FRAME workings, source citations, and provenance ledger."
+            href="/marketplace"
+            cta="Browse funds →"
+          />
+          <Pitch
+            kicker="For food banks"
+            title="Upload your annual report."
+            italic="Unlock corporate funding."
+            body="Drop your annual report PDF. Claude extracts food volumes, categories, and people served — every measurement tagged with extracted, inferred, or computed. FRAME does the rest. Once your data is in, you appear in the marketplace and corporates can sponsor your operations."
+            href="/for-foodbanks"
+            cta="Join as a food bank →"
+          />
         </div>
       </section>
 
       {/* Disclosure receipt — show, don't tell */}
-      <section className="border-t border-line">
+      <section className="border-b border-line">
         <div className="mx-auto max-w-[1280px] px-6 py-20 grid lg:grid-cols-[1fr_1.4fr] gap-x-12 gap-y-10 items-start">
           <div>
             <p className="eyebrow">The artifact</p>
@@ -225,31 +209,6 @@ export default async function Home() {
           </figure>
         </div>
       </section>
-
-      {/* Audience split — narrative trust */}
-      <section className="border-y border-line bg-surface-2">
-        <div className="mx-auto max-w-[1280px] px-6 py-20 grid md:grid-cols-2 gap-x-12 gap-y-10">
-          <Pitch
-            kicker="For corporates"
-            title="Buy a fund."
-            italic="Receive a disclosure-ready report."
-            body="The fund subscribes you to a quarterly contribution stream. The allocation engine ranks Dutch food banks by FRAME-computed CO₂e baseline or social reach — and weights your contribution accordingly. Every quarter, Claude composes an ESRS E5 + S3 contribution disclosure with full FRAME workings, source citations, and provenance ledger."
-            href="/marketplace"
-            cta="Browse funds →"
-          />
-          <Pitch
-            kicker="For food banks"
-            title="Upload your annual report."
-            italic="Unlock corporate funding."
-            body="Drop your annual report PDF. Claude extracts food volumes, categories, and people served — every measurement tagged with extracted, inferred, or computed. FRAME does the rest. Once your data is in, you appear in the marketplace and corporates can sponsor your operations."
-            href="/for-foodbanks"
-            cta="Join as a food bank →"
-          />
-        </div>
-      </section>
-
-      {/* Two-sided ledger spread */}
-      <PlatformSpread />
 
       {/* How it works */}
       <section className="mx-auto max-w-[1280px] px-6 py-24">
@@ -351,6 +310,56 @@ export default async function Home() {
                 href="https://voedselbankennederland.nl/jaarverslag/"
               />
             </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Pilot partners — full-width trust bars */}
+      <section className="border-t border-line overflow-hidden">
+        <div className="mx-auto max-w-[1280px] px-6 pt-14 pb-4">
+          <p className="eyebrow mb-8">Pilot partners</p>
+          <p className="eyebrow text-text-faint mb-4">Foodbank operators</p>
+        </div>
+        <LogoCarousel logos={COATOFARMS_LOGOS} itemHeight="h-12" speed={32} copies={6} />
+        <div className="mx-auto max-w-[1280px] px-6 pt-8 pb-4">
+          <p className="eyebrow text-text-faint mb-4">Corporate commitments</p>
+        </div>
+        <LogoCarousel logos={CORPORATE_LOGOS} copies={4} />
+        <div className="mx-auto max-w-[1280px] px-6 pb-14">
+          <p className="text-[11px] text-text-faint mt-3 italic">
+            Letters of intent · contracts pending Sunday demo
+          </p>
+        </div>
+      </section>
+
+      {/* Closing CTA — end on action, not on a list */}
+      <section className="border-t border-line bg-emerald-soft/40">
+        <div className="mx-auto max-w-[1280px] px-6 py-16 grid lg:grid-cols-[1.4fr_1fr] gap-x-12 gap-y-8 items-end">
+          <div>
+            <p className="eyebrow">Ready when you are</p>
+            <h2 className="display text-4xl md:text-5xl mt-3 tracking-[-0.025em] leading-[1.05] max-w-[22ch]">
+              Climate contribution your auditor{" "}
+              <span className="display-italic text-emerald-deep">can defend.</span>
+            </h2>
+            <p className="mt-5 text-text-muted text-[14.5px] leading-relaxed max-w-[58ch]">
+              Browse the funds open this quarter, or onboard your foodbank in
+              under ten minutes. Climate Harvest is live, supply-constrained,
+              and accepting Q2 commitments now.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3 lg:justify-end">
+            <Link
+              href="/marketplace"
+              className="bg-emerald text-text-on-emerald h-12 px-6 inline-flex items-center text-[14.5px] font-medium hover:bg-emerald-deep transition-colors"
+            >
+              Browse funds →
+            </Link>
+            <Link
+              href="/for-foodbanks"
+              className="border border-line bg-surface h-12 px-6 inline-flex items-center text-[14.5px] hover:bg-surface-2 transition-colors"
+            >
+              Onboard your bank
+            </Link>
           </div>
         </div>
       </section>

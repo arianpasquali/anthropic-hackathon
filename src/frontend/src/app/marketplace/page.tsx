@@ -1,10 +1,47 @@
+import { promises as fs } from "fs"
+import path from "path"
 import { api } from "@/lib/api"
 import { MarketplaceFilters } from "@/components/marketing/MarketplaceFilters"
-import { NLProvinceFoodbankHeatMapDynamic } from "@/components/map/NLProvinceFoodbankHeatMapDynamic"
-import { ProvinceFoodbankList } from "@/components/map/ProvinceFoodbankList"
+import { CoverageMap } from "@/components/marketing/CoverageMap"
 import { formatNumber, formatTCO2e } from "@/lib/format"
 import Image from "next/image"
 import Link from "next/link"
+
+interface CoverageGemeente {
+  code: string
+  name: string
+  path: string
+  persons_in_poverty: number | null
+  households_in_poverty: number | null
+  persons_in_poverty_pct: number | null
+  households_in_poverty_pct: number | null
+}
+
+interface CoverageBank {
+  id: string
+  name: string
+  region?: string
+  x: number
+  y: number
+  annual_tco2e?: number
+  households_weekly?: number | null
+  is_rdc?: boolean
+  rdc_satellite_count?: number | null
+  in_demo_cohort: boolean
+}
+
+interface CoverageData {
+  svg: { width: number; height: number }
+  scale: { source_label: string; source_url: string }
+  gemeenten: CoverageGemeente[]
+  banks: CoverageBank[]
+}
+
+async function loadCoverage(): Promise<CoverageData> {
+  const p = path.join(process.cwd(), "public", "coverage-data.json")
+  const raw = await fs.readFile(p, "utf-8")
+  return JSON.parse(raw) as CoverageData
+}
 
 export const metadata = {
   title: "Marketplace · Climate Harvest",
@@ -13,9 +50,10 @@ export const metadata = {
 }
 
 export default async function MarketplacePage() {
-  const [packages, banks] = await Promise.all([
+  const [packages, banks, coverage] = await Promise.all([
     api.listPackages().catch(() => []),
     api.listFoodbanks().catch(() => []),
+    loadCoverage(),
   ])
 
   const totalCo2 = banks.reduce((s, b) => s + (b.annual_tco2e ?? 0), 0)
@@ -34,20 +72,20 @@ export default async function MarketplacePage() {
             className="object-cover"
           />
         </div>
-        <header className="mx-auto max-w-[1280px] px-6 pt-12 md:pt-20 pb-16 md:pb-20 grid md:grid-cols-[1.4fr_1fr] gap-12 items-end">
-          <div>
+        <header className="mx-auto max-w-[1280px] px-6 pt-12 md:pt-20 pb-16 md:pb-20 min-h-[480px] md:min-h-[520px] flex flex-col justify-end max-w-[1280px]">
+          <div className="max-w-[60ch]">
             <p className="eyebrow">Verified climate contribution · ESRS-aligned</p>
-            <h1 className="display text-5xl md:text-6xl mt-4 tracking-[-0.025em] max-w-[18ch]">
+            <h1 className="display text-5xl md:text-7xl mt-4 tracking-[-0.03em] max-w-[18ch]">
               Buy a fund.{" "}
               <span className="display-italic text-emerald-deep">Move the network forward.</span>
             </h1>
+            <p className="mt-7 text-text-muted text-[15.5px] leading-relaxed max-w-[52ch]">
+              Each fund spreads a single corporate purchase across the top food banks
+              in the Netherlands. The allocation engine ranks banks by their FRAME-computed
+              CO₂e baseline, household reach, or both — depending on the impact profile
+              you choose.
+            </p>
           </div>
-          <p className="text-text-muted text-[15px] leading-relaxed max-w-[42ch]">
-            Each fund spreads a single corporate purchase across the top food banks
-            in the Netherlands. The allocation engine ranks banks by their FRAME-computed
-            CO₂e baseline, household reach, or both — depending on the impact profile
-            you choose.
-          </p>
         </header>
       </section>
       <div className="mx-auto max-w-[1280px] px-6 pt-12 pb-24">
@@ -60,11 +98,17 @@ export default async function MarketplacePage() {
         <div className="flex flex-col md:flex-row md:items-end gap-6 mb-10">
           <div className="flex-1">
             <p className="eyebrow">Fund coverage</p>
-            <h2 className="display text-4xl mt-3 tracking-[-0.02em] max-w-[24ch]">
-              Provinces tinted by{" "}
-              <span className="display-italic text-emerald-deep">CO₂e baseline</span>{" "}
-              reachable through funds.
+            <h2 className="display text-4xl mt-3 tracking-[-0.02em] max-w-[26ch]">
+              Where the funds land.{" "}
+              <span className="display-italic text-emerald-deep">
+                Where the need is.
+              </span>
             </h2>
+            <p className="mt-4 text-text-muted text-[14px] leading-relaxed max-w-[58ch]">
+              Gemeenten shaded by share of population on a low income for ≥1
+              year (CBS&nbsp;2023). Demo cohort foodbanks overlaid as emerald
+              circles, sized by annual climate-contribution capacity.
+            </p>
           </div>
           <dl className="flex gap-10 pb-1 shrink-0">
             <div>
@@ -79,14 +123,21 @@ export default async function MarketplacePage() {
             </div>
           </dl>
         </div>
-        <NLProvinceFoodbankHeatMapDynamic
-          banks={banks}
-          colorBy="co2e"
-          totalFunds={packages.length}
-        />
-        <div className="mt-6">
-          <ProvinceFoodbankList banks={banks} />
+        <div className="border border-line bg-surface rounded-[var(--radius-lg)] p-4">
+          <CoverageMap
+            width={coverage.svg.width}
+            height={coverage.svg.height}
+            gemeenten={coverage.gemeenten}
+            banks={coverage.banks}
+          />
         </div>
+        <p className="mt-6 text-[13px] text-text-faint leading-relaxed">
+          Detailed gemeente-level analysis + insight columns + Heerlen
+          expansion narrative on{" "}
+          <Link href="/coverage" className="text-emerald hover:underline">
+            /coverage →
+          </Link>
+        </p>
       </section>
 
       <section className="mt-24 grid md:grid-cols-2 gap-x-12 gap-y-6 border-t border-line pt-10">

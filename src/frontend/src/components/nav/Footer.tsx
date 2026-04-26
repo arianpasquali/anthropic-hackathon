@@ -20,8 +20,8 @@ export function Footer() {
         <FooterCol
           title="Product"
           links={[
-            { href: "/marketplace", label: "Marketplace" },
-            { href: "/methodology", label: "Methodology" },
+            { href: "/marketplace", label: "Funds" },
+            { href: "/methodology", label: "How · methodology" },
             { href: "/why", label: "Why · public data" },
             { href: "/coverage", label: "Coverage map" },
             { href: "/faq", label: "FAQ" },
