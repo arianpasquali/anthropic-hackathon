@@ -234,7 +234,10 @@ export function AssistantSidebar() {
           open && "pointer-events-none opacity-0 translate-y-2",
         )}
       >
-        <span aria-hidden className="block w-2 h-2 rounded-[1px] bg-white/85 group-hover:bg-white" />
+        <span
+          aria-hidden
+          className="block w-2 h-2 rounded-[1px] bg-text-on-emerald"
+        />
         Ask the assistant
       </button>
 
@@ -243,7 +246,8 @@ export function AssistantSidebar() {
         aria-hidden
         onClick={() => setOpen(false)}
         className={cn(
-          "fixed inset-0 z-40 bg-black/20 backdrop-blur-[1px] transition-opacity duration-200",
+          "fixed inset-0 z-40 transition-opacity duration-200",
+          "bg-[color-mix(in_oklch,var(--text)_14%,transparent)]",
           open ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       />

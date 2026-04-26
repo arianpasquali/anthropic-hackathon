@@ -43,6 +43,9 @@ export default async function MethodologyPage() {
           How we compute{" "}
           <span className="display-italic text-emerald-deep">climate contribution.</span>
         </h1>
+        <p className="mt-5 text-[12px] text-text-faint tabular tracking-wide">
+          FRAME-NL · v1.0 · published 2026-04-26 · CF<sub>NL</sub> = 0.93
+        </p>
         <p className="mt-7 text-text-muted text-[16px] max-w-[64ch] leading-relaxed">
           Kavel aligns with FRAME — the Food Recovery Avoided Methane Emissions
           methodology used by Global FoodBanking Network — and applies a Dutch-specific

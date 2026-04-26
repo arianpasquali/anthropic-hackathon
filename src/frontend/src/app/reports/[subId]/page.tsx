@@ -37,7 +37,7 @@ export default async function ReportPage({
 
       {/* header */}
       <header className="pb-8 border-b border-line">
-        <p className="eyebrow">ESRS E1 + S3 · climate contribution disclosure</p>
+        <p className="eyebrow">ESRS E5 + S3 · climate contribution disclosure</p>
         <h1 className="display text-[3rem] mt-3 max-w-[24ch]">{d.meta.org}</h1>
         <p className="text-text-muted text-[14px] mt-2 tabular">
           {d.meta.package_name} · {d.meta.period} · {d.meta.generated}

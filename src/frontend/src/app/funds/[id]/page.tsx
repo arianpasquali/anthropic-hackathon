@@ -14,7 +14,9 @@ export default async function FundDetailPage({
   const { id } = await params
 
   const pkg = await api.getPackage(id).catch((e) => {
-    if (e instanceof ApiError && e.status === 404) return null
+    // 404 = unknown id, 422 = malformed UUID — both should land on notFound
+    // rather than the unfriendly Next.js error boundary.
+    if (e instanceof ApiError && (e.status === 404 || e.status === 422)) return null
     throw e
   })
   if (!pkg) notFound()

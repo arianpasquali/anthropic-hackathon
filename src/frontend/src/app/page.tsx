@@ -140,10 +140,10 @@ export default async function Home() {
               from the Heineken pilot.
             </p>
             <Link
-              href="/reports/sample"
+              href="/methodology"
               className="mt-7 inline-flex items-center gap-2 text-[14px] font-medium text-emerald hover:underline"
             >
-              Read the full sample report →
+              See the full methodology →
             </Link>
           </div>
 
