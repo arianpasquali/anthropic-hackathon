@@ -81,8 +81,8 @@ export default async function Home() {
 
       {/* Traction strip — quantified momentum */}
       <section className="border-t border-line">
-        <div className="mx-auto max-w-[1280px] px-6 py-12">
-          <div className="flex items-end justify-between flex-wrap gap-x-8 gap-y-3 mb-7">
+        <div className="mx-auto max-w-[1280px] px-6 py-7">
+          <div className="flex items-end justify-between flex-wrap gap-x-8 gap-y-2 mb-4">
             <div className="flex items-center gap-2.5">
               <span className="kk-live-dot" aria-hidden />
               <p className="eyebrow">Pre-launch traction · live</p>
