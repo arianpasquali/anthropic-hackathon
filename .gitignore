@@ -16,3 +16,6 @@ src/frontend/.turbo/
 src/frontend/out/
 .playwright-mcp/
 videos/video_v2/node_modules/
+**/.DS_Store
+.DS_Store
+videos/video_v2/public/*
