@@ -51,7 +51,7 @@ export function MarketplaceFilters({ packages }: { packages: Package[] }) {
             {packages.length} {packages.length === 1 ? "fund" : "funds"} available
           </span>
           <span aria-hidden className="text-text-faint">·</span>
-          <span className="tabular text-text-faint">last allocation computed 6m ago</span>
+          {/* <span className="tabular text-text-faint">last allocation computed 6m ago</span> */}
         </div>
         <label className="flex items-center gap-2 text-[12.5px] text-text-muted">
           <span>Sort</span>

@@ -224,7 +224,7 @@ export function AssistantSidebar() {
         onClick={() => setOpen(true)}
         aria-label="Open Kavel assistant"
         className={cn(
-          "fixed bottom-6 right-6 z-40 group",
+          "fixed bottom-6 right-6 z-[1100] group",
           "h-12 pl-4 pr-5 inline-flex items-center gap-2.5",
           "bg-emerald text-text-on-emerald shadow-lg shadow-emerald/20",
           "border border-emerald-deep/20 rounded-full",
@@ -246,7 +246,7 @@ export function AssistantSidebar() {
         aria-hidden
         onClick={() => setOpen(false)}
         className={cn(
-          "fixed inset-0 z-40 transition-opacity duration-200",
+          "fixed inset-0 z-[1100] transition-opacity duration-200",
           "bg-[color-mix(in_oklch,var(--text)_14%,transparent)]",
           open ? "opacity-100" : "pointer-events-none opacity-0",
         )}
@@ -258,7 +258,7 @@ export function AssistantSidebar() {
         aria-label="Kavel assistant"
         aria-modal="true"
         className={cn(
-          "fixed top-0 right-0 z-50 h-dvh w-full sm:w-[420px] flex flex-col",
+          "fixed top-0 right-0 z-[1200] h-dvh w-full sm:w-[420px] flex flex-col",
           "bg-surface border-l border-line shadow-2xl shadow-black/10",
           "transition-transform duration-300 ease-out",
           open ? "translate-x-0" : "translate-x-full",
