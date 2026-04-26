@@ -125,17 +125,18 @@ export default async function Home() {
       </section>
 
       {/* Pilot partners — full-width trust bars */}
-      <section className="border-t border-line">
-        <div className="mx-auto max-w-[1280px] px-6 py-14">
+      <section className="border-t border-line overflow-hidden">
+        <div className="mx-auto max-w-[1280px] px-6 pt-14 pb-4">
           <p className="eyebrow mb-8">Pilot partners</p>
-
           <p className="eyebrow text-text-faint mb-4">Foodbank operators</p>
-          <LogoCarousel logos={COATOFARMS_LOGOS} itemHeight="h-12" speed={32} />
-
-          <p className="eyebrow text-text-faint mt-10 mb-4">Corporate commitments</p>
-          <LogoCarousel logos={CORPORATE_LOGOS} />
-
-          <p className="text-[11px] text-text-faint mt-5 italic">
+        </div>
+        <LogoCarousel logos={COATOFARMS_LOGOS} itemHeight="h-12" speed={32} copies={6} />
+        <div className="mx-auto max-w-[1280px] px-6 pt-8 pb-4">
+          <p className="eyebrow text-text-faint mb-4">Corporate commitments</p>
+        </div>
+        <LogoCarousel logos={CORPORATE_LOGOS} copies={4} />
+        <div className="mx-auto max-w-[1280px] px-6 pb-14">
+          <p className="text-[11px] text-text-faint mt-3 italic">
             Letters of intent · contracts pending Sunday demo
           </p>
         </div>
