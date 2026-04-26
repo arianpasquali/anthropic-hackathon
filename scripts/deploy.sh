@@ -3,7 +3,7 @@
 # Usage: ./scripts/deploy.sh [--restart]
 set -euo pipefail
 
-VM="kavel.boxd.sh"
+VM="klimaatkracht.boxd.sh"
 REMOTE_DIR="/home/boxd/app"
 SSH_OPTS="-o StrictHostKeyChecking=no"
 FNM_BIN="/home/boxd/.local/share/fnm/node-versions/v22.22.2/installation/bin"
@@ -32,7 +32,7 @@ rsync -az --delete \
 echo "==> Syncing data files (db + env)"
 rsync -az -e "ssh $SSH_OPTS" foodbank.db .env "$VM:$REMOTE_DIR/"
 
-# ── Caddy (HTTPS reverse proxy) ────────────────────────────────────────────
+# ── Caddy (HTTPS for api.kavel.tech) ──────────────────────────────────────
 echo "==> Ensuring caddy is installed"
 ssh $SSH_OPTS "$VM" '
   if ! command -v caddy &>/dev/null; then
@@ -42,12 +42,9 @@ ssh $SSH_OPTS "$VM" '
     sudo apt-get update && sudo apt-get install -y caddy
   fi
 '
-echo "==> Deploying Caddyfile"
-ssh $SSH_OPTS "$VM" "sudo cp $REMOTE_DIR/Caddyfile /etc/caddy/Caddyfile && sudo caddy fmt --overwrite /etc/caddy/Caddyfile"
-ssh $SSH_OPTS "$VM" "sudo systemctl enable caddy && sudo systemctl reload-or-restart caddy"
-sleep 2
+ssh $SSH_OPTS "$VM" "sudo cp $REMOTE_DIR/Caddyfile /etc/caddy/Caddyfile && sudo systemctl enable caddy && sudo systemctl reload-or-restart caddy"
 STATUS=$(ssh $SSH_OPTS "$VM" "sudo systemctl is-active caddy")
-echo "==> Caddy status: $STATUS"
+echo "==> Caddy: $STATUS"
 
 # ── Backend ────────────────────────────────────────────────────────────────
 echo "==> Installing Python dependencies"
