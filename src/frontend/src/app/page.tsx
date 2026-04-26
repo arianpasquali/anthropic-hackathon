@@ -57,14 +57,13 @@ export default async function Home() {
             Climate Harvest · ESRS-aligned
           </Badge>
           <h1 className="display text-[44px] md:text-[64px] leading-[1.02] tracking-[-0.03em] max-w-[16ch]">
-            Verified climate contribution,{" "}
-            <span className="display-italic text-emerald-deep">disclosure-ready.</span>
+            Translating Food Banks{" "}
+            <span className="display-italic text-emerald-deep">into Climate Action.</span>
           </h1>
           <p className="mt-7 text-[16px] text-text-muted leading-[1.55] max-w-[58ch]">
             Climate Harvest turns Dutch food rescue into ESRS&nbsp;E5 + S3 contribution
-            disclosures. Fund a package, and a single quarterly contribution is
-            allocated across the top food banks in the Netherlands — weighted by the
-            FRAME-computed CO₂e baseline we extract from each bank&apos;s annual report.
+            disclosures. Fund a package, and your contribution is allocated across 
+            a portfolio of the top food banks in the Netherlands. 
             Sources cited; provenance tagged; counterfactual disclosed. Climate
             contribution, not offsetting.
           </p>
