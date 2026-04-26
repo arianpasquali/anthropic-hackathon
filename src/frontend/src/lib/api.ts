@@ -17,7 +17,7 @@ import type {
 const BASE = process.env.NEXT_PUBLIC_API_BASE ?? "/api"
 
 // Server components cannot use the Next rewrite proxy; hit the backend directly.
-const SERVER_BASE = process.env.BACKEND_URL ?? "http://localhost:8000"
+const SERVER_BASE = process.env.BACKEND_URL ?? "http://localhost:8002"
 
 function absoluteUrl(path: string): string {
   if (typeof window === "undefined") return `${SERVER_BASE}${path}`
