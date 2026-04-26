@@ -9,11 +9,11 @@ import { Badge } from "@/components/ui/Badge"
 import { formatNumber, formatTCO2e } from "@/lib/format"
 
 const CORPORATE_LOGOS: CarouselLogo[] = [
-  { name: "Heineken",      src: "/SVGBrand.com_heineken_nv.svg"  },
-  { name: "Philips",       src: "/philips.svg"                   },
-  { name: "ASML",          src: "/ASML_Holding_N.V._logo.svg"    },
-  { name: "Albert Heijn",  src: "/Albert_Heijn_Logo.svg"         },
-  { name: "DSM-Firmenich", src: "/DSM-Firmenich_Logo_2023.svg"   },
+  { name: "Heineken",      src: "/SVGBrand.com_heineken_nv.svg",  w: 120 },
+  { name: "Philips",       src: "/philips.svg",                   w: 155 },
+  { name: "ASML",          src: "/ASML_Holding_N.V._logo.svg",    w: 115 },
+  { name: "Albert Heijn",  src: "/Albert_Heijn_Logo.svg",         w: 52  },
+  { name: "DSM-Firmenich", src: "/DSM-Firmenich_Logo_2023.svg",   w: 240 },
 ]
 
 const COATOFARMS_LOGOS: CarouselLogo[] = [

@@ -1,6 +1,13 @@
 "use client"
 
-export type CarouselLogo = { name: string; src: string }
+export type CarouselLogo = {
+  name: string
+  src: string
+  /** Optional explicit container width (px). When set, logo is object-contained
+   *  within a fixed w×itemHeight box, normalising visual weight across logos
+   *  with very different aspect ratios. */
+  w?: number
+}
 
 type Props = {
   logos: CarouselLogo[]
@@ -28,13 +35,18 @@ export function LogoCarousel({ logos, itemHeight = "h-8", speed = 28, copies = 4
         className="flex w-max animate-logo-scroll items-center py-1"
         style={{ animationDuration: `${speed}s` }}
       >
-        {track.map(({ name, src }, i) => (
+        {track.map(({ name, src, w }, i) => (
           <div
             key={`${name}-${i}`}
             className={`flex-shrink-0 ${itemHeight} mr-10 flex items-center opacity-35 grayscale hover:opacity-65 hover:grayscale-0 transition-all duration-300`}
+            style={w ? { width: w } : undefined}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={src} alt={name} className="h-full w-auto object-contain" />
+            <img
+              src={src}
+              alt={name}
+              className={w ? "h-full w-full object-contain" : "h-full w-auto object-contain"}
+            />
           </div>
         ))}
       </div>
