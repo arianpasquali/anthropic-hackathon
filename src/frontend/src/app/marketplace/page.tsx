@@ -3,6 +3,7 @@ import { MarketplaceFilters } from "@/components/marketing/MarketplaceFilters"
 import { NLProvinceFoodbankHeatMapDynamic } from "@/components/map/NLProvinceFoodbankHeatMapDynamic"
 import { ProvinceFoodbankList } from "@/components/map/ProvinceFoodbankList"
 import { formatNumber, formatTCO2e } from "@/lib/format"
+import Image from "next/image"
 import Link from "next/link"
 
 export const metadata = {
@@ -21,22 +22,35 @@ export default async function MarketplacePage() {
   const totalKg = banks.reduce((s, b) => s + (b.annual_kg_rescued ?? 0), 0)
 
   return (
-    <div className="mx-auto max-w-[1280px] px-6 pt-12 pb-24">
-      <header className="grid md:grid-cols-[1.4fr_1fr] gap-12 items-end pb-12 border-b border-line">
-        <div>
-          <p className="eyebrow">Verified climate contribution · ESRS-aligned</p>
-          <h1 className="display text-5xl md:text-6xl mt-4 tracking-[-0.025em] max-w-[18ch]">
-            Buy a fund.{" "}
-            <span className="display-italic text-emerald-deep">Move the network forward.</span>
-          </h1>
+    <div>
+      <section className="relative isolate border-b border-line">
+        <div aria-hidden className="kk-photo-hero absolute inset-0 -z-10">
+          <Image
+            src="https://images.unsplash.com/photo-1755599629285-91cc09a185c7?auto=format&fit=crop&w=2400&q=80"
+            alt=""
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover"
+          />
         </div>
-        <p className="text-text-muted text-[15px] leading-relaxed max-w-[42ch]">
-          Each fund spreads a single corporate purchase across the top food banks
-          in the Netherlands. The allocation engine ranks banks by their FRAME-computed
-          CO₂e baseline, household reach, or both — depending on the impact profile
-          you choose.
-        </p>
-      </header>
+        <header className="mx-auto max-w-[1280px] px-6 pt-12 md:pt-20 pb-16 md:pb-20 grid md:grid-cols-[1.4fr_1fr] gap-12 items-end">
+          <div>
+            <p className="eyebrow">Verified climate contribution · ESRS-aligned</p>
+            <h1 className="display text-5xl md:text-6xl mt-4 tracking-[-0.025em] max-w-[18ch]">
+              Buy a fund.{" "}
+              <span className="display-italic text-emerald-deep">Move the network forward.</span>
+            </h1>
+          </div>
+          <p className="text-text-muted text-[15px] leading-relaxed max-w-[42ch]">
+            Each fund spreads a single corporate purchase across the top food banks
+            in the Netherlands. The allocation engine ranks banks by their FRAME-computed
+            CO₂e baseline, household reach, or both — depending on the impact profile
+            you choose.
+          </p>
+        </header>
+      </section>
+      <div className="mx-auto max-w-[1280px] px-6 pt-12 pb-24">
 
       <section className="mt-14">
         <MarketplaceFilters packages={packages} />
@@ -45,9 +59,11 @@ export default async function MarketplacePage() {
       <section className="mt-24">
         <div className="flex flex-col md:flex-row md:items-end gap-6 mb-10">
           <div className="flex-1">
-            <p className="eyebrow">Where the rescue happens</p>
-            <h2 className="display text-4xl mt-3 tracking-[-0.02em] max-w-[22ch]">
-              {formatNumber(banks.length)} food banks across the Netherlands.
+            <p className="eyebrow">Fund coverage</p>
+            <h2 className="display text-4xl mt-3 tracking-[-0.02em] max-w-[24ch]">
+              Provinces tinted by{" "}
+              <span className="display-italic text-emerald-deep">CO₂e baseline</span>{" "}
+              reachable through funds.
             </h2>
           </div>
           <dl className="flex gap-10 pb-1 shrink-0">
@@ -63,7 +79,11 @@ export default async function MarketplacePage() {
             </div>
           </dl>
         </div>
-        <NLProvinceFoodbankHeatMapDynamic banks={banks} />
+        <NLProvinceFoodbankHeatMapDynamic
+          banks={banks}
+          colorBy="co2e"
+          totalFunds={packages.length}
+        />
         <div className="mt-6">
           <ProvinceFoodbankList banks={banks} />
         </div>
@@ -93,6 +113,7 @@ export default async function MarketplacePage() {
           </ul>
         </div>
       </section>
+      </div>
     </div>
   )
 }

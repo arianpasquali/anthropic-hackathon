@@ -1,18 +1,26 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { Suspense, useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/Button"
 import { Input, Label } from "@/components/ui/Input"
 import { api, ApiError } from "@/lib/api"
 
-export default function RegisterPage() {
+type Role = "corporate" | "foodbank"
+
+function parseRole(value: string | null): Role {
+  return value === "foodbank" ? "foodbank" : "corporate"
+}
+
+function RegisterPageInner() {
   const router = useRouter()
+  const search = useSearchParams()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [orgName, setOrgName] = useState("")
-  const [role, setRole] = useState<"corporate" | "foodbank">("corporate")
+  const [role, setRole] = useState<Role>(parseRole(search.get("role")))
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -31,7 +39,17 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="mx-auto max-w-[1100px] px-6 pt-16 pb-24 grid lg:grid-cols-[1fr_1fr] gap-x-16 gap-y-10 items-start">
+    <div className="relative isolate">
+      <div aria-hidden className="kk-photo-ambient absolute inset-0 -z-10 pointer-events-none">
+        <Image
+          src="https://images.unsplash.com/photo-1755599629285-91cc09a185c7?auto=format&fit=crop&w=2000&q=80"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
+      <div className="mx-auto max-w-[1100px] px-6 pt-16 pb-24 grid lg:grid-cols-[1fr_1fr] gap-x-16 gap-y-10 items-start">
       <div>
         <p className="eyebrow">Create account</p>
         <h1 className="display text-5xl mt-3 tracking-[-0.025em] max-w-[18ch]">
@@ -80,6 +98,7 @@ export default function RegisterPage() {
           {busy ? "Creating account…" : "Create account"}
         </Button>
       </form>
+      </div>
     </div>
   )
 }
@@ -105,5 +124,13 @@ function RoleButton({
     >
       {children}
     </button>
+  )
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense>
+      <RegisterPageInner />
+    </Suspense>
   )
 }

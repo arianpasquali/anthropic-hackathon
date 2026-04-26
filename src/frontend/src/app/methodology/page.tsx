@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { Badge } from "@/components/ui/Badge"
 import { CF_NL, EMISSION_FACTORS, EMISSION_FACTOR_SOURCES, CATEGORY_LABELS } from "@/lib/methodology"
 
@@ -21,7 +22,18 @@ const MAX_FACTOR = Math.max(...Object.values(EMISSION_FACTORS))
 export default function MethodologyPage() {
   return (
     <div className="overflow-hidden">
-      <section className="mx-auto max-w-[1100px] px-6 pt-16 pb-12">
+      <section className="relative isolate">
+        <div aria-hidden className="kk-photo-hero absolute inset-0 -z-10">
+          <Image
+            src="https://images.unsplash.com/photo-1757627550652-30788bfce978?auto=format&fit=crop&w=2400&q=80"
+            alt=""
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover"
+          />
+        </div>
+        <div className="mx-auto max-w-[1100px] px-6 pt-12 md:pt-20 pb-16 md:pb-20">
         <p className="eyebrow">Methodology</p>
         <h1 className="display text-5xl md:text-7xl mt-4 tracking-[-0.03em] max-w-[18ch]">
           How we compute{" "}
@@ -40,6 +52,7 @@ export default function MethodologyPage() {
           <Badge variant="outline">ESRS E5 + S3</Badge>
           <Badge variant="outline">Contribution claim</Badge>
           <Badge variant="outline">NL-specific</Badge>
+        </div>
         </div>
       </section>
 

@@ -7,7 +7,7 @@ export function Footer() {
         <div>
           <div className="flex items-baseline gap-2 mb-4">
             <span aria-hidden className="block w-2.5 h-2.5 bg-emerald rounded-[1px] translate-y-[1px]" />
-            <span className="font-display text-[17px] font-medium tracking-[-0.02em]">
+            <span className="text-[17px] font-semibold tracking-[-0.02em]">
               Klimaatkracht
             </span>
           </div>
@@ -28,6 +28,7 @@ export function Footer() {
         <FooterCol
           title="For food banks"
           links={[
+            { href: "/for-foodbanks", label: "How it works for operators" },
             { href: "/dashboard/foodbank", label: "Operator dashboard" },
             { href: "/register", label: "Onboard your bank" },
           ]}

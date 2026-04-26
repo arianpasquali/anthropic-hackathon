@@ -34,10 +34,10 @@
   --warning-deep:   oklch(38%   0.13   55);
   --warning-soft:   oklch(94%   0.05   85);
 
-  /* Type — Fontshare (free, self-hosted CDN), Dutch civic editorial register
-     Display: Gambarino — editorial serif w/ character (PP Editorial New class)
-     Body:    Switzer   — Swiss grotesk, audit-grade (Söhne / ABC Diatype class) */
-  --font-display: 'Gambarino', 'Times New Roman', Georgia, serif;
+  /* Type — Fontshare (free, self-hosted CDN), Dutch civic register
+     Display: Boska   — contemporary editorial serif (institutional, not luxury)
+     Body:    Switzer — Swiss grotesk, audit-grade (Söhne / ABC Diatype class) */
+  --font-display: 'Boska', 'Times New Roman', Georgia, serif;
   --font-sans:    'Switzer', system-ui, -apple-system, sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 
@@ -172,6 +172,110 @@ body {
   0%   { opacity: 0.55; transform: scale(0.6); }
   80%  { opacity: 0;    transform: scale(1.8); }
   100% { opacity: 0;    transform: scale(1.8); }
+}
+
+/* Editorial photography — duotone treatment.
+   Three intensities for three roles: hero operations imagery, civic Dutch
+   context, and ultra-faint ambient backgrounds. The wrapper applies the
+   filter; the inner <img> blends into the surface so the emerald accent
+   and warm-grey shadows read as a printed editorial plate, not a snapshot. */
+.kk-photo-operations,
+.kk-photo-civic,
+.kk-photo-ambient {
+  background: var(--surface-2);
+}
+.kk-photo-operations {
+  filter: grayscale(0.85) contrast(1.05);
+}
+.kk-photo-operations img {
+  mix-blend-mode: multiply;
+  opacity: 0.92;
+}
+.kk-photo-operations::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in oklch, var(--emerald-deep) 22%, transparent) 100%
+  );
+  pointer-events: none;
+}
+.kk-photo-civic {
+  filter: grayscale(0.6) sepia(0.06) contrast(0.95);
+}
+.kk-photo-civic img {
+  opacity: 0.95;
+}
+.kk-photo-ambient {
+  filter: grayscale(1) contrast(0.9);
+  opacity: 0.18;
+}
+
+/* Full-bleed hero background — readable text overlay, deep scrim. */
+.kk-photo-hero {
+  background: var(--surface);
+  filter: grayscale(1) contrast(0.95);
+}
+.kk-photo-hero img {
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+.kk-photo-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--surface) 88%, transparent) 0%,
+      color-mix(in oklch, var(--surface) 72%, transparent) 35%,
+      color-mix(in oklch, var(--surface) 45%, transparent) 70%,
+      color-mix(in oklch, var(--surface) 25%, transparent) 100%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--surface) 25%, transparent) 0%,
+      transparent 35%,
+      transparent 70%,
+      color-mix(in oklch, var(--emerald-deep) 18%, transparent) 100%
+    );
+  pointer-events: none;
+}
+
+/* Scroll-driven parallax — landing only.
+   GPU-only properties (transform, opacity). No JS. Falls back to static
+   when scroll-driven animations are unsupported or motion is reduced. */
+@keyframes kk-parallax-hero-shift {
+  from { transform: translateY(0) scale(1.04); }
+  to   { transform: translateY(64px) scale(1.08); }
+}
+@keyframes kk-rise-in {
+  from { transform: translateY(36px); opacity: 0.45; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .kk-parallax-hero img {
+      animation: kk-parallax-hero-shift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 720px;
+      will-change: transform;
+    }
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .kk-rise-on-view {
+      animation: kk-rise-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+      will-change: transform, opacity;
+    }
+  }
 }
 
 /* Anti-AI-slop guards (informational; enforced by code review) */

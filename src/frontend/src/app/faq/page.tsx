@@ -366,7 +366,7 @@ export default function FaqPage() {
       <section className="relative isolate">
         <div aria-hidden className="kk-photo-hero absolute inset-0 -z-10">
           <Image
-            src="https://images.unsplash.com/photo-1604881991720-f91add269bed?auto=format&fit=crop&w=2400&q=80"
+            src="https://images.unsplash.com/photo-1755599629285-91cc09a185c7?auto=format&fit=crop&w=2400&q=80"
             alt=""
             fill
             sizes="100vw"

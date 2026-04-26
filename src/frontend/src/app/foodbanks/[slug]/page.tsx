@@ -1,10 +1,13 @@
+import Image from "next/image"
+import Link from "next/link"
 import { notFound } from "next/navigation"
 import { api, ApiError } from "@/lib/api"
 import { Badge } from "@/components/ui/Badge"
 import { CategoryMixBars } from "@/components/foodbanks/CategoryMixBars"
 import { ProvenanceList } from "@/components/foodbanks/ProvenanceList"
 import { TimelineChart } from "@/components/charts/TimelineChart"
-import { formatKg, formatNumber, formatTCO2e } from "@/lib/format"
+import { formatEur, formatKg, formatNumber, formatTCO2e } from "@/lib/format"
+import { foodbankHeroPhoto } from "@/lib/foodbank-photos"
 
 export default async function FoodbankProfilePage({
   params,
@@ -17,20 +20,52 @@ export default async function FoodbankProfilePage({
     throw e
   })
   if (!bank) notFound()
-  const timeline = await api.getFoodbankTimeline(slug).catch(() => [])
+  const [timeline, packages] = await Promise.all([
+    api.getFoodbankTimeline(slug).catch(() => []),
+    api.listPackages().catch(() => []),
+  ])
+  const packageDetails = await Promise.all(
+    packages.map((p) => api.getPackage(p.id).catch(() => null)),
+  )
+  const fundsWithBank = packageDetails
+    .filter((p): p is NonNullable<typeof p> => p != null)
+    .filter((p) => p.projected_allocations.some((a) => a.foodbank.id === bank.id))
 
   return (
-    <div className="mx-auto max-w-[1100px] px-6 pt-12 pb-24">
-      <p className="eyebrow">{bank.region.toUpperCase()} · transparency profile</p>
-      <div className="mt-4 flex items-baseline gap-4 flex-wrap">
-        <h1 className="display text-5xl md:text-6xl tracking-[-0.025em]">{bank.name}</h1>
-        {bank.is_regional_dc ? <Badge variant="emerald">Regional DC</Badge> : null}
-      </div>
-      <p className="mt-5 max-w-[58ch] text-text-muted text-[15px] leading-relaxed">
-        Operator profile derived from {bank.name}&apos;s most recent annual report, processed through
-        Claude and the FRAME methodology. Every metric below carries its source and method —
-        cite this page directly in your audit trail.
-      </p>
+    <div>
+      <section className="relative isolate border-b border-line">
+        <div aria-hidden className="kk-photo-hero absolute inset-0 -z-10">
+          <Image
+            src={foodbankHeroPhoto(slug)}
+            alt=""
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover"
+          />
+        </div>
+        <div className="mx-auto max-w-[1100px] px-6 pt-12 md:pt-20 pb-16 md:pb-20">
+          <Link
+            href="/foodbanks"
+            className="text-[13px] text-text-muted hover:text-text inline-flex items-center gap-1"
+          >
+            ← All foodbanks
+          </Link>
+          <p className="eyebrow mt-6">{bank.region.toUpperCase()} · transparency profile</p>
+          <div className="mt-4 flex items-baseline gap-4 flex-wrap">
+            <h1 className="display text-5xl md:text-6xl tracking-[-0.025em]">{bank.name}</h1>
+            {bank.is_regional_dc ? <Badge variant="emerald">Regional DC</Badge> : null}
+          </div>
+          <p className="mt-5 max-w-[58ch] text-text-muted text-[15px] leading-relaxed">
+            Operator profile derived from {bank.name}&apos;s most recent annual report, processed through
+            Claude and the FRAME methodology. Every metric below carries its source and method —
+            cite this page directly in your audit trail.
+          </p>
+        </div>
+      </section>
+
+      <div className="mx-auto max-w-[1280px] px-6 pt-12 pb-24 grid lg:grid-cols-[minmax(0,1fr)_320px] gap-x-12 gap-y-10 items-start">
+        <div className="min-w-0">
 
       <section className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 border-y border-line py-8">
         <Stat
@@ -137,6 +172,70 @@ export default async function FoodbankProfilePage({
           </p>
         </section>
       ) : null}
+        </div>
+
+        <aside className="lg:sticky lg:top-24 flex flex-col gap-4">
+          <div className="border border-emerald/30 bg-emerald-soft/60 rounded-[var(--radius-lg)] p-6">
+            <p className="eyebrow text-emerald-deep">Fund this bank</p>
+            <p className="display text-2xl mt-3 tracking-[-0.015em] leading-[1.2]">
+              {fundsWithBank.length > 0 ? (
+                <>
+                  Included in{" "}
+                  <span className="display-italic text-emerald-deep tabular">
+                    {fundsWithBank.length} of {packageDetails.length}
+                  </span>{" "}
+                  active funds.
+                </>
+              ) : (
+                <>
+                  Not yet ranked into an{" "}
+                  <span className="display-italic text-emerald-deep">active fund.</span>
+                </>
+              )}
+            </p>
+
+            {fundsWithBank.length > 0 ? (
+              <ul className="mt-5 flex flex-col gap-3">
+                {fundsWithBank.map((p) => {
+                  const alloc = p.projected_allocations.find(
+                    (a) => a.foodbank.id === bank.id,
+                  )
+                  return (
+                    <li key={p.id}>
+                      <Link
+                        href={`/funds/${p.id}`}
+                        className="block border border-line/80 bg-surface rounded-[var(--radius)] p-4 hover:border-emerald-deep transition-colors"
+                      >
+                        <div className="flex items-baseline justify-between gap-3">
+                          <span className="text-[13.5px] font-medium text-text">{p.name}</span>
+                          <span className="text-[12px] text-text-faint tabular">
+                            {alloc ? `${(alloc.weight_pct * 100).toFixed(1)}%` : ""}
+                          </span>
+                        </div>
+                        <div className="mt-1 flex items-baseline justify-between gap-3 text-[12px] text-text-muted tabular">
+                          <span>{p.impact_profile.replace("_", " ")}</span>
+                          <span>{formatEur(p.price_eur)} / quarter</span>
+                        </div>
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            ) : null}
+
+            <Link
+              href="/marketplace"
+              className="mt-6 inline-flex items-center justify-center w-full h-11 px-5 bg-emerald text-text-on-emerald text-[14px] font-medium hover:bg-emerald-deep transition-colors rounded-[var(--radius)]"
+            >
+              Browse all funds →
+            </Link>
+            <p className="mt-3 text-[11.5px] text-text-faint italic leading-relaxed">
+              Climate contribution claim — disclosed under ESRS&nbsp;E5 + S3.
+              Not a Scope 1/2/3 offset.
+            </p>
+          </div>
+        </aside>
+      </div>
     </div>
   )
 }

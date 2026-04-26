@@ -25,7 +25,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
         <link
           rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=gambarino@400,400i&f[]=switzer@400,500,600,700&f[]=jetbrains-mono@400,500&display=swap"
+          href="https://api.fontshare.com/v2/css?f[]=boska@400,400i,500,500i,600&f[]=switzer@400,500,600,700&f[]=jetbrains-mono@400,500&display=swap"
         />
       </head>
       <body className="min-h-screen flex flex-col bg-surface text-text">

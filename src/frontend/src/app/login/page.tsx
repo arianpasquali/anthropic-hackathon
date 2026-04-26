@@ -2,6 +2,7 @@
 
 import { Suspense, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
+import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/Button"
 import { Input, Label } from "@/components/ui/Input"
@@ -52,7 +53,17 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="mx-auto max-w-[1100px] px-6 pt-16 pb-24 grid lg:grid-cols-[1fr_1fr] gap-x-16 gap-y-10 items-start">
+    <div className="relative isolate">
+      <div aria-hidden className="kk-photo-ambient absolute inset-0 -z-10 pointer-events-none">
+        <Image
+          src="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&w=2000&q=80"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
+      <div className="mx-auto max-w-[1100px] px-6 pt-16 pb-24 grid lg:grid-cols-[1fr_1fr] gap-x-16 gap-y-10 items-start">
       <div>
         <p className="eyebrow">Sign in</p>
         <h1 className="display text-5xl mt-3 tracking-[-0.025em] max-w-[16ch]">
@@ -74,6 +85,7 @@ export default function LoginPage() {
         <Suspense>
           <LoginForm />
         </Suspense>
+      </div>
       </div>
     </div>
   )

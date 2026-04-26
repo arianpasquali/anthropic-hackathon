@@ -10,6 +10,18 @@ const nextConfig: NextConfig = {
       { source: "/api/:path*", destination: `${BACKEND_URL}/:path*` },
     ]
   },
+  async redirects() {
+    return [
+      // /funds index does not exist; the marketplace is the funds list.
+      // Detail pages /funds/[id] still resolve normally.
+      { source: "/funds", destination: "/marketplace", permanent: true },
+    ]
+  },
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+    ],
+  },
 }
 
 export default nextConfig

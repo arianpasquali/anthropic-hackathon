@@ -50,11 +50,21 @@ function pointInFeature(lng: number, lat: number, feature: Feature): boolean {
 interface Props {
   banks: Bank[]
   height?: number | string
+  /** Bank-count (default, used on landing) or CO₂e baseline (used on marketplace
+   *  to differentiate the two maps and emphasise fund-eligible capacity). */
+  colorBy?: "count" | "co2e"
+  /** Total fund count in the catalogue. When provided, the tooltip surfaces
+   *  "X of N funds reach this province" — every province with ≥1 bank reaches
+   *  every fund (top_n caps allocation, not eligibility), so the count equals
+   *  N when banks > 0. */
+  totalFunds?: number
 }
 
 export function NLProvinceFoodbankHeatMap({
   banks,
   height = "clamp(360px, 56vh, 560px)",
+  colorBy = "count",
+  totalFunds,
 }: Props) {
   const [geojson, setGeojson] = useState<FeatureCollection | null>(null)
 
@@ -65,25 +75,36 @@ export function NLProvinceFoodbankHeatMap({
       .catch(() => setGeojson(null))
   }, [])
 
-  const countsByProvince = useMemo(() => {
-    if (!geojson) return {} as Record<string, number>
-    const counts: Record<string, number> = {}
+  const statsByProvince = useMemo(() => {
+    if (!geojson) return {} as Record<string, { count: number; tco2e: number }>
+    const stats: Record<string, { count: number; tco2e: number }> = {}
     const banksWithCoords = banks.filter((b) => b.lat != null && b.lng != null)
     for (const b of banksWithCoords) {
       for (const f of geojson.features) {
         const name = (f.properties?.statnaam ?? f.properties?.name) as string | undefined
         if (!name) continue
         if (pointInFeature(b.lng!, b.lat!, f)) {
-          counts[name] = (counts[name] ?? 0) + 1
+          const cur = stats[name] ?? { count: 0, tco2e: 0 }
+          cur.count += 1
+          cur.tco2e += b.annual_tco2e ?? 0
+          stats[name] = cur
           break
         }
       }
     }
-    return counts
+    return stats
   }, [geojson, banks])
 
-  const maxCount = Math.max(1, ...Object.values(countsByProvince))
-  const geoKey = useMemo(() => JSON.stringify(countsByProvince), [countsByProvince])
+  const maxValue = useMemo(() => {
+    const values = Object.values(statsByProvince).map((s) =>
+      colorBy === "co2e" ? s.tco2e : s.count,
+    )
+    return Math.max(1, ...values)
+  }, [statsByProvince, colorBy])
+  const geoKey = useMemo(
+    () => `${colorBy}:${JSON.stringify(statsByProvince)}`,
+    [statsByProvince, colorBy],
+  )
 
   // Resolve OKLCH brand emerald to a static rgb() at mount, since Leaflet/Canvas
   // ignore CSS custom properties in the GeoJSON style fn.
@@ -99,8 +120,9 @@ export function NLProvinceFoodbankHeatMap({
 
   function styleFor(feature?: Feature) {
     const name = (feature?.properties?.statnaam ?? feature?.properties?.name) as string | undefined
-    const count = name ? countsByProvince[name] ?? 0 : 0
-    const opacity = count === 0 ? 0.05 : 0.15 + (count / maxCount) * 0.55
+    const stat = name ? statsByProvince[name] : undefined
+    const value = stat ? (colorBy === "co2e" ? stat.tco2e : stat.count) : 0
+    const opacity = value === 0 ? 0.05 : 0.15 + (value / maxValue) * 0.55
     return {
       fillColor: emeraldRGB,
       fillOpacity: opacity,
@@ -113,11 +135,21 @@ export function NLProvinceFoodbankHeatMap({
   function onEach(feature: Feature, layer: import("leaflet").Layer) {
     const name = (feature?.properties?.statnaam ?? feature?.properties?.name) as string | undefined
     if (!name) return
-    const count = countsByProvince[name] ?? 0
+    const stat = statsByProvince[name] ?? { count: 0, tco2e: 0 }
+    const tco2eFmt = stat.tco2e >= 1000
+      ? `${(stat.tco2e / 1000).toFixed(1)}k tCO₂e/yr`
+      : `${stat.tco2e.toFixed(0)} tCO₂e/yr`
+    const fundsLine =
+      typeof totalFunds === "number"
+        ? stat.count > 0
+          ? `<span>${totalFunds} of ${totalFunds} funds reach here</span>`
+          : `<span>No funds reach here yet</span>`
+        : ""
     layer.bindTooltip(
       `<div class="kk-province-tip">
         <strong>${name}</strong>
-        <span>${count} foodbank${count === 1 ? "" : "s"}</span>
+        <span>${stat.count} foodbank${stat.count === 1 ? "" : "s"} · ${tco2eFmt}</span>
+        ${fundsLine}
       </div>`,
       { sticky: true, opacity: 1, className: "kk-leaflet-tip" },
     )

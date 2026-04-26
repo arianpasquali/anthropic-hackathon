@@ -13,12 +13,15 @@ export function Header() {
             aria-hidden
             className="block w-2.5 h-2.5 bg-emerald rounded-[1px] translate-y-[1px] group-hover:bg-emerald-deep transition-colors"
           />
-          <span className="font-display text-[17px] font-medium tracking-[-0.02em]">
+          <span className="text-[17px] font-semibold tracking-[-0.02em]">
             Klimaatkracht
           </span>
         </Link>
 
         <nav className="flex items-center gap-7 text-[13px] tracking-wide">
+          <Link href="/" className="text-text-muted hover:text-text transition-colors">
+            Start here
+          </Link>
           <Link href="/marketplace" className="text-text-muted hover:text-text transition-colors">
             Marketplace
           </Link>
