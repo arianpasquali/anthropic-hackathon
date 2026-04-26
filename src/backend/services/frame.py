@@ -85,7 +85,7 @@ def compute_frame(session: Session, report: AnnualReport) -> FrameResult:
     )
     _cat_populated = sum(1 for f in _CAT_FIELDS if getattr(fc, f, None) not in (None, 0.0)) if fc else 0
 
-    if fc and _cat_populated >= 1:
+    if fc and _cat_populated >= 3:
         produce   = fc.kg_produce      or 0.0
         meat_fish = fc.kg_meat_fish    or 0.0
         dairy     = fc.kg_dairy_eggs   or 0.0
